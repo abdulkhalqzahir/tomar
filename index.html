@@ -1,838 +1,280 @@
 <!DOCTYPE html>
-<html lang="ku" dir="rtl">
+<html lang="ku">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>زانکۆی سەلاحەدین - فۆڕمی تۆمارکردنی قوتابی</title>
-    
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.rtl.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <script src="datahandler.js"></script>
-    
-    <style>
-        :root {
-            --su-blue: #9c361a;
-            --su-yellow: #e8b417;
-        }
-        
-        .bg-su {
-            background-color: var(--su-blue);
-        }
-        
-        .btn-su {
-            background-color: var(--su-blue);
-            border-color: var(--su-blue);
-        }
-        
-        .btn-su:hover {
-            background-color: #134a7a;
-            border-color: #53148b;
-        }
-        
-        .required:after {
-            content: " *";
-            color: red;
-        }
-        
-        .file-upload-box {
-            border: 2px dashed #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .file-upload-box:hover {
-            border-color: var(--su-blue);
-            background-color: #f8f9fa;
-        }
-        
-        .preview-image {
-            max-width: 150px;
-            max-height: 150px;
-            margin: 10px 0;
-            display: none;
-        }
-        
-        /* New styles for student list */
-        .student-card {
-            transition: all 0.3s;
-        }
-        
-        .student-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .student-photo {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid var(--su-blue);
-        }
-        
-        #studentListSection {
-            display: none;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستەمی بەڕێوەبردنی ئۆتۆمبێل - غازي فقي</title>
+    <link rel="stylesheet" href="index.css">
 </head>
-<body class="bg-light">
-    <!-- ناوەڕۆکی سەرەوە -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-su">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="download.jpg" alt="زانکۆی سەلاحەدین" style=" height: 50px; border-radius: 10px;"  >
-            </a>
-            <h5 class="text-white mb-0">سیستەمی تۆمارکردنی قوتابیان</h5>
-            <div>
-                <button id="showFormBtn" class="btn btn-outline-light me-2">
-                    <i class="bi bi-file-earmark-plus"></i> فۆڕمی نوێ
-                </button>
-                <button id="showListBtn" class="btn btn-outline-light">
-                    <i class="bi bi-list-ul"></i> لیستی قوتابیان
-                </button>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 سیستەمی بەڕێوەبردنی ئۆتۆمبێل</h1>
+            <div class="user-info">
+                <span>بەخێربێیت، غازي فقي</span>
+                <div class="balance">باڵانسی ئێستا: <span id="currentBalance">0</span> درهم</div>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <!-- فۆڕمی سەرەکی -->
-    <div class="container py-4" id="formSection">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card shadow">
-                    <div class="card-header bg-su text-white">
-                        <h4 class="mb-0"><i class="bi bi-file-earmark-person"></i> فۆڕمی تۆمارکردنی تەواو</h4>
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="dashboard">داشبۆرد</a></li>
+                <li><a href="#" class="nav-link" data-section="cars">تۆماری ئۆتۆمبێلەکان</a></li>
+                <li><a href="#" class="nav-link" data-section="shipping">فاکتورەکانی شێوان</a></li>
+                <li><a href="#" class="nav-link" data-section="sales">فرۆشتنەکان</a></li>
+                <li><a href="#" class="nav-link" data-section="cancellations">هەڵوەشاندنەکان</a></li>
+                <li><a href="#" class="nav-link" data-section="cashier">کاشێر</a></li>
+                <li><a href="#" class="nav-link" data-section="reports">ڕاپۆرتەکان</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <!-- داشبۆرد -->
+            <section id="dashboard" class="content-section active">
+                <h2>داشبۆرد</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>کۆی ئۆتۆمبێلەکان</h3>
+                        <span class="stat-number" id="totalCars">0</span>
                     </div>
-                    
-                    <div class="card-body">
-                        <!-- ئاگاداری -->
-                        <div class="alert alert-info">
-                            <h5><i class="bi bi-info-circle"></i> ئامۆژگاری!</h5>
-                            <p>تکایە هەموو پێویستییەکان بە وردی پر بکەنەوە. هەموو فایلەکان پێویستە بە شێوەی <strong>JPG/PNG</strong> بن و قورسایی هەر فایلێک نەبێتە زیاتر لە <strong>2MB</strong>.</p>
-                        </div>
-                        
-                        <form id="studentForm">
-                            <!-- بەشی یەکەم: وێنەکان -->
-                            <div class="card mb-4">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0"><i class="bi bi-images"></i> بارکردنی پێویستییەکان</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <!-- وێنەی قوتابی -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">وێنەی قوتابی</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('studentPhoto').click()">
-                                                <input type="file" id="studentPhoto" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-camera fs-1"></i>
-                                                <p class="mb-0">کلیک بکە بۆ هەڵبژاردنی وێنە</p>
-                                                <img id="studentPhotoPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- کارتی نیشتیمانی -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">کارتی نیشتیمانی (پێشەوە)</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('nationalCardFront').click()">
-                                                <input type="file" id="nationalCardFront" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-credit-card fs-1"></i>
-                                                <p class="mb-0">رووی پێشەوە</p>
-                                                <img id="nationalCardFrontPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">کارتی نیشتیمانی (پشتەوە)</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('nationalCardBack').click()">
-                                                <input type="file" id="nationalCardBack" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-credit-card fs-1"></i>
-                                                <p class="mb-0">رووی پشتەوە</p>
-                                                <img id="nationalCardBackPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <!-- ناسنامە -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">ناسنامە (پێشەوە)</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('idFront').click()">
-                                                <input type="file" id="idFront" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-person-badge fs-1"></i>
-                                                <p class="mb-0">رووی پێشەوە</p>
-                                                <img id="idFrontPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">ناسنامە (پشتەوە)</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('idBack').click()">
-                                                <input type="file" id="idBack" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-person-badge fs-1"></i>
-                                                <p class="mb-0">رووی پشتەوە</p>
-                                                <img id="idBackPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- ڕەگەزنامە -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">ڕەگەزنامە</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('passport').click()">
-                                                <input type="file" id="passport" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-passport fs-1"></i>
-                                                <p class="mb-0">ڕەگەزنامە</p>
-                                                <img id="passportPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <!-- کارتی زانیاری -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">کارتی زانیاری (پێشەوە)</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('infoCardFront').click()">
-                                                <input type="file" id="infoCardFront" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-card-text fs-1"></i>
-                                                <p class="mb-0">رووی پێشەوە</p>
-                                                <img id="infoCardFrontPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">کارتی زانیاری (پشتەوە)</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('infoCardBack').click()">
-                                                <input type="file" id="infoCardBack" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-card-text fs-1"></i>
-                                                <p class="mb-0">رووی پشتەوە</p>
-                                                <img id="infoCardBackPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- پسوولەی خۆراک -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">پسوولەی خۆراک</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('foodCard').click()">
-                                                <input type="file" id="foodCard" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-credit-card-2-front fs-1"></i>
-                                                <p class="mb-0">پسوولەی خۆراک</p>
-                                                <img id="foodCardPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <!-- پشتگیری نیشتەجێبوون -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">پشتگیری نیشتەجێبوون</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('residenceProof').click()">
-                                                <input type="file" id="residenceProof" accept="image/*" style="display:none;" required>
-                                                <i class="bi bi-house-check fs-1"></i>
-                                                <p class="mb-0">پشتگیری نیشتەجێبوون</p>
-                                                <img id="residenceProofPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- بڕوانامەی پۆلی ١٢ -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">بڕوانامەی پۆلی ١٢</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('grade12Cert').click()">
-                                                <input type="file" id="grade12Cert" accept="image/*,.pdf" style="display:none;" required>
-                                                <i class="bi bi-file-earmark-text fs-1"></i>
-                                                <p class="mb-0">بڕوانامەی پۆلی ١٢</p>
-                                                <img id="grade12CertPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- بەڵێننامە (کەفیل) -->
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">بەڵێننامە (کەفیل)</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('kafala').click()">
-                                                <input type="file" id="kafala" accept="image/*,.pdf" style="display:none;" required>
-                                                <i class="bi bi-file-earmark-medical fs-1"></i>
-                                                <p class="mb-0">بەڵێننامەی کەفیل</p>
-                                                <img id="kafalaPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- پشکنینی پزیشکی -->
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label required">پشکنینی پزیشکی</label>
-                                            <div class="file-upload-box" onclick="document.getElementById('medicalTest').click()">
-                                                <input type="file" id="medicalTest" accept="image/*,.pdf" style="display:none;" required>
-                                                <i class="bi bi-heart-pulse fs-1"></i>
-                                                <p class="mb-0">پشکنینی پزیشکی</p>
-                                                <img id="medicalTestPreview" class="preview-image img-thumbnail">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- بەشی دووەم: زانیاری کەسی -->
-                            <div class="card mb-4">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0"><i class="bi bi-person-lines-fill"></i> زانیاری کەسی</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="fullName" class="form-label required">ناوی تەواو</label>
-                                            <input type="text" class="form-control" id="fullName" required>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="fatherName" class="form-label required">ناوی باوک</label>
-                                            <input type="text" class="form-control" id="fatherName" required>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="grandfatherName" class="form-label required">ناوی باپیر</label>
-                                            <input type="text" class="form-control" id="grandfatherName" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label for="gender" class="form-label required">رەگەز</label>
-                                            <select class="form-select" id="gender" required>
-                                                <option value="">-- هەڵبژێرە --</option>
-                                                <option value="male">نێر</option>
-                                                <option value="female">مێ</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="col-md-3 mb-3">
-                                            <label for="birthDate" class="form-label required">بەرواری لەدایکبوون</label>
-                                            <input type="date" class="form-control" id="birthDate" required>
-                                        </div>
-                                        
-                                        <div class="col-md-3 mb-3">
-                                            <label for="birthPlace" class="form-label required">شوێنی لەدایکبوون</label>
-                                            <input type="text" class="form-control" id="birthPlace" required>
-                                        </div>
-                                        
-                                        <div class="col-md-3 mb-3">
-                                            <label for="nationality" class="form-label required">نەتەوە</label>
-                                            <input type="text" class="form-control" id="nationality" value="کورد" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="phone" class="form-label required">ژمارەی مۆبایل</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">+964</span>
-                                                <input type="tel" class="form-control" id="phone" placeholder="7501234567" required>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="email" class="form-label required">ئیمەیل</label>
-                                            <input type="email" class="form-control" id="email" required>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="religion" class="form-label">ئایین</label>
-                                            <input type="text" class="form-control" id="religion" value="ئیسلام">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- بەشی سێیەم: زانیاری خوێندن -->
-                            <div class="card mb-4">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0"><i class="bi bi-book"></i> زانیاری خوێندن</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="faculty" class="form-label required">کۆلێژ/فاکەڵتی</label>
-                                            <select class="form-select" id="faculty" required>
-                                                <option value="">-- هەڵبژێرە --</option>
-                                                <option value="business">کۆلێژی کارگێری و ئابوری</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="department" class="form-label required">بەش</label>
-                                            <select class="form-select" id="department" required>
-                                                <option value="">-- هەڵبژێرە --</option>
-                                                <option value="accounting">ژمێریاری</option>
-                                                <option value="economics">ئابووری</option>
-                                                <option value="statistics">ئامار</option>
-                                                <option value="banking">دارایی بانک</option>
-                                                <option value="management">کارگێری کار</option>
-                                                <option value="marketing">مارکێتینگ</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="studyType" class="form-label required">جۆری خوێندن</label>
-                                            <select class="form-select" id="studyType" required>
-                                                <option value="">-- هەڵبژێرە --</option>
-                                                <option value="morning">بەیانیان</option>
-                                                <option value="evening">ئێواران</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="school" class="form-label required">ئامادەیی</label>
-                                            <input type="text" class="form-control" id="school" required>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="graduationYear" class="form-label required">ساڵی دەرچوون</label>
-                                            <input type="number" class="form-control" id="graduationYear" min="2000" max="2024" required>
-                                        </div>
-                                        
-                                        <div class="col-md-4 mb-3">
-                                            <label for="average" class="form-label required">کۆی نمرە</label>
-                                            <input type="number" step="0.01" class="form-control" id="average" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- دووگمەکان -->
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="reset" class="btn btn-outline-danger px-4">
-                                    <i class="bi bi-x-circle"></i> پاککردنەوە
-                                </button>
-                                
-                                <button type="submit" class="btn btn-su px-5">
-                                    <i class="bi bi-send-check"></i> ناردن
-                                </button>
-                            </div>
-                        </form>
+                    <div class="stat-card">
+                        <h3>ئۆتۆمبێلە بەفرۆشراوەکان</h3>
+                        <span class="stat-number" id="soldCars">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>ئۆتۆمبێلە بەردەستەکان</h3>
+                        <span class="stat-number" id="availableCars">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>داهاتی گشتی</h3>
+                        <span class="stat-number" id="totalRevenue">0</span>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- لیستی قوتابیان -->
-    <div class="container py-4" id="studentListSection">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card shadow">
-                    <div class="card-header bg-su text-white">
-                        <h4 class="mb-0"><i class="bi bi-people-fill"></i> لیستی قوتابیان</h4>
+                <div class="recent-activities">
+                    <h3>چالاکیەکانی دوایین</h3>
+                    <div id="recentActivities">
+                        <!-- چالاکیەکان لە JS دەخرێنەوە -->
                     </div>
-                    
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <input type="text" id="searchInput" class="form-control" placeholder="گەڕان بەناو قوتابیان...">
-                                    <button class="btn btn-outline-secondary" type="button" id="searchBtn">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </div>
+                </div>
+            </section>
+
+            <!-- تۆماری ئۆتۆمبێلەکان -->
+            <section id="cars" class="content-section">
+                <div class="section-header">
+                    <h2>تۆماری ئۆتۆمبێلەکان</h2>
+                    <button class="btn-primary" id="addCarBtn">➕ زیادکردنی ئۆتۆمبێلی نوێ</button>
+                </div>
+                
+                <div class="filters">
+                    <input type="text" id="carSearch" placeholder="گەڕان بە ناو، مۆدێل یان شاسێ..." class="search-input">
+                    <select id="statusFilter">
+                        <option value="all">هەموو دۆخەکان</option>
+                        <option value="available">بەردەست</option>
+                        <option value="sold">فرۆشراو</option>
+                        <option value="shipping">لە شێواندایە</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table id="carsTable">
+                        <thead>
+                            <tr>
+                                <th>نمایە</th>
+                                <th>ناو</th>
+                                <th>مۆدێل</th>
+                                <th>ساڵ</th>
+                                <th>شاسێ</th>
+                                <th>نرخ</th>
+                                <th>دۆخ</th>
+                                <th>کردارەکان</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carsTableBody">
+                            <!-- داتاکان لە JS دەخرێنەوە -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- فاکتورەکانی شێوان -->
+            <section id="shipping" class="content-section">
+                <div class="section-header">
+                    <h2>فاکتورەکانی شێوان</h2>
+                </div>
+                <div class="table-container">
+                    <table id="shippingTable">
+                        <thead>
+                            <tr>
+                                <th>ژمارە</th>
+                                <th>بەروار</th>
+                                <th>سەیارە / لوت</th>
+                                <th>نرخی فاکتور</th>
+                                <th>دۆخی پارەدان</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shippingTableBody">
+                            <!-- داتاکان لە JS دەخرێنەوە -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- فرۆشتنەکان -->
+            <section id="sales" class="content-section">
+                <div class="section-header">
+                    <h2>گرێبەستەکانی فرۆشتن</h2>
+                    <button class="btn-primary" id="addSaleBtn">➕ زیادکردنی فرۆشتن</button>
+                </div>
+                <div class="table-container">
+                    <table id="salesTable">
+                        <thead>
+                            <tr>
+                                <th>بەروار</th>
+                                <th>سەیارە</th>
+                                <th>کڕیار</th>
+                                <th>نرخی فرۆشتن</th>
+                                <th>کمیسیۆن</th>
+                                <th>کۆی گشتی</th>
+                                <th>دۆخ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesTableBody">
+                            <!-- داتاکان لە JS دەخرێنەوە -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- هەڵوەشاندنەکان -->
+            <section id="cancellations" class="content-section">
+                <h2>هەڵوەشاندنەکان</h2>
+                <div class="table-container">
+                    <table id="cancellationsTable">
+                        <thead>
+                            <tr>
+                                <th>بەروار</th>
+                                <th>سەیارە</th>
+                                <th>هۆکاری هەڵوەشاندن</th>
+                                <th>بڕی پارە</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cancellationsTableBody">
+                            <!-- داتاکان لە JS دەخرێنەوە -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- کاشێر -->
+            <section id="cashier" class="content-section">
+                <h2>کاشێر</h2>
+                <div class="cashier-grid">
+                    <div class="cashier-card">
+                        <h3>پارەدانە نوێیەکان</h3>
+                        <form id="paymentForm">
+                            <div class="form-group">
+                                <label>جۆری پارەدان:</label>
+                                <select id="paymentType" required>
+                                    <option value="shipping">پارەدانی شێوان</option>
+                                    <option value="purchase">کڕینی ئۆتۆمبێل</option>
+                                    <option value="expense">خەرجی</option>
+                                    <option value="income">داهات</option>
+                                </select>
                             </div>
-                            <div class="col-md-6 text-end">
-                                <button class="btn btn-outline-secondary" id="exportBtn">
-                                    <i class="bi bi-download"></i> هەناردەکردن
-                                </button>
+                            <div class="form-group">
+                                <label>بڕی پارە (درهم):</label>
+                                <input type="number" id="amount" required step="0.01">
                             </div>
-                        </div>
-                        
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <div class="form-group">
+                                <label>ڕێنوێی:</label>
+                                <textarea id="description" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>بەروار:</label>
+                                <input type="date" id="paymentDate" required>
+                            </div>
+                            <button type="submit" class="btn-primary">تۆمارکردنی پارەدان</button>
+                        </form>
+                    </div>
+
+                    <div class="cashier-card">
+                        <h3>مێژووی پارەدانەکان</h3>
+                        <div class="table-container">
+                            <table id="paymentsTable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>وێنە</th>
-                                        <th>ناو</th>
-                                        <th>بەش</th>
-                                        <th>ژمارەی مۆبایل</th>
-                                        <th>ئیمەیل</th>
-                                        <th>کردارەکان</th>
+                                        <th>بەروار</th>
+                                        <th>جۆر</th>
+                                        <th>ڕێنوێی</th>
+                                        <th>بڕ</th>
                                     </tr>
                                 </thead>
-                                <tbody id="studentTableBody">
-                                    <!-- لیستی قوتابیان لێرە دەخرێتەڕوو -->
+                                <tbody id="paymentsTableBody">
+                                    <!-- داتاکان لە JS دەخرێنەوە -->
                                 </tbody>
                             </table>
                         </div>
-                        
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center" id="pagination">
-                                <!-- پێڕستی پەڕەکان لێرە دەخرێتەڕوو -->
-                            </ul>
-                        </nav>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- ڕاپۆرتەکان -->
+            <section id="reports" class="content-section">
+                <h2>ڕاپۆرتەکان</h2>
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>ڕاپۆرتی داهات و خەرجی</h3>
+                        <canvas id="incomeExpenseChart"></canvas>
+                    </div>
+                    <div class="report-card">
+                        <h3>فرۆشتن بە مۆدێل</h3>
+                        <canvas id="salesByModelChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- مۆدالی زیادکردنی ئۆتۆمبێل -->
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>زیادکردنی ئۆتۆمبێلی نوێ</h3>
+            <form id="carForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>براند:</label>
+                        <input type="text" id="carBrand" required>
+                    </div>
+                    <div class="form-group">
+                        <label>مۆدێل:</label>
+                        <input type="text" id="carModel" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>ساڵ:</label>
+                        <input type="number" id="carYear" required min="1990" max="2025">
+                    </div>
+                    <div class="form-group">
+                        <label>نرخ (درهم):</label>
+                        <input type="number" id="carPrice" required step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>شاسێ:</label>
+                    <input type="text" id="carVIN" required>
+                </div>
+                <div class="form-group">
+                    <label>نمایە:</label>
+                    <input type="file" id="carImage" accept="image/*">
+                </div>
+                <button type="submit" class="btn-primary">تۆمارکردنی ئۆتۆمبێل</button>
+            </form>
         </div>
     </div>
 
-    <!-- پێنجەری خوارەوە -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <img src="download.jpg" alt="زانکۆی سەلاحەدین" width="120" class="mb-3" style="  border-radius: 10px;">
-            <p>© 2025 زانکۆی سەلاحەدین - هەموو مافەکان پارێزراوە</p>
-            <p>هەولێر، هەرێمی کوردستان - عێراق</p>
-        </div>
-    </footer>
-
-    <!-- Skriptەکان -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // فەنکشن بۆ پیشاندانی وێنەکان
-        function setupImagePreview(inputId, previewId) {
-            const input = document.getElementById(inputId);
-            const preview = document.getElementById(previewId);
-            
-            input.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    
-                    reader.addEventListener('load', function() {
-                        preview.src = this.result;
-                        preview.style.display = 'block';
-                    });
-                    
-                    reader.readAsDataURL(file);
-                }
-            });
-        }
-        
-        // دانانی فەنکشنەکان بۆ هەموو وێنەکان
-        setupImagePreview('studentPhoto', 'studentPhotoPreview');
-        setupImagePreview('nationalCardFront', 'nationalCardFrontPreview');
-        setupImagePreview('nationalCardBack', 'nationalCardBackPreview');
-        setupImagePreview('idFront', 'idFrontPreview');
-        setupImagePreview('idBack', 'idBackPreview');
-        setupImagePreview('passport', 'passportPreview');
-        setupImagePreview('infoCardFront', 'infoCardFrontPreview');
-        setupImagePreview('infoCardBack', 'infoCardBackPreview');
-        setupImagePreview('foodCard', 'foodCardPreview');
-        setupImagePreview('residenceProof', 'residenceProofPreview');
-        setupImagePreview('grade12Cert', 'grade12CertPreview');
-        setupImagePreview('kafala', 'kafalaPreview');
-        setupImagePreview('medicalTest', 'medicalTestPreview');
-        
-        // Storage for students
-        let students = JSON.parse(localStorage.getItem('students')) || [];
-        let currentPage = 1;
-        const studentsPerPage = 10;
-        
-        // Navigation buttons
-        document.getElementById('showFormBtn').addEventListener('click', showForm);
-        document.getElementById('showListBtn').addEventListener('click', showStudentList);
-        
-        function showForm() {
-            document.getElementById('formSection').style.display = 'block';
-            document.getElementById('studentListSection').style.display = 'none';
-        }
-        
-        function showStudentList() {
-            document.getElementById('formSection').style.display = 'none';
-            document.getElementById('studentListSection').style.display = 'block';
-            renderStudentList();
-        }
-        
-        // Form submission
-        document.getElementById('studentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const student = {
-                id: Date.now(),
-                fullName: document.getElementById('fullName').value,
-                fatherName: document.getElementById('fatherName').value,
-                grandfatherName: document.getElementById('grandfatherName').value,
-                gender: document.getElementById('gender').value,
-                birthDate: document.getElementById('birthDate').value,
-                birthPlace: document.getElementById('birthPlace').value,
-                nationality: document.getElementById('nationality').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                religion: document.getElementById('religion').value,
-                faculty: document.getElementById('faculty').value,
-                department: document.getElementById('department').value,
-                studyType: document.getElementById('studyType').value,
-                school: document.getElementById('school').value,
-                graduationYear: document.getElementById('graduationYear').value,
-                average: document.getElementById('average').value,
-                photo: document.getElementById('studentPhotoPreview').src,
-                registrationDate: new Date().toLocaleDateString('ku')
-            };
-            
-            // Add to storage
-            students.push(student);
-            localStorage.setItem('students', JSON.stringify(students));
-            
-            // Reset form
-            this.reset();
-            
-            // Hide all preview images
-            document.querySelectorAll('.preview-image').forEach(img => {
-                img.style.display = 'none';
-            });
-            
-            // Show success message
-            alert('زانیاری قوتابی بە سەرکەوتوویی تۆمارکرا!');
-            
-            // Show student list
-            showStudentList();
-        });
-        
-        // Render student list
-        function renderStudentList(page = 1) {
-            currentPage = page;
-            const studentTableBody = document.getElementById('studentTableBody');
-            const pagination = document.getElementById('pagination');
-            
-            // Clear previous content
-            studentTableBody.innerHTML = '';
-            pagination.innerHTML = '';
-            
-            // Calculate pagination
-            const startIndex = (page - 1) * studentsPerPage;
-            const endIndex = startIndex + studentsPerPage;
-            const paginatedStudents = students.slice(startIndex, endIndex);
-            const totalPages = Math.ceil(students.length / studentsPerPage);
-            
-            // Add students to table
-            paginatedStudents.forEach((student, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${startIndex + index + 1}</td>
-                    <td><img src="${student.photo}" alt="${student.fullName}" class="student-photo"></td>
-                    <td>${student.fullName}</td>
-                    <td>${student.department}</td>
-                    <td>${student.phone}</td>
-                    <td>${student.email}</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary view-btn" data-id="${student.id}">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning edit-btn" data-id="${student.id}">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${student.id}">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                `;
-                studentTableBody.appendChild(row);
-            });
-            
-            // Add pagination
-            if (totalPages > 1) {
-                // Previous button
-                const prevLi = document.createElement('li');
-                prevLi.className = `page-item ${page === 1 ? 'disabled' : ''}`;
-                prevLi.innerHTML = `<a class="page-link" href="#">پێشوو</a>`;
-                prevLi.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (page > 1) renderStudentList(page - 1);
-                });
-                pagination.appendChild(prevLi);
-                
-                // Page numbers
-                for (let i = 1; i <= totalPages; i++) {
-                    const li = document.createElement('li');
-                    li.className = `page-item ${i === page ? 'active' : ''}`;
-                    li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                    li.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        renderStudentList(i);
-                    });
-                    pagination.appendChild(li);
-                }
-                
-                // Next button
-                const nextLi = document.createElement('li');
-                nextLi.className = `page-item ${page === totalPages ? 'disabled' : ''}`;
-                nextLi.innerHTML = `<a class="page-link" href="#">دواتر</a>`;
-                nextLi.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (page < totalPages) renderStudentList(page + 1);
-                });
-                pagination.appendChild(nextLi);
-            }
-            
-            // Add event listeners to action buttons
-            document.querySelectorAll('.view-btn').forEach(btn => {
-                btn.addEventListener('click', () => viewStudent(btn.dataset.id));
-            });
-            
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', () => editStudent(btn.dataset.id));
-            });
-            
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', () => deleteStudent(btn.dataset.id));
-            });
-        }
-        
-        // View student details
-        function viewStudent(id) {
-            const student = students.find(s => s.id == id);
-            if (student) {
-                alert(`
-                    ناوی تەواو: ${student.fullName}
-                    ناوی باوک: ${student.fatherName}
-                    ناوی باپیر: ${student.grandfatherName}
-                    رەگەز: ${student.gender === 'male' ? 'نێر' : 'مێ'}
-                    بەرواری لەدایکبوون: ${student.birthDate}
-                    شوێنی لەدایکبوون: ${student.birthPlace}
-                    نەتەوە: ${student.nationality}
-                    ژمارەی مۆبایل: ${student.phone}
-                    ئیمەیل: ${student.email}
-                    ئایین: ${student.religion}
-                    کۆلێژ: ${student.faculty}
-                    بەش: ${student.department}
-                    جۆری خوێندن: ${student.studyType === 'morning' ? 'بەیانیان' : 'ئێواران'}
-                    ئامادەیی: ${student.school}
-                    ساڵی دەرچوون: ${student.graduationYear}
-                    کۆی نمرە: ${student.average}
-                    بەرواری تۆمارکردن: ${student.registrationDate}
-                `);
-            }
-        }
-        
-        // Edit student
-        function editStudent(id) {
-            const student = students.find(s => s.id == id);
-            if (student) {
-                // Fill the form with student data
-                document.getElementById('fullName').value = student.fullName;
-                document.getElementById('fatherName').value = student.fatherName;
-                document.getElementById('grandfatherName').value = student.grandfatherName;
-                document.getElementById('gender').value = student.gender;
-                document.getElementById('birthDate').value = student.birthDate;
-                document.getElementById('birthPlace').value = student.birthPlace;
-                document.getElementById('nationality').value = student.nationality;
-                document.getElementById('phone').value = student.phone;
-                document.getElementById('email').value = student.email;
-                document.getElementById('religion').value = student.religion;
-                document.getElementById('faculty').value = student.faculty;
-                document.getElementById('department').value = student.department;
-                document.getElementById('studyType').value = student.studyType;
-                document.getElementById('school').value = student.school;
-                document.getElementById('graduationYear').value = student.graduationYear;
-                document.getElementById('average').value = student.average;
-                
-                // Show photo if available
-                if (student.photo) {
-                    const preview = document.getElementById('studentPhotoPreview');
-                    preview.src = student.photo;
-                    preview.style.display = 'block';
-                }
-                
-                // Remove the student from the list
-                students = students.filter(s => s.id != id);
-                localStorage.setItem('students', JSON.stringify(students));
-                
-                // Show the form
-                showForm();
-            }
-        }
-        
-        // Delete student
-        function deleteStudent(id) {
-            if (confirm('دڵنیای لە سڕینەوەی ئەم قوتابیە؟')) {
-                students = students.filter(s => s.id != id);
-                localStorage.setItem('students', JSON.stringify(students));
-                renderStudentList(currentPage);
-            }
-        }
-        
-        // Search functionality
-        document.getElementById('searchBtn').addEventListener('click', searchStudents);
-        document.getElementById('searchInput').addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') searchStudents();
-        });
-        
-        function searchStudents() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            if (searchTerm) {
-                const filteredStudents = students.filter(student => 
-                    student.fullName.toLowerCase().includes(searchTerm) || 
-                    student.email.toLowerCase().includes(searchTerm) ||
-                    student.phone.includes(searchTerm)
-                );
-                
-                // Display search results
-                const studentTableBody = document.getElementById('studentTableBody');
-                studentTableBody.innerHTML = '';
-                
-                filteredStudents.forEach((student, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td><img src="${student.photo}" alt="${student.fullName}" class="student-photo"></td>
-                        <td>${student.fullName}</td>
-                        <td>${student.department}</td>
-                        <td>${student.phone}</td>
-                        <td>${student.email}</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary view-btn" data-id="${student.id}">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-warning edit-btn" data-id="${student.id}">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${student.id}">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
-                    `;
-                    studentTableBody.appendChild(row);
-                });
-                
-                // Add event listeners to action buttons
-                document.querySelectorAll('.view-btn').forEach(btn => {
-                    btn.addEventListener('click', () => viewStudent(btn.dataset.id));
-                });
-                
-                document.querySelectorAll('.edit-btn').forEach(btn => {
-                    btn.addEventListener('click', () => editStudent(btn.dataset.id));
-                });
-                
-                document.querySelectorAll('.delete-btn').forEach(btn => {
-                    btn.addEventListener('click', () => deleteStudent(btn.dataset.id));
-                });
-            } else {
-                renderStudentList();
-            }
-        }
-        
-        // Export functionality
-        document.getElementById('exportBtn').addEventListener('click', exportStudents);
-        
-        function exportStudents() {
-            let csv = 'ID,ناو,ناوی باوک,ناوی باپیر,رەگەز,بەرواری لەدایکبوون,شوێنی لەدایکبوون,نەتەوە,ژمارەی مۆبایل,ئیمەیل,ئایین,کۆلێژ,بەش,جۆری خوێندن,ئامادەیی,ساڵی دەرچوون,کۆی نمرە,بەرواری تۆمارکردن\n';
-            
-            students.forEach(student => {
-                csv += `"${student.id}","${student.fullName}","${student.fatherName}","${student.grandfatherName}","${student.gender === 'male' ? 'نێر' : 'مێ'}","${student.birthDate}","${student.birthPlace}","${student.nationality}","${student.phone}","${student.email}","${student.religion}","${student.faculty}","${student.department}","${student.studyType === 'morning' ? 'بەیانیان' : 'ئێواران'}","${student.school}","${student.graduationYear}","${student.average}","${student.registrationDate}"\n`;
-            });
-            
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.setAttribute('href', url);
-            link.setAttribute('download', `لیستی_قوتابیان_${new Date().toLocaleDateString('ku')}.csv`);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-        
-        // Initialize the form view
-        showForm();
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
