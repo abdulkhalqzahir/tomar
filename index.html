@@ -18,7 +18,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Noto Sans Arabic', sans-serif;
-            background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 50%, #6b3e2a 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
             color: white;
             min-height: 100vh;
             direction: rtl;
@@ -35,9 +35,9 @@
             left: 0;
             right: 0;
             height: 70px;
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.95), rgba(74, 44, 26, 0.95));
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.95), rgba(40, 53, 147, 0.95));
             backdrop-filter: blur(15px);
-            border-bottom: 3px solid #d4a574;
+            border-bottom: 3px solid #4fc3f7;
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -55,15 +55,15 @@
         .logo {
             width: 45px;
             height: 45px;
-            background: linear-gradient(135deg, #d4a574, #b8935f);
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #2c1810;
+            color: white;
             font-weight: bold;
             font-size: 24px;
-            box-shadow: 0 0 15px rgba(212, 165, 116, 0.5);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.5);
         }
 
         .title {
@@ -74,25 +74,25 @@
         .title h1 {
             font-size: 18px;
             margin-bottom: 2px;
-            color: #f4e4d4;
+            color: #e3f2fd;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .title h2 {
             font-size: 14px;
-            color: #d4a574;
+            color: #4fc3f7;
             font-weight: 600;
         }
 
         .location-indicator {
-            background: rgba(212, 165, 116, 0.2);
+            background: rgba(79, 195, 247, 0.2);
             border-radius: 20px;
             padding: 8px 15px;
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 12px;
-            border: 1px solid rgba(212, 165, 116, 0.4);
+            border: 1px solid rgba(79, 195, 247, 0.4);
         }
 
         /* Main Content */
@@ -109,7 +109,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            background: linear-gradient(to bottom, #87CEEB 0%, #98D8C8 50%, #8B7355 100%);
+            background: linear-gradient(to bottom, #e3f2fd 0%, #bbdefb 100%);
         }
 
         /* Navigation Overlay */
@@ -118,12 +118,12 @@
             top: 15px;
             left: 15px;
             right: 15px;
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.9), rgba(74, 44, 26, 0.9));
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9), rgba(40, 53, 147, 0.9));
             border-radius: 15px;
             padding: 15px;
             z-index: 500;
             backdrop-filter: blur(15px);
-            border: 2px solid rgba(212, 165, 116, 0.3);
+            border: 2px solid rgba(79, 195, 247, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
@@ -137,15 +137,15 @@
         .current-room {
             font-weight: bold;
             font-size: 18px;
-            color: #d4a574;
+            color: #4fc3f7;
         }
 
         .room-floor {
-            background: rgba(212, 165, 116, 0.2);
+            background: rgba(79, 195, 247, 0.2);
             padding: 4px 12px;
             border-radius: 15px;
             font-size: 12px;
-            color: #d4a574;
+            color: #4fc3f7;
         }
 
         .progress-container {
@@ -158,7 +158,7 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, #8B7355, #d4a574);
+            background: linear-gradient(to right, #2196f3, #4fc3f7);
             border-radius: 10px;
             width: 5%;
             transition: width 0.5s ease;
@@ -168,7 +168,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 12px;
-            color: rgba(244, 228, 212, 0.8);
+            color: rgba(227, 242, 253, 0.8);
         }
 
         /* User Position Indicator */
@@ -184,12 +184,12 @@
         .user-dot {
             width: 24px;
             height: 24px;
-            background: #FFD700;
+            background: #ff9800;
             border-radius: 50%;
             position: absolute;
             top: 8px;
             left: 8px;
-            box-shadow: 0 0 20px #FFD700, 0 0 40px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 20px #ff9800, 0 0 40px rgba(255, 152, 0, 0.5);
             animation: pulse 2s infinite;
         }
 
@@ -198,16 +198,16 @@
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-bottom: 12px solid #FFD700;
+            border-bottom: 12px solid #ff9800;
             position: absolute;
             top: -5px;
             left: 12px;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 152, 0, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
         }
 
         /* Mobile Controls */
@@ -220,12 +220,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.95), rgba(74, 44, 26, 0.95));
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.95), rgba(40, 53, 147, 0.95));
             backdrop-filter: blur(15px);
             border-radius: 15px;
             padding: 0 20px;
             z-index: 1000;
-            border: 2px solid rgba(212, 165, 116, 0.3);
+            border: 2px solid rgba(79, 195, 247, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
@@ -233,9 +233,9 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8B7355, #6b5637);
-            border: 2px solid rgba(212, 165, 116, 0.3);
-            color: #f4e4d4;
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            color: #e3f2fd;
             font-size: 20px;
             display: flex;
             align-items: center;
@@ -247,12 +247,12 @@
 
         .control-btn:active {
             transform: scale(0.9);
-            background: linear-gradient(135deg, #d4a574, #b8935f);
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
         }
 
         .control-btn.active {
-            background: linear-gradient(135deg, #d4a574, #b8935f);
-            color: #2c1810;
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            color: white;
         }
 
         /* Room Info Panel */
@@ -261,14 +261,14 @@
             bottom: -300px;
             left: 0;
             right: 0;
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.98), rgba(74, 44, 26, 0.98));
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.98), rgba(40, 53, 147, 0.98));
             backdrop-filter: blur(20px);
             border-radius: 25px 25px 0 0;
             padding: 25px 20px;
             z-index: 1500;
             transition: bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
-            border-top: 3px solid #d4a574;
+            border-top: 3px solid #4fc3f7;
             max-height: 70vh;
             overflow-y: auto;
         }
@@ -283,12 +283,12 @@
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid rgba(212, 165, 116, 0.2);
+            border-bottom: 2px solid rgba(79, 195, 247, 0.2);
         }
 
         .panel-title {
             font-size: 22px;
-            color: #d4a574;
+            color: #4fc3f7;
             font-weight: bold;
         }
 
@@ -296,9 +296,9 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(212, 165, 116, 0.1);
+            background: rgba(79, 195, 247, 0.1);
             border: none;
-            color: #f4e4d4;
+            color: #e3f2fd;
             font-size: 20px;
             display: flex;
             align-items: center;
@@ -315,22 +315,22 @@
             align-items: center;
             margin-bottom: 15px;
             padding: 12px;
-            background: rgba(212, 165, 116, 0.05);
+            background: rgba(79, 195, 247, 0.05);
             border-radius: 10px;
-            border-right: 3px solid #d4a574;
+            border-right: 3px solid #4fc3f7;
         }
 
         .detail-icon {
             width: 40px;
             height: 40px;
-            background: rgba(212, 165, 116, 0.1);
+            background: rgba(79, 195, 247, 0.1);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-left: 15px;
             font-size: 18px;
-            color: #d4a574;
+            color: #4fc3f7;
         }
 
         .detail-text {
@@ -339,22 +339,22 @@
 
         .detail-label {
             font-size: 12px;
-            color: rgba(244, 228, 212, 0.6);
+            color: rgba(227, 242, 253, 0.6);
             margin-bottom: 3px;
         }
 
         .detail-value {
             font-size: 16px;
             font-weight: bold;
-            color: #f4e4d4;
+            color: #e3f2fd;
         }
 
         .direction-info {
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 152, 0, 0.1);
             border-radius: 15px;
             padding: 15px;
             margin-top: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(255, 152, 0, 0.3);
         }
 
         .direction-header {
@@ -362,13 +362,13 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
-            color: #FFD700;
+            color: #ff9800;
         }
 
         .direction-text {
             font-size: 14px;
             line-height: 1.5;
-            color: #f4e4d4;
+            color: #e3f2fd;
         }
 
         /* Touch Controls */
@@ -385,9 +385,9 @@
             position: absolute;
             width: 70px;
             height: 70px;
-            background: rgba(44, 24, 16, 0.7);
+            background: rgba(26, 35, 126, 0.7);
             border-radius: 50%;
-            border: 2px solid rgba(212, 165, 116, 0.3);
+            border: 2px solid rgba(79, 195, 247, 0.3);
             top: 25px;
             left: 25px;
         }
@@ -396,7 +396,7 @@
             position: absolute;
             width: 40px;
             height: 40px;
-            background: rgba(212, 165, 116, 0.8);
+            background: rgba(79, 195, 247, 0.8);
             border-radius: 50%;
             top: 15px;
             left: 15px;
@@ -416,14 +416,43 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: rgba(44, 24, 16, 0.7);
-            border: 2px solid rgba(212, 165, 116, 0.3);
-            color: #f4e4d4;
+            background: rgba(26, 35, 126, 0.7);
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            color: #e3f2fd;
             font-size: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+        }
+
+        /* Path Indicators */
+        .path-indicators {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .path-line {
+            position: absolute;
+            background: linear-gradient(to right, #4fc3f7, #2196f3);
+            border-radius: 3px;
+            opacity: 0.7;
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+        }
+
+        .path-arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #4fc3f7;
+            opacity: 0.8;
         }
 
         /* Permission Modal */
@@ -442,30 +471,30 @@
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #2c1810, #4a2c1a);
+            background: linear-gradient(135deg, #1a237e, #283593);
             border-radius: 25px;
             padding: 30px;
             max-width: 400px;
             width: 100%;
             text-align: center;
-            border: 3px solid #d4a574;
+            border: 3px solid #4fc3f7;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
         }
 
         .modal-icon {
             font-size: 60px;
-            color: #d4a574;
+            color: #4fc3f7;
             margin-bottom: 20px;
         }
 
         .modal-title {
             font-size: 24px;
-            color: #f4e4d4;
+            color: #e3f2fd;
             margin-bottom: 15px;
         }
 
         .modal-text {
-            color: rgba(244, 228, 212, 0.8);
+            color: rgba(227, 242, 253, 0.8);
             line-height: 1.6;
             margin-bottom: 25px;
             font-size: 16px;
@@ -488,14 +517,14 @@
         }
 
         .modal-btn.allow {
-            background: linear-gradient(to right, #8B7355, #d4a574);
-            color: #2c1810;
+            background: linear-gradient(to right, #2196f3, #4fc3f7);
+            color: white;
         }
 
         .modal-btn.deny {
-            background: rgba(244, 228, 212, 0.1);
-            color: #f4e4d4;
-            border: 2px solid rgba(244, 228, 212, 0.3);
+            background: rgba(227, 242, 253, 0.1);
+            color: #e3f2fd;
+            border: 2px solid rgba(227, 242, 253, 0.3);
         }
 
         .modal-btn:active {
@@ -508,7 +537,7 @@
             top: 100px;
             right: 20px;
             left: 20px;
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.95), rgba(74, 44, 26, 0.95));
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.95), rgba(40, 53, 147, 0.95));
             backdrop-filter: blur(15px);
             border-radius: 15px;
             padding: 15px;
@@ -518,7 +547,7 @@
             z-index: 2000;
             transform: translateY(-100px);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid rgba(212, 165, 116, 0.3);
+            border: 1px solid rgba(79, 195, 247, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
@@ -528,7 +557,7 @@
 
         .toast-icon {
             font-size: 24px;
-            color: #d4a574;
+            color: #4fc3f7;
         }
 
         .toast-content {
@@ -538,12 +567,12 @@
         .toast-title {
             font-weight: bold;
             margin-bottom: 5px;
-            color: #f4e4d4;
+            color: #e3f2fd;
         }
 
         .toast-text {
             font-size: 14px;
-            color: rgba(244, 228, 212, 0.8);
+            color: rgba(227, 242, 253, 0.8);
         }
 
         /* Responsive Adjustments */
@@ -590,6 +619,24 @@
             .room-info-panel {
                 padding: 20px 15px;
             }
+            
+            .touch-controls {
+                bottom: 80px;
+                left: 15px;
+                width: 100px;
+                height: 100px;
+            }
+            
+            .touch-buttons {
+                bottom: 80px;
+                right: 15px;
+            }
+            
+            .touch-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
 
         /* Hide scrollbars but keep functionality */
@@ -598,7 +645,7 @@
         }
         
         .room-info-panel::-webkit-scrollbar-thumb {
-            background: rgba(212, 165, 116, 0.5);
+            background: rgba(79, 195, 247, 0.5);
             border-radius: 10px;
         }
 
@@ -609,7 +656,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #2c1810, #4a2c1a);
+            background: linear-gradient(135deg, #1a237e, #283593);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -626,8 +673,8 @@
         .loading-icon {
             width: 80px;
             height: 80px;
-            border: 4px solid rgba(212, 165, 116, 0.2);
-            border-top: 4px solid #d4a574;
+            border: 4px solid rgba(79, 195, 247, 0.2);
+            border-top: 4px solid #4fc3f7;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
@@ -639,9 +686,103 @@
         }
 
         .loading-text {
-            color: #d4a574;
+            color: #4fc3f7;
             font-size: 18px;
             font-weight: bold;
+        }
+
+        /* Modern Building Elements */
+        .floor-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(26, 35, 126, 0.9);
+            border-radius: 10px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 400;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+        }
+
+        .floor-btn {
+            background: rgba(79, 195, 247, 0.2);
+            border: none;
+            color: #e3f2fd;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .floor-btn.active {
+            background: #4fc3f7;
+            color: white;
+        }
+
+        /* 3D Building Colors */
+        .building-wall {
+            background-color: #607d8b !important;
+        }
+
+        .building-window {
+            background-color: #4fc3f7 !important;
+        }
+
+        .building-door {
+            background-color: #795548 !important;
+        }
+
+        .ground-floor {
+            background-color: #8d6e63 !important;
+        }
+
+        .first-floor {
+            background-color: #78909c !important;
+        }
+
+        .second-floor {
+            background-color: #546e7a !important;
+        }
+
+        .special-room {
+            background-color: #ff9800 !important;
+        }
+
+        /* Interactive Elements */
+        .interactive-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #4fc3f7;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 200;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.8);
+        }
+
+        .interactive-dot:hover {
+            transform: scale(1.5);
+            background: #ff9800;
+        }
+
+        /* Building Structure Styles */
+        .column {
+            background-color: #37474f !important;
+        }
+
+        .staircase {
+            background-color: #455a64 !important;
+        }
+
+        .elevator {
+            background-color: #ff9800 !important;
         }
     </style>
 </head>
@@ -688,7 +829,7 @@
             <div class="logo">س</div>
             <div class="title">
                 <h1>زانکۆی سەڵاحەدین</h1>
-                <h2>نەخشەی 3Dی کۆلێژ</h2>
+                <h2>کۆلێژی بەڕێوەبردن و ئابووری</h2>
             </div>
             <div class="location-indicator" id="locationStatus">
                 <i class="fas fa-map-marker-alt"></i>
@@ -722,6 +863,14 @@
             <div class="user-dot"></div>
         </div>
 
+        <!-- Floor Indicator -->
+        <div class="floor-indicator" id="floorIndicator">
+            <button class="floor-btn active" data-floor="ground">س</button>
+            <button class="floor-btn" data-floor="first">١</button>
+            <button class="floor-btn" data-floor="second">٢</button>
+            <span style="color: #4fc3f7; font-size: 12px;">نهۆم</span>
+        </div>
+
         <!-- Touch Controls -->
         <div class="touch-controls" id="touchControls">
             <div class="joystick">
@@ -737,6 +886,9 @@
                 <i class="fas fa-minus"></i>
             </div>
         </div>
+
+        <!-- Path Indicators Container -->
+        <div class="path-indicators" id="pathIndicators"></div>
     </div>
 
     <!-- Mobile Controls -->
@@ -778,7 +930,7 @@
     </div>
 
     <script>
-        // Room data with detailed information
+        // Enhanced Room data with detailed information based on the image
         const rooms = [
             { 
                 id: 1, 
@@ -789,61 +941,89 @@
                 description: "دەرگای سەرەکی کۆلێژ کە بۆ هەموو خوێندکاران و مامۆستایان کراوەیە",
                 distance: 0,
                 visited: true,
-                current: true
+                current: true,
+                color: 0x4CAF50,
+                type: "entrance",
+                capacity: "ناوچا",
+                hours: "٨:٠٠ - ١٨:٠٠"
             },
             { 
                 id: 2, 
                 name: "ئەکاونتی", 
                 floor: "first", 
-                x: -5, y: 3, z: 10,
+                x: -8, y: 3.5, z: 10,
                 details: "بەشی ئەکاونتی - نهۆمی یەکەم",
-                description: "بەشی خوێندنی ئەکاونتی و هەموو وانەکانی تێدایە",
-                distance: 15
+                description: "بەشی خوێندنی ئەکاونتی و هەموو وانەکانی تێدایە. لە لای ڕاستی پەیجی پلەیەکانە",
+                distance: 15,
+                color: 0x2196F3,
+                type: "department",
+                capacity: "٥٠٠ خوێندکار",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 3, 
                 name: "ئابووری", 
                 floor: "first", 
-                x: 5, y: 3, z: 10,
+                x: 8, y: 3.5, z: 10,
                 details: "بەشی ئابووری - نهۆمی یەکەم",
-                description: "بەشی ئابووری و ئابووری نێودەوڵەتی",
-                distance: 18
+                description: "بەشی ئابووری و ئابووری نێودەوڵەتی. لە لای چەپی پەیجی پلەیەکانە",
+                distance: 18,
+                color: 0xFF9800,
+                type: "department",
+                capacity: "٤٥٠ خوێندکار",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 4, 
                 name: "کتێبخانە", 
                 floor: "ground", 
-                x: -8, y: 0, z: 5,
+                x: -12, y: 0, z: 5,
                 details: "کتێبخانەی کۆلێژ",
-                description: "کتێبخانەی سەرەکی کۆلێژ بە هەزاران کتێب و سەرچاوە",
-                distance: 12
+                description: "کتێبخانەی سەرەکی کۆلێژ بە هەزاران کتێب و سەرچاوە. لە لای ڕاستی دەرگای سەرەکیە",
+                distance: 12,
+                color: 0x9C27B0,
+                type: "library",
+                capacity: "٢٠٠ کورسی",
+                hours: "٨:٠٠ - ٢٠:٠٠"
             },
             { 
                 id: 5, 
                 name: "موسڵمانان", 
                 floor: "ground", 
-                x: 10, y: 0, z: 0,
+                x: 12, y: 0, z: 0,
                 details: "موسڵمانی نێرینە",
-                description: "موسڵمانی کۆلێژ بۆ نوێژ و عیبادەت",
-                distance: 20
+                description: "موسڵمانی کۆلێژ بۆ نوێژ و عیبادەت. لە نزیک تەوالێتی نێرینەیە",
+                distance: 20,
+                color: 0x795548,
+                type: "prayer",
+                capacity: "١٠٠ کەس",
+                hours: "هەموو کات"
             },
             { 
                 id: 6, 
                 name: "تەوالێت", 
                 floor: "ground", 
-                x: 12, y: 0, z: -5,
+                x: 15, y: 0, z: -5,
                 details: "تەوالێتی نێرینە",
-                description: "تەوالێتی پاک و ئاسایی",
-                distance: 22
+                description: "تەوالێتی پاک و ئاسایی. لە نزیک موسڵمانە",
+                distance: 22,
+                color: 0x607D8B,
+                type: "wc",
+                capacity: "١٠ کەس",
+                hours: "هەموو کات"
             },
             { 
                 id: 7, 
                 name: "تەوالێتی مێینە", 
                 floor: "ground", 
-                x: -12, y: 0, z: -5,
+                x: -15, y: 0, z: -5,
                 details: "تەوالێتی مێینە",
-                description: "تەوالێتی تایبەت بە خوێندکارە مێینەکان",
-                distance: 25
+                description: "تەوالێتی تایبەت بە خوێندکارە مێینەکان. لە لای چەپی کتێبخانەیە",
+                distance: 25,
+                color: 0xE91E63,
+                type: "wc",
+                capacity: "١٠ کەس",
+                hours: "هەموو کات"
             },
             { 
                 id: 8, 
@@ -851,8 +1031,12 @@
                 floor: "ground", 
                 x: -5, y: 0, z: -10,
                 details: "بەشی وەرگرتنی خوێندکارە نوێیەکان",
-                description: "بەشی وەرگرتنی خوێندکارانی نوێ و یارمەتیدانیان",
-                distance: 18
+                description: "بەشی وەرگرتنی خوێندکارانی نوێ و یارمەتیدانیان. لە نزیک کافێیە",
+                distance: 18,
+                color: 0x00BCD4,
+                type: "admissions",
+                capacity: "ژووری کۆبونەوە",
+                hours: "٩:٠٠ - ١٤:٠٠"
             },
             { 
                 id: 9, 
@@ -860,17 +1044,25 @@
                 floor: "ground", 
                 x: 5, y: 0, z: -10,
                 details: "ئامادەبوونی خوێندکاران",
-                description: "خشتەی ئامادەبوونی خوێندکاران و تۆمارکردن",
-                distance: 16
+                description: "خشتەی ئامادەبوونی خوێندکاران و تۆمارکردن. لە نزیک دوکانیە",
+                distance: 16,
+                color: 0x8BC34A,
+                type: "attendance",
+                capacity: "ژووری کار",
+                hours: "٨:٠٠ - ١٥:٠٠"
             },
             { 
                 id: 10, 
                 name: "پارێزەر", 
                 floor: "ground", 
-                x: 15, y: 0, z: 8,
+                x: 18, y: 0, z: 8,
                 details: "پارێزەری کۆلێژ",
-                description: "ژووری پارێزەر و پاراستنی کۆلێژ",
-                distance: 25
+                description: "ژووری پارێزەر و پاراستنی کۆلێژ. لە نزیک دەرگای سەرەکیە",
+                distance: 25,
+                color: 0xF44336,
+                type: "security",
+                capacity: "ژووری کار",
+                hours: "٢٤ کاتژمێر"
             },
             { 
                 id: 11, 
@@ -878,17 +1070,25 @@
                 floor: "ground", 
                 x: 0, y: 0, z: 12,
                 details: "ژووری پێشوازیکردن",
-                description: "ژووری پێشوازیکردن و یارمەتیدانی سەردانکەران",
-                distance: 8
+                description: "ژووری پێشوازیکردن و یارمەتیدانی سەردانکەران. لە ناوەڕاستی دەرگای سەرەکیدایە",
+                distance: 8,
+                color: 0xFFC107,
+                type: "reception",
+                capacity: "ژووری چاوپێکەوتن",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 12, 
                 name: "چاپ", 
                 floor: "ground", 
-                x: -15, y: 0, z: 8,
+                x: -18, y: 0, z: 8,
                 details: "بەشی چاپکردن",
-                description: "بەشی چاپکردنی پەڕە و پڕۆژەکان",
-                distance: 28
+                description: "بەشی چاپکردنی پەڕە و پڕۆژەکان. لە لای چەپی کتێبخانەیە",
+                distance: 28,
+                color: 0x9E9E9E,
+                type: "printing",
+                capacity: "ژووری ئامێرەکان",
+                hours: "٨:٠٠ - ١٥:٠٠"
             },
             { 
                 id: 13, 
@@ -896,8 +1096,12 @@
                 floor: "ground", 
                 x: -10, y: 0, z: -12,
                 details: "کافێی کۆلێژ",
-                description: "کافێی خوێندکاران بۆ خواردن و خواردنەوە",
-                distance: 22
+                description: "کافێی خوێندکاران بۆ خواردن و خواردنەوە. لە نزیک وەرگرتنی خوێندکارە",
+                distance: 22,
+                color: 0xFF5722,
+                type: "cafe",
+                capacity: "١٠٠ کورسی",
+                hours: "٨:٠٠ - ١٨:٠٠"
             },
             { 
                 id: 14, 
@@ -905,8 +1109,12 @@
                 floor: "ground", 
                 x: 10, y: 0, z: -12,
                 details: "دوکانی کۆلێژ",
-                description: "دوکانی کۆلێژ بۆ کاڵای پێویست",
-                distance: 20
+                description: "دوکانی کۆلێژ بۆ کاڵای پێویست. لە نزیک ئامادەبوونە",
+                distance: 20,
+                color: 0x3F51B5,
+                type: "shop",
+                capacity: "دوکان",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 15, 
@@ -914,90 +1122,154 @@
                 floor: "ground", 
                 x: 0, y: 0, z: -15,
                 details: "بەشی وەرزشی",
-                description: "بەشی وەرزش و تەندروستی",
-                distance: 18
+                description: "بەشی وەرزش و تەندروستی. لە ناوەڕاستی کۆلێژە",
+                distance: 18,
+                color: 0x4CAF50,
+                type: "sports",
+                capacity: "ژووری وەرزش",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 16, 
                 name: "مارکێتینگ", 
                 floor: "ground", 
-                x: -15, y: 0, z: -8,
+                x: -20, y: 0, z: -8,
                 details: "بەشی مارکێتینگ",
-                description: "بەشی مارکێتینگ و فرۆشتن",
-                distance: 30
+                description: "بەشی مارکێتینگ و فرۆشتن. لە لای چەپی کۆلێژە",
+                distance: 30,
+                color: 0xE91E63,
+                type: "department",
+                capacity: "٣٠٠ خوێندکار",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 17, 
                 name: "ئامار", 
                 floor: "second", 
-                x: -5, y: 6, z: 10,
+                x: -8, y: 7, z: 10,
                 details: "بەشی ئامار - نهۆمی دووەم",
-                description: "بەشی ئامار و زانستی داتا",
-                distance: 35
+                description: "بەشی ئامار و زانستی داتا. لەسەر هەمان شوێنی ئەکاونتیە بەڵام لەسەر نهۆمی دووەم",
+                distance: 35,
+                color: 0x673AB7,
+                type: "department",
+                capacity: "٤٠٠ خوێندکار",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 18, 
                 name: "دارایی و بانکداری", 
                 floor: "second", 
-                x: 5, y: 6, z: 10,
+                x: 8, y: 7, z: 10,
                 details: "بەشی دارایی و بانکداری - نهۆمی دووەم",
-                description: "بەشی دارایی و بانکداری و بوودجە",
-                distance: 38
+                description: "بەشی دارایی و بانکداری و بوودجە. لەسەر هەمان شوێنی ئابووریە بەڵام لەسەر نهۆمی دووەم",
+                distance: 38,
+                color: 0x009688,
+                type: "department",
+                capacity: "٣٥٠ خوێندکار",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 19, 
                 name: "دەزگای کۆلێژ", 
                 floor: "second", 
-                x: 0, y: 6, z: 0,
+                x: 0, y: 7, z: 0,
                 details: "دەزگای کۆلێژ - نهۆمی دووەم",
-                description: "ژووری دەزگای کۆلێژ و بەڕێوەبردن",
-                distance: 42
+                description: "ژووری دەزگای کۆلێژ و بەڕێوەبردن. لە ناوەڕاستی نهۆمی دووەمە",
+                distance: 42,
+                color: 0xFF9800,
+                type: "dean",
+                capacity: "ژووری کۆبونەوە",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 20, 
                 name: "یەکەکانی ئەکاونتی", 
                 floor: "second", 
-                x: -8, y: 6, z: 5,
+                x: -12, y: 7, z: 5,
                 details: "یەکەکانی بەشی ئەکاونتی - نهۆمی دووەم",
-                description: "یەکەکانی تایبەتی بەشی ئەکاونتی",
-                distance: 40
+                description: "یەکەکانی تایبەتی بەشی ئەکاونتی. لە نزیک بەشی ئامارە",
+                distance: 40,
+                color: 0x2196F3,
+                type: "units",
+                capacity: "ژووری وانە",
+                hours: "٨:٠٠ - ١٦:٠٠"
             },
             { 
                 id: 21, 
                 name: "هۆڵی د. بەیان", 
                 floor: "second", 
-                x: 8, y: 6, z: 5,
+                x: 12, y: 7, z: 5,
                 details: "هۆڵی دکتۆر بەیان - نهۆمی دووەم",
-                description: "هۆڵی وانەی گەورە بە ناوی دکتۆر بەیان",
-                distance: 38
+                description: "هۆڵی وانەی گەورە بە ناوی دکتۆر بەیان. بۆ کۆرسە گەورەکان",
+                distance: 38,
+                color: 0xFF5722,
+                type: "hall",
+                capacity: "٢٠٠ کورسی",
+                hours: "بەپێی پڕۆگرامی وانە"
             },
             { 
                 id: 22, 
                 name: "هۆڵی شەهید گەرەداغی", 
                 floor: "first", 
-                x: -10, y: 3, z: -5,
+                x: -10, y: 3.5, z: -5,
                 details: "هۆڵی شەهید گەرەداغی - نهۆمی یەکەم",
-                description: "هۆڵی وانەی گەورە بە ناوی شەهید گەرەداغی",
-                distance: 28
+                description: "هۆڵی وانەی گەورە بە ناوی شەهید گەرەداغی. لە لای ڕاستی پەیجی پلەیەکانە",
+                distance: 28,
+                color: 0x4CAF50,
+                type: "hall",
+                capacity: "١٥٠ کورسی",
+                hours: "بەپێی پڕۆگرامی وانە"
             },
             { 
                 id: 23, 
                 name: "هۆڵی ئاشتی", 
                 floor: "first", 
-                x: 10, y: 3, z: -5,
+                x: 10, y: 3.5, z: -5,
                 details: "هۆڵی ئاشتی - نهۆمی یەکەم",
-                description: "هۆڵی وانەی گەورە بە ناوی ئاشتی",
-                distance: 26
+                description: "هۆڵی وانەی گەورە بە ناوی ئاشتی. لە لای چەپی پەیجی پلەیەکانە",
+                distance: 26,
+                color: 0x9C27B0,
+                type: "hall",
+                capacity: "١٨٠ کورسی",
+                hours: "بەپێی پڕۆگرامی وانە"
             },
             { 
                 id: 24, 
                 name: "یەکێتی خوێندکاران", 
                 floor: "first", 
-                x: 0, y: 3, z: -5,
+                x: 0, y: 3.5, z: -5,
                 details: "یەکێتی خوێندکاران - نهۆمی یەکەم",
-                description: "ژووری یەکێتی خوێندکاران و چالاکیەکان",
-                distance: 20
+                description: "ژووری یەکێتی خوێندکاران و چالاکیەکان. لە ناوەڕاستی نهۆمی یەکەمە",
+                distance: 20,
+                color: 0x00BCD4,
+                type: "union",
+                capacity: "ژووری کۆبونەوە",
+                hours: "٩:٠٠ - ١٥:٠٠"
             }
+        ];
+
+        // Path connections between rooms (for navigation guidance)
+        const roomConnections = [
+            { from: 1, to: 11, color: 0x4fc3f7 }, // Main door to reception
+            { from: 11, to: 4, color: 0x4fc3f7 }, // Reception to library
+            { from: 11, to: 12, color: 0x4fc3f7 }, // Reception to printing
+            { from: 1, to: 5, color: 0xff9800 }, // Main door to mosque
+            { from: 5, to: 6, color: 0xff9800 }, // Mosque to WC male
+            { from: 4, to: 7, color: 0xff9800 }, // Library to WC female
+            { from: 1, to: 10, color: 0x4caf50 }, // Main door to security
+            { from: 11, to: 8, color: 0x2196f3 }, // Reception to admissions
+            { from: 8, to: 13, color: 0x2196f3 }, // Admissions to cafe
+            { from: 11, to: 9, color: 0x9c27b0 }, // Reception to attendance
+            { from: 9, to: 14, color: 0x9c27b0 }, // Attendance to shop
+            { from: 8, to: 15, color: 0xff5722 }, // Cafe to sports
+            { from: 9, to: 15, color: 0xff5722 }, // Shop to sports
+            { from: 4, to: 16, color: 0xe91e63 }, // Library to marketing
+            // Stair connections
+            { from: 2, to: 17, color: 0x673ab7, type: "stair" }, // Accounting to Statistics
+            { from: 3, to: 18, color: 0x009688, type: "stair" }, // Economics to Finance
+            { from: 22, to: 19, color: 0xff9800, type: "stair" }, // Garadaghi Hall to Dean
+            { from: 23, to: 21, color: 0xff5722, type: "stair" }, // Ashti Hall to Dr. Bayan Hall
+            { from: 24, to: 20, color: 0x2196f3, type: "stair" }  // Union to Accounting Units
         ];
 
         // Global variables
@@ -1013,6 +1285,8 @@
         let isMoving = false;
         let joystickActive = false;
         let joystickPosition = { x: 0, y: 0 };
+        let currentFloor = "ground";
+        let pathLines = [];
 
         // DOM elements
         const loadingScreen = document.getElementById('loadingScreen');
@@ -1040,6 +1314,9 @@
         const zoomOutBtn = document.getElementById('zoomOutBtn');
         const joystickHandle = document.getElementById('joystickHandle');
         const touchControls = document.getElementById('touchControls');
+        const floorIndicator = document.getElementById('floorIndicator');
+        const floorButtons = document.querySelectorAll('.floor-btn');
+        const pathIndicators = document.getElementById('pathIndicators');
 
         // Initialize the application
         function init() {
@@ -1049,13 +1326,17 @@
             // Initialize 3D scene
             init3DScene();
             
+            // Create path indicators
+            createPathIndicators();
+            
             // Hide loading screen
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
+                // Show permission modal after loading
+                setTimeout(() => {
+                    permissionModal.style.display = 'flex';
+                }, 500);
             }, 1500);
-            
-            // Show permission modal
-            showToast("بەخێربێیت", "نەخشەی 3Dی کۆلێژی بەڕێوەبردن و ئابووری");
             
             // Update UI
             updateUI();
@@ -1064,11 +1345,12 @@
             animate();
         }
 
-        // Initialize 3D scene with traditional architecture
+        // Initialize 3D scene with modern architecture
         function init3DScene() {
             // Create scene
             scene = new THREE.Scene();
-            scene.fog = new THREE.Fog(0x87CEEB, 10, 100);
+            scene.background = new THREE.Color(0xe3f2fd);
+            scene.fog = new THREE.Fog(0xe3f2fd, 10, 100);
             
             // Create camera
             const canvas = document.getElementById('3d-viewer');
@@ -1076,7 +1358,7 @@
             const height = canvas.parentElement.clientHeight;
             
             camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
-            camera.position.set(0, 20, 35);
+            camera.position.set(0, 25, 35);
             
             // Create renderer
             renderer = new THREE.WebGLRenderer({ 
@@ -1112,8 +1394,8 @@
             directionalLight.shadow.camera.bottom = -50;
             scene.add(directionalLight);
             
-            // Create traditional building
-            createTraditionalBuilding();
+            // Create modern building
+            createModernBuilding();
             
             // Create rooms
             createRooms();
@@ -1124,6 +1406,9 @@
             // Create user position indicator
             createUserIndicator();
             
+            // Create stairs between floors
+            createStairs();
+            
             // Handle window resize
             window.addEventListener('resize', onWindowResize);
             
@@ -1131,209 +1416,259 @@
             setupTouchControls();
         }
 
-        // Create traditional building with old architecture
-        function createTraditionalBuilding() {
-            // Stone pathway
-            const pathwayGeometry = new THREE.BoxGeometry(8, 0.2, 40);
-            const pathwayMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x8B7355,
+        // Create modern building structure
+        function createModernBuilding() {
+            // Main building structure - Modern design
+            const buildingGroup = new THREE.Group();
+            
+            // Ground floor base
+            const groundGeometry = new THREE.BoxGeometry(60, 0.5, 40);
+            const groundMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x78909c,
                 transparent: true,
                 opacity: 0.9
             });
-            const pathway = new THREE.Mesh(pathwayGeometry, pathwayMaterial);
-            pathway.position.y = -0.1;
-            pathway.receiveShadow = true;
-            scene.add(pathway);
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.position.y = 0;
+            ground.receiveShadow = true;
+            buildingGroup.add(ground);
             
-            // Create traditional buildings on both sides
-            createTraditionalBuildingSide(-15, 0, 0, 'left');
-            createTraditionalBuildingSide(15, 0, 0, 'right');
-            
-            // Ground with traditional texture
-            const groundGeometry = new THREE.PlaneGeometry(100, 100);
-            const groundMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0x8B7355,
+            // Building walls
+            const wallGeometry = new THREE.BoxGeometry(50, 12, 30);
+            const wallMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x607d8b,
                 transparent: true,
                 opacity: 0.8
             });
-            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-            ground.rotation.x = -Math.PI / 2;
-            ground.position.y = -0.2;
-            ground.receiveShadow = true;
-            scene.add(ground);
-        }
-
-        // Create traditional building side
-        function createTraditionalBuildingSide(x, y, z, side) {
-            // Main building structure
-            const buildingGeometry = new THREE.BoxGeometry(8, 12, 30);
-            const buildingMaterial = new THREE.MeshLambertMaterial({ 
-                color: 0xD2B48C // Tan color for traditional buildings
-            });
-            const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
-            building.position.set(x, y + 6, z);
-            building.castShadow = true;
-            building.receiveShadow = true;
-            scene.add(building);
+            const walls = new THREE.Mesh(wallGeometry, wallMaterial);
+            walls.position.y = 6;
+            walls.castShadow = true;
+            walls.receiveShadow = true;
+            buildingGroup.add(walls);
             
-            // Wooden doors
-            for (let i = 0; i < 3; i++) {
-                const doorGeometry = new THREE.BoxGeometry(2, 4, 0.5);
-                const doorMaterial = new THREE.MeshLambertMaterial({ 
-                    color: 0x8B4513 // Brown wood color
-                });
-                const door = new THREE.Mesh(doorGeometry, doorMaterial);
-                door.position.set(x + (side === 'left' ? 4 : -4), y + 2, z - 8 + i * 8);
-                door.castShadow = true;
-                scene.add(door);
-            }
-            
-            // Windows with wooden frames
+            // Modern windows
             for (let i = 0; i < 4; i++) {
-                for (let j = 0; j < 2; j++) {
-                    const windowGeometry = new THREE.BoxGeometry(1.5, 2, 0.3);
+                for (let j = 0; j < 3; j++) {
+                    const windowGeometry = new THREE.BoxGeometry(2, 3, 0.1);
                     const windowMaterial = new THREE.MeshLambertMaterial({ 
-                        color: 0x87CEEB // Sky blue for windows
+                        color: 0x4fc3f7,
+                        transparent: true,
+                        opacity: 0.7
                     });
                     const window = new THREE.Mesh(windowGeometry, windowMaterial);
                     window.position.set(
-                        x + (side === 'left' ? 4 : -4), 
-                        y + 4 + j * 3, 
-                        z - 12 + i * 6
+                        -20 + i * 13,
+                        3 + j * 4,
+                        15
                     );
-                    scene.add(window);
+                    buildingGroup.add(window);
                     
-                    // Wooden frame
-                    const frameGeometry = new THREE.BoxGeometry(1.7, 2.2, 0.4);
+                    // Window frame
+                    const frameGeometry = new THREE.BoxGeometry(2.2, 3.2, 0.2);
                     const frameMaterial = new THREE.MeshLambertMaterial({ 
-                        color: 0x654321 // Dark wood
+                        color: 0x37474f
                     });
                     const frame = new THREE.Mesh(frameGeometry, frameMaterial);
                     frame.position.copy(window.position);
-                    frame.position.z += 0.1;
-                    scene.add(frame);
+                    frame.position.z += 0.05;
+                    buildingGroup.add(frame);
                 }
             }
             
-            // Wooden boxes and pottery (like in the image)
-            if (side === 'left') {
-                // Wooden boxes
-                for (let i = 0; i < 3; i++) {
-                    const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-                    const boxMaterial = new THREE.MeshLambertMaterial({ 
-                        color: 0x8B4513
-                    });
-                    const box = new THREE.Mesh(boxGeometry, boxMaterial);
-                    box.position.set(x - 5, y + 0.5, z - 10 + i * 5);
-                    box.castShadow = true;
-                    box.receiveShadow = true;
-                    scene.add(box);
-                }
-                
-                // Pottery
-                for (let i = 0; i < 2; i++) {
-                    const potGeometry = new THREE.CylinderGeometry(0.5, 0.7, 1, 8);
-                    const potMaterial = new THREE.MeshLambertMaterial({ 
-                        color: 0x8B7355
-                    });
-                    const pot = new THREE.Mesh(potGeometry, potMaterial);
-                    pot.position.set(x - 6, y + 0.5, z - 5 + i * 8);
-                    pot.castShadow = true;
-                    pot.receiveShadow = true;
-                    scene.add(pot);
-                }
-            }
+            // Main entrance
+            const entranceGeometry = new THREE.BoxGeometry(8, 6, 1);
+            const entranceMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x4fc3f7
+            });
+            const entrance = new THREE.Mesh(entranceGeometry, entranceMaterial);
+            entrance.position.set(0, 3, 15.5);
+            entrance.castShadow = true;
+            buildingGroup.add(entrance);
             
-            // Plants and greenery on walls
-            for (let i = 0; i < 5; i++) {
-                const plantGeometry = new THREE.SphereGeometry(0.8, 8, 6);
-                const plantMaterial = new THREE.MeshLambertMaterial({ 
-                    color: 0x228B22 // Forest green
+            // Entrance door
+            const doorGeometry = new THREE.BoxGeometry(3, 5, 0.5);
+            const doorMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x795548
+            });
+            const door = new THREE.Mesh(doorGeometry, doorMaterial);
+            door.position.set(0, 2.5, 16);
+            door.castShadow = true;
+            buildingGroup.add(door);
+            
+            // Add building to scene
+            scene.add(buildingGroup);
+            
+            // Parking area
+            const parkingGeometry = new THREE.BoxGeometry(20, 0.2, 15);
+            const parkingMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x78909c
+            });
+            const parking = new THREE.Mesh(parkingGeometry, parkingMaterial);
+            parking.position.set(25, 0.1, 5);
+            parking.receiveShadow = true;
+            scene.add(parking);
+            
+            // Car models (simplified)
+            for (let i = 0; i < 3; i++) {
+                const carGeometry = new THREE.BoxGeometry(3, 1, 1.5);
+                const carMaterial = new THREE.MeshLambertMaterial({ 
+                    color: 0xf44336
                 });
-                const plant = new THREE.Mesh(plantGeometry, plantMaterial);
-                plant.position.set(
-                    x + (side === 'left' ? 4.2 : -4.2), 
-                    y + 2 + Math.random() * 6, 
-                    z - 14 + i * 6
-                );
-                plant.castShadow = true;
-                scene.add(plant);
+                const car = new THREE.Mesh(carGeometry, carMaterial);
+                car.position.set(25, 0.6, 2 + i * 4);
+                car.rotation.y = Math.PI / 2;
+                car.castShadow = true;
+                scene.add(car);
             }
+            
+            // Courtyard
+            const courtyardGeometry = new THREE.CircleGeometry(15, 32);
+            const courtyardMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x8bc34a
+            });
+            const courtyard = new THREE.Mesh(courtyardGeometry, courtyardMaterial);
+            courtyard.rotation.x = -Math.PI / 2;
+            courtyard.position.set(0, 0.05, 0);
+            courtyard.receiveShadow = true;
+            scene.add(courtyard);
+            
+            // Courtyard path
+            const pathGeometry = new THREE.BoxGeometry(4, 0.1, 30);
+            const pathMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x78909c
+            });
+            const path = new THREE.Mesh(pathGeometry, pathMaterial);
+            path.position.set(0, 0.1, 0);
+            path.receiveShadow = true;
+            scene.add(path);
+        }
+
+        // Create stairs between floors
+        function createStairs() {
+            // Main staircase
+            for (let i = 0; i < 20; i++) {
+                const stepGeometry = new THREE.BoxGeometry(3, 0.2, 0.5);
+                const stepMaterial = new THREE.MeshLambertMaterial({ 
+                    color: 0x795548
+                });
+                const step = new THREE.Mesh(stepGeometry, stepMaterial);
+                step.position.set(0, i * 0.2, 12);
+                step.castShadow = true;
+                step.receiveShadow = true;
+                scene.add(step);
+            }
+            
+            // Staircase structure
+            const stairStructureGeometry = new THREE.BoxGeometry(4, 4, 1);
+            const stairStructureMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x607d8b
+            });
+            const stairStructure = new THREE.Mesh(stairStructureGeometry, stairStructureMaterial);
+            stairStructure.position.set(0, 2, 12.5);
+            stairStructure.castShadow = true;
+            scene.add(stairStructure);
+            
+            // Elevator
+            const elevatorGeometry = new THREE.BoxGeometry(2, 12, 2);
+            const elevatorMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0xff9800
+            });
+            const elevator = new THREE.Mesh(elevatorGeometry, elevatorMaterial);
+            elevator.position.set(5, 6, 12);
+            elevator.castShadow = true;
+            scene.add(elevator);
         }
 
         // Create environment elements
         function createEnvironment() {
-            // Trees along the alley
-            for (let i = 0; i < 8; i++) {
+            // Trees in courtyard
+            for (let i = 0; i < 6; i++) {
                 const treeGroup = new THREE.Group();
                 
                 // Tree trunk
-                const trunkGeometry = new THREE.CylinderGeometry(0.5, 0.7, 4, 8);
+                const trunkGeometry = new THREE.CylinderGeometry(0.3, 0.5, 3, 8);
                 const trunkMaterial = new THREE.MeshLambertMaterial({ 
-                    color: 0x8B4513
+                    color: 0x795548
                 });
                 const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
-                trunk.position.y = 2;
+                trunk.position.y = 1.5;
                 trunk.castShadow = true;
                 treeGroup.add(trunk);
                 
                 // Tree leaves
-                const leavesGeometry = new THREE.SphereGeometry(2, 8, 6);
+                const leavesGeometry = new THREE.SphereGeometry(1.5, 8, 6);
                 const leavesMaterial = new THREE.MeshLambertMaterial({ 
-                    color: 0x228B22
+                    color: 0x4CAF50
                 });
                 const leaves = new THREE.Mesh(leavesGeometry, leavesMaterial);
-                leaves.position.y = 5;
+                leaves.position.y = 3.5;
                 leaves.castShadow = true;
                 treeGroup.add(leaves);
                 
-                // Position trees
-                const side = i % 2 === 0 ? -20 : 20;
-                treeGroup.position.set(side, 0, -15 + i * 5);
+                // Position trees in circle
+                const angle = (i / 6) * Math.PI * 2;
+                const radius = 12;
+                treeGroup.position.set(
+                    Math.cos(angle) * radius,
+                    0,
+                    Math.sin(angle) * radius
+                );
                 scene.add(treeGroup);
             }
             
-            // Additional plants and decorations
-            for (let i = 0; i < 10; i++) {
-                const plantGeometry = new THREE.ConeGeometry(0.5, 1.5, 6);
-                const plantMaterial = new THREE.MeshLambertMaterial({ 
-                    color: 0x2E7D32
+            // Benches in courtyard
+            for (let i = 0; i < 4; i++) {
+                const benchGroup = new THREE.Group();
+                
+                // Bench seat
+                const seatGeometry = new THREE.BoxGeometry(3, 0.2, 0.5);
+                const seatMaterial = new THREE.MeshLambertMaterial({ 
+                    color: 0x795548
                 });
-                const plant = new THREE.Mesh(plantGeometry, plantMaterial);
-                plant.position.set(
-                    (Math.random() - 0.5) * 40,
-                    0.75,
-                    (Math.random() - 0.5) * 40
+                const seat = new THREE.Mesh(seatGeometry, seatMaterial);
+                seat.position.y = 0.5;
+                seat.castShadow = true;
+                benchGroup.add(seat);
+                
+                // Bench legs
+                for (let j = 0; j < 2; j++) {
+                    const legGeometry = new THREE.BoxGeometry(0.1, 0.5, 0.1);
+                    const legMaterial = new THREE.MeshLambertMaterial({ 
+                        color: 0x795548
+                    });
+                    const leg = new THREE.Mesh(legGeometry, legMaterial);
+                    leg.position.set(-1.2 + j * 2.4, 0.25, 0);
+                    leg.castShadow = true;
+                    benchGroup.add(leg);
+                }
+                
+                // Position benches
+                const angle = (i / 4) * Math.PI * 2 + Math.PI/4;
+                const radius = 10;
+                benchGroup.position.set(
+                    Math.cos(angle) * radius,
+                    0,
+                    Math.sin(angle) * radius
                 );
-                plant.castShadow = true;
-                plant.receiveShadow = true;
-                scene.add(plant);
+                benchGroup.rotation.y = angle + Math.PI/2;
+                scene.add(benchGroup);
             }
         }
 
-        // Create rooms with traditional styling
+        // Create rooms with modern styling
         function createRooms() {
             rooms.forEach((room, index) => {
-                // Room size based on importance
-                const size = room.name.includes("هۆڵی") ? 6 : 4;
+                // Room size based on type
+                let size = 4;
+                if (room.type === "hall") size = 6;
+                if (room.type === "department") size = 8;
+                if (room.type === "library") size = 10;
+                
                 const roomGeometry = new THREE.BoxGeometry(size, 3, size);
                 
-                // Determine color based on floor and status
-                let color;
-                if (room.current) {
-                    color = 0xFFD700; // Gold for current room
-                } else if (room.visited) {
-                    color = 0x90EE90; // Light green for visited
-                } else if (room.floor === 'ground') {
-                    color = 0xDEB887; // Burlywood for ground floor
-                } else if (room.floor === 'first') {
-                    color = 0xD2B48C; // Tan for first floor
-                } else {
-                    color = 0xBC9A6A; // Darker tan for second floor
-                }
-                
+                // Use room's color from data
                 const roomMaterial = new THREE.MeshLambertMaterial({ 
-                    color: color,
+                    color: room.color,
                     transparent: true,
                     opacity: 0.8
                 });
@@ -1344,59 +1679,146 @@
                 roomMesh.castShadow = true;
                 roomMesh.receiveShadow = true;
                 
-                // Add traditional door to each room
+                // Add room door
                 const doorGeometry = new THREE.BoxGeometry(1.5, 2.5, 0.3);
                 const doorMaterial = new THREE.MeshLambertMaterial({ 
-                    color: 0x654321
+                    color: 0x795548
                 });
                 const door = new THREE.Mesh(doorGeometry, doorMaterial);
                 door.position.set(room.x, room.y + 1.25, room.z + size/2);
                 door.castShadow = true;
                 scene.add(door);
                 
-                // Add label with traditional styling
+                // Add modern label with room info
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
-                canvas.width = 200;
-                canvas.height = 80;
+                canvas.width = 300;
+                canvas.height = 100;
                 
-                // Background with traditional pattern
+                // Modern gradient background
                 const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, '#F5DEB3');
-                gradient.addColorStop(1, '#DEB887');
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+                gradient.addColorStop(1, 'rgba(227, 242, 253, 0.9)');
                 context.fillStyle = gradient;
                 context.fillRect(0, 0, canvas.width, canvas.height);
                 
-                // Border
-                context.strokeStyle = '#8B4513';
-                context.lineWidth = 3;
+                // Modern border
+                context.strokeStyle = '#4fc3f7';
+                context.lineWidth = 2;
                 context.strokeRect(5, 5, canvas.width-10, canvas.height-10);
                 
-                // Text
-                context.fillStyle = '#654321';
-                context.font = 'bold 18px Arial';
+                // Room name with shadow
+                context.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                context.shadowBlur = 5;
+                context.shadowOffsetX = 2;
+                context.shadowOffsetY = 2;
+                
+                context.fillStyle = '#1a237e';
+                context.font = 'bold 20px Arial';
                 context.textAlign = 'center';
                 context.fillText(room.name, canvas.width/2, 35);
                 
-                context.fillStyle = '#8B4513';
+                context.shadowColor = 'transparent';
+                context.fillStyle = '#283593';
                 context.font = '14px Arial';
                 context.fillText(room.floor === 'ground' ? 'نهۆمی سەرەتایی' : 
                                room.floor === 'first' ? 'نهۆمی یەکەم' : 'نهۆمی دووەم', 
                                canvas.width/2, 60);
                 
+                // Room type indicator
+                context.fillStyle = '#4fc3f7';
+                context.font = '12px Arial';
+                const typeText = room.type === "department" ? "بەش" :
+                               room.type === "hall" ? "هۆڵ" :
+                               room.type === "library" ? "کتێبخانە" :
+                               room.type === "wc" ? "تەوالێت" :
+                               room.type === "cafe" ? "کافێ" : "ژووری";
+                context.fillText(typeText, canvas.width/2, 80);
+                
                 const texture = new THREE.CanvasTexture(canvas);
-                const labelMaterial = new THREE.SpriteMaterial({ map: texture });
+                const labelMaterial = new THREE.SpriteMaterial({ 
+                    map: texture,
+                    transparent: true
+                });
                 const label = new THREE.Sprite(labelMaterial);
                 label.position.set(room.x, room.y + 4, room.z);
-                label.scale.set(6, 2.4, 1);
+                label.scale.set(8, 2.7, 1);
                 
                 // Store reference
                 roomMesh.roomData = room;
                 roomMesh.label = label;
+                roomMesh.door = door;
                 
                 scene.add(roomMesh);
                 scene.add(label);
                 roomMeshes.push(roomMesh);
+            });
+        }
+
+        // Create path indicators for navigation
+        function createPathIndicators() {
+            roomConnections.forEach(connection => {
+                const fromRoom = rooms.find(r => r.id === connection.from);
+                const toRoom = rooms.find(r => r.id === connection.to);
+                
+                if (!fromRoom || !toRoom) return;
+                
+                // Create 3D path line
+                const points = [
+                    new THREE.Vector3(fromRoom.x, fromRoom.y + 1, fromRoom.z),
+                    new THREE.Vector3(toRoom.x, toRoom.y + 1, toRoom.z)
+                ];
+                
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const material = new THREE.LineBasicMaterial({ 
+                    color: connection.color,
+                    linewidth: 2,
+                    transparent: true,
+                    opacity: 0.6
+                });
+                
+                const line = new THREE.Line(geometry, material);
+                scene.add(line);
+                pathLines.push(line);
+                
+                // Add 2D overlay indicator
+                const pathIndicator = document.createElement('div');
+                pathIndicator.className = 'path-line';
+                pathIndicator.style.backgroundColor = `rgb(${(connection.color >> 16) & 255}, ${(connection.color >> 8) & 255}, ${connection.color & 255})`;
+                
+                // Calculate position and rotation for 2D indicator
+                const viewer = document.getElementById('3d-viewer');
+                const width = viewer.clientWidth;
+                const height = viewer.clientHeight;
+                
+                const screenFromX = (fromRoom.x + 30) / 60 * width;
+                const screenFromY = (fromRoom.z + 20) / 40 * height;
+                const screenToX = (toRoom.x + 30) / 60 * width;
+                const screenToY = (toRoom.z + 20) / 40 * height;
+                
+                const dx = screenToX - screenFromX;
+                const dy = screenToY - screenFromY;
+                const length = Math.sqrt(dx*dx + dy*dy);
+                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                
+                pathIndicator.style.width = `${length}px`;
+                pathIndicator.style.height = '6px';
+                pathIndicator.style.left = `${screenFromX}px`;
+                pathIndicator.style.top = `${screenFromY - 3}px`;
+                pathIndicator.style.transform = `rotate(${angle}deg)`;
+                pathIndicator.style.transformOrigin = '0 0';
+                
+                pathIndicators.appendChild(pathIndicator);
+                
+                // Add arrow at the end
+                const arrow = document.createElement('div');
+                arrow.className = 'path-arrow';
+                arrow.style.borderTopColor = `rgb(${(connection.color >> 16) & 255}, ${(connection.color >> 8) & 255}, ${connection.color & 255})`;
+                arrow.style.left = `${screenToX - 8}px`;
+                arrow.style.top = `${screenToY - 6}px`;
+                arrow.style.transform = `rotate(${angle}deg)`;
+                
+                pathIndicators.appendChild(arrow);
             });
         }
 
@@ -1405,9 +1827,9 @@
             // Create a 3D indicator for the user
             const geometry = new THREE.SphereGeometry(0.5, 16, 16);
             const material = new THREE.MeshBasicMaterial({ 
-                color: 0xFFD700,
+                color: 0xff9800,
                 transparent: true,
-                opacity: 0.8
+                opacity: 0.9
             });
             const userSphere = new THREE.Mesh(geometry, material);
             userSphere.position.set(userPosition.x, userPosition.y + 1.5, userPosition.z);
@@ -1415,7 +1837,7 @@
             
             // Add a cone for direction
             const coneGeometry = new THREE.ConeGeometry(0.3, 1, 8);
-            const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xFFD700 });
+            const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xff9800 });
             const directionCone = new THREE.Mesh(coneGeometry, coneMaterial);
             directionCone.position.set(userPosition.x, userPosition.y + 2.5, userPosition.z);
             directionCone.rotation.x = Math.PI;
@@ -1444,6 +1866,9 @@
             else if (y < 4.5) userFloor = "first";
             else userFloor = "second";
             
+            // Update floor buttons
+            updateFloorButtons();
+            
             // Check if user is near any room
             checkUserNearRooms();
         }
@@ -1455,7 +1880,7 @@
             const height = viewer.clientHeight;
             
             // Convert 3D coordinates to screen coordinates
-            const screenX = (x + 20) / 40 * width;
+            const screenX = (x + 30) / 60 * width;
             const screenY = (z + 20) / 40 * height;
             
             userPositionEl.style.left = `${screenX - 20}px`;
@@ -1463,12 +1888,22 @@
             userPositionEl.style.display = 'block';
         }
 
+        // Update floor buttons state
+        function updateFloorButtons() {
+            floorButtons.forEach(btn => {
+                const floor = btn.dataset.floor;
+                btn.classList.toggle('active', floor === userFloor);
+            });
+            currentFloor = userFloor;
+        }
+
         // Check if user is near any rooms
         function checkUserNearRooms() {
             rooms.forEach((room, index) => {
                 const dx = room.x - userPosition.x;
                 const dz = room.z - userPosition.z;
-                const distance = Math.sqrt(dx*dx + dz*dz);
+                const dy = room.y - userPosition.y;
+                const distance = Math.sqrt(dx*dx + dz*dz + dy*dy);
                 
                 // If user is close to a room and it's on the same floor
                 if (distance < 3 && room.floor === userFloor && !room.visited) {
@@ -1484,6 +1919,9 @@
                     
                     // Update progress
                     updateProgress();
+                    
+                    // Update UI
+                    updateUI();
                 }
             });
         }
@@ -1495,20 +1933,14 @@
             
             if (!roomMesh) return;
             
-            let color;
-            if (room.current) {
-                color = 0xFFD700;
-            } else if (room.visited) {
-                color = 0x90EE90;
-            } else if (room.floor === 'ground') {
-                color = 0xDEB887;
-            } else if (room.floor === 'first') {
-                color = 0xD2B48C;
+            // If visited, make it brighter
+            if (room.visited) {
+                roomMesh.material.color.setHex(room.color);
+                roomMesh.material.opacity = 1;
             } else {
-                color = 0xBC9A6A;
+                roomMesh.material.color.setHex(room.color);
+                roomMesh.material.opacity = 0.6;
             }
-            
-            roomMesh.material.color.setHex(color);
         }
 
         // Go to specific room
@@ -1546,6 +1978,9 @@
             
             // Show direction info
             updateDirectionInfo();
+            
+            // Show notification
+            showToast("گواستنەوە", `گواسترایتەوە بۆ ${targetRoom.name}`);
         }
 
         // Go to next room
@@ -1579,7 +2014,7 @@
                         toggleAutoTour();
                         showToast("سەردانی تەواو", "هەموو هۆڵەکان سەردان کران!");
                     }
-                }, 4000);
+                }, 3000);
             } else {
                 autoTourBtn.classList.remove('active');
                 autoTourBtn.innerHTML = '<i class="fas fa-play"></i>';
@@ -1608,12 +2043,12 @@
             // Update location status
             if (hasLocationPermission) {
                 locationStatus.innerHTML = `<i class="fas fa-map-marker-alt"></i> <span>لۆکەیشن چالاکە</span>`;
-                locationStatus.style.background = "rgba(144, 238, 144, 0.2)";
-                locationStatus.style.borderColor = "rgba(144, 238, 144, 0.4)";
+                locationStatus.style.background = "rgba(76, 175, 80, 0.2)";
+                locationStatus.style.borderColor = "rgba(76, 175, 80, 0.4)";
             } else {
                 locationStatus.innerHTML = `<i class="fas fa-map-marker-alt"></i> <span>لۆکەیشن ناچالاکە</span>`;
-                locationStatus.style.background = "rgba(255, 140, 0, 0.2)";
-                locationStatus.style.borderColor = "rgba(255, 140, 0, 0.4)";
+                locationStatus.style.background = "rgba(255, 152, 0, 0.2)";
+                locationStatus.style.borderColor = "rgba(255, 152, 0, 0.4)";
             }
         }
 
@@ -1630,6 +2065,25 @@
         // Load room details into panel
         function loadRoomDetails() {
             const currentRoom = rooms[currentRoomIndex];
+            
+            // Get room type in Kurdish
+            const roomType = currentRoom.type === "department" ? "بەش" :
+                           currentRoom.type === "hall" ? "هۆڵی وانە" :
+                           currentRoom.type === "library" ? "کتێبخانە" :
+                           currentRoom.type === "wc" ? "تەوالێت" :
+                           currentRoom.type === "cafe" ? "کافێ" :
+                           currentRoom.type === "shop" ? "دوکان" :
+                           currentRoom.type === "security" ? "پارێزەری" :
+                           currentRoom.type === "reception" ? "پێشوازی" :
+                           currentRoom.type === "prayer" ? "موسڵمان" :
+                           currentRoom.type === "sports" ? "وەرزشی" :
+                           currentRoom.type === "admissions" ? "وەرگرتنی خوێندکار" :
+                           currentRoom.type === "attendance" ? "ئامادەبوون" :
+                           currentRoom.type === "printing" ? "چاپ" :
+                           currentRoom.type === "dean" ? "دەزگای کۆلێژ" :
+                           currentRoom.type === "units" ? "یەکەی ئەکاونتی" :
+                           currentRoom.type === "union" ? "یەکێتی خوێندکاران" :
+                           currentRoom.type === "entrance" ? "دەرگای سەرەکی" : "ژووری";
             
             roomDetails.innerHTML = `
                 <div class="detail-item">
@@ -1653,6 +2107,15 @@
                 </div>
                 <div class="detail-item">
                     <div class="detail-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="detail-text">
+                        <div class="detail-label">جۆری هۆڵ</div>
+                        <div class="detail-value">${roomType}</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">
                         <i class="fas fa-info-circle"></i>
                     </div>
                     <div class="detail-text">
@@ -1665,8 +2128,26 @@
                         <i class="fas fa-road"></i>
                     </div>
                     <div class="detail-text">
-                        <div class="detail-label">دووری</div>
+                        <div class="detail-label">دووری لە دەرگای سەرەکی</div>
                         <div class="detail-value">${currentRoom.distance} مەتر</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="detail-text">
+                        <div class="detail-label">توانای هۆڵ</div>
+                        <div class="detail-value">${currentRoom.capacity}</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="detail-text">
+                        <div class="detail-label">کاتی کراوەیی</div>
+                        <div class="detail-value">${currentRoom.hours}</div>
                     </div>
                 </div>
                 <div class="detail-item">
@@ -1674,7 +2155,7 @@
                         <i class="fas fa-book"></i>
                     </div>
                     <div class="detail-text">
-                        <div class="detail-label">وەسف</div>
+                        <div class="detail-label">وەسفی تەواو</div>
                         <div class="detail-value">${currentRoom.description}</div>
                     </div>
                 </div>
@@ -1686,18 +2167,13 @@
         // Update direction information
         function updateDirectionInfo() {
             const currentRoom = rooms[currentRoomIndex];
-            const userRoom = rooms.find(r => 
-                Math.abs(r.x - userPosition.x) < 1 && 
-                Math.abs(r.z - userPosition.z) < 1 &&
-                r.floor === userFloor
-            );
             
             let direction = "";
             
             if (currentRoom.id === 1) {
-                direction = "ئێستا لە دەرگای سەرەکیدایت. بۆ چوونە ناوەوە، بە ڕاست بڕۆ.";
+                direction = "ئێستا لە دەرگای سەرەکیدایت. بۆ چوونە ناوەوە، بە ڕاست بڕۆ بۆ ژووری پێشوازیکردن.";
             } else if (currentRoom.floor !== userFloor) {
-                direction = `بۆ گەیشتن بەم هۆڵە، پێویستە بچیتە سەر ${currentRoom.floor === 'first' ? 'نهۆمی یەکەم' : 'نهۆمی دووەم'}. پەیجی پلەیەکان لە لای ڕاستەوە`;
+                direction = `بۆ گەیشتن بەم هۆڵە، پێویستە بچیتە سەر ${currentRoom.floor === 'first' ? 'نهۆمی یەکەم' : 'نهۆمی دووەم'}. پەیجی پلەیەکان لە ناوەڕاستی کۆلێژە (نیشانە کراوە بە هێڵی شین).`;
             } else {
                 const dx = currentRoom.x - userPosition.x;
                 const dz = currentRoom.z - userPosition.z;
@@ -1708,11 +2184,26 @@
                     direction = dz > 0 ? "بۆ گەیشتن بەم هۆڵە، بە پێشەوە بڕۆ" : "بۆ گەیشتن بەم هۆڵە، بە دواوە بڕۆ";
                 }
                 
-                if (userRoom) {
-                    direction += ` لە ${userRoom.name}`;
+                // Find nearest connection path color
+                const connection = roomConnections.find(conn => 
+                    conn.from === currentRoom.id || conn.to === currentRoom.id
+                );
+                
+                if (connection) {
+                    const colorName = connection.color === 0x4fc3f7 ? "شین" :
+                                    connection.color === 0xff9800 ? "پەمەیی" :
+                                    connection.color === 0x4caf50 ? "سەوز" :
+                                    connection.color === 0x2196f3 ? "شینی تۆخ" :
+                                    connection.color === 0x9c27b0 ? "مۆر" :
+                                    connection.color === 0xff5722 ? "پەمەیی تۆخ" :
+                                    connection.color === 0xe91e63 ? "پەمەیی سوور" :
+                                    connection.color === 0x673ab7 ? "پەمەیی تۆخ" :
+                                    connection.color === 0x009688 ? "سەوزی تۆخ" : "ڕەش";
+                    
+                    direction += `. هێڵی ${colorName} ڕێگاکەت نیشان دەدات.`;
                 }
                 
-                direction += `. دووری نزیکەی ${currentRoom.distance} مەترە.`;
+                direction += ` دووری نزیکەی ${currentRoom.distance} مەترە لە دەرگای سەرەکی.`;
             }
             
             directionText.textContent = direction;
@@ -1791,17 +2282,25 @@
             // Zoom buttons
             zoomInBtn.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                camera.position.y = Math.max(5, camera.position.y - 2);
+                camera.position.y = Math.max(10, camera.position.y - 3);
             });
             
             zoomOutBtn.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                camera.position.y = Math.min(50, camera.position.y + 2);
+                camera.position.y = Math.min(60, camera.position.y + 3);
+            });
+            
+            // Floor buttons
+            floorButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const floor = btn.dataset.floor;
+                    goToFloor(floor);
+                });
             });
             
             // Prevent default touch behaviors
             document.addEventListener('touchmove', (e) => {
-                if (e.target.closest('.joystick') || e.target.closest('.touch-btn')) {
+                if (e.target.closest('.joystick') || e.target.closest('.touch-btn') || e.target.closest('.floor-btn')) {
                     e.preventDefault();
                 }
             }, { passive: false });
@@ -1809,14 +2308,37 @@
 
         // Move user based on joystick input
         function moveUser(x, z) {
-            const speed = 0.3;
+            const speed = 0.4;
             const newX = userPosition.x + x * speed;
             const newZ = userPosition.z + z * speed;
             
             // Keep user within bounds
-            if (newX > -20 && newX < 20 && newZ > -20 && newZ < 20) {
+            if (newX > -30 && newX < 30 && newZ > -20 && newZ < 20) {
                 updateUserPosition(newX, userPosition.y, newZ);
             }
+        }
+
+        // Change floor
+        function goToFloor(floor) {
+            if (floor === currentFloor) return;
+            
+            // Update floor buttons
+            floorButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.floor === floor);
+            });
+            
+            currentFloor = floor;
+            userFloor = floor;
+            
+            // Move user to appropriate height
+            let newY = 0;
+            if (floor === "first") newY = 3.5;
+            if (floor === "second") newY = 7;
+            
+            updateUserPosition(userPosition.x, newY, userPosition.z);
+            
+            // Show notification
+            showToast("گۆڕینی نهۆم", `گواسترایتەوە بۆ ${floor === 'ground' ? 'نهۆمی سەرەتایی' : floor === 'first' ? 'نهۆمی یەکەم' : 'نهۆمی دووەم'}`);
         }
 
         // Handle window resize
@@ -1827,6 +2349,59 @@
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
+            
+            // Update path indicators position
+            updatePathIndicators();
+        }
+
+        // Update path indicators on resize
+        function updatePathIndicators() {
+            const viewer = document.getElementById('3d-viewer');
+            const width = viewer.clientWidth;
+            const height = viewer.clientHeight;
+            
+            // Clear existing indicators
+            pathIndicators.innerHTML = '';
+            
+            // Recreate path indicators
+            roomConnections.forEach(connection => {
+                const fromRoom = rooms.find(r => r.id === connection.from);
+                const toRoom = rooms.find(r => r.id === connection.to);
+                
+                if (!fromRoom || !toRoom) return;
+                
+                const pathIndicator = document.createElement('div');
+                pathIndicator.className = 'path-line';
+                pathIndicator.style.backgroundColor = `rgb(${(connection.color >> 16) & 255}, ${(connection.color >> 8) & 255}, ${connection.color & 255})`;
+                
+                const screenFromX = (fromRoom.x + 30) / 60 * width;
+                const screenFromY = (fromRoom.z + 20) / 40 * height;
+                const screenToX = (toRoom.x + 30) / 60 * width;
+                const screenToY = (toRoom.z + 20) / 40 * height;
+                
+                const dx = screenToX - screenFromX;
+                const dy = screenToY - screenFromY;
+                const length = Math.sqrt(dx*dx + dy*dy);
+                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                
+                pathIndicator.style.width = `${length}px`;
+                pathIndicator.style.height = '6px';
+                pathIndicator.style.left = `${screenFromX}px`;
+                pathIndicator.style.top = `${screenFromY - 3}px`;
+                pathIndicator.style.transform = `rotate(${angle}deg)`;
+                pathIndicator.style.transformOrigin = '0 0';
+                
+                pathIndicators.appendChild(pathIndicator);
+                
+                const arrow = document.createElement('div');
+                arrow.className = 'path-arrow';
+                arrow.style.borderTopColor = `rgb(${(connection.color >> 16) & 255}, ${(connection.color >> 8) & 255}, ${connection.color & 255})`;
+                arrow.style.left = `${screenToX - 8}px`;
+                arrow.style.top = `${screenToY - 6}px`;
+                arrow.style.transform = `rotate(${angle}deg)`;
+                
+                pathIndicators.appendChild(arrow);
+            });
         }
 
         // Animation loop
@@ -1847,6 +2422,11 @@
             if (window.directionIndicator && joystickActive) {
                 const angle = Math.atan2(-joystickPosition.y, joystickPosition.x);
                 window.directionIndicator.rotation.y = -angle;
+            }
+            
+            // Gentle rotation of the entire scene for visual interest
+            if (isAutoTour) {
+                scene.rotation.y += 0.001;
             }
         }
 
@@ -1890,18 +2470,34 @@
             let touchStartY = 0;
             
             document.addEventListener('touchstart', (e) => {
+                // Only handle swipes on main area, not on controls
+                if (e.target.closest('.mobile-controls') || 
+                    e.target.closest('.touch-controls') || 
+                    e.target.closest('.touch-buttons') ||
+                    e.target.closest('.floor-indicator')) {
+                    return;
+                }
+                
                 touchStartX = e.changedTouches[0].clientX;
                 touchStartY = e.changedTouches[0].clientY;
             });
             
             document.addEventListener('touchend', (e) => {
+                // Only handle swipes on main area
+                if (e.target.closest('.mobile-controls') || 
+                    e.target.closest('.touch-controls') || 
+                    e.target.closest('.touch-buttons') ||
+                    e.target.closest('.floor-indicator')) {
+                    return;
+                }
+                
                 const touchEndX = e.changedTouches[0].clientX;
                 const touchEndY = e.changedTouches[0].clientY;
                 
                 const diffX = touchStartX - touchEndX;
                 const diffY = touchStartY - touchEndY;
                 
-                // Swipe right (next room)
+                // Swipe right (next room) - remember RTL direction
                 if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
                     if (diffX > 0) {
                         nextRoom();
@@ -1910,13 +2506,22 @@
                     }
                 }
                 
-                // Swipe up/down for info panel
+                // Swipe up/down for floor change
                 if (Math.abs(diffY) > 50 && Math.abs(diffY) > Math.abs(diffX)) {
-                    if (diffY > 0 && !roomInfoPanel.classList.contains('open')) {
-                        toggleRoomInfoPanel();
-                    } else if (diffY < 0 && roomInfoPanel.classList.contains('open')) {
-                        toggleRoomInfoPanel();
+                    if (diffY > 0) {
+                        // Swipe down - go to lower floor
+                        if (currentFloor === "second") goToFloor("first");
+                        else if (currentFloor === "first") goToFloor("ground");
+                    } else {
+                        // Swipe up - go to higher floor
+                        if (currentFloor === "ground") goToFloor("first");
+                        else if (currentFloor === "first") goToFloor("second");
                     }
+                }
+                
+                // Double tap to toggle info panel
+                if (e.detail === 2) {
+                    toggleRoomInfoPanel();
                 }
             });
             
@@ -1946,6 +2551,44 @@
                     }
                 });
             }
+            
+            // Keyboard controls for desktop testing
+            document.addEventListener('keydown', (e) => {
+                switch(e.key) {
+                    case 'ArrowRight':
+                    case 'd':
+                        nextRoom();
+                        break;
+                    case 'ArrowLeft':
+                    case 'a':
+                        prevRoom();
+                        break;
+                    case 'ArrowUp':
+                    case 'w':
+                        camera.position.y = Math.max(10, camera.position.y - 3);
+                        break;
+                    case 'ArrowDown':
+                    case 's':
+                        camera.position.y = Math.min(60, camera.position.y + 3);
+                        break;
+                    case ' ':
+                        toggleAutoTour();
+                        break;
+                    case 'i':
+                    case 'I':
+                        toggleRoomInfoPanel();
+                        break;
+                    case '1':
+                        goToFloor('ground');
+                        break;
+                    case '2':
+                        goToFloor('first');
+                        break;
+                    case '3':
+                        goToFloor('second');
+                        break;
+                }
+            });
         }
 
         // Get user location
