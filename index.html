@@ -1,1459 +1,1105 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستەمی بەڕێوبردنی ئۆتۆمبێڵ</title>
+    <title>سەردانی 3Dی کۆلێژی بەڕێوەبردن و ئابووری - زانکۆی سەڵاحەدین</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
     <style>
-        :root {
-            --primary-color: #6a1b9a;
-            --primary-dark: #4a148c;
-            --primary-light: #9c4dcc;
-            --secondary-color: #212121;
-            --secondary-light: #484848;
-            --accent-color: #ffab00;
-            --text-light: #f5f5f5;
-            --text-dark: #212121;
-            --success-color: #4caf50;
-            --danger-color: #f44336;
-            --warning-color: #ff9800;
-            --info-color: #2196f3;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-dark) 100%);
-            color: var(--text-light);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #0c1d4d 0%, #1a3a8f 100%);
+            color: white;
             min-height: 100vh;
+            overflow-x: hidden;
+            direction: rtl;
         }
-        
+
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* فۆڕمی لۆگین */
-        #login-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            max-width: 100%;
             padding: 20px;
         }
-        
-        .login-container {
-            background-color: rgba(33, 33, 33, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            padding: 2.5rem;
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid var(--primary-light);
-        }
-        
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .login-header h1 {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .login-header p {
-            color: #b0b0b0;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-light);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--primary-light);
-            border-radius: 5px;
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(255, 171, 0, 0.2);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn-accent {
-            background-color: var(--accent-color);
-            color: var(--text-dark);
-        }
-        
-        .btn-accent:hover {
-            background-color: #ffb300;
-        }
-        
-        .btn-full {
-            width: 100%;
-        }
-        
-        .alert {
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        
-        .alert-success {
-            background-color: rgba(76, 175, 80, 0.2);
-            color: #a5d6a7;
-            border: 1px solid rgba(76, 175, 80, 0.3);
-        }
-        
-        .alert-danger {
-            background-color: rgba(244, 67, 54, 0.2);
-            color: #ff8a80;
-            border: 1px solid rgba(244, 67, 54, 0.3);
-        }
-        
-        /* سیستەمی سەرەکی */
-        #main-system {
-            display: none;
-        }
-        
+
         header {
-            background-color: rgba(33, 33, 33, 0.95);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: rgba(13, 43, 109, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px solid #ffcc00;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-light);
-        }
-        
-        .logo span {
-            color: var(--accent-color);
-        }
-        
-        .user-info {
+
+        .logo-section {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 15px;
         }
-        
-        .user-details {
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a3a8f;
+            font-size: 35px;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .title {
             text-align: right;
         }
-        
-        .user-name {
-            font-weight: 600;
-            color: var(--text-light);
-        }
-        
-        .user-role {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-        }
-        
-        .logout-btn {
-            background-color: transparent;
-            border: 1px solid var(--primary-light);
-            color: var(--text-light);
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .logout-btn:hover {
-            background-color: rgba(106, 27, 154, 0.3);
-        }
-        
-        .main-content {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 20px;
-            margin-top: 20px;
-            padding-bottom: 20px;
-        }
-        
-        .sidebar {
-            background-color: rgba(33, 33, 33, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            padding: 1.5rem;
-            height: fit-content;
-            border: 1px solid var(--primary-light);
-        }
-        
-        .sidebar h3 {
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-            border-bottom: 1px solid var(--primary-light);
-            padding-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .sidebar ul {
-            list-style: none;
-        }
-        
-        .sidebar ul li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .sidebar ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            padding: 0.7rem;
-            border-radius: 5px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .sidebar ul li a i {
-            width: 20px;
-            text-align: center;
-        }
-        
-        .sidebar ul li a:hover {
-            background-color: rgba(106, 27, 154, 0.3);
-            color: var(--accent-color);
-        }
-        
-        .sidebar ul li a.active {
-            background-color: var(--primary-color);
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 5px;
             color: white;
         }
-        
-        .content {
-            background-color: rgba(33, 33, 33, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            padding: 1.5rem;
-            border: 1px solid var(--primary-light);
-        }
-        
-        .section {
-            display: none;
-        }
-        
-        .section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .section h2 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--primary-light);
-            font-size: 1.5rem;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid var(--primary-light);
-            transition: transform 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .stat-card h3 {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-card p {
-            color: var(--text-light);
-            font-weight: 500;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        
-        table th, table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--primary-light);
-        }
-        
-        table th {
-            background-color: rgba(106, 27, 154, 0.3);
+
+        h2 {
+            font-size: 20px;
+            color: #ffcc00;
             font-weight: 600;
-            color: var(--accent-color);
         }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
         }
-        
-        .access-denied {
+
+        .viewer-container {
+            flex: 3;
+            min-width: 300px;
+            height: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            position: relative;
+            background-color: #0a1930;
+        }
+
+        #3d-viewer {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .controls-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            z-index: 100;
+        }
+
+        .controls-overlay h3 {
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+
+        .controls-overlay ul {
+            list-style: none;
+            padding-right: 10px;
+        }
+
+        .controls-overlay li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .tour-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .tour-btn {
+            padding: 12px 25px;
+            background: linear-gradient(to right, #ffcc00, #ff9900);
+            color: #0c1d4d;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+            transition: all 0.3s;
+        }
+
+        .tour-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.6);
+        }
+
+        .tour-btn:active {
+            transform: translateY(1px);
+        }
+
+        .info-panel {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .location-info {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-right: 5px solid #ffcc00;
+        }
+
+        .location-info h3 {
+            color: #ffcc00;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .current-location {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .location-details {
+            line-height: 1.6;
+        }
+
+        .visitor-stats {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .visitor-stats h4 {
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .progress-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #00c853, #64dd17);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .rooms-list {
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .rooms-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .rooms-list::-webkit-scrollbar-thumb {
+            background: #ffcc00;
+            border-radius: 10px;
+        }
+
+        .room-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-right: 3px solid transparent;
+        }
+
+        .room-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+            border-right: 3px solid #ffcc00;
+        }
+
+        .room-item.visited {
+            border-right: 3px solid #00c853;
+        }
+
+        .room-item.current {
+            background: rgba(255, 204, 0, 0.25);
+            border-right: 3px solid #ffcc00;
+        }
+
+        .room-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .room-name {
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+        }
+
+        .room-floor {
+            background: rgba(255, 204, 0, 0.2);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #ffcc00;
+        }
+
+        .room-details {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        footer {
+            background: rgba(13, 43, 109, 0.9);
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
-            padding: 3rem;
-            color: #b0b0b0;
+            border: 2px solid #ffcc00;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        
-        .access-denied i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: var(--danger-color);
+
+        .designer {
+            margin-top: 10px;
+            font-style: italic;
+            color: #ffcc00;
         }
-        
-        .access-denied h3 {
-            color: var(--danger-color);
-            margin-bottom: 1rem;
+
+        .location-permission {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
         }
-        
-        .car-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--primary-light);
+
+        .permission-box {
+            background: linear-gradient(135deg, #1a3a8f 0%, #0c1d4d 100%);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            border: 3px solid #ffcc00;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
         }
-        
-        .car-card h4 {
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
+
+        .permission-box h2 {
+            color: #ffcc00;
+            margin-bottom: 20px;
         }
-        
-        .car-card p {
-            margin-bottom: 1rem;
-            color: #b0b0b0;
+
+        .permission-box p {
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
-        
-        /* وەشانی مۆبایل */
+
+        .permission-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .permission-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .permission-btn.allow {
+            background: linear-gradient(to right, #00c853, #64dd17);
+            color: white;
+        }
+
+        .permission-btn.deny {
+            background: linear-gradient(to right, #ff3d00, #ff9100);
+            color: white;
+        }
+
+        .permission-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
         @media (max-width: 768px) {
             .main-content {
-                grid-template-columns: 1fr;
+                flex-direction: column;
             }
             
-            .sidebar {
-                order: 2;
-            }
-            
-            .content {
-                order: 1;
+            .viewer-container {
+                height: 400px;
             }
             
             .header-content {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 15px;
             }
             
-            .user-info {
-                width: 100%;
-                justify-content: space-between;
+            .tour-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .controls-overlay {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- فۆڕمی لۆگین -->
-    <section id="login-section">
-        <div class="login-container">
-            <div class="login-header">
-                <h1>سیستەمی بەڕێوبردنی ئۆتۆمبێڵ</h1>
-                <p>تکایە ناوی بەکارهێنەر و تێپەڕەوشە بنووسە بۆ چوونەژوورەوە</p>
+    <!-- Location Permission Modal -->
+    <div class="location-permission" id="locationPermission">
+        <div class="permission-box">
+            <h2><i class="fas fa-map-marker-alt"></i> دەستپێکردنی سەردانی 3D</h2>
+            <p>بۆ ئەوەی بتوانین سەردانی ئۆتۆماتیکی 3D بۆ هۆڵەکانی کۆلێژ بکەین، پێویستە ڕێگە بدەیت بە وێبپەڕەکە کە لۆکەیشنی ئێستای تۆ بەکاربهێنێت.</p>
+            <p>ئەم زانیاریە تەنها بۆ پێشاندانی سەردانی ئۆتۆماتیکی بەکاردەهێنرێت و هەرگیز نەگواسترێتەوە یەکێکی تر.</p>
+            <div class="permission-btns">
+                <button class="permission-btn allow" id="allowLocation">
+                    <i class="fas fa-check-circle"></i> ڕێگەدان بە لۆکەیشن
+                </button>
+                <button class="permission-btn deny" id="denyLocation">
+                    <i class="fas fa-times-circle"></i> ڕێگە نەدان (سەردانی دەستی)
+                </button>
             </div>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="username">ناوی بەکارهێنەر</label>
-                    <input type="text" id="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">تێپەڕەوشە</label>
-                    <input type="password" id="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-accent btn-full">چوونەژوورەوە</button>
-            </form>
-            <div id="login-alert"></div>
         </div>
-    </section>
-    
-    <!-- سیستەمی سەرەکی -->
-    <section id="main-system">
+    </div>
+
+    <div class="container">
         <header>
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">سیستەمی بەڕێوبردنی <span>ئۆتۆمبێڵ</span></div>
-                    <div class="user-info">
-                        <div class="user-details">
-                            <div class="user-name" id="current-user-name">ئەدمین</div>
-                            <div class="user-role" id="current-user-role">ئەدمین</div>
-                        </div>
-                        <button class="logout-btn" id="logout-btn">چوونەدەر</button>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">س</div>
+                    <div class="title">
+                        <h1>زانکۆی سەڵاحەدین</h1>
+                        <h2>سەردانی 3Dی کۆلێژی بەڕێوەبردن و ئابووری</h2>
                     </div>
+                </div>
+                <div class="current-location">
+                    <i class="fas fa-map-pin"></i>
+                    <span id="currentLocationText">لۆکەیشن: چاوەڕوانی ڕێگەدان...</span>
                 </div>
             </div>
         </header>
-        
-        <div class="container">
-            <div class="main-content">
-                <aside class="sidebar">
-                    <h3>بەشەکان</h3>
-                    <ul>
-                        <li><a href="#" data-section="dashboard" class="active"><i>📊</i> داشبۆرد</a></li>
-                        <li><a href="#" data-section="register-car"><i>🚗</i> تۆمارکردنی ئۆتۆمبێل</a></li>
-                        <li><a href="#" data-section="sales"><i>💰</i> بەشی فرۆشتن</a></li>
-                        <li><a href="#" data-section="sold"><i>✅</i> بەشی فرۆشراوەکان</a></li>
-                        <li><a href="#" data-section="employees"><i>👥</i> بەشی کارمەندان</a></li>
-                        <li><a href="#" data-section="monthly-income"><i>📈</i> داهاتی ماوە</a></li>
-                        <li><a href="#" data-section="sold-income"><i>💵</i> داهاتی فرۆشراو</a></li>
-                        <li><a href="#" data-section="companies"><i>🏢</i> بەشی کۆمپانیاکان</a></li>
-                        <li><a href="#" data-section="expenses"><i>📉</i> بەشی بەسەرچووەکان</a></li>
-                    </ul>
-                </aside>
+
+        <div class="main-content">
+            <div class="viewer-container">
+                <canvas id="3d-viewer"></canvas>
                 
-                <main class="content">
-                    <!-- داشبۆرد -->
-                    <section id="dashboard" class="section active">
-                        <h2>داشبۆرد</h2>
-                        <div class="stats">
-                            <div class="stat-card">
-                                <h3 id="total-cars">0</h3>
-                                <p>ژمارەی ئۆتۆمبێلەکان</p>
-                            </div>
-                            <div class="stat-card">
-                                <h3 id="available-cars">0</h3>
-                                <p>ئۆتۆمبێلی بەردەست</p>
-                            </div>
-                            <div class="stat-card">
-                                <h3 id="sold-cars">0</h3>
-                                <p>ئۆتۆمبێلی فرۆشراو</p>
-                            </div>
-                            <div class="stat-card">
-                                <h3 id="total-employees">0</h3>
-                                <p>ژمارەی کارمەندان</p>
-                            </div>
-                        </div>
-                        
-                        <h3>چالاکیەکانی دوایین</h3>
-                        <div id="recent-activities">
-                            <!-- چالاکیەکان لێرە دەخرێنەوە -->
-                        </div>
-                    </section>
+                <div class="controls-overlay">
+                    <h3><i class="fas fa-gamepad"></i> کۆنترۆڵەکان:</h3>
+                    <ul>
+                        <li><i class="fas fa-mouse-pointer"></i> ڕاکێشان: سوڕاندنی بینین</li>
+                        <li><i class="fas fa-mouse"></i> کلیکی ڕاست: جوڵاندن</li>
+                        <li><i class="fas fa-mouse"></i> ماووس سکرۆڵ: نزیک/دوورکردنەوە</li>
+                        <li><i class="fas fa-arrows-alt"></i> WASD: جوڵاندن لە ناو نەخشەکەدا</li>
+                    </ul>
+                </div>
+                
+                <div class="tour-controls">
+                    <button class="tour-btn" id="startTour">
+                        <i class="fas fa-play"></i> دەستپێکردنی سەردانی ئۆتۆماتیکی
+                    </button>
+                    <button class="tour-btn" id="pauseTour">
+                        <i class="fas fa-pause"></i> وەستان
+                    </button>
+                    <button class="tour-btn" id="resetTour">
+                        <i class="fas fa-redo"></i> دەستپێکردنەوە
+                    </button>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="location-info">
+                    <h3><i class="fas fa-info-circle"></i> زانیاری سەردان</h3>
+                    <div class="location-details">
+                        <p>ئێستا سەردانی: <strong id="currentRoomName">دەرگای سەرەکی</strong></p>
+                        <p>شوێن: <strong id="currentRoomFloor">نهۆمی سەرەتایی</strong></p>
+                        <p>سەردانکراوە: <strong id="visitedRoomsCount">0 لە 23</strong></p>
+                    </div>
                     
-                    <!-- تۆمارکردنی ئۆتۆمبێل -->
-                    <section id="register-car" class="section">
-                        <h2>تۆمارکردنی ئۆتۆمبێل</h2>
-                        <form id="car-registration-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="car-model">مۆدێلی ئۆتۆمبێل</label>
-                                    <input type="text" id="car-model" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="car-year">ساڵی بەرهەمهێنان</label>
-                                    <input type="number" id="car-year" class="form-control" required>
-                                </div>
+                    <div class="visitor-stats">
+                        <h4>پێشی سەردانکردن:</h4>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="tourProgress"></div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="car-color">ڕەنگ</label>
-                                    <input type="text" id="car-color" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="car-price">نرخ</label>
-                                    <input type="number" id="car-price" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="car-company">کۆمپانیا</label>
-                                <select id="car-company" class="form-control" required>
-                                    <option value="">کۆمپانیا هەڵبژێرە</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-accent">تۆمارکردنی ئۆتۆمبێل</button>
-                        </form>
-                        <div id="car-registration-alert"></div>
-                    </section>
-                    
-                    <!-- بەشی فرۆشتن -->
-                    <section id="sales" class="section">
-                        <h2>بەشی فرۆشتن</h2>
-                        <div id="sales-access-message" class="access-denied" style="display: none;">
-                            <i>🔒</i>
-                            <h3>پێویستی بە مۆڵەتیە</h3>
-                            <p>تەنیا بەکارهێنەرانی ئەدمین دەتوانن ئۆتۆمبێل بفرۆشن.</p>
+                            <p>تەواوکردنی سەردان: <span id="progressPercent">0%</span></p>
                         </div>
-                        <div id="available-cars-list">
-                            <!-- ئۆتۆمبێلە بەردەستەکان لێرە دەخرێنەوە -->
-                        </div>
-                    </section>
-                    
-                    <!-- بەشی فرۆشراوەکان -->
-                    <section id="sold" class="section">
-                        <h2>بەشی فرۆشراوەکان</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>مۆدێل</th>
-                                    <th>ڕەنگ</th>
-                                    <th>نرخ</th>
-                                    <th>کەسی فرۆشتن</th>
-                                    <th>کاتی فرۆشتن</th>
-                                </tr>
-                            </thead>
-                            <tbody id="sold-cars-table">
-                                <!-- ئۆتۆمبێلە فرۆشراوەکان لێرە دەخرێنەوە -->
-                            </tbody>
-                        </table>
-                    </section>
-                    
-                    <!-- بەشی کارمەندان -->
-                    <section id="employees" class="section">
-                        <h2>بەشی کارمەندان</h2>
-                        <div id="employees-access-message" class="access-denied" style="display: none;">
-                            <i>🔒</i>
-                            <h3>پێویستی بە مۆڵەتیە</h3>
-                            <p>تەنیا بەکارهێنەرانی ئەدمین دەتوانن کارمەند زیاد بکەن.</p>
-                        </div>
-                        <div id="employees-content">
-                            <form id="employee-form">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="employee-name">ناوی کارمەند</label>
-                                        <input type="text" id="employee-name" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="employee-phone">ژمارەی تەلەفۆن</label>
-                                        <input type="tel" id="employee-phone" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="employee-birthplace">شوێنی لەدایکبوون</label>
-                                    <input type="text" id="employee-birthplace" class="form-control" required>
-                                </div>
-                                <button type="submit" class="btn btn-accent">زیادکردنی کارمەند</button>
-                            </form>
-                            <div id="employee-alert"></div>
-                            
-                            <h3>لیستی کارمەندان</h3>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ناو</th>
-                                        <th>ژمارەی تەلەفۆن</th>
-                                        <th>شوێنی لەدایکبوون</th>
-                                        <th>کردارەکان</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="employees-table">
-                                    <!-- کارمەندان لێرە دەخرێنەوە -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    
-                    <!-- داهاتی ماوە -->
-                    <section id="monthly-income" class="section">
-                        <h2>داهاتی ماوە</h2>
-                        <div id="income-access-message" class="access-denied" style="display: none;">
-                            <i>🔒</i>
-                            <h3>پێویستی بە مۆڵەتیە</h3>
-                            <p>تەنیا بەکارهێنەرانی ئەدمین دەتوانن داهاتەکان ببینن.</p>
-                        </div>
-                        <div id="income-content">
-                            <div class="stats">
-                                <div class="stat-card">
-                                    <h3 id="current-month-income">0</h3>
-                                    <p>داهاتی ئەم مانگە</p>
-                                </div>
-                                <div class="stat-card">
-                                    <h3 id="last-month-income">0</h3>
-                                    <p>داهاتی مانگی ڕابردوو</p>
-                                </div>
-                            </div>
-                            
-                            <h3>مێژووی داهات بەپێی مانگ</h3>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>مانگ</th>
-                                        <th>ژمارەی فرۆشتن</th>
-                                        <th>کۆی داهات</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="monthly-income-table">
-                                    <!-- داهاتی مانگانە لێرە دەخرێنەوە -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    
-                    <!-- داهاتی فرۆشراو -->
-                    <section id="sold-income" class="section">
-                        <h2>داهاتی فرۆشراو</h2>
-                        <div id="sold-income-access-message" class="access-denied" style="display: none;">
-                            <i>🔒</i>
-                            <h3>پێویستی بە مۆڵەتیە</h3>
-                            <p>تەنیا بەکارهێنەرانی ئەدمین دەتوانن داهاتەکان ببینن.</p>
-                        </div>
-                        <div id="sold-income-content">
-                            <div class="stats">
-                                <div class="stat-card">
-                                    <h3 id="total-income">0</h3>
-                                    <p>کۆی داهاتی فرۆشتن</p>
-                                </div>
-                                <div class="stat-card">
-                                    <h3 id="avg-income">0</h3>
-                                    <p>تێکڕای داهات بۆ هەر فرۆشتنێک</p>
-                                </div>
-                            </div>
-                            
-                            <h3>مێژووی فرۆشتن</h3>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ئۆتۆمبێل</th>
-                                        <th>نرخ</th>
-                                        <th>کەسی فرۆشتن</th>
-                                        <th>کاتی فرۆشتن</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sold-income-table">
-                                    <!-- فرۆشتنەکان لێرە دەخرێنەوە -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    
-                    <!-- بەشی کۆمپانیاکان -->
-                    <section id="companies" class="section">
-                        <h2>بەشی کۆمپانیاکان</h2>
-                        <form id="company-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="company-name">ناوی کۆمپانیا</label>
-                                    <input type="text" id="company-name" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="company-country">وڵات</label>
-                                    <input type="text" id="company-country" class="form-control" required>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-accent">زیادکردنی کۆمپانیا</button>
-                        </form>
-                        <div id="company-alert"></div>
-                        
-                        <h3>لیستی کۆمپانیاکان</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ناوی کۆمپانیا</th>
-                                    <th>وڵات</th>
-                                    <th>ژمارەی ئۆتۆمبێلەکان</th>
-                                </tr>
-                            </thead>
-                            <tbody id="companies-table">
-                                <!-- کۆمپانیاکان لێرە دەخرێنەوە -->
-                            </tbody>
-                        </table>
-                    </section>
-                    
-                    <!-- بەشی بەسەرچووەکان -->
-                    <section id="expenses" class="section">
-                        <h2>بەشی بەسەرچووەکان</h2>
-                        <div id="expenses-access-message" class="access-denied" style="display: none;">
-                            <i>🔒</i>
-                            <h3>پێویستی بە مۆڵەتیە</h3>
-                            <p>تەنیا بەکارهێنەرانی ئەدمین دەتوانن بەسەرچووەکان ببینن.</p>
-                        </div>
-                        <div id="expenses-content">
-                            <form id="expense-form">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="expense-type">جۆری بەسەرچوو</label>
-                                        <select id="expense-type" class="form-control" required>
-                                            <option value="">جۆری بەسەرچوو هەڵبژێرە</option>
-                                            <option value="کارمەندان">موچەی کارمەندان</option>
-                                            <option value="بینا">کرێی بینا</option>
-                                            <option value="هەواڵ">هەواڵ</option>
-                                            <option value="ترانسپۆرت">ترانسپۆرت</option>
-                                            <option value="هیتر">هیتر</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="expense-amount">بڕی بەسەرچوو</label>
-                                        <input type="number" id="expense-amount" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="expense-date">بەروار</label>
-                                        <input type="date" id="expense-date" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="expense-description">شرح</label>
-                                        <input type="text" id="expense-description" class="form-control">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-accent">تۆمارکردنی بەسەرچوو</button>
-                            </form>
-                            <div id="expense-alert"></div>
-                            
-                            <h3>مێژووی بەسەرچووەکان</h3>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>جۆری بەسەرچوو</th>
-                                        <th>بڕ</th>
-                                        <th>بەروار</th>
-                                        <th>شرح</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="expenses-table">
-                                    <!-- بەسەرچووەکان لێرە دەخرێنەوە -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                </main>
+                    </div>
+                </div>
+                
+                <h3 style="color: #ffcc00; margin-bottom: 15px;">
+                    <i class="fas fa-door-open"></i> هۆڵەکانی کۆلێژ
+                </h3>
+                
+                <div class="rooms-list" id="roomsList">
+                    <!-- Room list will be dynamically added -->
+                </div>
             </div>
         </div>
-    </section>
+
+        <footer>
+            <p>کۆلێژی بەڕێوەبردن و ئابووری - زانکۆی سەڵاحەدین &copy; ٢٠٢٥</p>
+            <p class="designer"><i class="fas fa-paint-brush"></i> دیزاین: دژوار گەنجۆ گیبرەیڵی</p>
+            <p><i class="fas fa-map-marker-alt"></i> سەردانی 3Dی ئۆتۆماتیکی - بەکارهێنانی لۆکەیشنی ڕاستەقینە</p>
+        </footer>
+    </div>
 
     <script>
-        // زانیاریە بنەڕەتیەکان
-        let currentUser = null;
-        let cars = JSON.parse(localStorage.getItem('cars')) || [];
-        let employees = JSON.parse(localStorage.getItem('employees')) || [];
-        let companies = JSON.parse(localStorage.getItem('companies')) || [
-            { id: 1, name: "تۆیۆتا", country: "Japan" },
-            { id: 2, name: "هۆندا", country: "Japan" },
-            { id: 3, name: "فۆرد", country: "USA" },
-            { id: 4, name: "بی ئێم دەبڵیو", country: "Germany" }
+        // Room data
+        const rooms = [
+            { id: 1, name: "دەرگای سەرەکی", floor: "ground", x: 0, y: 0, z: 15, visited: true, current: true, details: "دەرگای سەرەکی چوونە ناو کۆلێژەوە" },
+            { id: 2, name: "ئەکاونتی", floor: "first", x: -5, y: 3, z: 10, visited: false, current: false, details: "بەشی ئەکاونتی - نهۆمی یەکەم" },
+            { id: 3, name: "ئابووری", floor: "first", x: 5, y: 3, z: 10, visited: false, current: false, details: "بەشی ئابووری - نهۆمی یەکەم" },
+            { id: 4, name: "کتێبخانە", floor: "ground", x: -8, y: 0, z: 5, visited: false, current: false, details: "کتێبخانەی کۆلێژ" },
+            { id: 5, name: "موسڵمانان", floor: "ground", x: 10, y: 0, z: 0, visited: false, current: false, details: "موسڵمانی نێرینە" },
+            { id: 6, name: "تەوالێت (نێرینە)", floor: "ground", x: 12, y: 0, z: -5, visited: false, current: false, details: "تەوالێتی نێرینە" },
+            { id: 7, name: "تەوالێت (مێینە)", floor: "ground", x: -12, y: 0, z: -5, visited: false, current: false, details: "تەوالێتی مێینە" },
+            { id: 8, name: "وەرگرتنی خوێندکار", floor: "ground", x: -5, y: 0, z: -10, visited: false, current: false, details: "بەشی وەرگرتنی خوێندکارە نوێیەکان" },
+            { id: 9, name: "ئامادەبوون", floor: "ground", x: 5, y: 0, z: -10, visited: false, current: false, details: "ئامادەبوونی خوێندکاران" },
+            { id: 10, name: "پارێزەر", floor: "ground", x: 15, y: 0, z: 8, visited: false, current: false, details: "پارێزەری کۆلێژ" },
+            { id: 11, name: "پێشوازیکردن", floor: "ground", x: 0, y: 0, z: 12, visited: false, current: false, details: "ژووری پێشوازیکردن" },
+            { id: 12, name: "چاپ", floor: "ground", x: -15, y: 0, z: 8, visited: false, current: false, details: "بەشی چاپکردن" },
+            { id: 13, name: "کافێ", floor: "ground", x: -10, y: 0, z: -12, visited: false, current: false, details: "کافێی کۆلێژ" },
+            { id: 14, name: "دوکان", floor: "ground", x: 10, y: 0, z: -12, visited: false, current: false, details: "دوکانی کۆلێژ" },
+            { id: 15, name: "وەرزش", floor: "ground", x: 0, y: 0, z: -15, visited: false, current: false, details: "بەشی وەرزشی" },
+            { id: 16, name: "مارکێتینگ", floor: "ground", x: -15, y: 0, z: -8, visited: false, current: false, details: "بەشی مارکێتینگ" },
+            { id: 17, name: "ئامار", floor: "second", x: -5, y: 6, z: 10, visited: false, current: false, details: "بەشی ئامار - نهۆمی دووەم" },
+            { id: 18, name: "دارایی و بانکداری", floor: "second", x: 5, y: 6, z: 10, visited: false, current: false, details: "بەشی دارایی و بانکداری - نهۆمی دووەم" },
+            { id: 19, name: "دەزگای کۆلێژ", floor: "second", x: 0, y: 6, z: 0, visited: false, current: false, details: "دەزگای کۆلێژ - نهۆمی دووەم" },
+            { id: 20, name: "یەکەکانی ئەکاونتی", floor: "second", x: -8, y: 6, z: 5, visited: false, current: false, details: "یەکەکانی بەشی ئەکاونتی - نهۆمی دووەم" },
+            { id: 21, name: "هۆڵی د. بەیان", floor: "second", x: 8, y: 6, z: 5, visited: false, current: false, details: "هۆڵی دکتۆر بەیان - نهۆمی دووەم" },
+            { id: 22, name: "هۆڵی شەهید گەرەداغی", floor: "first", x: -10, y: 3, z: -5, visited: false, current: false, details: "هۆڵی شەهید گەرەداغی - نهۆمی یەکەم" },
+            { id: 23, name: "هۆڵی ئاشتی", floor: "first", x: 10, y: 3, z: -5, visited: false, current: false, details: "هۆڵی ئاشتی - نهۆمی یەکەم" },
+            { id: 24, name: "یەکێتی خوێندکاران", floor: "first", x: 0, y: 3, z: -5, visited: false, current: false, details: "یەکێتی خوێندکاران - نهۆمی یەکەم" }
         ];
-        let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-        let sales = JSON.parse(localStorage.getItem('sales')) || [];
+
+        // Global variables
+        let scene, camera, renderer, controls;
+        let roomMeshes = [];
+        let currentRoomIndex = 0;
+        let isTourActive = false;
+        let tourInterval;
+        let userLocation = null;
+        let hasLocationPermission = false;
+        let visitedRooms = 1; // Starting with the main door
         
-        // زیادکردنی کۆمپانیاکان بۆ localStorage
-        localStorage.setItem('companies', JSON.stringify(companies));
-        
-        // DOM جێگیرکردنەوە
-        document.addEventListener('DOMContentLoaded', function() {
-            // ڕێکخستنی فۆڕمی لۆگین
-            document.getElementById('login-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                login();
-            });
+        // DOM elements
+        const locationPermission = document.getElementById('locationPermission');
+        const allowLocationBtn = document.getElementById('allowLocation');
+        const denyLocationBtn = document.getElementById('denyLocation');
+        const startTourBtn = document.getElementById('startTour');
+        const pauseTourBtn = document.getElementById('pauseTour');
+        const resetTourBtn = document.getElementById('resetTour');
+        const currentLocationText = document.getElementById('currentLocationText');
+        const currentRoomName = document.getElementById('currentRoomName');
+        const currentRoomFloor = document.getElementById('currentRoomFloor');
+        const visitedRoomsCount = document.getElementById('visitedRoomsCount');
+        const tourProgress = document.getElementById('tourProgress');
+        const progressPercent = document.getElementById('progressPercent');
+        const roomsList = document.getElementById('roomsList');
+
+        // Initialize the application
+        function init() {
+            // Request location permission on load
+            showLocationPermission();
             
-            // ڕێکخستنی کلیک کردن بۆ لیستەکانی ناوەڕاست
-            document.querySelectorAll('.sidebar a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const sectionId = this.getAttribute('data-section');
-                    showSection(sectionId);
-                    
-                    // چالاککردنی لیستەکە
-                    document.querySelectorAll('.sidebar a').forEach(a => {
-                        a.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                });
-            });
+            // Setup event listeners
+            setupEventListeners();
             
-            // دوگمەی چوونەدەر
-            document.getElementById('logout-btn').addEventListener('click', function(e) {
-                e.preventDefault();
-                logout();
-            });
+            // Initialize 3D scene
+            init3DScene();
             
-            // فۆرمی تۆمارکردنی ئۆتۆمبێل
-            document.getElementById('car-registration-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                registerCar();
-            });
+            // Create room list
+            createRoomList();
             
-            // فۆرمی کارمەندان
-            document.getElementById('employee-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addEmployee();
-            });
+            // Update UI
+            updateUI();
             
-            // فۆرمی کۆمپانیاکان
-            document.getElementById('company-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addCompany();
-            });
+            // Start animation loop
+            animate();
+        }
+
+        // Show location permission modal
+        function showLocationPermission() {
+            locationPermission.style.display = 'flex';
+        }
+
+        // Hide location permission modal
+        function hideLocationPermission() {
+            locationPermission.style.display = 'none';
+        }
+
+        // Initialize 3D scene
+        function init3DScene() {
+            // Create scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0a1930);
             
-            // فۆرمی بەسەرچووەکان
-            document.getElementById('expense-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addExpense();
-            });
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 10, 30);
             
-            // پڕکردنەوەی لیستی کۆمپانیاکان
-            populateCompanySelect();
-        });
-        
-        // چوونەژوورەوە
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const alertDiv = document.getElementById('login-alert');
+            // Create renderer
+            const canvas = document.getElementById('3d-viewer');
+            renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             
-            // پشکنینی ناوی بەکارهێنەر و تێپەڕەوشە
-            const user = authenticateUser(username, password);
+            // Add orbit controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 5;
+            controls.maxDistance = 50;
+            controls.maxPolarAngle = Math.PI / 2;
             
-            if (user) {
-                currentUser = user;
-                alertDiv.innerHTML = '<div class="alert alert-success">بە سەرکەوتوویی چووتەژوورەوە!</div>';
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 20, 5);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            // Create building structure
+            createBuilding();
+            
+            // Create rooms
+            createRooms();
+            
+            // Add grid helper
+            const gridHelper = new THREE.GridHelper(50, 50, 0x444444, 0x222222);
+            scene.add(gridHelper);
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        // Create building structure
+        function createBuilding() {
+            // Ground floor
+            const groundGeometry = new THREE.BoxGeometry(40, 0.5, 40);
+            const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x2c5aa0 });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.position.y = -0.25;
+            ground.receiveShadow = true;
+            scene.add(ground);
+            
+            // First floor
+            const firstFloorGeometry = new THREE.BoxGeometry(35, 0.5, 35);
+            const firstFloorMaterial = new THREE.MeshLambertMaterial({ color: 0x3a6bb8 });
+            const firstFloor = new THREE.Mesh(firstFloorGeometry, firstFloorMaterial);
+            firstFloor.position.y = 3;
+            firstFloor.receiveShadow = true;
+            scene.add(firstFloor);
+            
+            // Second floor
+            const secondFloorGeometry = new THREE.BoxGeometry(30, 0.5, 30);
+            const secondFloorMaterial = new THREE.MeshLambertMaterial({ color: 0x4a7cc8 });
+            const secondFloor = new THREE.Mesh(secondFloorGeometry, secondFloorMaterial);
+            secondFloor.position.y = 6;
+            secondFloor.receiveShadow = true;
+            scene.add(secondFloor);
+            
+            // Stairs between floors
+            for (let i = 0; i < 10; i++) {
+                const stairGeometry = new THREE.BoxGeometry(2, 0.2, 0.8);
+                const stairMaterial = new THREE.MeshLambertMaterial({ color: 0xcccccc });
+                const stair = new THREE.Mesh(stairGeometry, stairMaterial);
+                stair.position.set(-15 + i * 0.5, i * 0.3, 12);
+                stair.receiveShadow = true;
+                stair.castShadow = true;
+                scene.add(stair);
+            }
+            
+            // Building walls (simplified)
+            const wallMaterial = new THREE.MeshLambertMaterial({ color: 0x1a3a8f });
+            
+            // Outer walls
+            const wallGeometry = new THREE.BoxGeometry(40, 7, 1);
+            const northWall = new THREE.Mesh(wallGeometry, wallMaterial);
+            northWall.position.set(0, 3.5, -20);
+            northWall.castShadow = true;
+            northWall.receiveShadow = true;
+            scene.add(northWall);
+            
+            const southWall = new THREE.Mesh(wallGeometry, wallMaterial);
+            southWall.position.set(0, 3.5, 20);
+            southWall.castShadow = true;
+            southWall.receiveShadow = true;
+            scene.add(southWall);
+            
+            const eastWall = new THREE.Mesh(new THREE.BoxGeometry(1, 7, 40), wallMaterial);
+            eastWall.position.set(20, 3.5, 0);
+            eastWall.castShadow = true;
+            eastWall.receiveShadow = true;
+            scene.add(eastWall);
+            
+            const westWall = new THREE.Mesh(new THREE.BoxGeometry(1, 7, 40), wallMaterial);
+            westWall.position.set(-20, 3.5, 0);
+            westWall.castShadow = true;
+            westWall.receiveShadow = true;
+            scene.add(westWall);
+        }
+
+        // Create rooms in 3D
+        function createRooms() {
+            const roomGeometry = new THREE.BoxGeometry(4, 2, 4);
+            
+            rooms.forEach((room, index) => {
+                // Determine room color based on floor
+                let roomColor;
+                if (room.floor === 'ground') roomColor = 0x2c5aa0;
+                else if (room.floor === 'first') roomColor = 0x3a6bb8;
+                else roomColor = 0x4a7cc8;
                 
-                // نوێکردنەوەی ناوی بەکارهێنەر
-                document.getElementById('current-user-name').textContent = user.name;
-                document.getElementById('current-user-role').textContent = user.role === 'admin' ? 'ئەدمین' : 'بەکارهێنەر';
+                // Special color for current room
+                if (room.current) roomColor = 0xffcc00;
                 
-                // نیشاندانی سیستەمەکە و شاردنەوەی فۆڕمی لۆگین
-                setTimeout(() => {
-                    document.getElementById('login-section').style.display = 'none';
-                    document.getElementById('main-system').style.display = 'block';
-                    updateDashboard();
-                    updateAvailableCarsList();
-                    updateSoldCarsTable();
-                    updateEmployeesTable();
-                    updateMonthlyIncomeTable();
-                    updateSoldIncomeTable();
-                    updateCompaniesTable();
-                    updateExpensesTable();
-                    
-                    // پشکنینی مۆڵەتەکان
-                    checkPermissions();
-                }, 1000);
-            } else {
-                alertDiv.innerHTML = '<div class="alert alert-danger">ناوی بەکارهێنەر یان تێپەڕەوشە هەڵەیە!</div>';
-            }
-        }
-        
-        // پشکنینی ناوی بەکارهێنەر و تێپەڕەوشە
-        function authenticateUser(username, password) {
-            // لە ڕاستیدا ئەمە پێویستە بگەڕێتەوە بۆ سێرڤەر، بەڵام لێرەدا بە شێوەیەکی سادە دەیکەین
-            const users = [
-                {
-                    id: 1,
-                    username: "admin",
-                    password: "admin123",
-                    name: "ئەدمین",
-                    role: "admin"
-                },
-                {
-                    id: 2,
-                    username: "user",
-                    password: "user123", 
-                    name: "بەکارهێنەر",
-                    role: "user"
-                }
-            ];
-            
-            return users.find(u => u.username === username && u.password === password);
-        }
-        
-        // چوونەدەر
-        function logout() {
-            currentUser = null;
-            document.getElementById('login-section').style.display = 'flex';
-            document.getElementById('main-system').style.display = 'none';
-            document.getElementById('login-form').reset();
-            document.getElementById('login-alert').innerHTML = '';
-        }
-        
-        // پشکنینی مۆڵەتەکان
-        function checkPermissions() {
-            const isAdmin = currentUser.role === 'admin';
-            
-            // بەشی فرۆشتن - تەنیا ئەدمین دەتوانێت بفرۆشێت
-            if (!isAdmin) {
-                document.getElementById('sales-access-message').style.display = 'block';
-                document.getElementById('available-cars-list').style.display = 'none';
-            } else {
-                document.getElementById('sales-access-message').style.display = 'none';
-                document.getElementById('available-cars-list').style.display = 'block';
-            }
-            
-            // بەشی کارمەندان - تەنیا ئەدمین دەتوانێت کارمەند زیاد بکات
-            if (!isAdmin) {
-                document.getElementById('employees-access-message').style.display = 'block';
-                document.getElementById('employees-content').style.display = 'none';
-            } else {
-                document.getElementById('employees-access-message').style.display = 'none';
-                document.getElementById('employees-content').style.display = 'block';
-            }
-            
-            // بەشی داهاتەکان - تەنیا ئەدمین دەتوانێت ببینێت
-            if (!isAdmin) {
-                document.getElementById('income-access-message').style.display = 'block';
-                document.getElementById('income-content').style.display = 'none';
-                document.getElementById('sold-income-access-message').style.display = 'block';
-                document.getElementById('sold-income-content').style.display = 'none';
-                document.getElementById('expenses-access-message').style.display = 'block';
-                document.getElementById('expenses-content').style.display = 'none';
-            } else {
-                document.getElementById('income-access-message').style.display = 'none';
-                document.getElementById('income-content').style.display = 'block';
-                document.getElementById('sold-income-access-message').style.display = 'none';
-                document.getElementById('sold-income-content').style.display = 'block';
-                document.getElementById('expenses-access-message').style.display = 'none';
-                document.getElementById('expenses-content').style.display = 'block';
-            }
-            
-            // بەشی فرۆشراوەکان - هەردوو ئەدمین و یوزەر دەتوانن بیبینن
-            // هیچ شتێک پێویست نیە لێرەدا
-        }
-        
-        // نیشاندانی بەشێکی دیاریکراو
-        function showSection(sectionId) {
-            // هەموو بەشەکان دەشارێنەوە
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
+                const roomMaterial = new THREE.MeshLambertMaterial({ color: roomColor });
+                const roomMesh = new THREE.Mesh(roomGeometry, roomMaterial);
+                
+                // Position the room
+                roomMesh.position.set(room.x, room.y + 1, room.z);
+                roomMesh.castShadow = true;
+                roomMesh.receiveShadow = true;
+                
+                // Add label
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 256;
+                canvas.height = 128;
+                
+                context.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                
+                context.fillStyle = '#1a3a8f';
+                context.font = 'bold 24px Arial';
+                context.textAlign = 'center';
+                context.fillText(room.name, canvas.width/2, 40);
+                
+                context.fillStyle = '#555';
+                context.font = '16px Arial';
+                context.fillText(room.floor === 'ground' ? 'نهۆمی سەرەتایی' : 
+                               room.floor === 'first' ? 'نهۆمی یەکەم' : 'نهۆمی دووەم', 
+                               canvas.width/2, 70);
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                const labelMaterial = new THREE.SpriteMaterial({ map: texture });
+                const label = new THREE.Sprite(labelMaterial);
+                label.position.set(room.x, room.y + 3, room.z);
+                label.scale.set(8, 4, 1);
+                
+                // Store room data with mesh
+                roomMesh.roomData = room;
+                roomMesh.label = label;
+                
+                scene.add(roomMesh);
+                scene.add(label);
+                
+                roomMeshes.push(roomMesh);
             });
-            
-            // بەشی دیاریکراو نیشان بدە
-            document.getElementById(sectionId).classList.add('active');
-            
-            // پشکنینی مۆڵەتەکان بۆ ئەو بەشە دیاریکراو
-            if (sectionId === 'sales') {
-                checkSalesPermissions();
-            }
         }
-        
-        // پشکنینی مۆڵەتەکان بۆ بەشی فرۆشتن
-        function checkSalesPermissions() {
-            const isAdmin = currentUser.role === 'admin';
+
+        // Create room list in sidebar
+        function createRoomList() {
+            roomsList.innerHTML = '';
             
-            if (!isAdmin) {
-                document.getElementById('sales-access-message').style.display = 'block';
-                document.getElementById('available-cars-list').style.display = 'none';
-            } else {
-                document.getElementById('sales-access-message').style.display = 'none';
-                document.getElementById('available-cars-list').style.display = 'block';
-            }
-        }
-        
-        // نوێکردنەوەی داشبۆرد
-        function updateDashboard() {
-            const totalCars = cars.length;
-            const availableCars = cars.filter(car => !car.sold).length;
-            const soldCars = cars.filter(car => car.sold).length;
-            const totalEmployees = employees.length;
-            
-            document.getElementById('total-cars').textContent = totalCars;
-            document.getElementById('available-cars').textContent = availableCars;
-            document.getElementById('sold-cars').textContent = soldCars;
-            document.getElementById('total-employees').textContent = totalEmployees;
-            
-            // نوێکردنەوەی چالاکیەکان
-            updateRecentActivities();
-        }
-        
-        // نوێکردنەوەی چالاکیەکانی دوایین
-        function updateRecentActivities() {
-            const activitiesContainer = document.getElementById('recent-activities');
-            activitiesContainer.innerHTML = '';
-            
-            // چالاکیەکانی فرۆشتن
-            const recentSales = sales.slice(-5).reverse();
-            recentSales.forEach(sale => {
-                const activityDiv = document.createElement('div');
-                activityDiv.className = 'alert';
-                activityDiv.textContent = `ئۆتۆمبێلی ${sale.carModel} فرۆشرا بە نرخی ${sale.price} دینار`;
-                activitiesContainer.appendChild(activityDiv);
-            });
-            
-            // چالاکیەکانی تۆمارکردنی ئۆتۆمبێل
-            const recentCars = cars.slice(-3).reverse();
-            recentCars.forEach(car => {
-                if (!car.sold) {
-                    const activityDiv = document.createElement('div');
-                    activityDiv.className = 'alert';
-                    activityDiv.textContent = `ئۆتۆمبێلی ${car.model} تۆمارکرا`;
-                    activitiesContainer.appendChild(activityDiv);
-                }
-            });
-            
-            if (activitiesContainer.children.length === 0) {
-                activitiesContainer.innerHTML = '<div class="alert">هیچ چالاکیەک تۆمارنەکراوە</div>';
-            }
-        }
-        
-        // تۆمارکردنی ئۆتۆمبێل
-        function registerCar() {
-            const model = document.getElementById('car-model').value;
-            const year = document.getElementById('car-year').value;
-            const color = document.getElementById('car-color').value;
-            const price = document.getElementById('car-price').value;
-            const companyId = document.getElementById('car-company').value;
-            
-            const newCar = {
-                id: Date.now(),
-                model,
-                year: parseInt(year),
-                color,
-                price: parseInt(price),
-                companyId: parseInt(companyId),
-                sold: false
-            };
-            
-            cars.push(newCar);
-            localStorage.setItem('cars', JSON.stringify(cars));
-            
-            document.getElementById('car-registration-form').reset();
-            document.getElementById('car-registration-alert').innerHTML = 
-                '<div class="alert alert-success">ئۆتۆمبێل بە سەرکەوتوویی تۆمارکرا</div>';
-            
-            updateDashboard();
-            updateAvailableCarsList();
-            
-            setTimeout(() => {
-                document.getElementById('car-registration-alert').innerHTML = '';
-            }, 3000);
-        }
-        
-        // نوێکردنەوەی لیستی ئۆتۆمبێلە بەردەستەکان
-        function updateAvailableCarsList() {
-            const container = document.getElementById('available-cars-list');
-            container.innerHTML = '';
-            
-            const availableCars = cars.filter(car => !car.sold);
-            
-            if (availableCars.length === 0) {
-                container.innerHTML = '<div class="alert">هیچ ئۆتۆمبێلێک بەردەست نیە</div>';
-                return;
-            }
-            
-            availableCars.forEach(car => {
-                const company = companies.find(c => c.id === car.companyId);
-                const carDiv = document.createElement('div');
-                carDiv.className = 'car-card';
-                carDiv.innerHTML = `
-                    <h4>${car.model} (${car.year})</h4>
-                    <p>ڕەنگ: ${car.color} | نرخ: ${car.price} دینار | کۆمپانیا: ${company ? company.name : 'نەزانراو'}</p>
-                    ${currentUser.role === 'admin' ? 
-                        `<button class="btn btn-accent sell-car-btn" data-car-id="${car.id}">فرۆشتن</button>` : 
-                        ''
-                    }
+            rooms.forEach(room => {
+                const roomItem = document.createElement('div');
+                roomItem.className = 'room-item';
+                if (room.visited) roomItem.classList.add('visited');
+                if (room.current) roomItem.classList.add('current');
+                roomItem.dataset.id = room.id;
+                
+                roomItem.innerHTML = `
+                    <div class="room-header">
+                        <div class="room-name">${room.name}</div>
+                        <div class="room-floor">${room.floor === 'ground' ? 'سەرەتایی' : 
+                                                 room.floor === 'first' ? 'یەکەم' : 'دووەم'}</div>
+                    </div>
+                    <div class="room-details">${room.details}</div>
+                    ${room.visited ? '<div style="margin-top: 8px; color: #00c853; font-size: 12px;"><i class="fas fa-check-circle"></i> سەردانکراوە</div>' : ''}
                 `;
-                container.appendChild(carDiv);
-            });
-            
-            // زیادکردنی ڕیزی کارکردن بۆ دوگمەکانی فرۆشتن
-            document.querySelectorAll('.sell-car-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const carId = parseInt(this.getAttribute('data-car-id'));
-                    sellCar(carId);
+                
+                roomItem.addEventListener('click', () => {
+                    goToRoom(room.id);
                 });
+                
+                roomsList.appendChild(roomItem);
             });
         }
-        
-        // فرۆشتی ئۆتۆمبێل
-        function sellCar(carId) {
-            const carIndex = cars.findIndex(car => car.id === carId);
-            if (carIndex !== -1) {
-                cars[carIndex].sold = true;
-                cars[carIndex].soldDate = new Date().toLocaleDateString('ku');
-                
-                // زیادکردنی فرۆشتنەکە
-                const sale = {
-                    id: Date.now(),
-                    carId: carId,
-                    carModel: cars[carIndex].model,
-                    price: cars[carIndex].price,
-                    saleDate: new Date().toLocaleDateString('ku')
-                };
-                
-                sales.push(sale);
-                
-                localStorage.setItem('cars', JSON.stringify(cars));
-                localStorage.setItem('sales', JSON.stringify(sales));
-                
-                updateDashboard();
-                updateAvailableCarsList();
-                updateSoldCarsTable();
-                updateSoldIncomeTable();
-                updateMonthlyIncomeTable();
-                
-                alert(`ئۆتۆمبێلی ${cars[carIndex].model} بە سەرکەوتوویی فرۆشرا`);
+
+        // Update UI elements
+        function updateUI() {
+            const currentRoom = rooms[currentRoomIndex];
+            const visitedCount = rooms.filter(r => r.visited).length;
+            const totalRooms = rooms.length;
+            const percentage = Math.round((visitedCount / totalRooms) * 100);
+            
+            currentRoomName.textContent = currentRoom.name;
+            currentRoomFloor.textContent = currentRoom.floor === 'ground' ? 'نهۆمی سەرەتایی' : 
+                                          currentRoom.floor === 'first' ? 'نهۆمی یەکەم' : 'نهۆمی دووەم';
+            visitedRoomsCount.textContent = `${visitedCount} لە ${totalRooms}`;
+            tourProgress.style.width = `${percentage}%`;
+            progressPercent.textContent = `${percentage}%`;
+            
+            // Update location text based on permission
+            if (hasLocationPermission && userLocation) {
+                currentLocationText.innerHTML = `<i class="fas fa-map-marker-alt"></i> لۆکەیشن: چالاک (سەردانی ئۆتۆماتیکی)`;
+            } else {
+                currentLocationText.innerHTML = `<i class="fas fa-map-marker-alt"></i> لۆکەیشن: سەردانی دەستی`;
             }
         }
-        
-        // نوێکردنەوەی خشتەی ئۆتۆمبێلە فرۆشراوەکان
-        function updateSoldCarsTable() {
-            const tableBody = document.getElementById('sold-cars-table');
-            tableBody.innerHTML = '';
+
+        // Go to a specific room
+        function goToRoom(roomId) {
+            const roomIndex = rooms.findIndex(r => r.id === roomId);
+            if (roomIndex === -1) return;
             
-            const soldCars = cars.filter(car => car.sold);
-            
-            if (soldCars.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">هیچ ئۆتۆمبێلێک فرۆشراو نیە</td></tr>';
-                return;
+            // Mark as visited
+            if (!rooms[roomIndex].visited) {
+                rooms[roomIndex].visited = true;
+                visitedRooms++;
             }
             
-            soldCars.forEach(car => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${car.model}</td>
-                    <td>${car.color}</td>
-                    <td>${car.price} دینار</td>
-                    <td>کارمەندی فرۆشتن</td>
-                    <td>${car.soldDate}</td>
-                `;
-                tableBody.appendChild(row);
+            // Update current room
+            rooms.forEach(room => room.current = false);
+            rooms[roomIndex].current = true;
+            currentRoomIndex = roomIndex;
+            
+            // Update 3D room colors
+            updateRoomColors();
+            
+            // Move camera to room
+            const targetRoom = rooms[roomIndex];
+            const targetPosition = new THREE.Vector3(
+                targetRoom.x, 
+                targetRoom.y + 5, 
+                targetRoom.z + 10
+            );
+            
+            // Animate camera movement
+            animateCameraToPosition(targetPosition);
+            
+            // Update UI
+            updateUI();
+            createRoomList();
+        }
+
+        // Update room colors in 3D scene
+        function updateRoomColors() {
+            roomMeshes.forEach((mesh, index) => {
+                const room = rooms[index];
+                let roomColor;
+                
+                if (room.floor === 'ground') roomColor = 0x2c5aa0;
+                else if (room.floor === 'first') roomColor = 0x3a6bb8;
+                else roomColor = 0x4a7cc8;
+                
+                if (room.current) roomColor = 0xffcc00;
+                else if (room.visited) roomColor = 0x00c853;
+                
+                mesh.material.color.setHex(roomColor);
             });
         }
-        
-        // زیادکردنی کارمەند
-        function addEmployee() {
-            // پشکنین بکە بەکارهێنەر ئەدمینە یان نا
-            if (currentUser.role !== 'admin') {
-                alert('تەنیا بەکارهێنەرانی ئەدمین دەتوانن کارمەند زیاد بکەن!');
-                return;
+
+        // Animate camera to a position
+        function animateCameraToPosition(targetPosition) {
+            const startPosition = camera.position.clone();
+            const startTime = Date.now();
+            const duration = 1500; // 1.5 seconds
+            
+            function animateCamera() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function
+                const easeProgress = progress < 0.5 
+                    ? 2 * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                
+                camera.position.lerpVectors(startPosition, targetPosition, easeProgress);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animateCamera);
+                } else {
+                    // Look at the room
+                    controls.target.set(
+                        rooms[currentRoomIndex].x,
+                        rooms[currentRoomIndex].y + 1,
+                        rooms[currentRoomIndex].z
+                    );
+                }
             }
             
-            const name = document.getElementById('employee-name').value;
-            const phone = document.getElementById('employee-phone').value;
-            const birthplace = document.getElementById('employee-birthplace').value;
-            
-            const newEmployee = {
-                id: Date.now(),
-                name,
-                phone,
-                birthplace
-            };
-            
-            employees.push(newEmployee);
-            localStorage.setItem('employees', JSON.stringify(employees));
-            
-            document.getElementById('employee-form').reset();
-            document.getElementById('employee-alert').innerHTML = 
-                '<div class="alert alert-success">کارمەند بە سەرکەوتوویی زیادکرا</div>';
-            
-            updateDashboard();
-            updateEmployeesTable();
-            
-            setTimeout(() => {
-                document.getElementById('employee-alert').innerHTML = '';
-            }, 3000);
+            animateCamera();
         }
-        
-        // نوێکردنەوەی خشتەی کارمەندان
-        function updateEmployeesTable() {
-            const tableBody = document.getElementById('employees-table');
-            tableBody.innerHTML = '';
+
+        // Start automatic tour
+        function startTour() {
+            if (isTourActive) return;
             
-            if (employees.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">هیچ کارمەندێک تۆمارنەکراوە</td></tr>';
-                return;
+            isTourActive = true;
+            startTourBtn.innerHTML = '<i class="fas fa-play"></i> سەردان بەردەوامە';
+            
+            // If we have location, simulate based on location
+            if (hasLocationPermission && userLocation) {
+                startLocationBasedTour();
+            } else {
+                startSequentialTour();
             }
+        }
+
+        // Start sequential tour (room by room)
+        function startSequentialTour() {
+            let roomIndex = 0;
             
-            employees.forEach(employee => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${employee.name}</td>
-                    <td>${employee.phone}</td>
-                    <td>${employee.birthplace}</td>
-                    <td>
-                        ${currentUser.role === 'admin' ? 
-                            `<button class="btn logout-btn delete-employee-btn" data-employee-id="${employee.id}">سڕینەوە</button>` : 
-                            ''
+            tourInterval = setInterval(() => {
+                goToRoom(rooms[roomIndex].id);
+                roomIndex = (roomIndex + 1) % rooms.length;
+                
+                // Pause tour if all rooms visited
+                if (roomIndex === 0) {
+                    pauseTour();
+                    alert('سەردانی 3D تەواو بوو! هەموو هۆڵەکان سەردان کران.');
+                }
+            }, 3000); // 3 seconds per room
+        }
+
+        // Start location-based tour (simulated)
+        function startLocationBasedTour() {
+            // Simulate user moving through the building based on location
+            // In a real app, this would use actual geolocation data
+            
+            // Start from current location
+            let currentIndex = currentRoomIndex;
+            
+            tourInterval = setInterval(() => {
+                // Simulate moving to nearby rooms
+                const nearbyRooms = rooms.filter((room, index) => {
+                    if (index === currentIndex) return false;
+                    
+                    // Calculate distance from current room
+                    const dx = room.x - rooms[currentIndex].x;
+                    const dz = room.z - rooms[currentIndex].z;
+                    const distance = Math.sqrt(dx*dx + dz*dz);
+                    
+                    return distance < 10; // Only rooms within 10 units
+                });
+                
+                // If no nearby rooms, go to random room
+                if (nearbyRooms.length === 0) {
+                    currentIndex = Math.floor(Math.random() * rooms.length);
+                } else {
+                    // Go to a random nearby room
+                    const randomRoom = nearbyRooms[Math.floor(Math.random() * nearbyRooms.length)];
+                    currentIndex = rooms.findIndex(r => r.id === randomRoom.id);
+                }
+                
+                goToRoom(rooms[currentIndex].id);
+            }, 2500); // 2.5 seconds per room
+        }
+
+        // Pause tour
+        function pauseTour() {
+            if (!isTourActive) return;
+            
+            isTourActive = false;
+            clearInterval(tourInterval);
+            startTourBtn.innerHTML = '<i class="fas fa-play"></i> دەستپێکردنی سەردانی ئۆتۆماتیکی';
+        }
+
+        // Reset tour
+        function resetTour() {
+            pauseTour();
+            
+            // Reset all rooms
+            rooms.forEach(room => {
+                room.visited = false;
+                room.current = false;
+            });
+            
+            // Set first room as current and visited
+            rooms[0].visited = true;
+            rooms[0].current = true;
+            currentRoomIndex = 0;
+            visitedRooms = 1;
+            
+            // Reset camera
+            camera.position.set(0, 10, 30);
+            controls.target.set(0, 0, 0);
+            
+            // Update everything
+            updateRoomColors();
+            updateUI();
+            createRoomList();
+        }
+
+        // Handle window resize
+        function onWindowResize() {
+            const canvas = document.getElementById('3d-viewer');
+            const container = canvas.parentElement;
+            
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (controls) controls.update();
+            if (renderer && scene && camera) renderer.render(scene, camera);
+            
+            // Rotate room labels to always face camera
+            roomMeshes.forEach(mesh => {
+                if (mesh.label) {
+                    mesh.label.lookAt(camera.position);
+                }
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Location permission buttons
+            allowLocationBtn.addEventListener('click', () => {
+                hasLocationPermission = true;
+                hideLocationPermission();
+                
+                // Try to get real location
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            userLocation = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            // Simulate starting from a random room based on location
+                            const randomStart = Math.floor(Math.random() * 5) + 1;
+                            goToRoom(randomStart);
+                        },
+                        error => {
+                            console.log('Error getting location:', error);
+                            // Start from main door anyway
+                            goToRoom(1);
                         }
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-            
-            // زیادکردنی ڕیزی کارکردن بۆ دوگمەکانی سڕینەوە
-            document.querySelectorAll('.delete-employee-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const employeeId = parseInt(this.getAttribute('data-employee-id'));
-                    deleteEmployee(employeeId);
-                });
-            });
-        }
-        
-        // سڕینەوەی کارمەند
-        function deleteEmployee(employeeId) {
-            if (confirm("دڵنیایت لە سڕینەوەی ئەم کارmەندە؟")) {
-                employees = employees.filter(employee => employee.id !== employeeId);
-                localStorage.setItem('employees', JSON.stringify(employees));
-                
-                updateDashboard();
-                updateEmployeesTable();
-            }
-        }
-        
-        // نوێکردنەوەی خشتەی داهاتی مانگانە
-        function updateMonthlyIncomeTable() {
-            const tableBody = document.getElementById('monthly-income-table');
-            tableBody.innerHTML = '';
-            
-            // کۆکردنەوەی داهات بەپێی مانگ
-            const monthlyIncome = {};
-            sales.forEach(sale => {
-                const saleDate = new Date();
-                const monthYear = `${saleDate.getMonth() + 1}/${saleDate.getFullYear()}`;
-                
-                if (!monthlyIncome[monthYear]) {
-                    monthlyIncome[monthYear] = {
-                        count: 0,
-                        total: 0
-                    };
+                    );
+                } else {
+                    goToRoom(1);
                 }
+            });
+            
+            denyLocationBtn.addEventListener('click', () => {
+                hasLocationPermission = false;
+                hideLocationPermission();
+                goToRoom(1); // Start from main door
+            });
+            
+            // Tour control buttons
+            startTourBtn.addEventListener('click', startTour);
+            pauseTourBtn.addEventListener('click', pauseTour);
+            resetTourBtn.addEventListener('click', resetTour);
+            
+            // Keyboard controls for movement
+            document.addEventListener('keydown', (event) => {
+                const moveSpeed = 0.5;
                 
-                monthlyIncome[monthYear].count++;
-                monthlyIncome[monthYear].total += sale.price;
-            });
-            
-            // نوێکردنەوەی ئامارەکانی داشبۆرد
-            const currentDate = new Date();
-            const currentMonthYear = `${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-            const lastMonth = currentDate.getMonth() === 0 ? 12 : currentDate.getMonth();
-            const lastMonthYear = `${lastMonth}/${currentDate.getFullYear()}`;
-            
-            document.getElementById('current-month-income').textContent = 
-                monthlyIncome[currentMonthYear] ? `${monthlyIncome[currentMonthYear].total} دینار` : '0 دینار';
-            document.getElementById('last-month-income').textContent = 
-                monthlyIncome[lastMonthYear] ? `${monthlyIncome[lastMonthYear].total} دینار` : '0 دینار';
-            
-            // زیادکردنی ڕیزەکان بۆ خشتەکە
-            Object.keys(monthlyIncome).forEach(monthYear => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${monthYear}</td>
-                    <td>${monthlyIncome[monthYear].count}</td>
-                    <td>${monthlyIncome[monthYear].total} دینار</td>
-                `;
-                tableBody.appendChild(row);
-            });
-            
-            if (Object.keys(monthlyIncome).length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="3" style="text-align: center;">هیچ داهاتێک تۆمارنەکراوە</td></tr>';
-            }
-        }
-        
-        // نوێکردنەوەی خشتەی داهاتی فرۆشراو
-        function updateSoldIncomeTable() {
-            const tableBody = document.getElementById('sold-income-table');
-            tableBody.innerHTML = '';
-            
-            // نوێکردنەوەی ئامارەکانی داشبۆرد
-            const totalIncome = sales.reduce((sum, sale) => sum + sale.price, 0);
-            const avgIncome = sales.length > 0 ? Math.round(totalIncome / sales.length) : 0;
-            
-            document.getElementById('total-income').textContent = `${totalIncome} دینار`;
-            document.getElementById('avg-income').textContent = `${avgIncome} دینار`;
-            
-            // زیادکردنی ڕیزەکان بۆ خشتەکە
-            sales.forEach(sale => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${sale.carModel}</td>
-                    <td>${sale.price} دینار</td>
-                    <td>کارمەندی فرۆشتن</td>
-                    <td>${sale.saleDate}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-            
-            if (sales.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">هیچ فرۆشتنێک تۆمارنەکراوە</td></tr>';
-            }
-        }
-        
-        // زیادکردنی کۆمپانیا
-        function addCompany() {
-            const name = document.getElementById('company-name').value;
-            const country = document.getElementById('company-country').value;
-            
-            const newCompany = {
-                id: Date.now(),
-                name,
-                country
-            };
-            
-            companies.push(newCompany);
-            localStorage.setItem('companies', JSON.stringify(companies));
-            
-            document.getElementById('company-form').reset();
-            document.getElementById('company-alert').innerHTML = 
-                '<div class="alert alert-success">کۆمپانیا بە سەرکەوتوویی زیادکرا</div>';
-            
-            updateCompaniesTable();
-            populateCompanySelect();
-            
-            setTimeout(() => {
-                document.getElementById('company-alert').innerHTML = '';
-            }, 3000);
-        }
-        
-        // نوێکردنەوەی خشتەی کۆمپانیاکان
-        function updateCompaniesTable() {
-            const tableBody = document.getElementById('companies-table');
-            tableBody.innerHTML = '';
-            
-            if (companies.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="3" style="text-align: center;">هیچ کۆمپانیایەک تۆمارنەکراوە</td></tr>';
-                return;
-            }
-            
-            companies.forEach(company => {
-                const carCount = cars.filter(car => car.companyId === company.id).length;
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${company.name}</td>
-                    <td>${company.country}</td>
-                    <td>${carCount}</td>
-                `;
-                tableBody.appendChild(row);
+                switch(event.key.toLowerCase()) {
+                    case 'w': // Move forward
+                        camera.position.z -= moveSpeed;
+                        break;
+                    case 's': // Move backward
+                        camera.position.z += moveSpeed;
+                        break;
+                    case 'a': // Move left
+                        camera.position.x -= moveSpeed;
+                        break;
+                    case 'd': // Move right
+                        camera.position.x += moveSpeed;
+                        break;
+                    case ' ': // Space - jump to next room
+                        const nextIndex = (currentRoomIndex + 1) % rooms.length;
+                        goToRoom(rooms[nextIndex].id);
+                        break;
+                }
             });
         }
-        
-        // پڕکردنەوەی لیستی کۆمپانیاکان
-        function populateCompanySelect() {
-            const select = document.getElementById('car-company');
-            select.innerHTML = '<option value="">کۆمپانیا هەڵبژێرە</option>';
-            
-            companies.forEach(company => {
-                const option = document.createElement('option');
-                option.value = company.id;
-                option.textContent = company.name;
-                select.appendChild(option);
-            });
-        }
-        
-        // زیادکردنی بەسەرچوو
-        function addExpense() {
-            // پشکنین بکە بەکارهێنەر ئەدمینە یان نا
-            if (currentUser.role !== 'admin') {
-                alert('تەنیا بەکارهێنەرانی ئەدمین دەتوانن بەسەرچوو تۆمار بکەن!');
-                return;
-            }
-            
-            const type = document.getElementById('expense-type').value;
-            const amount = document.getElementById('expense-amount').value;
-            const date = document.getElementById('expense-date').value;
-            const description = document.getElementById('expense-description').value;
-            
-            const newExpense = {
-                id: Date.now(),
-                type,
-                amount: parseInt(amount),
-                date,
-                description
-            };
-            
-            expenses.push(newExpense);
-            localStorage.setItem('expenses', JSON.stringify(expenses));
-            
-            document.getElementById('expense-form').reset();
-            document.getElementById('expense-alert').innerHTML = 
-                '<div class="alert alert-success">بەسەرچوو بە سەرکەوتوویی تۆمارکرا</div>';
-            
-            updateExpensesTable();
-            
-            setTimeout(() => {
-                document.getElementById('expense-alert').innerHTML = '';
-            }, 3000);
-        }
-        
-        // نوێکردنەوەی خشتەی بەسەرچووەکان
-        function updateExpensesTable() {
-            const tableBody = document.getElementById('expenses-table');
-            tableBody.innerHTML = '';
-            
-            if (expenses.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">هیچ بەسەرچوویەک تۆمارنەکراوە</td></tr>';
-                return;
-            }
-            
-            expenses.forEach(expense => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${expense.type}</td>
-                    <td>${expense.amount} دینار</td>
-                    <td>${expense.date}</td>
-                    <td>${expense.description}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
+
+        // Initialize the app when page loads
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
