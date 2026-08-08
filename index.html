@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="ku" dir="rtl">
+<html lang="ckb" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ASWDA TRAVEL | ئاسودە تراڤڵ - سیستەمی بەڕێوبردنی گەشت و ڤیزە</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تایپ خێرا - ڕاهێنانی پیشەیی کیبۆرد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -16,544 +13,1264 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #050d17;
-            color: #f0f4fa;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
             min-height: 100vh;
-            padding: 1.8rem;
-            position: relative;
-            overflow-x: hidden;
+            background: linear-gradient(145deg, #0a0e1a 0%, #141c36 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            direction: rtl;
         }
 
-        /* dynamic world travel background */
-        .bg-slideshow {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .container {
+            max-width: 960px;
             width: 100%;
-            height: 100%;
-            z-index: -2;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 1.2s ease-in-out;
-        }
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(3, 12, 24, 0.75);
-            backdrop-filter: blur(5px);
-            z-index: -1;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 36px;
+            padding: 28px 24px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
         }
 
-        /* main glass container */
-        .aswda-container {
-            max-width: 1500px;
-            margin: 0 auto;
-            background: rgba(12, 22, 40, 0.55);
-            backdrop-filter: blur(12px);
-            border-radius: 2.5rem;
-            padding: 1.8rem 2rem;
-            border: 1px solid rgba(255, 200, 110, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        /* header with brand */
-        .brand-header {
+        /* ===== HEADER ===== */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid rgba(255, 180, 70, 0.5);
-        }
-        .logo-area h1 {
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #FFDFA5, #FFB347, #6EC3E8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-        .logo-area p {
-            font-size: 0.8rem;
-            color: #FFE2B5;
-        }
-        .global-badge {
-            background: #00000055;
-            padding: 0.5rem 1.2rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            backdrop-filter: blur(4px);
-        }
-
-        /* grid system */
-        .two-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 1.8rem;
-            margin-bottom: 2rem;
-        }
-
-        /* modern cards */
-        .card {
-            background: rgba(8, 18, 30, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 1.8rem;
-            padding: 1.4rem 1.6rem;
-            border: 1px solid rgba(255, 215, 140, 0.25);
-            transition: all 0.25s;
-        }
-        .card:hover {
-            border-color: #FFB347;
-            background: rgba(15, 30, 48, 0.8);
-        }
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1.4rem;
-            border-bottom: 1px dashed #FFB34770;
-            padding-bottom: 0.6rem;
-        }
-        .card-header i {
-            font-size: 1.7rem;
-            color: #FFC46B;
-        }
-        .card-header h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        /* form */
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            font-size: 0.8rem;
-            margin-bottom: 0.4rem;
-            color: #FFE5C2;
-        }
-        input, select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 1.2rem;
-            border: 1px solid #3a5a7a;
-            background: #07121fcc;
-            color: white;
-            font-family: inherit;
-            font-size: 0.9rem;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #FFB347;
-            box-shadow: 0 0 0 3px #ffb34740;
-        }
-        .btn-primary {
-            background: linear-gradient(95deg, #FFB347, #FF8C33);
-            border: none;
-            width: 100%;
-            padding: 0.85rem;
-            border-radius: 2rem;
-            font-weight: 800;
-            font-size: 1rem;
-            color: #0a1420;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 0.5rem;
-        }
-        .btn-primary:hover {
-            transform: scale(0.97);
-            background: linear-gradient(95deg, #FFA12E, #FF7518);
-        }
-
-        /* kpi row duration & people */
-        .info-kpi {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .info-card {
-            background: #0b1624aa;
-            border-radius: 1.2rem;
-            padding: 0.8rem;
-            text-align: center;
-            flex: 1;
-        }
-        .info-number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #FFC857;
-        }
-
-        /* table */
-        .filter-bar {
-            display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 1rem;
+            margin-bottom: 16px;
         }
-        .search-box {
-            background: #0f1c2c;
-            border-radius: 2rem;
-            padding: 0.2rem 1rem;
+
+        .logo h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6fcbff, #8b6fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo small {
+            font-size: 0.75rem;
+            color: #6a84b8;
+            font-weight: 500;
+            -webkit-text-fill-color: #6a84b8;
+            display: block;
+        }
+
+        .badge-level {
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .badge-level.beginner {
+            color: #ff8a8a;
+            border-color: rgba(255, 80, 80, 0.15);
+        }
+        .badge-level.intermediate {
+            color: #ffd966;
+            border-color: rgba(255, 200, 80, 0.15);
+        }
+        .badge-level.advanced {
+            color: #7ae0a0;
+            border-color: rgba(90, 255, 150, 0.15);
+        }
+        .badge-level.expert {
+            color: #6fcbff;
+            border-color: rgba(79, 200, 255, 0.15);
+        }
+
+        /* ===== STATS ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 12px 16px;
+            border-radius: 28px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+        }
+        .stat-number.speed {
+            color: #6fcbff;
+        }
+        .stat-number.accuracy {
+            color: #7ae0a0;
+        }
+        .stat-number.time {
+            color: #ffd966;
+        }
+        .stat-number.progress {
+            color: #b38aff;
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #6a84b8;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-top: 2px;
+        }
+
+        /* ===== SENTENCE ===== */
+        .sentence-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 20px 24px;
+            margin-bottom: 14px;
+            min-height: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
-            gap: 6px;
-            border: 1px solid #ffb34770;
         }
-        .search-box input {
-            background: transparent;
-            border: none;
-            width: 170px;
-            padding: 0.4rem;
+        #sentenceDisplay {
+            font-size: 1.3rem;
+            line-height: 2.2rem;
+            color: #dce6ff;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            width: 100%;
+            word-break: break-word;
         }
-        .btn-sm {
-            background: #1e3146;
-            border: 1px solid #ffb34760;
-            padding: 0.4rem 1rem;
-            border-radius: 2rem;
-            color: #ffdfb3;
+        #sentenceDisplay .correct {
+            color: #7ae0a0;
+            text-shadow: 0 0 16px rgba(90, 255, 150, 0.12);
+        }
+        #sentenceDisplay .wrong {
+            color: #ff7a7a;
+            background: rgba(255, 0, 0, 0.05);
+            border-radius: 4px;
+            padding: 0 2px;
+            text-decoration: underline wavy #ff5e5e;
+        }
+        #sentenceDisplay .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.6rem;
+            background: #6fcbff;
+            margin-right: 2px;
+            border-radius: 3px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+            box-shadow: 0 0 16px rgba(79, 122, 255, 0.2);
+        }
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* ===== KEYBOARD ===== */
+        .keyboard-wrapper {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 20px;
+            padding: 14px 12px 12px;
+            margin: 12px 0 14px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.2);
+            user-select: none;
+            overflow-x: auto;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 600px;
+            direction: ltr;
+        }
+
+        .kb-row {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .key {
+            min-width: 40px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #b3c7f0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            padding: 0 6px;
+            flex-shrink: 0;
+        }
+
+        .key.special {
+            min-width: 55px;
+            font-size: 0.65rem;
+            color: #6a84b8;
+        }
+        .key.space {
+            min-width: 200px;
+            font-size: 0.7rem;
+            color: #4a6a8a;
+            letter-spacing: 2px;
+        }
+        .key.shift {
+            min-width: 70px;
+        }
+
+        .key .finger {
+            position: absolute;
+            bottom: -18px;
+            font-size: 0.5rem;
+            color: #4a6a8a;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .key:hover .finger {
+            opacity: 1;
+        }
+
+        .key.active-key {
+            background: #4f7aff;
+            border-color: #4f7aff;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(79, 122, 255, 0.3);
+            transform: scale(0.92);
+        }
+
+        .key.active-key .finger {
+            opacity: 1;
+            color: #6fcbff;
+        }
+
+        .key.hit-correct {
+            background: rgba(90, 255, 150, 0.15);
+            border-color: rgba(90, 255, 150, 0.2);
+            color: #7ae0a0;
+        }
+
+        .key.hit-wrong {
+            background: rgba(255, 80, 80, 0.15);
+            border-color: rgba(255, 80, 80, 0.2);
+            color: #ff7a7a;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-4px);
+            }
+            75% {
+                transform: translateX(4px);
+            }
+        }
+
+        .finger-LP {
+            border-bottom: 2px solid #ff6b6b;
+        }
+        .finger-LR {
+            border-bottom: 2px solid #ffa94d;
+        }
+        .finger-LM {
+            border-bottom: 2px solid #ffd93d;
+        }
+        .finger-LI {
+            border-bottom: 2px solid #6bcb6b;
+        }
+        .finger-LT {
+            border-bottom: 2px solid #4dabf7;
+        }
+        .finger-RT {
+            border-bottom: 2px solid #4dabf7;
+        }
+        .finger-RI {
+            border-bottom: 2px solid #6bcb6b;
+        }
+        .finger-RM {
+            border-bottom: 2px solid #ffd93d;
+        }
+        .finger-RR {
+            border-bottom: 2px solid #ffa94d;
+        }
+        .finger-RP {
+            border-bottom: 2px solid #ff6b6b;
+        }
+
+        /* ===== INPUT ===== */
+        #userInput {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 1.2rem;
+            border-radius: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.04);
+            background: rgba(0, 0, 0, 0.4);
+            color: #f0f4ff;
+            outline: none;
+            transition: all 0.3s ease;
+            direction: ltr;
+            text-align: right;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+        #userInput:focus {
+            border-color: #4f7aff;
+            box-shadow: 0 0 0 6px rgba(79, 122, 255, 0.08);
+            background: rgba(0, 0, 0, 0.55);
+        }
+        #userInput::placeholder {
+            color: #3e5a8a;
+            font-weight: 400;
+        }
+        #userInput:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ===== BUTTONS ===== */
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            padding: 12px 32px;
+            border-radius: 60px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-start {
+            background: linear-gradient(135deg, #4f7aff, #6b4fff);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(79, 122, 255, 0.25);
+        }
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 36px rgba(79, 122, 255, 0.35);
+        }
+        .btn-start:active {
+            transform: scale(0.96);
+        }
+        .btn-reset {
+            background: rgba(255, 120, 120, 0.06);
+            color: #ffbcbc;
+            border: 1px solid rgba(255, 120, 120, 0.08);
+        }
+        .btn-reset:hover {
+            background: rgba(255, 80, 80, 0.12);
+            border-color: rgba(255, 120, 120, 0.15);
+        }
+
+        /* ===== STATUS ===== */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .status-text {
+            color: #6a84b8;
+            font-size: 0.8rem;
             font-weight: 500;
         }
-        .travel-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8rem;
+        .status-text strong {
+            color: #b3c7f0;
         }
-        .travel-table th, .travel-table td {
-            padding: 0.8rem 0.3rem;
-            border-bottom: 1px solid #3a5a78;
-            text-align: start;
+
+        .mode-btns {
+            display: flex;
+            gap: 4px;
         }
-        .status-badge {
-            display: inline-block;
-            padding: 0.2rem 0.7rem;
-            border-radius: 40px;
+        .mode-btn {
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: transparent;
+            color: #6a84b8;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .mode-btn.active {
+            background: #4f7aff;
+            color: #fff;
+            border-color: #4f7aff;
+        }
+        .mode-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.04);
+            color: #b3c7f0;
+        }
+
+        .count-btns {
+            display: flex;
+            gap: 4px;
+        }
+        .count-btn {
+            padding: 4px 10px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: transparent;
+            color: #6a84b8;
             font-size: 0.7rem;
-            font-weight: bold;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
-        .status-active { background: #2c8c6e40; color: #b8f2dc; border-left: 3px solid #2A9D8F; }
-        .status-pending { background: #e6b42230; color: #FFE2A4; border-left: 3px solid #F4A261; }
-        .status-completed { background: #5a626e40; color: #cfcfcf; border-left: 3px solid #9aaebf; }
-        .action-icon { margin: 0 5px; cursor: pointer; font-size: 1rem; transition: 0.1s; color: #ffcd94; }
-        .action-icon:hover { color: #FFB347; transform: scale(1.1); }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.7rem;
-            opacity: 0.7;
+        .count-btn.active {
+            background: #2a3a6a;
+            color: #fff;
+            border-color: #2a3a6a;
         }
-        @media (max-width: 900px) { .two-grid { grid-template-columns: 1fr; } body { padding: 1rem; } }
+        .count-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 650px) {
+            .container {
+                padding: 16px 12px;
+                border-radius: 24px;
+            }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
+                padding: 10px 12px;
+            }
+            .stat-number {
+                font-size: 1.2rem;
+            }
+            #sentenceDisplay {
+                font-size: 1rem;
+                line-height: 1.8rem;
+            }
+            #userInput {
+                font-size: 1rem;
+                padding: 14px 18px;
+            }
+            .key {
+                min-width: 30px;
+                height: 36px;
+                font-size: 0.65rem;
+            }
+            .key.special {
+                min-width: 40px;
+                font-size: 0.55rem;
+            }
+            .key.space {
+                min-width: 100px;
+            }
+            .key.shift {
+                min-width: 50px;
+            }
+            .keyboard {
+                min-width: 400px;
+            }
+            .btn {
+                padding: 10px 22px;
+                font-size: 0.85rem;
+            }
+            .key .finger {
+                display: none;
+            }
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            .status-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+            .mode-btns,
+            .count-btns {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .key {
+                min-width: 24px;
+                height: 30px;
+                font-size: 0.55rem;
+                padding: 0 3px;
+            }
+            .key.special {
+                min-width: 32px;
+                font-size: 0.5rem;
+            }
+            .key.space {
+                min-width: 60px;
+            }
+            .keyboard {
+                min-width: 300px;
+            }
+            #sentenceDisplay {
+                font-size: 0.9rem;
+                line-height: 1.6rem;
+            }
+            .sentence-box {
+                padding: 14px 16px;
+                min-height: 70px;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="bg-slideshow" id="bgSlideshow"></div>
-<div class="bg-overlay"></div>
 
-<div class="aswda-container">
-    <div class="brand-header">
-        <div class="logo-area">
-            <h1><i class="fas fa-plane-departure"></i> ASWDA TRAVEL</h1>
-            <p><i class="fas fa-globe-asia"></i> ئاسودە تراڤڵ - بەڕێوبردنی گەشت و ڤیزەی ئەلیکترۆنی</p>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <h1>⌨️عبدالخالق </h1>
+                <h1>⌨️TEAM KHAWAN</h1>
+                <small>ڕاهێنانی کیبۆرد بە شوێنی پەنجە</small>
+            </div>
+            <span class="badge-level beginner" id="levelBadge">⚡ ئاست: —</span>
         </div>
-        <div class="global-badge">
-            <i class="fas fa-chart-line"></i> ڕێژەی گەشتە چالاکەکان: <span id="activeTripRate">0</span>%
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number time" id="timerDisplay">0</div>
+                <div class="stat-label">⏱️ کات</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number speed" id="speedDisplay">0</div>
+                <div class="stat-label">⚡ WPM</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number accuracy" id="accuracyDisplay">100</div>
+                <div class="stat-label">🎯 دروستی</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number progress" id="progressDisplay">0/0</div>
+                <div class="stat-label">📌 پێشکەوتن</div>
+            </div>
+        </div>
+
+        <!-- SENTENCE -->
+        <div class="sentence-box">
+            <div id="sentenceDisplay">
+                <span>👆 کلیک لە «دەستپێکردن» بکە</span>
+                <span class="cursor"></span>
+            </div>
+        </div>
+
+        <!-- KEYBOARD -->
+        <div class="keyboard-wrapper">
+            <div class="keyboard" id="keyboard"></div>
+        </div>
+
+        <!-- INPUT -->
+        <input type="text" id="userInput" placeholder="لێرە بنوسە ..." autocomplete="off" />
+
+        <!-- ACTIONS -->
+        <div class="actions">
+            <button class="btn btn-start" id="startBtn">▶️ دەستپێکردن</button>
+            <button class="btn btn-reset" id="resetBtn">🔄 دووبارە</button>
+        </div>
+
+        <!-- STATUS -->
+        <div class="status-bar">
+            <span class="status-text" id="statusText">📖 مۆدی وتە — <strong>٢٥</strong> وتە</span>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <div class="mode-btns">
+                    <button class="mode-btn active" data-mode="proverb">📖 وتە</button>
+                    <button class="mode-btn" data-mode="story">📚 چیرۆک</button>
+                </div>
+                <div class="count-btns">
+                    <button class="count-btn" data-count="10">١٠</button>
+                    <button class="count-btn active" data-count="25">٢٥</button>
+                    <button class="count-btn" data-count="35">٣٥</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="two-grid">
-        <!-- تۆمارکردنی گەشتیار + وردەکاری گەشت -->
-        <div class="card">
-            <div class="card-header">
-                <i class="fas fa-user-plus"></i>
-                <h2>تۆمارکردنی گەشتیار & گەشت</h2>
-            </div>
-            <form id="travelerForm">
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> ناوی تەواو</label>
-                    <input type="text" id="fullname" placeholder="نمونە: شێرزاد حەمە" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-passport"></i> ژمارەی پاسپۆرت</label>
-                    <input type="text" id="passport" placeholder="A1234567" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-map-marker-alt"></i> وڵات</label>
-                    <select id="country">
-                        <option>عێراق</option><option>ئوردن</option><option>تورکیا</option><option>مەغریب</option><option>میسر</option><option>ئیمارات</option><option>ئەڵمانیا</option>
-                        <option>فەڕەنسا</option><option>ئیسپانیا</option><option>ئیتاڵیا</option><option>ژاپۆن</option><option>تایلەند</option><option>بەریتانیا</option><option>ئەمریکا</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> ڕێکەوتی دەستپێکی گەشت</label>
-                    <input type="date" id="startDate" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-check"></i> ڕێکەوتی کۆتایی گەشت</label>
-                    <input type="date" id="endDate" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-tag"></i> جۆری ڤیزە</label>
-                    <select id="visaType">
-                        <option>گەشتیاری</option><option>بازرگانی</option><option>خوێندن</option><option>چارهسەری</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-primary"><i class="fas fa-save"></i> تۆمارکردنی گەشت و گەشتیار</button>
-            </form>
-        </div>
+    <script>
+        (function() {
+            'use strict';
 
-        <!-- Dashboard چەند دەڕوات و چەند کەس دەمینێتەوە -->
-        <div class="card">
-            <div class="card-header">
-                <i class="fas fa-chart-simple"></i>
-                <h2>ڕاپۆرتی گەشتەکان</h2>
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <canvas id="travelChart" width="400" height="150" style="max-height:150px; width:100%"></canvas>
-            </div>
-            <div class="info-kpi">
-                <div class="info-card"><div class="info-number" id="totalTravelers">0</div><span>کۆی گەشتیاران</span></div>
-                <div class="info-card"><div class="info-number" id="activeTravelers">0</div><span>گەشتی چالاک (لە گەشتان)</span></div>
-                <div class="info-card"><div class="info-number" id="completedTravelers">0</div><span>گەشتی تەواوکراو</span></div>
-            </div>
-            <div class="info-kpi">
-                <div class="info-card"><div class="info-number" id="totalDaysSum">0</div><span>کۆی ڕۆژەکانی گەشت</span></div>
-                <div class="info-card"><div class="info-number" id="remainingPeople">0</div><span>کەس لە گەشت دەمینێتەوە*</span></div>
-                <div class="info-card"><div class="info-number" id="avgDuration">0</div><span>تێکڕای ڕۆژ</span></div>
-            </div>
-            <div style="font-size:11px; margin-top:8px;"><i class="fas fa-clock"></i> * کەس دەمینێتەوە = ئەو گەشتیارانەی گەشتیان کۆتایی نەهاتووە (ڕۆژنامەی ئەمڕۆ پێش کۆتایی)</div>
-        </div>
-    </div>
+            // ================================================================
+            //  DATA — وتە و چیرۆکی درێژ و بەمانا
+            // ================================================================
 
-    <!-- لیستی گەشتەکان و بەڕێوەبردن -->
-    <div class="card">
-        <div class="card-header">
-            <i class="fas fa-list-ul"></i>
-            <h2>بەڕێوەبردنی گەشت و گەشتیاران</h2>
-        </div>
-        <div class="filter-bar">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="ناو یان پاسپۆرت...">
-            </div>
-            <div>
-                <button id="filterAll" class="btn-sm">🔁 هەموو</button>
-                <button id="filterActive" class="btn-sm">🟢 چالاک</button>
-                <button id="filterCompleted" class="btn-sm">✅ تەواوکراو</button>
-                <button id="deleteAllBtn" class="btn-sm" style="border-color:#ff8c69;">🗑️ ڕێکخستنەوە</button>
-            </div>
-        </div>
-        <div style="overflow-x:auto;">
-            <table class="travel-table" id="travelTable">
-                <thead>
-                    <tr><th>ناو</th><th>پاسپۆرت</th><th>وڵات</th><th>ڤیزە</th><th>دەستپێک</th><th>کۆتایی</th><th>ماوەی ڕۆژ</th><th>بارودۆخ</th><th>کردار</th></tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-        </div>
-    </div>
-    <footer>
-        <i class="fas fa-clock"></i> ASWDA TRAVEL - ئاسودە تراڤڵ | ژماردنی ڕۆژەکان و دۆخی گەشت بەپێی ڕێکەوتی ئەمڕۆ
-    </footer>
-</div>
-
-<script>
-    // list of travel images for slideshow (world destinations)
-    const travelImages = [
-        "https://images.pexels.com/photos/161042/lost-stone-petra-jordan-hiking-161042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.pexels.com/photos/2082103/pexels-photo-2082103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.pexels.com/photos/1054655/pexels-photo-1054655.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.pexels.com/photos/2372720/pexels-photo-2372720.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.pexels.com/photos/1486879/pexels-photo-1486879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    ];
-    let bgIndex = 0;
-    function changeBG() {
-        document.getElementById('bgSlideshow').style.backgroundImage = `url('${travelImages[bgIndex]}')`;
-        document.getElementById('bgSlideshow').style.backgroundSize = "cover";
-        document.getElementById('bgSlideshow').style.backgroundPosition = "center";
-        bgIndex = (bgIndex+1)%travelImages.length;
-    }
-    changeBG(); setInterval(changeBG, 5500);
-
-    // Data structure
-    let travelers = []; // each: {id, name, passport, country, visaType, start, end, status}
-    let currentFilter = "all";
-    let currentSearch = "";
-
-    // Helper: calculate days between dates
-    function daysDiff(start, end) {
-        const s = new Date(start), e = new Date(end);
-        return Math.ceil((e - s) / (1000*60*60*24));
-    }
-
-    // determine status based on today vs start/end
-    function computeStatus(startStr, endStr) {
-        const today = new Date();
-        today.setHours(0,0,0,0);
-        const start = new Date(startStr);
-        const end = new Date(endStr);
-        if(today < start) return "pending"; // چاوەڕوانی دەستپێک
-        else if(today >= start && today <= end) return "active";
-        else return "completed";
-    }
-
-    // update all travelers statuses dynamically
-    function refreshAllStatuses() {
-        let changed = false;
-        travelers.forEach(t => {
-            let newStatus = computeStatus(t.start, t.end);
-            if(t.status !== newStatus) { t.status = newStatus; changed = true; }
-        });
-        if(changed) saveToLocal();
-    }
-
-    // Load / Save
-    function loadData() {
-        const stored = localStorage.getItem('aswda_travel_data');
-        if(stored) {
-            travelers = JSON.parse(stored);
-        } else {
-            const today = new Date();
-            const nextWeek = new Date(today); nextWeek.setDate(today.getDate()+7);
-            const lastWeek = new Date(today); lastWeek.setDate(today.getDate()-5);
-            travelers = [
-                { id: 1001, name: "ئاوات کەریم", passport: "P8877JK", country: "تورکیا", visaType: "گەشتیاری", start: today.toISOString().split('T')[0], end: nextWeek.toISOString().split('T')[0], status: "active" },
-                { id: 1002, name: "دڵشاد ڕەئوف", passport: "L5522TR", country: "ئوردن", visaType: "بازرگانی", start: lastWeek.toISOString().split('T')[0], end: nextWeek.toISOString().split('T')[0], status: "active" },
-                { id: 1003, name: "سۆزان محەمەد", passport: "M9981AD", country: "فەڕەنسا", visaType: "خوێندن", start: "2024-01-01", end: "2024-12-20", status: "completed" }
+            const PROVERBS = [
+                "هەوڵ بدە سەرکەوتن لەگەڵتە، چونکە بێ هەوڵ هیچ نابێت و ژیان بەفیڕۆ دەچێت",
+                "زانیاری هێزە و خوێندن ڕووناکییە، بەڵام بیرکردنەوە پێشکەوتنە و گەشە دەهێنێت",
+                "کات زێڕە، بە باشی بەکاری بهێنە بۆ دروستکردنی داهاتوویەکی گەش و پڕ لە سەربەخۆیی",
+                "خوێندن ڕووناکییە، ڕووناکی ڕێگا دەدۆزێتەوە بۆ سەرکەوتن و ژیانی باشتر",
+                "بە هەوڵی خۆت بگە بە مەبەست، هیچ کەس ناتوانێت شوێنی تۆ بگرێتەوە لەم ژیانەدا",
+                "هەموو ڕێگە بۆ ڕۆما دەڕوات، بەڵام هەر کەس ڕێگای خۆی هەیە بۆ گەیشتن بە خەونەکان",
+                "باشی بکە وەک ئاوی زەریا، بەردەوام و بێ تەنگە، چونکە باشی هەمیشە گەڕ دەگەڕێتەوە",
+                "دەست بە کار بکە خودا یارمەتیت دەدات، بەوڵە نەکەوێتە خەمەوە، هەمیشە هیوا هەیە",
+                "ئیمان دارە بە خۆت، چونکە تۆ توانای زۆرت هەیە کە نازانیت و دەتوانیت گەورە ببیت",
+                "شەرمن نەبە لە فێربوون، هەر کەس هەڵە دەکات و لە هەڵەکانی خۆیەوە فێر دەبێت",
+                "هەر ڕۆژێک هەوڵێکی نوێ، پێشکەوتن بچوک بەڵام بەردەوام دەبێتە گۆڕانکاری گەورە",
+                "گوێ بۆ ڕێنمایی دەرباز، ڕێنمایی چرای ڕێگەی ژیانە و ڕێگا ڕوون دەکاتەوە",
+                "وەک سێویک بە دەست بکە، بە ئارامی و بە دڵنیایی، بە خۆشەویستی و بە ڕێز",
+                "خوا لەگەڵ خەڵکی ئاسانە، ئەگەر تۆش لەگەڵ خەڵکدا ئاسان بیت و ڕەوشت باش بێت",
+                "زۆر خوێندن بیر روشن دەکات، و بیرکردنەوە دەریا دەکاتەوە بۆ ژیانی نوێ",
+                "تێگەیشتن گەنجینەیە، کە خاوەنی خۆی دەوڵەمەند دەکات بە زانیاری و دانایی",
+                "ڕێز بۆ باوک و دایک، ڕێز بناغەی هەموو ڕەوشتێکی چاکە و کۆمەڵگای پێشکەوتوو",
+                "هاوکار باشترە لە تەنها، یەکێتی هێز دروست دەکات و کێشەکان چارەسەر دەکات",
+                "هەموو شتێک کاتی خۆی هەیە، خەم بۆ کاتی ڕابردوو مەخۆ و چاوەڕوانی داهاتوو بە",
+                "خەون ببینە بەڵام بە هەوڵ، خەون بەبێ هەوڵ وەک با تێدەپەڕێت و نامێنێت",
+                "سەرکەوتن خەم ناگرێتەوە، بەڵکو ڕێگا دەدۆزێتەوە بۆ ئەوەی خەڵک پێشکەوتن بکات",
+                "باشی بکە لەهەموو کات، چونکە باشی هەمیشە گەڕ دەگەڕێتەوە و جیهان باشتر دەکات",
+                "دانایی لە هەلەکە، هەل هەر کەسێک نایبینێت، بەڵام دانا هەل دروست دەکات",
+                "هەموو کێشە چارەسەری هەیە، تەنها پێویستە بیر بکەیتەوە و ڕێگای چارەسەر بدۆزیتەوە",
+                "بێ تۆز نەمری، هەموو شتێک بە هەوڵ بەدەست دەهێنرێت و ژیان بە مانا دەبێت"
             ];
-            travelers.forEach(t => { t.status = computeStatus(t.start, t.end); });
-        }
-        refreshAllStatuses();
-        renderEverything();
-    }
-    function saveToLocal() { localStorage.setItem('aswda_travel_data', JSON.stringify(travelers)); }
 
-    function addTraveler(name, passport, country, visaType, start, end) {
-        if(!name || !passport || !start || !end) return false;
-        if(new Date(start) > new Date(end)) { alert("ڕێکەوتی کۆتایی دەبێت دوای دەستپێک بێت!"); return false; }
-        if(travelers.some(t => t.passport.toLowerCase() === passport.toLowerCase())) { alert("پاسپۆرت پێشتر هەیە"); return false; }
-        let status = computeStatus(start, end);
-        travelers.push({ id: Date.now(), name, passport: passport.toUpperCase(), country, visaType, start, end, status });
-        saveToLocal();
-        renderEverything();
-        return true;
-    }
+            const STORIES = [
+                "لە ڕۆژێکی خۆش و پڕ لە تیشکی خۆردا، کوڕێکی گەنج بە ناوی زانیار لە گوندێکی شاخاوی ژیان دەکرد. ئەو هەمیشە خەونی ئەوەی دەبینی کە کتێبخانەیەک لە گوندەکەیان دروست بکات، چونکە باوەڕی وابوو کە خوێندن و زانست دەتوانێت ژیانی خەڵک بگۆڕێت و ڕووناکی بە ژیانیاندا بڵاو بکاتەوە. بۆیە هەموو پارەکەی کۆکردەوە و کتێبەکانی کڕی و ماڵەکەی کردە کتێبخانە. دوای ساڵێک، کتێبخانەکە بووە شوێنی کۆبوونەوەی هەموو کەسێک کە حەزی لە فێربوونە. ئەم چیرۆکە فێری ئەوە دەکات کە خەونەکان بە هەوڵ و بەردەوامی دەبنە ڕاستی، و خوێندن دەرگای ژیانی باشترە.",
 
-    function deleteTraveler(id) { travelers = travelers.filter(t => t.id !== id); saveToLocal(); renderEverything(); }
-    function deleteAll() { if(confirm("سڕینەوەی هەموو گەشت و گەشتیاران?")) { travelers = []; saveToLocal(); renderEverything(); } }
+                "کچە پیاوێک بە ناوی ژین، لە گوندێکی دوورەدەست و شاخاویدا ژیان دەکرد. ئەو هەموو ڕۆژێک بە پیادە ڕێگایەکی درێژی دەبڕی بۆ خوێندن، چونکە باوکی پێی دەگووت: «خوێندن تەنها ڕێگایە بۆ ژیانی باشتر و سەربەخۆیی». دوای چەند ساڵێک هەوڵ و بەردەوامی، ژین بووە مامۆستایەکی باش و گەڕایەوە گوندەکەی بۆ ئەوەی منداڵانی تر فێر بکات. ئەم چیرۆکە فێری ئەوە دەکات کە بەردەوامی و هەوڵ هەمیشە بەرەکەت دەهێنێت و خوێندن ڕێگای ژیانە.",
 
-    function getFiltered() {
-        refreshAllStatuses();
-        let filtered = [...travelers];
-        if(currentFilter !== "all") filtered = filtered.filter(t => t.status === currentFilter);
-        if(currentSearch.trim()) {
-            let s = currentSearch.toLowerCase();
-            filtered = filtered.filter(t => t.name.toLowerCase().includes(s) || t.passport.toLowerCase().includes(s));
-        }
-        return filtered;
-    }
+                "لە شارێکی گەورە و پڕ لە ژیاندا، دوو برا بە ناوەکانی ڕێبوار و ڕەهەند ژیان دەکرد. یەکێکیان خوێندنی زۆری دەکرد و ئەوی تر کاری بازرگانی. هەموو شەوێک کۆدەبوونەوە و بیرۆکەکانیان هاوبەش دەکرد. بەم هاوکاری و یەکێتیە توانیان کۆمپانیایەکی گەورە دامەزرێنن کە هەموو کەسێکی سەرسام کرد و بوو بە نموونەی هاوکاری. ئەمە فێری ئەوە دەکات کە هاوکاری و یەکێتی هێزێکی گەورە دروست دەکات و کۆمەڵگا پێش دەخات.",
 
-    let chart;
-    function renderTableAndStats() {
-        const filtered = getFiltered();
-        const tbody = document.getElementById('tableBody');
-        tbody.innerHTML = "";
-        if(filtered.length === 0) { tbody.innerHTML = "<tr><td colspan='9'>هیچ گەشتێک نەدۆزرایەوە</td></tr>"; }
-        filtered.forEach(t => {
-            let row = tbody.insertRow();
-            row.insertCell(0).innerText = t.name;
-            row.insertCell(1).innerText = t.passport;
-            row.insertCell(2).innerText = t.country;
-            row.insertCell(3).innerText = t.visaType;
-            row.insertCell(4).innerText = t.start;
-            row.insertCell(5).innerText = t.end;
-            let duration = daysDiff(t.start, t.end);
-            row.insertCell(6).innerText = duration;
-            let statusText = t.status === 'active' ? 'چالاک (لە گەشت)' : (t.status === 'pending' ? 'چاوەڕوان' : 'تەواوکراو');
-            let cls = t.status === 'active' ? 'status-active' : (t.status === 'pending' ? 'status-pending' : 'status-completed');
-            row.insertCell(7).innerHTML = `<span class="status-badge ${cls}">${statusText}</span>`;
-            let actions = `<i class="fas fa-trash-alt action-icon" data-id="${t.id}"></i>`;
-            row.insertCell(8).innerHTML = actions;
-        });
-        document.querySelectorAll('.action-icon').forEach(icon => {
-            icon.addEventListener('click', (e) => deleteTraveler(parseInt(icon.getAttribute('data-id'))));
-        });
+                "منداڵێکی زیرەک بە ناوی ئاوات، هەمیشە حەزی لە گوێگرتن لە چیرۆکەکانی باپیرەی بوو. باپیرەی پێی دەگوت: «هەر کتێبێک جیهانێکی نوێیە و دەرگایەکە بۆ ژیانی تر». ئاوات بڕیاریدا کە خۆی چیرۆک بنووسێت. سەرەتا زۆر هەڵەی دەکرد و دڵەڕاوکێی زۆری هەبوو، بەڵام وازی نەهێنا و بەردەوام بوو. دوای چەند ساڵێک، یەکەم کتێبی بڵاوکردەوە و بووە نووسەرێکی ناسراو. ئەمە فێری ئەوە دەکات کە هەڵەکان بەشێکن لە ڕێگای سەرکەوتن و هیچ کەس بەبێ هەڵە نەگەیشتووەتە مەبەست.",
 
-        // KPIs advanced
-        const total = travelers.length;
-        const active = travelers.filter(t => t.status === 'active').length;
-        const completed = travelers.filter(t => t.status === 'completed').length;
-        const pending = travelers.filter(t => t.status === 'pending').length;
-        const totalDays = travelers.reduce((sum, t) => sum + daysDiff(t.start, t.end), 0);
-        const avgDur = total === 0 ? 0 : Math.round(totalDays / total);
-        const remainingPeople = active; // ئەو کەسانەی کە هێشتا لە گەشتاندان (ڕۆژی ئەمڕۆ لە نێوان start و endدا)
-        const activeRate = total === 0 ? 0 : Math.round((active/total)*100);
-        document.getElementById('totalTravelers').innerText = total;
-        document.getElementById('activeTravelers').innerText = active;
-        document.getElementById('completedTravelers').innerText = completed;
-        document.getElementById('totalDaysSum').innerText = totalDays;
-        document.getElementById('remainingPeople').innerText = remainingPeople;
-        document.getElementById('avgDuration').innerText = avgDur;
-        document.getElementById('activeTripRate').innerText = activeRate;
+                "لە گوندێکی شاخاویدا، خەڵک بە یەکەوە دەژیان و یارمەتی یەکتریان دەدا. کاتێک زستانێکی سەخت و پڕ لە بەفر هات، هەموو گوندەکە کۆبوونەوە و ڕێگایان دۆزیەوە بۆ مانەوە و ڕزگاربوون لەو زستانە. ئەوان فێری ئەوە بوون کە یەکێتی و هاوکاری دەتوانێت بەرگری بکات لە هەموو کێشەکان. ئەم چیرۆکە فێری ئەوە دەکات کە کۆمەڵگای بەهێز لە هاوکاری و یەکێتی دروست دەبێت و هەموو کێشەیەک بە یەکەوە چارەسەر دەکرێت.",
 
-        const ctx = document.getElementById('travelChart').getContext('2d');
-        if(chart) chart.destroy();
-        chart = new Chart(ctx, {
-            type: 'bar',
-            data: { labels: ['چالاک', 'چاوەڕوان', 'تەواوکراو'], datasets: [{ label: 'ژمارەی گەشتیاران', data: [active, pending, completed], backgroundColor: ['#FFB347', '#F4A261', '#5f7f9e'], borderRadius: 12 }] },
-            options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#fff' } } } }
-        });
-    }
-    function renderEverything() { renderTableAndStats(); saveToLocal(); }
+                "کوڕێکی گەنج بە ناوی دیاکۆ، خولیای گەشتکردنی هەبوو. بڕیاریدا بە پیادە بگەڕێت بۆ شارە گەورەکان و جیهان ببینێت. لە ڕێگادا چاوی بە خەڵکی جیاواز کەوت و لە هەر کەسێک شتێکی نوێ فێربوو. ئەو درکی بەوە کرد کە جیهان زۆر گەورەترە لەوەی کە خەیاڵی دەکرد و هەر کەسێک چیرۆکی خۆی هەیە. ئەم گەشتە وای لێکرد کە مرۆڤێکی زیرەکتر و بەهێزتر بێت، و فێری بوو کە گەشت کردن خوێندنە لە کتێبی ژیان و جیهان.",
 
-    // event handlers
-    document.getElementById('travelerForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        let name = document.getElementById('fullname').value.trim();
-        let passport = document.getElementById('passport').value.trim();
-        let country = document.getElementById('country').value;
-        let visaType = document.getElementById('visaType').value;
-        let start = document.getElementById('startDate').value;
-        let end = document.getElementById('endDate').value;
-        if(addTraveler(name, passport, country, visaType, start, end)) {
-            document.getElementById('travelerForm').reset();
-            let tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
-            document.getElementById('startDate').valueAsDate = new Date();
-            document.getElementById('endDate').valueAsDate = tomorrow;
-            if(currentFilter !== "all") currentFilter="all";
-            document.getElementById('searchInput').value = "";
-            currentSearch="";
-            renderEverything();
-        }
-    });
-    document.getElementById('filterAll').onclick = () => { currentFilter="all"; renderEverything(); };
-    document.getElementById('filterActive').onclick = () => { currentFilter="active"; renderEverything(); };
-    document.getElementById('filterCompleted').onclick = () => { currentFilter="completed"; renderEverything(); };
-    document.getElementById('deleteAllBtn').onclick = () => deleteAll();
-    document.getElementById('searchInput').addEventListener('input', (e) => { currentSearch = e.target.value; renderEverything(); });
-    
-    // set default dates: today as start, tomorrow+6 as end
-    let todayDate = new Date();
-    let defaultStart = new Date(todayDate);
-    let defaultEnd = new Date(todayDate); defaultEnd.setDate(todayDate.getDate()+7);
-    document.getElementById('startDate').valueAsDate = defaultStart;
-    document.getElementById('endDate').valueAsDate = defaultEnd;
-    
-    loadData();
-    setInterval(() => { refreshAllStatuses(); renderEverything(); }, 60000); // update every minute
-</script>
+                "خانمە شاعیرێک بە ناوی هێلان، لە شارۆچکەیەکی بچوکدا ژیان دەکرد. ئەو هەموو شەوێک شیعرەکانی دەنووسی و خەونی دەکرد کە کتێبێکی چاپ بکات. دوای ساڵانێک هەوڵ و بەردەوامی، کتێبی شیعرەکانی چاپ کرا و بووە پڕفرۆشترین کتێب لە ناوچەکەدا. ئەمە فێری ئەوە دەکات کە بەردەوامی لەسەر خەونەکان، هەرچەندە قورس بن، دەبێتە ڕاستی و خەونەکان بە هەوڵ دەبێتە ژیان.",
+
+                "لە شارێکی کۆن و مێژووییدا، پیاوێکی پیر کتێبخانەیەکی گەورەی هەبوو. ئەو هەموو ڕۆژێک کتێبەکانی بۆ منداڵان دەخوێندەوە و چیرۆکی پێیان دەگوت. منداڵان حەزیان لە گوێگرتن بوو و فێری زۆر شتیان دەبوو. پیاوە پیرەکە پێی دەگووت: «کتێب باشترین هاوڕێیە، چونکە هەرگیز خیانەت ناکات و هەمیشە ڕێگا دەدۆزێتەوە». ئەم چیرۆکە فێری ئەوە دەکات کە خوێندن دەروازەیەکە بۆ جیهانی نوێ و بیرکردنەوەی باشتر و ژیانی پڕ لە مانا.",
+
+                "دوو هاوڕێی دڵسۆز بە ناوەکانی کاروان و بارام، بڕیاریاندا کە قوتابخانەیەک لە گوندەکەیان دروست بکەن بۆ منداڵانی هەژار. خەڵک پێیان دەکەنی و دەیانگوت کە ئەم خەونە گەورەیە، بەڵام ئەوان وازیان نەهێنا و بەردەوام بوون. دوای ساڵێک، قوتابخانەکە کرایەوە و زۆر منداڵ لێی فێربوون و ژیانیان گۆڕا. ئەمە نیشانەی ئەوەیە کە خەونە گەورەکان بە هەوڵی بەردەوام دەبنە ڕاستی و کاریگەری گەورە دەکەن لە کۆمەڵگا.",
+
+                "کچێکی گەنج و بەهرەمەند بە ناوی ڕووناک، حەزی لە زانست و توێژینەوە بوو. بڕیاریدا کە تاقیگەیەکی بچووک لە ماڵەکەی دروست بکات و توێژینەوە بکات. هەموو ڕۆژێک تاقیکردنەوەی دەکرد و شتی نوێ فێردەبوو. دوای چەند ساڵێک، بووە زانایەکی ناسراو و کاریگەری گەورەی لەسەر کۆمەڵگا دروست کرد و چارەسەری زۆر کێشەی دۆزییەوە. ئەم چیرۆکە فێری ئەوە دەکات کە خوێندن و توێژینەوە دەتوانێت ژیانی خەڵک بگۆڕێت و جیهان باشتر بکات."
+            ];
+
+            // ================================================================
+            //  KEYBOARD LAYOUT
+            // ================================================================
+
+            const KEYBOARD_ROWS = [
+                [
+                    { key: '`', finger: 'LT' },
+                    { key: '1', finger: 'LT' },
+                    { key: '2', finger: 'LT' },
+                    { key: '3', finger: 'LM' },
+                    { key: '4', finger: 'LI' },
+                    { key: '5', finger: 'LI' },
+                    { key: '6', finger: 'RT' },
+                    { key: '7', finger: 'RT' },
+                    { key: '8', finger: 'RI' },
+                    { key: '9', finger: 'RM' },
+                    { key: '0', finger: 'RR' },
+                    { key: '-', finger: 'RR' },
+                    { key: '=', finger: 'RP' },
+                    { key: 'Backspace', finger: 'RP', special: true }
+                ],
+                [
+                    { key: 'Tab', finger: 'LP', special: true },
+                    { key: 'ق', finger: 'LP' },
+                    { key: 'و', finger: 'LR' },
+                    { key: 'ە', finger: 'LM' },
+                    { key: 'ر', finger: 'LI' },
+                    { key: 'ت', finger: 'LI' },
+                    { key: 'ی', finger: 'RT' },
+                    { key: 'ئ', finger: 'RT' },
+                    { key: 'ا', finger: 'RI' },
+                    { key: 'س', finger: 'RM' },
+                    { key: 'د', finger: 'RR' },
+                    { key: 'ف', finger: 'RP' },
+                    { key: 'گ', finger: 'RP' },
+                    { key: 'ه', finger: 'RP' },
+                    { key: '\\', finger: 'RP', special: true }
+                ],
+                [
+                    { key: 'Caps', finger: 'LP', special: true },
+                    { key: 'ش', finger: 'LP' },
+                    { key: 'س', finger: 'LR' },
+                    { key: 'ن', finger: 'LM' },
+                    { key: 'م', finger: 'LI' },
+                    { key: 'ت', finger: 'LI' },
+                    { key: 'ۆ', finger: 'RT' },
+                    { key: 'ی', finger: 'RT' },
+                    { key: 'ێ', finger: 'RI' },
+                    { key: 'ا', finger: 'RM' },
+                    { key: 'ل', finger: 'RR' },
+                    { key: 'ک', finger: 'RP' },
+                    { key: 'ژ', finger: 'RP' },
+                    { key: 'Enter', finger: 'RP', special: true }
+                ],
+                [
+                    { key: 'Shift', finger: 'LP', special: true },
+                    { key: 'ز', finger: 'LP' },
+                    { key: 'خ', finger: 'LR' },
+                    { key: 'ح', finger: 'LM' },
+                    { key: 'ج', finger: 'LI' },
+                    { key: 'چ', finger: 'LI' },
+                    { key: 'پ', finger: 'RT' },
+                    { key: 'ڤ', finger: 'RT' },
+                    { key: 'گ', finger: 'RI' },
+                    { key: 'ل', finger: 'RM' },
+                    { key: 'ک', finger: 'RR' },
+                    { key: 'ژ', finger: 'RP' },
+                    { key: 'Shift', finger: 'RP', special: true }
+                ],
+                [
+                    { key: 'Ctrl', finger: 'LP', special: true },
+                    { key: 'Fn', finger: 'LP', special: true },
+                    { key: 'Alt', finger: 'LP', special: true },
+                    { key: 'Space', finger: 'LP', special: true, space: true },
+                    { key: 'Alt', finger: 'RP', special: true },
+                    { key: 'Fn', finger: 'RP', special: true },
+                    { key: 'Ctrl', finger: 'RP', special: true }
+                ]
+            ];
+
+            // ================================================================
+            //  DOM REFS
+            // ================================================================
+
+            const sentenceDisplay = document.getElementById('sentenceDisplay');
+            const userInput = document.getElementById('userInput');
+            const timerDisplay = document.getElementById('timerDisplay');
+            const speedDisplay = document.getElementById('speedDisplay');
+            const accuracyDisplay = document.getElementById('accuracyDisplay');
+            const progressDisplay = document.getElementById('progressDisplay');
+            const statusText = document.getElementById('statusText');
+            const levelBadge = document.getElementById('levelBadge');
+            const startBtn = document.getElementById('startBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const modeBtns = document.querySelectorAll('.mode-btn');
+            const countBtns = document.querySelectorAll('.count-btn');
+            const keyboardEl = document.getElementById('keyboard');
+
+            // ================================================================
+            //  STATE
+            // ================================================================
+
+            let currentMode = 'proverb';
+            let maxCount = 25;
+            let activeList = [];
+            let currentSentence = '';
+            let sentenceIndex = 0;
+            let charIndex = 0;
+
+            let isActive = false;
+            let startTime = null;
+            let timerInterval = null;
+
+            let totalCharsTyped = 0;
+            let correctCharsTyped = 0;
+
+            // ================================================================
+            //  BUILD KEYBOARD
+            // ================================================================
+
+            function buildKeyboard() {
+                keyboardEl.innerHTML = '';
+                KEYBOARD_ROWS.forEach(row => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'kb-row';
+
+                    row.forEach(k => {
+                        const keyDiv = document.createElement('div');
+                        keyDiv.className = 'key';
+                        keyDiv.dataset.key = k.key;
+
+                        if (k.special) keyDiv.classList.add('special');
+                        if (k.space) keyDiv.classList.add('space');
+
+                        if (k.finger) {
+                            keyDiv.classList.add(`finger-${k.finger}`);
+                            const fingerSpan = document.createElement('span');
+                            fingerSpan.className = 'finger';
+                            const fingerNames = {
+                                'LP': 'پەنجە بچوک (چەپ)',
+                                'LR': 'پەنجە ئەڵقە (چەپ)',
+                                'LM': 'پەنجە ناوەڕاست (چەپ)',
+                                'LI': 'پەنجە ئاماژە (چەپ)',
+                                'LT': 'پەنجە گەورە (چەپ)',
+                                'RT': 'پەنجە گەورە (ڕاست)',
+                                'RI': 'پەنجە ئاماژە (ڕاست)',
+                                'RM': 'پەنجە ناوەڕاست (ڕاست)',
+                                'RR': 'پەنجە ئەڵقە (ڕاست)',
+                                'RP': 'پەنجە بچوک (ڕاست)'
+                            };
+                            fingerSpan.textContent = fingerNames[k.finger] || k.finger;
+                            keyDiv.appendChild(fingerSpan);
+                        }
+
+                        const display = k.key === 'Space' ? '⎵' : k.key;
+                        keyDiv.textContent = display;
+                        rowDiv.appendChild(keyDiv);
+                    });
+
+                    keyboardEl.appendChild(rowDiv);
+                });
+            }
+
+            // ================================================================
+            //  HELPERS
+            // ================================================================
+
+            function getFullList() {
+                return currentMode === 'proverb' ? PROVERBS : STORIES;
+            }
+
+            function buildActiveList() {
+                const full = getFullList();
+                activeList = full.slice(0, Math.min(maxCount, full.length));
+                if (activeList.length === 0) activeList = ['هیچ وتەیەک نیە'];
+                return activeList;
+            }
+
+            function getModeLabel() {
+                return currentMode === 'proverb' ? 'وتە' : 'چیرۆک';
+            }
+
+            function getLevelFromWPM(wpm) {
+                if (wpm < 10) return { label: 'دەستپێک', cls: 'beginner' };
+                if (wpm < 20) return { label: 'مامناوەند', cls: 'intermediate' };
+                if (wpm < 35) return { label: 'باش', cls: 'advanced' };
+                return { label: 'پیشەیی 🔥', cls: 'expert' };
+            }
+
+            // ================================================================
+            //  RENDER
+            // ================================================================
+
+            function renderSentence() {
+                if (!currentSentence) {
+                    sentenceDisplay.innerHTML =
+                        `<span>هیچ وتەیەک نیە</span><span class="cursor"></span>`;
+                    return;
+                }
+
+                const chars = currentSentence.split('');
+                let html = '';
+
+                for (let i = 0; i < chars.length; i++) {
+                    if (i < charIndex) {
+                        html += `<span data-idx="${i}">${chars[i]}</span>`;
+                    } else if (i === charIndex) {
+                        html += `<span data-idx="${i}">${chars[i]}</span><span class="cursor"></span>`;
+                    } else {
+                        html += `<span data-idx="${i}">${chars[i]}</span>`;
+                    }
+                }
+
+                if (charIndex >= chars.length) {
+                    html += `<span class="cursor"></span>`;
+                }
+
+                sentenceDisplay.innerHTML = html;
+                applyStyles();
+            }
+
+            function applyStyles() {
+                const input = userInput.value;
+                const chars = currentSentence.split('');
+                const spans = sentenceDisplay.querySelectorAll('span[data-idx]');
+
+                spans.forEach(span => {
+                    span.classList.remove('correct', 'wrong');
+                });
+
+                for (let i = 0; i < input.length && i < chars.length; i++) {
+                    const span = sentenceDisplay.querySelector(`span[data-idx="${i}"]`);
+                    if (!span) continue;
+                    if (input[i] === chars[i]) {
+                        span.classList.add('correct');
+                    } else {
+                        span.classList.add('wrong');
+                    }
+                }
+            }
+
+            function updateStats() {
+                const elapsed = startTime ? (Date.now() - startTime) / 1000 : 0;
+                timerDisplay.textContent = Math.floor(elapsed);
+
+                if (elapsed > 0 && correctCharsTyped > 0) {
+                    const minutes = elapsed / 60;
+                    const wpm = Math.round((correctCharsTyped / 5) / minutes);
+                    speedDisplay.textContent = wpm;
+
+                    const level = getLevelFromWPM(wpm);
+                    levelBadge.textContent = `⚡ ئاست: ${level.label}`;
+                    levelBadge.className = `badge-level ${level.cls}`;
+                } else {
+                    speedDisplay.textContent = '0';
+                }
+
+                if (totalCharsTyped > 0) {
+                    const acc = Math.round((correctCharsTyped / totalCharsTyped) * 100);
+                    accuracyDisplay.textContent = acc;
+                } else {
+                    accuracyDisplay.textContent = '100';
+                }
+
+                const total = activeList.length;
+                const current = Math.min(sentenceIndex + 1, total);
+                progressDisplay.textContent = `${current}/${total}`;
+            }
+
+            function updateStatus() {
+                const label = getModeLabel();
+                const count = activeList.length;
+                statusText.innerHTML = `📖 مۆدی ${label} — <strong>${count}</strong> ${currentMode === 'proverb' ? 'وتە' : 'بەش'}`;
+            }
+
+            // ================================================================
+            //  KEYBOARD HIGHLIGHT
+            // ================================================================
+
+            function highlightKey(char) {
+                const allKeys = keyboardEl.querySelectorAll('.key');
+                allKeys.forEach(k => {
+                    k.classList.remove('active-key', 'hit-correct', 'hit-wrong');
+                });
+
+                if (!char) return;
+
+                let found = null;
+                allKeys.forEach(k => {
+                    const keyText = k.dataset.key;
+                    if (keyText && keyText.toLowerCase() === char.toLowerCase()) {
+                        found = k;
+                    }
+                    if (char === ' ' && k.dataset.key === 'Space') {
+                        found = k;
+                    }
+                });
+
+                if (found) {
+                    found.classList.add('active-key');
+                }
+            }
+
+            function markHit(char, isCorrect) {
+                const allKeys = keyboardEl.querySelectorAll('.key');
+                let found = null;
+                allKeys.forEach(k => {
+                    const keyText = k.dataset.key;
+                    if (keyText && keyText.toLowerCase() === char.toLowerCase()) {
+                        found = k;
+                    }
+                    if (char === ' ' && k.dataset.key === 'Space') {
+                        found = k;
+                    }
+                });
+
+                if (found) {
+                    found.classList.remove('active-key');
+                    if (isCorrect) {
+                        found.classList.add('hit-correct');
+                        setTimeout(() => found.classList.remove('hit-correct'), 300);
+                    } else {
+                        found.classList.add('hit-wrong');
+                        setTimeout(() => found.classList.remove('hit-wrong'), 400);
+                    }
+                }
+            }
+
+            // ================================================================
+            //  GAME LOGIC
+            // ================================================================
+
+            function loadSentence(index) {
+                if (index >= activeList.length) {
+                    finishGame();
+                    return;
+                }
+
+                sentenceIndex = index;
+                currentSentence = activeList[index];
+                charIndex = 0;
+                totalCharsTyped = 0;
+                correctCharsTyped = 0;
+
+                userInput.value = '';
+                userInput.disabled = false;
+                renderSentence();
+                updateStats();
+                updateStatus();
+                highlightKey('');
+            }
+
+            function finishGame() {
+                stopTimer();
+                isActive = false;
+                userInput.disabled = true;
+                sentenceDisplay.innerHTML = `
+                    <span style="color: #7ae0a0; font-weight: 600; font-size: 1.6rem;">
+                        🎉 پیرۆز! هەموو ${getModeLabel()}کان تەواو بوون!
+                    </span>
+                    <span class="cursor"></span>
+                `;
+                statusText.innerHTML = '🏁 تەواو! دووبارە دەستپێبکە';
+                levelBadge.textContent = '🎯 تەواو!';
+                levelBadge.className = 'badge-level expert';
+                updateStats();
+                highlightKey('');
+            }
+
+            function startGame() {
+                if (isActive) return;
+
+                buildActiveList();
+                if (activeList.length === 0) return;
+
+                if (sentenceIndex >= activeList.length) {
+                    sentenceIndex = 0;
+                }
+
+                if (!currentSentence || sentenceIndex >= activeList.length) {
+                    loadSentence(0);
+                }
+
+                isActive = true;
+                userInput.disabled = false;
+                userInput.value = '';
+                userInput.focus();
+
+                totalCharsTyped = 0;
+                correctCharsTyped = 0;
+                charIndex = 0;
+
+                currentSentence = activeList[sentenceIndex];
+                renderSentence();
+                startTimer();
+                updateStats();
+                updateStatus();
+                highlightKey('');
+
+                levelBadge.textContent = '⚡ ئاست: —';
+                levelBadge.className = 'badge-level beginner';
+            }
+
+            function resetGame() {
+                stopTimer();
+                isActive = false;
+                startTime = null;
+
+                buildActiveList();
+                if (activeList.length === 0) activeList = ['هیچ وتەیەک نیە'];
+
+                sentenceIndex = 0;
+                loadSentence(0);
+
+                userInput.disabled = false;
+                userInput.value = '';
+                timerDisplay.textContent = '0';
+                speedDisplay.textContent = '0';
+                accuracyDisplay.textContent = '100';
+                progressDisplay.textContent = `1/${activeList.length}`;
+                levelBadge.textContent = '⚡ ئاست: —';
+                levelBadge.className = 'badge-level beginner';
+                updateStatus();
+                highlightKey('');
+                userInput.focus();
+            }
+
+            // ================================================================
+            //  TIMER
+            // ================================================================
+
+            function startTimer() {
+                if (timerInterval) stopTimer();
+                startTime = Date.now();
+                timerInterval = setInterval(() => {
+                    if (startTime) updateStats();
+                }, 200);
+            }
+
+            function stopTimer() {
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                startTime = null;
+            }
+
+            // ================================================================
+            //  INPUT HANDLER
+            // ================================================================
+
+            function handleInput(e) {
+                if (!isActive) {
+                    startGame();
+                    if (!isActive) return;
+                }
+
+                const input = userInput.value;
+                const chars = currentSentence.split('');
+                const typedLen = Math.min(input.length, chars.length);
+
+                const lastChar = input.length > 0 ? input[input.length - 1] : '';
+                if (lastChar) {
+                    const idx = input.length - 1;
+                    if (idx < chars.length) {
+                        const isCorrect = lastChar === chars[idx];
+                        markHit(lastChar, isCorrect);
+                    }
+                }
+
+                totalCharsTyped = typedLen;
+
+                let correctCount = 0;
+                for (let i = 0; i < typedLen; i++) {
+                    if (input[i] === chars[i]) correctCount++;
+                }
+                correctCharsTyped = correctCount;
+
+                charIndex = Math.min(input.length, chars.length);
+
+                renderSentence();
+                updateStats();
+
+                if (charIndex < chars.length) {
+                    highlightKey(chars[charIndex]);
+                } else {
+                    highlightKey('');
+                }
+
+                if (input.length >= chars.length && correctCount === chars.length) {
+                    setTimeout(() => {
+                        if (sentenceIndex + 1 < activeList.length) {
+                            loadSentence(sentenceIndex + 1);
+                            if (isActive) userInput.focus();
+                        } else {
+                            finishGame();
+                        }
+                    }, 400);
+                }
+            }
+
+            // ================================================================
+            //  MODE / COUNT CHANGE
+            // ================================================================
+
+            function setMode(mode) {
+                if (mode === currentMode) return;
+                currentMode = mode;
+
+                modeBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.mode === mode);
+                });
+
+                resetGame();
+            }
+
+            function setCount(count) {
+                if (count === maxCount) return;
+                maxCount = count;
+
+                countBtns.forEach(btn => {
+                    btn.classList.toggle('active', parseInt(btn.dataset.count) === count);
+                });
+
+                resetGame();
+            }
+
+            // ================================================================
+            //  EVENT LISTENERS
+            // ================================================================
+
+            userInput.addEventListener('input', handleInput);
+            startBtn.addEventListener('click', startGame);
+            resetBtn.addEventListener('click', resetGame);
+
+            modeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setMode(this.dataset.mode);
+                });
+            });
+
+            countBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setCount(parseInt(this.dataset.count));
+                });
+            });
+
+            keyboardEl.addEventListener('click', function() {
+                userInput.focus();
+            });
+
+            // ================================================================
+            //  INIT
+            // ================================================================
+
+            function init() {
+                buildKeyboard();
+                buildActiveList();
+                if (activeList.length === 0) activeList = ['بەخێربێیت!'];
+                loadSentence(0);
+                updateStatus();
+                levelBadge.textContent = '⚡ ئاست: —';
+                levelBadge.className = 'badge-level beginner';
+                userInput.focus();
+
+                if (currentSentence && currentSentence.length > 0) {
+                    setTimeout(() => highlightKey(currentSentence[0]), 300);
+                }
+
+                console.log('⌨️ کیبۆردی ڤێرتوالی ئامادەیە!');
+                console.log('📚 ژمارەی وتە/چیرۆک: ٢٥ وتە و ١٠ چیرۆکی درێژ');
+                console.log('💡 وانەکانی ژیان، سڵاش، فاریزە، ڕەوشت، و ڕێنمایی');
+            }
+
+            init();
+
+        })();
+    </script>
+
 </body>
 </html>
