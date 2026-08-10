@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>تایپ خێرا - وتە، چیرۆک و تاپۆ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>⚔️ABDULKHALQ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -15,130 +15,264 @@
         body {
             font-family: 'Inter', 'Noto Naskh Arabic', 'Segoe UI', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(145deg, #0a0e1a 0%, #1a1f38 100%);
+            background: linear-gradient(145deg, #0a0e1a 0%, #1a0a0a 50%, #0f0a1a 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 16px;
             direction: rtl;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ff6b6b, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,200,100,0.8), transparent),
+                radial-gradient(2px 2px at 50px 160px, #ff4444, transparent);
+            background-size: 200px 200px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 880px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 36px;
-            padding: 28px 24px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            border-radius: 40px;
+            padding: 24px 24px 20px;
+            border: 1px solid rgba(255, 100, 100, 0.08);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 1;
         }
 
-        .header {
+        /* ===== HEADER ===== */
+        .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .logo h1 {
             font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #6fcbff, #8b6fff, #fbbf24);
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b6b, #ff4444, #cc0000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .logo small {
-            font-size: 0.7rem;
-            color: #8a9bc0;
+            font-size: 0.65rem;
+            color: #8a6b6b;
             font-weight: 500;
-            -webkit-text-fill-color: #8a9bc0;
+            -webkit-text-fill-color: #8a6b6b;
             display: block;
         }
 
-        .badge-level {
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.02);
-            font-family: 'Inter', sans-serif;
+        .score-board {
+            display: flex;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 6px 14px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 100, 100, 0.08);
+            flex-wrap: wrap;
         }
-        .badge-level.beginner {
-            color: #ff8a8a;
-            border-color: rgba(255, 80, 80, 0.15);
-        }
-        .badge-level.intermediate {
-            color: #ffd966;
-            border-color: rgba(255, 200, 80, 0.15);
-        }
-        .badge-level.advanced {
-            color: #7ae0a0;
-            border-color: rgba(90, 255, 150, 0.15);
-        }
-        .badge-level.expert {
-            color: #6fcbff;
-            border-color: rgba(79, 200, 255, 0.15);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 10px 14px;
-            border-radius: 28px;
-            margin-bottom: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-        }
-        .stat-item {
+        .score-item {
             text-align: center;
+            padding: 0 3px;
         }
-        .stat-number {
-            font-size: 1.3rem;
-            font-weight: 700;
+        .score-number {
+            font-size: 1.1rem;
+            font-weight: 800;
             color: #fff;
             line-height: 1.2;
         }
-        .stat-number.speed {
-            color: #fbbf24;
-        }
-        .stat-number.accuracy {
-            color: #7ae0a0;
-        }
-        .stat-number.time {
-            color: #6fcbff;
-        }
-        .stat-number.progress {
-            color: #b38aff;
-        }
-        .stat-number.correct {
-            color: #34d399;
-        }
-        .stat-label {
-            font-size: 0.6rem;
-            font-weight: 500;
-            color: #6a84b8;
+        .score-number.gold { color: #ffd700; }
+        .score-number.green { color: #34d399; }
+        .score-number.blue { color: #6fcbff; }
+        .score-number.pink { color: #ff6b6b; }
+        .score-number.purple { color: #a78bfa; }
+        .score-label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: #8a6b6b;
             text-transform: uppercase;
             letter-spacing: 0.3px;
-            margin-top: 2px;
         }
 
-        .sentence-box {
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 20px;
-            padding: 18px 22px;
-            margin-bottom: 14px;
-            min-height: 100px;
-            border: 2px solid rgba(251, 191, 36, 0.06);
-            box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.3);
+        /* ===== CHARACTER AREA (بە گەورەیی) ===== */
+        .character-area {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 30px;
+            padding: 30px 20px 20px;
+            margin-bottom: 12px;
+            border: 2px solid rgba(255, 100, 100, 0.04);
+            box-shadow: inset 0 4px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .character-big {
+            font-size: 8rem;
+            line-height: 1;
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 10px;
+            filter: drop-shadow(0 10px 40px rgba(255, 50, 50, 0.2));
+            transition: all 0.1s ease;
         }
+
+        .character-big .sword-big {
+            font-size: 5rem;
+            display: inline-block;
+            transform-origin: bottom center;
+            transition: all 0.05s ease;
+        }
+
+        .character-big .sword-big.swing {
+            animation: swordBigSwing 0.15s ease;
+        }
+
+        @keyframes swordBigSwing {
+            0% { transform: rotate(-40deg) scale(1); }
+            50% { transform: rotate(35deg) scale(1.4); }
+            100% { transform: rotate(-40deg) scale(1); }
+        }
+
+        .character-big .sword-big.slash {
+            animation: swordBigSlash 0.25s ease;
+        }
+
+        @keyframes swordBigSlash {
+            0% { transform: rotate(-40deg) scale(1); opacity: 1; }
+            40% { transform: rotate(70deg) scale(1.6); opacity: 1; }
+            100% { transform: rotate(-40deg) scale(1); opacity: 0.6; }
+        }
+
+        .character-big.dash-char {
+            animation: charBigDash 0.35s ease;
+        }
+
+        @keyframes charBigDash {
+            0% { transform: translateX(0) scale(1); }
+            30% { transform: translateX(40px) scale(1.15); }
+            70% { transform: translateX(-15px) scale(0.92); }
+            100% { transform: translateX(0) scale(1); }
+        }
+
+        .character-big.hit-char {
+            animation: charBigHit 0.45s ease;
+        }
+
+        @keyframes charBigHit {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-20px) rotate(-5deg); }
+            40% { transform: translateX(20px) rotate(5deg); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+        }
+
+        .character-big.jump-char {
+            animation: charBigJump 0.6s ease;
+        }
+
+        @keyframes charBigJump {
+            0% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-50px) scale(1.2); }
+            60% { transform: translateY(-20px) scale(0.9); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        .char-name-big {
+            color: #ff6b6b;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 6px;
+            text-shadow: 0 0 30px rgba(255, 50, 50, 0.1);
+        }
+
+        .char-level-big {
+            color: #8a6b6b;
+            font-size: 0.85rem;
+        }
+        .char-level-big span {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        /* ===== GLASS TARGET ===== */
+        .glass-target {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            padding: 8px 0;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .glass {
+            width: 34px;
+            height: 42px;
+            background: rgba(100, 200, 255, 0.06);
+            border: 2px solid rgba(100, 200, 255, 0.12);
+            border-radius: 6px 6px 12px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            color: rgba(100, 200, 255, 0.12);
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: inset 0 -8px 16px rgba(100, 200, 255, 0.02);
+        }
+
+        .glass .glass-num {
+            font-size: 0.5rem;
+            color: rgba(100, 200, 255, 0.1);
+            font-weight: 700;
+        }
+
+        .glass.broken {
+            background: rgba(255, 50, 50, 0.08);
+            border-color: rgba(255, 50, 50, 0.15);
+            animation: glassBreak 0.4s ease forwards;
+        }
+
+        .glass.broken .glass-num {
+            color: rgba(255, 50, 50, 0.2);
+        }
+
+        .glass.shattered {
+            opacity: 0;
+            transform: scale(0.2) rotate(30deg);
+            border-color: transparent;
+        }
+
+        @keyframes glassBreak {
+            0% { transform: scale(1); border-color: rgba(255, 50, 50, 0.2); }
+            30% { transform: scale(1.15); border-color: rgba(255, 200, 100, 0.4); }
+            60% { transform: scale(0.8) rotate(8deg); }
+            100% { transform: scale(0.95); }
+        }
+
+        /* ===== SENTENCE ===== */
         #sentenceDisplay {
             font-size: 1.3rem;
             line-height: 2.2rem;
@@ -148,182 +282,109 @@
             width: 100%;
             word-break: break-word;
             font-family: 'Noto Naskh Arabic', 'Inter', sans-serif;
+            padding: 10px 4px 6px;
+            min-height: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            margin-top: 6px;
+            text-align: center;
         }
         #sentenceDisplay .correct {
             color: #34d399;
-            text-shadow: 0 0 16px rgba(52, 211, 153, 0.15);
+            text-shadow: 0 0 20px rgba(52, 211, 153, 0.15);
         }
         #sentenceDisplay .wrong {
-            color: #ff7a7a;
-            background: rgba(255, 0, 0, 0.06);
+            color: #ff4444;
+            background: rgba(255, 0, 0, 0.04);
             border-radius: 4px;
             padding: 0 2px;
-            text-decoration: underline wavy #ff5e5e;
+            text-decoration: underline wavy #ff4444;
         }
         #sentenceDisplay .cursor {
             display: inline-block;
             width: 3px;
             height: 1.8rem;
-            background: #fbbf24;
+            background: #ff6b6b;
             margin-right: 2px;
             border-radius: 3px;
             animation: blink 1s step-end infinite;
             vertical-align: text-bottom;
-            box-shadow: 0 0 16px rgba(251, 191, 36, 0.2);
+            box-shadow: 0 0 20px rgba(255, 50, 50, 0.2);
         }
+
         @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        .keyboard-wrapper {
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 20px;
-            padding: 12px 10px 10px;
-            margin: 10px 0 12px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.2);
-            user-select: none;
-            overflow-x: auto;
-        }
-
-        .keyboard {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            min-width: 600px;
-            direction: ltr;
-        }
-
-        .kb-row {
-            display: flex;
-            gap: 4px;
-            justify-content: center;
-        }
-
-        .key {
-            min-width: 38px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            color: #b3c7f0;
-            font-size: 0.75rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            font-family: 'Inter', 'Noto Naskh Arabic', sans-serif;
-            position: relative;
-            padding: 0 4px;
-            flex-shrink: 0;
-        }
-
-        .key.special {
-            min-width: 50px;
-            font-size: 0.6rem;
-            color: #6a84b8;
-        }
-        .key.space {
-            min-width: 160px;
-            font-size: 0.65rem;
-            color: #4a6a8a;
-            letter-spacing: 2px;
-        }
-
-        .key .finger {
+        /* ===== COMBO / DAMAGE on character ===== */
+        .combo-on-char {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
             position: absolute;
-            bottom: -16px;
-            font-size: 0.45rem;
-            color: #4a6a8a;
-            font-weight: 600;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 0 4px;
-            border-radius: 4px;
-            white-space: nowrap;
+            top: 10px;
+            left: 20px;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
-        .key:hover .finger {
+        .combo-on-char.active {
             opacity: 1;
+            animation: comboPop 0.3s ease;
+        }
+        @keyframes comboPop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); color: #ff6b6b; }
         }
 
-        .key.active-key {
-            background: #fbbf24;
-            border-color: #fbbf24;
-            color: #0a0e1a;
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
-            transform: scale(0.92);
+        .damage-on-char {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            font-family: 'Inter', sans-serif;
         }
-        .key.hit-correct {
-            background: rgba(52, 211, 153, 0.2);
-            border-color: rgba(52, 211, 153, 0.2);
-            color: #34d399;
+        .damage-on-char.active {
+            animation: dmgBigFloat 0.8s ease forwards;
         }
-        .key.hit-wrong {
-            background: rgba(255, 80, 80, 0.15);
-            border-color: rgba(255, 80, 80, 0.2);
-            color: #ff7a7a;
-            animation: shake 0.3s ease;
-        }
-
-        @keyframes shake {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            25% {
-                transform: translateX(-4px);
-            }
-            75% {
-                transform: translateX(4px);
-            }
+        @keyframes dmgBigFloat {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.3); }
+            40% { opacity: 1; transform: translate(-50%, -70%) scale(1.4); }
+            100% { opacity: 0; transform: translate(-50%, -110%) scale(1); }
         }
 
-        .finger-LP {
-            border-bottom: 2px solid #ff6b6b;
+        /* ===== PROGRESS BAR ===== */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            margin-top: 4px;
+            overflow: hidden;
         }
-        .finger-LR {
-            border-bottom: 2px solid #ffa94d;
-        }
-        .finger-LM {
-            border-bottom: 2px solid #ffd93d;
-        }
-        .finger-LI {
-            border-bottom: 2px solid #6bcb6b;
-        }
-        .finger-LT {
-            border-bottom: 2px solid #4dabf7;
-        }
-        .finger-RT {
-            border-bottom: 2px solid #4dabf7;
-        }
-        .finger-RI {
-            border-bottom: 2px solid #6bcb6b;
-        }
-        .finger-RM {
-            border-bottom: 2px solid #ffd93d;
-        }
-        .finger-RR {
-            border-bottom: 2px solid #ffa94d;
-        }
-        .finger-RP {
-            border-bottom: 2px solid #ff6b6b;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #ff6b6b, #ffd700);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+            width: 0%;
+            box-shadow: 0 0 20px rgba(255, 50, 50, 0.15);
         }
 
+        /* ===== INPUT ===== */
         #userInput {
             width: 100%;
-            padding: 16px 24px;
-            font-size: 1.2rem;
+            padding: 14px 22px;
+            font-size: 1.1rem;
             border-radius: 60px;
-            border: 2px solid rgba(251, 191, 36, 0.08);
+            border: 2px solid rgba(255, 100, 100, 0.06);
             background: rgba(0, 0, 0, 0.4);
             color: #f0f4ff;
             outline: none;
@@ -335,51 +396,52 @@
             font-family: 'Noto Naskh Arabic', 'Inter', sans-serif;
         }
         #userInput:focus {
-            border-color: #fbbf24;
-            box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.08);
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 8px rgba(255, 50, 50, 0.05);
             background: rgba(0, 0, 0, 0.55);
         }
         #userInput::placeholder {
-            color: #3e5a8a;
+            color: #3e3a5a;
             font-weight: 400;
         }
         #userInput:disabled {
-            opacity: 0.4;
+            opacity: 0.25;
             cursor: not-allowed;
         }
 
+        /* ===== BUTTONS ===== */
         .actions {
             display: flex;
             gap: 12px;
-            margin-top: 14px;
+            margin-top: 12px;
             flex-wrap: wrap;
             justify-content: center;
         }
         .btn {
-            padding: 12px 32px;
+            padding: 10px 28px;
             border-radius: 60px;
             border: none;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.9rem;
+            font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .btn-start {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: #0a0e1a;
-            box-shadow: 0 6px 24px rgba(251, 191, 36, 0.2);
+            background: linear-gradient(135deg, #ff6b6b, #cc0000);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(255, 50, 50, 0.2);
         }
         .btn-start:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 36px rgba(251, 191, 36, 0.3);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 36px rgba(255, 50, 50, 0.3);
         }
-        .btn-start:active {
-            transform: scale(0.96);
-        }
+        .btn-start:active { transform: scale(0.96); }
         .btn-reset {
             background: rgba(255, 120, 120, 0.06);
             color: #ffbcbc;
@@ -390,230 +452,475 @@
             border-color: rgba(255, 120, 120, 0.15);
         }
 
+        /* ===== STATUS ===== */
         .status-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 14px;
-            padding: 10px 16px;
-            background: rgba(0, 0, 0, 0.15);
+            gap: 6px;
+            margin-top: 12px;
+            padding: 6px 14px;
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 100, 100, 0.03);
         }
         .status-text {
-            color: #6a84b8;
-            font-size: 0.8rem;
+            color: #8a6b6b;
+            font-size: 0.7rem;
             font-weight: 500;
         }
         .status-text strong {
-            color: #fbbf24;
+            color: #ff6b6b;
         }
 
-        .mode-btns {
+        .mode-btns, .sub-mode-btns, .count-btns {
             display: flex;
-            gap: 4px;
+            gap: 3px;
             flex-wrap: wrap;
         }
-        .mode-btn {
-            padding: 4px 14px;
+        .mode-btn, .sub-mode-btn, .count-btn {
+            padding: 3px 10px;
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             background: transparent;
-            color: #6a84b8;
-            font-size: 0.7rem;
+            color: #6a6a8a;
+            font-size: 0.6rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: 'Inter', sans-serif;
         }
-        .mode-btn.active {
-            background: #fbbf24;
+        .mode-btn.active, .sub-mode-btn.active, .count-btn.active {
+            background: #ff6b6b;
             color: #0a0e1a;
-            border-color: #fbbf24;
+            border-color: #ff6b6b;
         }
-        .mode-btn:hover:not(.active) {
+        .mode-btn:hover:not(.active), .sub-mode-btn:hover:not(.active), .count-btn:hover:not(.active) {
             background: rgba(255, 255, 255, 0.04);
-            color: #b3c7f0;
+            color: #b3b3c7;
+        }
+        .sub-mode-btn.active, .count-btn.active {
+            background: rgba(255, 100, 100, 0.15);
+            color: #ff6b6b;
+            border-color: rgba(255, 100, 100, 0.12);
         }
 
-        .count-btns {
+        .level-up {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 60px rgba(255, 215, 0, 0.4);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            animation: levelUpAnim 1.5s ease forwards;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px 60px;
+            border-radius: 40px;
+            border: 2px solid rgba(255, 215, 0, 0.15);
+        }
+        @keyframes levelUpAnim {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+            animation: particleFly 0.9s ease forwards;
+            z-index: 50;
+        }
+        @keyframes particleFly {
+            0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); }
+        }
+
+        .glass-fragment {
+            position: fixed;
+            pointer-events: none;
+            width: 12px;
+            height: 12px;
+            background: rgba(100, 200, 255, 0.12);
+            border-radius: 2px;
+            animation: glassFragFly 0.7s ease forwards;
+            z-index: 40;
+        }
+        @keyframes glassFragFly {
+            0% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(720deg); }
+        }
+
+
+        /* ===== NINJA BATTLE UPGRADE ===== */
+        .character-area {
+            min-height: 260px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 70%, rgba(255,65,65,.10), transparent 32%),
+                linear-gradient(180deg, rgba(8,10,18,.9), rgba(22,7,10,.65));
+        }
+
+        .ninja-wrap {
+            position: relative;
+            width: min(520px, 92%);
+            height: 145px;
             display: flex;
-            gap: 4px;
-        }
-        .count-btn {
-            padding: 4px 10px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: transparent;
-            color: #6a84b8;
-            font-size: 0.7rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        .count-btn.active {
-            background: rgba(251, 191, 36, 0.15);
-            color: #fbbf24;
-            border-color: rgba(251, 191, 36, 0.15);
-        }
-        .count-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.04);
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            z-index: 3;
         }
 
-        .level-message {
-            text-align: center;
-            margin-top: 10px;
-            padding: 12px 20px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(251, 191, 36, 0.1);
-            display: none;
-            font-family: 'Inter', sans-serif;
-        }
-        .level-message.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        .level-message .msg-beginner {
-            color: #ff8a8a;
-        }
-        .level-message .msg-intermediate {
-            color: #ffd966;
-        }
-        .level-message .msg-advanced {
-            color: #7ae0a0;
-        }
-        .level-message .msg-expert {
-            color: #6fcbff;
+        .ninja {
+            position: relative;
+            width: 105px;
+            height: 125px;
+            filter: drop-shadow(0 15px 22px rgba(0,0,0,.65));
+            transform-origin: 50% 90%;
+            transition: transform .08s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .ninja-head {
+            position: absolute;
+            top: -6px;
+            left: 7px;
+            font-size: 5.6rem;
+            line-height: 1;
+            z-index: 2;
         }
 
-        /* ===== Sub-mode for Tapoo ===== */
-        .sub-mode-btns {
-            display: flex;
-            gap: 4px;
+        .ninja-body {
+            position: absolute;
+            width: 64px;
+            height: 78px;
+            left: 20px;
+            top: 48px;
+            border-radius: 45% 45% 20% 20%;
+            background: linear-gradient(135deg, #151a27, #05070c 70%);
+            border: 2px solid rgba(255,255,255,.08);
+            box-shadow: inset 0 0 18px rgba(255,60,60,.08);
         }
-        .sub-mode-btn {
-            padding: 2px 10px;
+
+        .ninja-body::before,
+        .ninja-body::after {
+            content: "";
+            position: absolute;
+            width: 14px;
+            height: 62px;
+            background: #080b12;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: transparent;
-            color: #6a84b8;
-            font-size: 0.65rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
+            top: 35px;
         }
-        .sub-mode-btn.active {
-            background: rgba(251, 191, 36, 0.12);
-            color: #fbbf24;
-            border-color: rgba(251, 191, 36, 0.12);
+        .ninja-body::before { left: -12px; transform: rotate(28deg); }
+        .ninja-body::after { right: -12px; transform: rotate(-28deg); }
+
+        .ninja-shadow {
+            position: absolute;
+            bottom: 0;
+            width: 150px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0,0,0,.6);
+            filter: blur(7px);
         }
-        .sub-mode-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.04);
+
+        .sword-big {
+            position: relative;
+            z-index: 4;
+            font-size: 5rem;
+            display: inline-block;
+            transform-origin: 20% 85%;
+            filter: drop-shadow(0 0 16px rgba(180,220,255,.25));
+        }
+
+        .sword-big.swing {
+            animation: ninjaSlash .13s cubic-bezier(.2,.8,.2,1);
+        }
+        .sword-big.slash {
+            animation: ninjaFinisher .28s cubic-bezier(.15,.8,.2,1);
+        }
+
+        @keyframes ninjaSlash {
+            0% { transform: rotate(-65deg) translateY(5px) scale(.9); }
+            55% { transform: rotate(25deg) translateY(-8px) scale(1.18); }
+            100% { transform: rotate(-35deg) translateY(0) scale(1); }
+        }
+
+        @keyframes ninjaFinisher {
+            0% { transform: rotate(-70deg) translateX(0) scale(.85); }
+            35% { transform: rotate(75deg) translateX(30px) scale(1.55); }
+            55% { transform: rotate(90deg) translateX(48px) scale(1.65); }
+            100% { transform: rotate(-45deg) translateX(0) scale(1); }
+        }
+
+        .ninja-hit {
+            animation: ninjaHit .18s ease;
+        }
+        @keyframes ninjaHit {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(12px) rotate(5deg); }
+            65% { transform: translateX(-9px) rotate(-4deg); }
+            100% { transform: translateX(0); }
+        }
+
+        .target-dummy {
+            position: absolute;
+            right: 9%;
+            bottom: 34px;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 3.8rem;
+            background: radial-gradient(circle, rgba(255,80,80,.18), rgba(255,80,80,.02) 65%, transparent 70%);
+            border: 2px dashed rgba(255,90,90,.20);
+            transition: transform .16s ease, opacity .16s ease, filter .16s ease;
+            z-index: 2;
+        }
+
+        .target-dummy.hit {
+            animation: targetHit .2s ease;
+            filter: drop-shadow(0 0 24px rgba(255,70,70,.8));
+        }
+
+        @keyframes targetHit {
+            0% { transform: scale(1) rotate(0); }
+            45% { transform: scale(1.35) rotate(8deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        .target-dummy.word-break {
+            animation: targetBreak .5s ease forwards;
+        }
+
+        @keyframes targetBreak {
+            0% { opacity: 1; transform: scale(1); }
+            35% { opacity: 1; transform: scale(1.35) rotate(-8deg); }
+            100% { opacity: 0; transform: scale(.1) rotate(40deg); }
+        }
+
+        .word-target {
+            margin: 3px auto 4px;
+            width: fit-content;
+            min-width: 150px;
+            padding: 4px 13px;
+            border-radius: 999px;
+            color: #ffb4b4;
+            background: rgba(255,65,65,.06);
+            border: 1px solid rgba(255,100,100,.10);
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .word-done {
+            animation: wordDone .25s ease;
+        }
+        @keyframes wordDone {
+            50% { color: #ffd700; transform: scale(1.08); }
+        }
+
+        .slash-line {
+            position: fixed;
+            width: 170px;
+            height: 5px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, #fff, #8ed8ff, transparent);
+            box-shadow: 0 0 22px #8ed8ff;
+            pointer-events: none;
+            z-index: 90;
+            animation: slashLine .22s ease forwards;
+            transform: rotate(-18deg);
+        }
+        @keyframes slashLine {
+            0% { opacity: 0; transform: translateX(-50px) rotate(-18deg) scaleX(.2); }
+            35% { opacity: 1; transform: translateX(0) rotate(-18deg) scaleX(1); }
+            100% { opacity: 0; transform: translateX(70px) rotate(-18deg) scaleX(.5); }
         }
 
         @media (max-width: 650px) {
-            .container {
-                padding: 16px 12px;
-                border-radius: 24px;
-            }
-            .stats {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 4px;
-                padding: 10px 12px;
-            }
-            .stat-number {
-                font-size: 1.1rem;
-            }
-            #sentenceDisplay {
-                font-size: 1rem;
-                line-height: 1.8rem;
-            }
-            #userInput {
-                font-size: 1rem;
-                padding: 14px 18px;
-            }
-            .key {
-                min-width: 28px;
-                height: 34px;
-                font-size: 0.6rem;
-            }
-            .key.special {
-                min-width: 36px;
-                font-size: 0.5rem;
-            }
-            .key.space {
-                min-width: 80px;
-            }
-            .keyboard {
-                min-width: 400px;
-            }
-            .btn {
-                padding: 10px 22px;
-                font-size: 0.85rem;
-            }
-            .key .finger {
-                display: none;
-            }
-            .logo h1 {
-                font-size: 1.2rem;
-            }
-            .status-bar {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 6px;
-            }
-            .mode-btns,
-            .count-btns {
-                justify-content: center;
-            }
+            .ninja-wrap { gap: 12px; transform: scale(.62); }
+            .target-dummy { right: 3%; font-size: 2.8rem; width: 65px; height: 65px; }
+        }
+
+
+        /* ===== COMPACT FULL-VIEWPORT MODE ===== */
+        html, body {
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            padding: 8px 10px !important;
+        }
+        .container {
+            max-width: 980px !important;
+            min-height: 0 !important;
+            height: calc(100vh - 16px);
+            margin: 0 auto !important;
+            display: flex;
+            flex-direction: column;
+            gap: 7px !important;
+        }
+        .header {
+            padding: 7px 14px !important;
+            min-height: 54px;
+        }
+        .header h1 {
+            font-size: 1.25rem !important;
+            margin: 0 !important;
+        }
+        .header p {
+            font-size: .72rem !important;
+            margin: 2px 0 0 !important;
+        }
+        .stats-bar {
+            padding: 5px 8px !important;
+            gap: 5px !important;
+        }
+        .stat {
+            padding: 4px 10px !important;
+            min-width: 82px !important;
+        }
+        .stat-label { font-size: .58rem !important; }
+        .stat-value { font-size: 1rem !important; }
+        .character-area {
+            min-height: 150px !important;
+            height: 150px !important;
+            border-radius: 12px !important;
+        }
+        .ninja-wrap {
+            transform: scale(.72);
+            transform-origin: center bottom;
+            height: 130px;
+        }
+        .target-dummy {
+            right: 10%;
+            bottom: 22px;
+            transform: scale(.72);
+        }
+        .sentence-area {
+            padding: 8px 12px !important;
+        }
+        #sentenceDisplay {
+            min-height: 45px !important;
+            font-size: 1.08rem !important;
+            line-height: 1.55 !important;
+        }
+        .word-target {
+            margin: 0 auto 2px !important;
+            padding: 2px 10px !important;
+            font-size: .62rem !important;
+        }
+        .input-area {
+            padding: 7px 10px !important;
+        }
+        #typingInput {
+            min-height: 42px !important;
+            padding: 8px 12px !important;
+            font-size: 1rem !important;
+        }
+        .controls {
+            padding: 7px 10px !important;
+            gap: 6px !important;
+        }
+        .controls button, button {
+            padding: 7px 13px !important;
+            font-size: .78rem !important;
+        }
+        .progress-section {
+            padding: 5px 10px !important;
+        }
+        .progress-bar { height: 8px !important; }
+        .tips {
+            padding: 5px 10px !important;
+            font-size: .65rem !important;
+        }
+        .footer {
+            padding: 4px !important;
+            font-size: .62rem !important;
+        }
+        .glass-container {
+            min-height: 0 !important;
+        }
+        .glass {
+            transform: scale(.75);
+        }
+
+        /* ===== MOVING NINJA ===== */
+        .ninja-wrap { animation: ninjaIdle 1.1s ease-in-out infinite; }
+        @keyframes ninjaIdle {
+            0%, 100% { transform: translate3d(-5px, 2px, 0) scale(.72) rotate(-1deg); }
+            50% { transform: translate3d(5px, -4px, 0) scale(.72) rotate(1deg); }
+        }
+        .ninja.move-fast {
+            animation: ninjaRun .18s linear infinite;
+        }
+        @keyframes ninjaRun {
+            0% { transform: translateX(-8px) rotate(-3deg); }
+            50% { transform: translateX(10px) rotate(3deg); }
+            100% { transform: translateX(-8px) rotate(-3deg); }
+        }
+        .ninja.move-attack {
+            animation: ninjaAttack .18s cubic-bezier(.15,.8,.25,1);
+        }
+        @keyframes ninjaAttack {
+            0% { transform: translateX(-4px) rotate(-8deg); }
+            30% { transform: translateX(12px) rotate(8deg) scale(1.06); }
+            100% { transform: translateX(0) rotate(0) scale(1); }
+        }
+        .target-dummy {
+            animation: none;
+        }
+        .target-dummy.word-break {
+            animation: targetBreak .32s ease forwards;
+        }
+        @keyframes targetBreak {
+            0% { opacity: 1; transform: translateY(0) scale(.72) rotate(0); }
+            45% { opacity: 1; transform: translateY(-5px) scale(1.05) rotate(12deg); }
+            100% { opacity: 0; transform: translateY(4px) scale(.05) rotate(45deg); }
+        }
+
+        /* Fast typing = faster ninja */
+
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 650px) {
+            .container { padding: 16px 12px; border-radius: 24px; }
+            .character-big { font-size: 5rem; }
+            .character-big .sword-big { font-size: 3.5rem; }
+            .character-area { padding: 20px 14px; min-height: 150px; }
+            .glass { width: 26px; height: 34px; }
+            .glass .glass-num { font-size: 0.4rem; }
+            #sentenceDisplay { font-size: 1rem; line-height: 1.8rem; }
+            .score-number { font-size: 0.95rem; }
+            .score-board { padding: 4px 10px; gap: 6px; }
+            .btn { padding: 8px 18px; font-size: 0.8rem; }
+            .combo-on-char { font-size: 1.2rem; }
+            .damage-on-char { font-size: 2.5rem; }
+            .char-name-big { font-size: 0.9rem; }
         }
 
         @media (max-width: 450px) {
-            .key {
-                min-width: 22px;
-                height: 28px;
-                font-size: 0.5rem;
-                padding: 0 2px;
-            }
-            .key.special {
-                min-width: 28px;
-                font-size: 0.45rem;
-            }
-            .key.space {
-                min-width: 50px;
-            }
-            .keyboard {
-                min-width: 280px;
-            }
-            #sentenceDisplay {
-                font-size: 0.85rem;
-                line-height: 1.5rem;
-            }
-            .sentence-box {
-                padding: 12px 14px;
-                min-height: 60px;
-            }
-            .stats {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .character-big { font-size: 3.8rem; }
+            .character-big .sword-big { font-size: 2.5rem; }
+            .character-area { padding: 14px 10px; min-height: 120px; }
+            .glass { width: 20px; height: 28px; }
+            .glass .glass-num { font-size: 0.35rem; }
+            #sentenceDisplay { font-size: 0.85rem; line-height: 1.6rem; }
+            .score-number { font-size: 0.8rem; }
+            .level-up { font-size: 2.5rem; padding: 20px 30px; }
+            .combo-on-char { font-size: 1rem; }
+            .damage-on-char { font-size: 2rem; }
+            .status-bar { flex-direction: column; align-items: stretch; gap: 4px; }
+            .mode-btns, .sub-mode-btns, .count-btns { justify-content: center; }
         }
     </style>
 </head>
@@ -621,49 +928,41 @@
 
     <div class="container">
         <!-- HEADER -->
-        <div class="header">
+        <div class="game-header">
             <div class="logo">
-                <h1>⌨️ تایپ خێرا</h1>
-                <small>وتە · چیرۆک · تاپۆ</small>
+                <h1>⚔️ABADULKHALQ </h1>
+                <small>🥷 KHAWAN</small>
             </div>
-            <span class="badge-level beginner" id="levelBadge">⚡ ئاست: —</span>
+            <div class="score-board">
+                <div class="score-item"><div class="score-number gold" id="scoreDisplay">0</div><div class="score-label">⭐ خاڵ</div></div>
+                <div class="score-item"><div class="score-number blue" id="levelDisplay">١</div><div class="score-label">📈 ئاست</div></div>
+                <div class="score-item"><div class="score-number pink" id="comboDisplay">٠</div><div class="score-label">🔥 کۆمبۆ</div></div>
+                <div class="score-item"><div class="score-number purple" id="wpmDisplay">0</div><div class="score-label">⚡ WPM</div></div>
+                <div class="score-item"><div class="score-number green" id="glassDisplay">0</div><div class="score-label">💎 ئامانج</div></div>
+            </div>
         </div>
 
-        <!-- STATS -->
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number time" id="timerDisplay">0</div>
-                <div class="stat-label">⏱️ کات</div>
+        <!-- CHARACTER BIG -->
+        <div class="character-area">
+            <div class="combo-on-char" id="comboOnChar">🔥 x0</div>
+            <div class="damage-on-char" id="damageOnChar">💥 +50</div>
+            
+            <div class="character-big" id="characterBig">
+                <div class="ninja-wrap" id="ninjaWrap"><div class="ninja-shadow"></div><div class="ninja" id="ninjaBig"><div class="ninja-head">🥷</div><div class="ninja-body"></div></div><span class="sword-big" id="swordBig">🗡️</span></div><div class="target-dummy" id="targetDummy"><span>🎯</span></div>
             </div>
-            <div class="stat-item">
-                <div class="stat-number speed" id="speedDisplay">0</div>
-                <div class="stat-label">⚡ WPM</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number accuracy" id="accuracyDisplay">100</div>
-                <div class="stat-label">🎯 دروستی</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number progress" id="progressDisplay">0/0</div>
-                <div class="stat-label">📌 پێشکەوتن</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number correct" id="correctDisplay">0</div>
-                <div class="stat-label">✅ دروست</div>
-            </div>
+            <div class="char-name-big" id="charNameBig">🥷 </div>
+            <div class="char-level-big">ئاست <span id="charLevelBig">١</span> | شوشە <span id="glassCountBig">٠</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
         </div>
+
+        <!-- GLASS TARGET -->
+        <div class="glass-target" id="glassTarget"></div>
 
         <!-- SENTENCE -->
-        <div class="sentence-box">
-            <div id="sentenceDisplay">
-                <span>👆 کلیک لە «دەستپێکردن» بکە</span>
-                <span class="cursor"></span>
-            </div>
-        </div>
-
-        <!-- KEYBOARD -->
-        <div class="keyboard-wrapper">
-            <div class="keyboard" id="keyboard"></div>
+        <div class="word-target" id="wordTarget">🎯 وشەی داهاتوو</div>
+        <div id="sentenceDisplay">
+            <span>👆 کلیک لە «دەستپێکردن» بکە</span>
+            <span class="cursor"></span>
         </div>
 
         <!-- INPUT -->
@@ -671,28 +970,23 @@
 
         <!-- ACTIONS -->
         <div class="actions">
-            <button class="btn btn-start" id="startBtn">▶️ دەستپێکردن</button>
+            <button class="btn btn-start" id="startBtn">⚔️ دەستپێکردن</button>
             <button class="btn btn-reset" id="resetBtn">🔄 دووبارە</button>
-        </div>
-
-        <!-- LEVEL MESSAGE -->
-        <div class="level-message" id="levelMessage">
-            <span id="levelMessageText"></span>
         </div>
 
         <!-- STATUS -->
         <div class="status-bar">
             <span class="status-text" id="statusText">📖 مۆدی وتە — <strong>١٠</strong></span>
-            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">
                 <div class="mode-btns">
                     <button class="mode-btn active" data-mode="proverb">📖 وتە</button>
                     <button class="mode-btn" data-mode="story">📚 چیرۆک</button>
                     <button class="mode-btn" data-mode="tapoo">📜 تاپۆ</button>
                 </div>
                 <div class="sub-mode-btns" id="subModeContainer" style="display:none;">
-                    <button class="sub-mode-btn active" data-submode="short">کورت</button>
+                    <button class="sub-mode-btn active" data-submode="mixed">تێکەڵ</button>
+                    <button class="sub-mode-btn" data-submode="short">کورت</button>
                     <button class="sub-mode-btn" data-submode="long">درێژ</button>
-                    <button class="sub-mode-btn" data-submode="mixed">تێکەڵ</button>
                 </div>
                 <div class="count-btns">
                     <button class="count-btn active" data-count="10">١٠</button>
@@ -708,13 +1002,12 @@
             'use strict';
 
             // ================================================================
-            //  DATA — وتە · چیرۆک · تاپۆ (کورت + درێژ)
+            //  DATA
             // ================================================================
 
-            // ---------- وتە (پەندی بەناوبانگ) ----------
             const PROVERBS = [
-                "هەوڵ بدە سەرکەوتن لەگەڵتە، چونکە بێ هەوڵ ژیان بەفیڕۆ دەچێت",
-                "زانیاری هێزە و خوێندن ڕووناکییە، بیرکردنەوە پێشکەوتنە",
+                "هەوڵ بدە سەرکەوتن لەگەڵتە، بێ هەوڵ ژیان بەفیڕۆ دەچێت",
+                "زانیاری هێزە، خوێندن ڕووناکییە، بیرکردنەوە پێشکەوتنە",
                 "کات زێڕە، بە باشی بەکاری بهێنە بۆ داهاتوویەکی گەش",
                 "خوێندن ڕووناکییە، ڕووناکی ڕێگا دەدۆزێتەوە بۆ سەرکەوتن",
                 "بە هەوڵی خۆت بگە بە مەبەست، هیچ کەس شوێنی تۆ ناگرێتەوە",
@@ -722,48 +1015,17 @@
                 "دەست بە کار بکە خودا یارمەتیت دەدات، بەوڵە نەکەوێتە خەمەوە",
                 "ئیمان دارە بە خۆت، چونکە تۆ توانای زۆرت هەیە",
                 "شەرمن نەبە لە فێربوون، هەر کەس لە هەڵەکانی خۆیەوە فێر دەبێت",
-                "هەر ڕۆژێک هەوڵێکی نوێ، پێشکەوتن بچوک دەبێتە گۆڕانکاری گەورە",
-                "گوێ بۆ ڕێنمایی دەرباز، ڕێنمایی چرای ڕێگەی ژیانە",
-                "وەک سێویک بە دەست بکە، بە ئارامی و بە دڵنیایی",
-                "خوا لەگەڵ خەڵکی ئاسانە، ئەگەر تۆش لەگەڵ خەڵکدا ئاسان بیت",
-                "زۆر خوێندن بیر روشن دەکات، بیرکردنەوە دەریا دەکاتەوە",
-                "تێگەیشتن گەنجینەیە، خاوەنی خۆی دەوڵەمەند دەکات",
-                "ڕێز بۆ باوک و دایک، ڕێز بناغەی هەموو ڕەوشتێکی چاکە",
-                "هاوکار باشترە لە تەنها، یەکێتی هێز دروست دەکات",
-                "هەموو شتێک کاتی خۆی هەیە، خەم بۆ ڕابردوو مەخۆ",
-                "خەون ببینە بەڵام بە هەوڵ، خەون بەبێ هەوڵ وەک با تێدەپەڕێت",
-                "سەرکەوتن خەم ناگرێتەوە، بەڵکو ڕێگا دەدۆزێتەوە",
-                "باشی بکە لەهەموو کات، باشی هەمیشە گەڕ دەگەڕێتەوە",
-                "دانایی لە هەلەکە، هەل هەر کەسێک نایبینێت",
-                "هەموو کێشە چارەسەری هەیە، پێویستە بیر بکەیتەوە",
-                "بێ تۆز نەمری، هەموو شتێک بە هەوڵ بەدەست دەهێنرێت",
-                "هێزی خۆت بناسە، لاوازی خۆت قبوڵ بکە بۆ پێشکەوتن"
+                "هەر ڕۆژێک هەوڵێکی نوێ، پێشکەوتن بچوک دەبێتە گۆڕانکاری گەورە"
             ];
 
-            // ---------- چیرۆک (درێژ و بەمانا) ----------
             const STORIES = [
-                "لە ڕۆژێکی خۆشدا، کوڕێکی گەنج بە ناوی زانیار لە گوندێکی شاخاوی ژیان دەکرد. ئەو هەمیشە خەونی ئەوەی دەبینی کە کتێبخانەیەک لە گوندەکەیان دروست بکات، چونکە باوەڕی وابوو کە خوێندن و زانست دەتوانێت ژیانی خەڵک بگۆڕێت و ڕووناکی بە ژیانیاندا بڵاو بکاتەوە. بۆیە هەموو پارەکەی کۆکردەوە و کتێبەکانی کڕی و ماڵەکەی کردە کتێبخانە. دوای ساڵێک، کتێبخانەکە بووە شوێنی کۆبوونەوەی هەموو کەسێک کە حەزی لە فێربوونە. ئەم چیرۆکە فێری ئەوە دەکات کە خەونەکان بە هەوڵ و بەردەوامی دەبنە ڕاستی، و خوێندن دەرگای ژیانی باشترە.",
-
-                "کچە پیاوێک بە ناوی ژین، لە گوندێکی دوورەدەست و شاخاویدا ژیان دەکرد. ئەو هەموو ڕۆژێک بە پیادە ڕێگایەکی درێژی دەبڕی بۆ خوێندن، چونکە باوکی پێی دەگووت: «خوێندن تەنها ڕێگایە بۆ ژیانی باشتر و سەربەخۆیی». دوای چەند ساڵێک هەوڵ و بەردەوامی، ژین بووە مامۆستایەکی باش و گەڕایەوە گوندەکەی بۆ ئەوەی منداڵانی تر فێر بکات. ئەم چیرۆکە فێری ئەوە دەکات کە بەردەوامی و هەوڵ هەمیشە بەرەکەت دەهێنێت.",
-
-                "لە شارێکی گەورە و پڕ لە ژیاندا، دوو برا بە ناوەکانی ڕێبوار و ڕەهەند ژیان دەکرد. یەکێکیان خوێندنی زۆری دەکرد و ئەوی تر کاری بازرگانی. هەموو شەوێک کۆدەبوونەوە و بیرۆکەکانیان هاوبەش دەکرد. بەم هاوکاری و یەکێتیە توانیان کۆمپانیایەکی گەورە دامەزرێنن کە هەموو کەسێکی سەرسام کرد. ئەمە فێری ئەوە دەکات کە هاوکاری و یەکێتی هێزێکی گەورە دروست دەکات.",
-
-                "منداڵێکی زیرەک بە ناوی ئاوات، هەمیشە حەزی لە گوێگرتن لە چیرۆکەکانی باپیرەی بوو. باپیرەی پێی دەگوت: «هەر کتێبێک جیهانێکی نوێیە و دەرگایەکە بۆ ژیانی تر». ئاوات بڕیاریدا کە خۆی چیرۆک بنووسێت. سەرەتا زۆر هەڵەی دەکرد، بەڵام وازی نەهێنا. دوای چەند ساڵێک، یەکەم کتێبی بڵاوکردەوە و بووە نووسەرێکی ناسراو. ئەمە فێری ئەوە دەکات کە هەڵەکان بەشێکن لە ڕێگای سەرکەوتن.",
-
-                "لە گوندێکی شاخاویدا، خەڵک بە یەکەوە دەژیان و یارمەتی یەکتریان دەدا. کاتێک زستانێکی سەخت هات، هەموو گوندەکە کۆبوونەوە و ڕێگایان دۆزیەوە بۆ مانەوە. ئەوان فێری ئەوە بوون کە یەکێتی و هاوکاری دەتوانێت بەرگری بکات لە هەموو کێشەکان. ئەم چیرۆکە فێری ئەوە دەکات کە کۆمەڵگای بەهێز لە هاوکاری دروست دەبێت.",
-
-                "کوڕێکی گەنج بە ناوی دیاکۆ، خولیای گەشتکردنی هەبوو. بڕیاریدا بە پیادە بگەڕێت بۆ شارە گەورەکان. لە ڕێگادا چاوی بە خەڵکی جیاواز کەوت و لە هەر کەسێک شتێکی نوێ فێربوو. ئەو درکی بەوە کرد کە جیهان زۆر گەورەترە لەوەی خەیاڵی دەکرد. ئەم گەشتە وای لێکرد کە مرۆڤێکی زیرەکتر و بەهێزتر بێت، و فێری بوو کە گەشت کردن خوێندنە لە کتێبی ژیان.",
-
-                "خانمە شاعیرێک بە ناوی هێلان، لە شارۆچکەیەکی بچوکدا ژیان دەکرد. ئەو هەموو شەوێک شیعرەکانی دەنووسی و خەونی دەکرد کە کتێبێکی چاپ بکات. دوای ساڵانێک هەوڵ، کتێبی شیعرەکانی چاپ کرا و بووە پڕفرۆشترین کتێب. ئەمە فێری ئەوە دەکات کە بەردەوامی لەسەر خەونەکان دەبێتە ڕاستی.",
-
-                "لە شارێکی کۆن و مێژووییدا، پیاوێکی پیر کتێبخانەیەکی گەورەی هەبوو. ئەو هەموو ڕۆژێک کتێبەکانی بۆ منداڵان دەخوێندەوە. منداڵان حەزیان لە گوێگرتن بوو و فێری زۆر شتیان دەبوو. پیاوە پیرەکە پێی دەگووت: «کتێب باشترین هاوڕێیە، چونکە هەرگیز خیانەت ناکات». ئەم چیرۆکە فێری ئەوە دەکات کە خوێندن دەروازەیەکە بۆ جیهانی نوێ.",
-
-                "دوو هاوڕێی دڵسۆز بە ناوەکانی کاروان و بارام، بڕیاریاندا کە قوتابخانەیەک لە گوندەکەیان دروست بکەن. خەڵک پێیان دەکەنی، بەڵام ئەوان وازیان نەهێنا. دوای ساڵێک، قوتابخانەکە کرایەوە و زۆر منداڵ لێی فێربوون. ئەمە نیشانەی ئەوەیە کە خەونە گەورەکان بە هەوڵی بەردەوام دەبنە ڕاستی.",
-
-                "کچێکی گەنج و بەهرەمەند بە ناوی ڕووناک، حەزی لە زانست و توێژینەوە بوو. بڕیاریدا کە تاقیگەیەکی بچووک لە ماڵەکەی دروست بکات. هەموو ڕۆژێک تاقیکردنەوەی دەکرد و شتی نوێ فێردەبوو. دوای چەند ساڵێک، بووە زانایەکی ناسراو. ئەم چیرۆکە فێری ئەوە دەکات کە خوێندن و توێژینەوە دەتوانێت ژیانی خەڵک بگۆڕێت."
+                "لە ڕۆژێکی خۆشدا کوڕێکی گەنج بە ناوی زانیار لە گوندێکی شاخاوی ژیان دەکرد. ئەو خەونی ئەوەی دەبینی کە کتێبخانەیەک دروست بکات، باوەڕی وابوو خوێندن ژیان دەگۆڕێت.",
+                "کچێک بە ناوی ژین لە گوندێکی دوورەدەست ژیان دەکرد. هەموو ڕۆژێک ڕێگایەکی درێژی دەبڕی بۆ خوێندن. دوای ساڵانێک بووە مامۆستا.",
+                "دوو برا بە ناوەکانی ڕێبوار و ڕەهەند لە شارێکی گەورەدا ژیان دەکرد. یەکێکیان خوێندن و ئەوی تر بازرگانی. بە هاوکاری کۆمپانیایەکی گەورەیان دامەزراند.",
+                "منداڵێک بە ناوی ئاوات حەزی لە گوێگرتن لە چیرۆکی باپیرەی بوو. بڕیاریدا خۆی چیرۆک بنووسێت. دوای ساڵانێک بووە نووسەرێکی ناسراو.",
+                "خەڵکی گوندێکی شاخاوی بە یەکەوە دەژیان. کاتێک زستانێکی سەخت هات، هەموو گوندەکە کۆبوونەوە و مانەوە."
             ];
 
-            // ---------- تاپۆ (کورت + درێژ + تێکەڵ) ----------
             const TAPOO_SHORT = [
                 "ئەحمەد محەممەد - ٢٢١١٤٣ - شوقە ٤/ب",
                 "خەدیجە عەلی - ٣٤٥٦٧ - خانوو ١١٣/أ",
@@ -774,142 +1036,20 @@
                 "یووسف ئەحمەد - ٥٤٣٢١ - خانوو ٨٥",
                 "ڕەحیم سەلمان - ٦٥٤٣٢ - شەقامی نەورۆز",
                 "نەجمە حەسەن - ٧٦٥٤٣ - شوقە ٥/ب",
-                "محەممەد عەلی - ٨٧٦٥٤ - خانوو ٢٢",
-                "خەلیل ئیبراهیم - ٩٨٧٦٥ - ناوچەی بەکر",
-                "حەمیدە عەلی - ١٠٩٨٧ - شوقە ٢/أ",
-                "عەبدولکەریم - ١١١٢٣ - خانوو ٤٥",
-                "نەرگس حەسەن - ١٢٢٣٤ - گەڕەکی پێشمەرگە",
-                "مەلا عەبدول - ١٣٣٤٥ - شوقە ٦/أ",
-                "ڕۆژان محەممەد - ١٤٤٥٦ - خانوو ٣٣",
-                "گوڵستان عەلی - ١٥٥٦٧ - ناوچەی مەیدان",
-                "سیروان ئەحمەد - ١٦٦٧٨ - شەقامی زانکۆ",
-                "ئیبراهیم خەلیل - ١٧٧٨٩ - شوقە ٣/ج",
-                "غەزالە عەلی - ١٨٨٩٠ - گەڕەکی بەختیاری",
-                "عومەر حەسەن - ١٩٩٠١ - شوقە ٤/أ",
-                "نازدار محەممەد - ٢٠١١٢ - خانوو ٧٨",
-                "بریار عەلی - ٢١٢٢٣ - ناوچەی ئازادی",
-                "شەماڵ محەممەد - ٢٢٣٣٤ - شەقامی کوردستان",
-                "دیلان ئەحمەد - ٢٣٤٤٥ - شوقە ١/ج",
-                "هێرۆ عەلی - ٢٤٥٥٦ - گەڕەکی هەولێر",
-                "ڕێبوار محەممەد - ٢٥٦٦٧ - شوقە ٦/ب",
-                "شیلان حەسەن - ٢٦٧٧٨ - خانوو ٥٦",
-                "زانیار عەلی - ٢٧٨٨٩ - ناوچەی کەرکوک",
-                "پەریش محەممەد - ٢٨٩٩٠ - شەقامی سەلام"
+                "محەممەد عەلی - ٨٧٦٥٤ - خانوو ٢٢"
             ];
 
             const TAPOO_LONG = [
-                "پشک دراوە بە ئەحمەد محەممەد بە (٢٢١١٤٣) لە شوقە ژمارە (٤/ب) بە ناوی فەلاح حەسەن لە گەڕەکی شۆرە",
-                "بەڵگەنامەی خانووی ژمارە (١١٣/أ) بە ناوی خەدیجە عەلی بە (٣٤٥٦٧) لە ناوچەی کەرکوک بە ڕووبەری (١٢٠) مەتر",
-                "تۆماری زەوی بە ناوی محەممەد ساڵح بە (٥٦٧٨٩) لە گەڕەکی شۆرە، خانوو بە (٢/ج) بە بەهای (١٥٠٠٠٠٠) دینار",
-                "پشک دراوە بە فاتیمە حەسەن بە (٧٨٩١٢) لە شوقە (١/أ) بە بەهای (٢٥٠٠٠٠٠٠) دینار لە ناوچەی مەیدان",
-                "تاپۆی زەوی بە ناوی عەبدولڕەحمان محەممەد بە (٣٢١٤٥) لە ناحیەی تەلەعفەر بە ڕووبەری (٢٠٠) مەتر",
-                "بەڵگەی مەڵک بە ناوی زەینەب عەلی بە (٤٣٢١١) لە شوقە (٣/ج) بە ڕووبەری (١٢٠) مەتر لە گەڕەکی بەکر",
-                "پشک دراوە بە یووسف ئەحمەد بە (٥٤٣٢١) لە خانووی ژمارە (٨٥) لە گەڕەکی بەکر بە بەهای (٨٠٠٠٠٠) دینار",
-                "تۆماری خانوو بە ناوی ڕەحیم سەلمان بە (٦٥٤٣٢) لە شەقامی نەورۆز، خانوو بە (١٢/أ) بە ڕووبەری (١٥٠) مەتر",
-                "بەڵگەنامەی زەوی بە ناوی نەجمە حەسەن بە (٧٦٥٤٣) لە شوقە (٥/ب) بە (٣٠٠) مەتر لە ناوچەی ئازادی",
-                "پشک دراوە بە محەممەد عەلی بە (٨٧٦٥٤) لە خانووی ژمارە (٢٢) لە گەڕەکی ئازادی بە بەهای (١٢٠٠٠٠٠) دینار",
-                "تاپۆی زەوی بە ناوی خەلیل ئیبراهیم بە (٩٨٧٦٥) لە ناوچەی بەکر، شوقە (٧/ج) بە ڕووبەری (٢٥٠) مەتر",
-                "بەڵگەنامەی مەڵک بە ناوی حەمیدە عەلی بە (١٠٩٨٧) لە شوقە (٢/أ) بە (١٥٠) مەتر لە گەڕەکی شۆرە",
-                "پشک دراوە بە عەبدولکەریم محەممەد بە (١١١٢٣) لە خانووی ژمارە (٤٥) شەقامی وەحدەت بە بەهای (٩٠٠٠٠٠) دینار",
-                "تۆماری زەوی بە ناوی نەرگس حەسەن بە (١٢٢٣٤) لە گەڕەکی پێشمەرگە، بە (٢/ج) بە ڕووبەری (١٨٠) مەتر",
-                "بەڵگەی مەڵک بە ناوی مەلا عەبدول بە (١٣٣٤٥) لە شوقە (٦/أ) بە (٢٠٠) مەتر لە ناوچەی کەرکوک",
-                "پشک دراوە بە ڕۆژان محەممەد بە (١٤٤٥٦) لە خانووی ژمارە (٣٣) لە گەڕەکی کوردستان بە بەهای (١١٠٠٠٠٠) دینار",
-                "تاپۆی زەوی بە ناوی گوڵستان عەلی بە (١٥٥٦٧) لە ناوچەی مەیدان، شوقە (٨/ب) بە ڕووبەری (٢٢٠) مەتر",
-                "بەڵگەنامەی خانوو بە ناوی سیروان ئەحمەد بە (١٦٦٧٨) لە شەقامی زانکۆ، بە (١/أ) بە بەهای (١٤٠٠٠٠٠) دینار",
-                "پشک دراوە بە ئیبراهیم خەلیل بە (١٧٧٨٩) لە شوقە (٣/ج) بە (٢٥٠) مەتر لە گەڕەکی بەختیاری",
-                "تۆماری زەوی بە ناوی غەزالە عەلی بە (١٨٨٩٠) لە گەڕەکی بەختیاری، خانوو (٥) بە ڕووبەری (١٣٠) مەتر",
-                "بەڵگەی مەڵک بە ناوی عومەر حەسەن بە (١٩٩٠١) لە شوقە (٤/أ) بە (٣٢٠) مەتر لە ناوچەی ئازادی",
-                "پشک دراوە بە نازدار محەممەد بە (٢٠١١٢) لە خانووی ژمارە (٧٨) لە گەڕەکی شۆرە بە بەهای (١٦٠٠٠٠٠) دینار",
-                "تاپۆی زەوی بە ناوی بریار عەلی بە (٢١٢٢٣) لە ناوچەی ئازادی، شوقە (٩/ج) بە ڕووبەری (١٩٠) مەتر",
-                "بەڵگەنامەی خانوو بە ناوی شەماڵ محەممەد بە (٢٢٣٣٤) لە شەقامی کوردستان، بە (٢/ب) بە بەهای (١٣٠٠٠٠٠) دینار",
-                "پشک دراوە بە دیلان ئەحمەد بە (٢٣٤٤٥) لە شوقە (١/ج) بە (١٨٠) مەتر لە گەڕەکی پاسداران",
-                "تۆماری زەوی بە ناوی هێرۆ عەلی بە (٢٤٥٥٦) لە گەڕەکی هەولێر، خانوو (١٤) بە ڕووبەری (٢٦٠) مەتر",
-                "بەڵگەی مەڵک بە ناوی ڕێبوار محەممەد بە (٢٥٦٦٧) لە شوقە (٦/ب) بە (٢٧٠) مەتر لە ناوچەی شۆرە",
-                "پشک دراوە بە شیلان حەسەن بە (٢٦٧٧٨) لە خانووی ژمارە (٥٦) لە گەڕەکی پاسداران بە بەهای (١٨٠٠٠٠٠) دینار",
-                "تاپۆی زەوی بە ناوی زانیار عەلی بە (٢٧٨٨٩) لە ناوچەی کەرکوک، شوقە (٣/أ) بە ڕووبەری (٢٣٠) مەتر",
-                "بەڵگەنامەی خانوو بە ناوی پەریش محەممەد بە (٢٨٩٩٠) لە شەقامی سەلام، بە (١/ب) بە بەهای (١٢٠٠٠٠٠) دینار",
-                "پشک دراوە بە هاوژین ئەحمەد بە (٢٩١٠١) لە شوقە (٨/ج) بە (٢٢٠) مەتر لە گەڕەکی بەکر",
-                "تۆماری زەوی بە ناوی بەختیار عەلی بە (٣٠١١٢) لە گەڕەکی نوێ، خانوو (٦٧) بە ڕووبەری (١٧٠) مەتر",
-                "بەڵگەی مەڵک بە ناوی سۆران محەممەد بە (٣١٢٢٣) لە شوقە (٢/أ) بە (١٣٠) مەتر لە ناوچەی مەیدان",
-                "پشک دراوە بە خاتوون حەسەن بە (٣٢٣٣٤) لە خانووی ژمارە (٨٩) لە گەڕەکی مەلا بە بەهای (٢٢٠٠٠٠٠) دینار",
-                "تاپۆی زەوی بە ناوی کامیار عەلی بە (٣٣٤٤٥) لە ناوچەی شۆرە، شوقە (٥/ب) بە ڕووبەری (١٦٠) مەتر"
-            ];
-
-            // ================================================================
-            //  KEYBOARD LAYOUT
-            // ================================================================
-
-            const KEYBOARD_ROWS = [
-                [
-                    { key: '`', finger: 'LT' },
-                    { key: '1', finger: 'LT' },
-                    { key: '2', finger: 'LT' },
-                    { key: '3', finger: 'LM' },
-                    { key: '4', finger: 'LI' },
-                    { key: '5', finger: 'LI' },
-                    { key: '6', finger: 'RT' },
-                    { key: '7', finger: 'RT' },
-                    { key: '8', finger: 'RI' },
-                    { key: '9', finger: 'RM' },
-                    { key: '0', finger: 'RR' },
-                    { key: '-', finger: 'RR' },
-                    { key: '=', finger: 'RP' },
-                    { key: 'Backspace', finger: 'RP', special: true }
-                ],
-                [
-                    { key: 'Tab', finger: 'LP', special: true },
-                    { key: 'ض', finger: 'LP' },
-                    { key: 'ص', finger: 'LR' },
-                    { key: 'ث', finger: 'LM' },
-                    { key: 'ق', finger: 'LI' },
-                    { key: 'ف', finger: 'LI' },
-                    { key: 'غ', finger: 'RT' },
-                    { key: 'ع', finger: 'RT' },
-                    { key: 'ه', finger: 'RI' },
-                    { key: 'خ', finger: 'RM' },
-                    { key: 'ح', finger: 'RR' },
-                    { key: 'ج', finger: 'RP' },
-                    { key: 'د', finger: 'RP' },
-                    { key: '\\', finger: 'RP', special: true }
-                ],
-                [
-                    { key: 'Caps', finger: 'LP', special: true },
-                    { key: 'ش', finger: 'LP' },
-                    { key: 'س', finger: 'LR' },
-                    { key: 'ي', finger: 'LM' },
-                    { key: 'ب', finger: 'LI' },
-                    { key: 'ل', finger: 'LI' },
-                    { key: 'ا', finger: 'RT' },
-                    { key: 'ت', finger: 'RT' },
-                    { key: 'ن', finger: 'RI' },
-                    { key: 'م', finger: 'RM' },
-                    { key: 'ك', finger: 'RR' },
-                    { key: 'ط', finger: 'RP' },
-                    { key: 'Enter', finger: 'RP', special: true }
-                ],
-                [
-                    { key: 'Shift', finger: 'LP', special: true },
-                    { key: 'ئ', finger: 'LP' },
-                    { key: 'ء', finger: 'LR' },
-                    { key: 'ؤ', finger: 'LM' },
-                    { key: 'ر', finger: 'LI' },
-                    { key: 'ى', finger: 'LI' },
-                    { key: 'ة', finger: 'RT' },
-                    { key: 'و', finger: 'RT' },
-                    { key: 'ز', finger: 'RI' },
-                    { key: 'ظ', finger: 'RM' },
-                    { key: 'ذ', finger: 'RR' },
-                    { key: 'Shift', finger: 'RP', special: true }
-                ],
-                [
-                    { key: 'Ctrl', finger: 'LP', special: true },
-                    { key: 'Fn', finger: 'LP', special: true },
-                    { key: 'Alt', finger: 'LP', special: true },
-                    { key: 'Space', finger: 'LP', special: true, space: true },
-                    { key: 'Alt', finger: 'RP', special: true },
-                    { key: 'Fn', finger: 'RP', special: true },
-                    { key: 'Ctrl', finger: 'RP', special: true }
-                ]
+                "پشک دراوە بە ئەحمەد محەممەد بە (٢٢١١٤٣) لە شوقە (٤/ب) بە ناوی فەلاح حەسەن لە گەڕەکی شۆرە",
+                "بەڵگەنامەی خانووی ژمارە (١١٣/أ) بە ناوی خەدیجە عەلی بە (٣٤٥٦٧) لە ناوچەی کەرکوک",
+                "تۆماری زەوی بە ناوی محەممەد ساڵح بە (٥٦٧٨٩) لە گەڕەکی شۆرە، خانوو بە (٢/ج)",
+                "پشک دراوە بە فاتیمە حەسەن بە (٧٨٩١٢) لە شوقە (١/أ) بە بەهای (٢٥٠٠٠٠٠٠) دینار",
+                "تاپۆی زەوی بە ناوی عەبدولڕەحمان محەممەد بە (٣٢١٤٥) لە ناحیەی تەلەعفەر",
+                "بەڵگەی مەڵک بە ناوی زەینەب عەلی بە (٤٣٢١١) لە شوقە (٣/ج) بە ڕووبەری (١٢٠) مەتر",
+                "پشک دراوە بە یووسف ئەحمەد بە (٥٤٣٢١) لە خانووی ژمارە (٨٥) لە گەڕەکی بەکر",
+                "تۆماری خانوو بە ناوی ڕەحیم سەلمان بە (٦٥٤٣٢) لە شەقامی نەورۆز، خانوو بە (١٢/أ)",
+                "بەڵگەنامەی زەوی بە ناوی نەجمە حەسەن بە (٧٦٥٤٣) لە شوقە (٥/ب) بە (٣٠٠) مەتر",
+                "پشک دراوە بە محەممەد عەلی بە (٨٧٦٥٤) لە خانووی ژمارە (٢٢) لە گەڕەکی ئازادی"
             ];
 
             // ================================================================
@@ -918,30 +1058,42 @@
 
             const sentenceDisplay = document.getElementById('sentenceDisplay');
             const userInput = document.getElementById('userInput');
-            const timerDisplay = document.getElementById('timerDisplay');
-            const speedDisplay = document.getElementById('speedDisplay');
-            const accuracyDisplay = document.getElementById('accuracyDisplay');
-            const progressDisplay = document.getElementById('progressDisplay');
-            const correctDisplay = document.getElementById('correctDisplay');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const levelDisplay = document.getElementById('levelDisplay');
+            const comboDisplay = document.getElementById('comboDisplay');
+            const wpmDisplay = document.getElementById('wpmDisplay');
+            const glassDisplay = document.getElementById('glassDisplay');
+            const glassCountBig = document.getElementById('glassCountBig');
+            const progressFill = document.getElementById('progressFill');
+            const glassTarget = document.getElementById('glassTarget');
             const statusText = document.getElementById('statusText');
-            const levelBadge = document.getElementById('levelBadge');
-            const levelMessage = document.getElementById('levelMessage');
-            const levelMessageText = document.getElementById('levelMessageText');
             const startBtn = document.getElementById('startBtn');
             const resetBtn = document.getElementById('resetBtn');
             const modeBtns = document.querySelectorAll('.mode-btn');
-            const countBtns = document.querySelectorAll('.count-btn');
             const subModeBtns = document.querySelectorAll('.sub-mode-btn');
             const subModeContainer = document.getElementById('subModeContainer');
-            const keyboardEl = document.getElementById('keyboard');
+            const countBtns = document.querySelectorAll('.count-btn');
+
+            // Character elements
+            const charBigEmoji = document.getElementById('charBigEmoji');
+            const swordBig = document.getElementById('swordBig');
+            const ninjaBig = document.getElementById('ninjaBig');
+            const targetDummy = document.getElementById('targetDummy');
+            const wordTarget = document.getElementById('wordTarget');
+            const charNameBig = document.getElementById('charNameBig');
+            const charLevelBig = document.getElementById('charLevelBig');
+            const characterBig = document.getElementById('characterBig');
+            const comboOnChar = document.getElementById('comboOnChar');
+            const damageOnChar = document.getElementById('damageOnChar');
 
             // ================================================================
             //  STATE
             // ================================================================
 
             let currentMode = 'proverb';
-            let currentSubMode = 'mixed'; // short, long, mixed
+            let currentSubMode = 'mixed';
             let maxCount = 10;
+
             let activeList = [];
             let currentSentence = '';
             let sentenceIndex = 0;
@@ -954,52 +1106,13 @@
             let totalCharsTyped = 0;
             let correctCharsTyped = 0;
 
-            // ================================================================
-            //  BUILD KEYBOARD
-            // ================================================================
-
-            function buildKeyboard() {
-                keyboardEl.innerHTML = '';
-                KEYBOARD_ROWS.forEach(row => {
-                    const rowDiv = document.createElement('div');
-                    rowDiv.className = 'kb-row';
-
-                    row.forEach(k => {
-                        const keyDiv = document.createElement('div');
-                        keyDiv.className = 'key';
-                        keyDiv.dataset.key = k.key;
-
-                        if (k.special) keyDiv.classList.add('special');
-                        if (k.space) keyDiv.classList.add('space');
-
-                        if (k.finger) {
-                            keyDiv.classList.add(`finger-${k.finger}`);
-                            const fingerSpan = document.createElement('span');
-                            fingerSpan.className = 'finger';
-                            const fingerNames = {
-                                'LP': 'پەنجە بچوک (چەپ)',
-                                'LR': 'پەنجە ئەڵقە (چەپ)',
-                                'LM': 'پەنجە ناوەڕاست (چەپ)',
-                                'LI': 'پەنجە ئاماژە (چەپ)',
-                                'LT': 'پەنجە گەورە (چەپ)',
-                                'RT': 'پەنجە گەورە (ڕاست)',
-                                'RI': 'پەنجە ئاماژە (ڕاست)',
-                                'RM': 'پەنجە ناوەڕاست (ڕاست)',
-                                'RR': 'پەنجە ئەڵقە (ڕاست)',
-                                'RP': 'پەنجە بچوک (ڕاست)'
-                            };
-                            fingerSpan.textContent = fingerNames[k.finger] || k.finger;
-                            keyDiv.appendChild(fingerSpan);
-                        }
-
-                        const display = k.key === 'Space' ? '⎵' : k.key;
-                        keyDiv.textContent = display;
-                        rowDiv.appendChild(keyDiv);
-                    });
-
-                    keyboardEl.appendChild(rowDiv);
-                });
-            }
+            let score = 0;
+            let level = 1;
+            let combo = 0;
+            let maxCombo = 0;
+            let sentencesCompleted = 0;
+            let glassesBroken = 0;
+            let totalGlasses = 10;
 
             // ================================================================
             //  HELPERS
@@ -1008,11 +1121,8 @@
             function getFullList() {
                 if (currentMode === 'proverb') return PROVERBS;
                 if (currentMode === 'story') return STORIES;
-                
-                // Tapoo mode
                 if (currentSubMode === 'short') return TAPOO_SHORT;
                 if (currentSubMode === 'long') return TAPOO_LONG;
-                // Mixed: combine both
                 const combined = [];
                 const maxLen = Math.max(TAPOO_SHORT.length, TAPOO_LONG.length);
                 for (let i = 0; i < maxLen; i++) {
@@ -1026,6 +1136,7 @@
                 const full = getFullList();
                 activeList = full.slice(0, Math.min(maxCount, full.length));
                 if (activeList.length === 0) activeList = ['هیچ بەڵگەیەک نیە'];
+                totalGlasses = Math.min(activeList.length, 30);
                 return activeList;
             }
 
@@ -1035,39 +1146,27 @@
                 return 'تاپۆ';
             }
 
-            function getModeEmoji() {
-                if (currentMode === 'proverb') return '📖';
-                if (currentMode === 'story') return '📚';
-                return '📜';
+            function getCharacterEmoji() {
+                const chars = ['🥷', '⚔️', '🗡️', '🔥', '⚡', '🐉', '👺', '🥷'];
+                return chars[(level - 1) % chars.length];
             }
 
-            function getSubModeLabel() {
-                if (currentSubMode === 'short') return 'کورت';
-                if (currentSubMode === 'long') return 'درێژ';
-                return 'تێکەڵ';
-            }
-
-            function getLevelFromWPM(wpm, accuracy) {
-                if (wpm < 8) return { label: 'دەستپێک', cls: 'beginner', msg: 'دەستپێک — پێویستە زیاتر ڕاهێنان بکەیت' };
-                if (wpm < 15) return { label: 'مامناوەند', cls: 'intermediate', msg: 'مامناوەند — باشە بەڵام دەتوانیت باشتر بیت' };
-                if (wpm < 25) return { label: 'باش', cls: 'advanced', msg: 'باش — ئاستێکی چاک' };
-                return { label: 'پیشەیی 🔥', cls: 'expert', msg: 'پیشەیی — زۆر خێرا و ورد' };
+            function getCharacterName() {
+                const names = ['نینجا', 'شینۆبی', 'تایپ مەستەر', 'نینجای خێرا', 'شینۆبی زیرەک', 'قاتڵی وشە', 'سەربازی شەو', 'نینجای بەهێز'];
+                return names[(level - 1) % names.length];
             }
 
             // ================================================================
-            //  RENDER
+            //  RENDER FUNCTIONS
             // ================================================================
 
             function renderSentence() {
                 if (!currentSentence) {
-                    sentenceDisplay.innerHTML =
-                        `<span>هیچ بەڵگەیەک نیە</span><span class="cursor"></span>`;
+                    sentenceDisplay.innerHTML = `<span>هیچ بەڵگەیەک نیە</span><span class="cursor"></span>`;
                     return;
                 }
-
                 const chars = currentSentence.split('');
                 let html = '';
-
                 for (let i = 0; i < chars.length; i++) {
                     if (i < charIndex) {
                         html += `<span data-idx="${i}">${chars[i]}</span>`;
@@ -1077,24 +1176,19 @@
                         html += `<span data-idx="${i}">${chars[i]}</span>`;
                     }
                 }
-
                 if (charIndex >= chars.length) {
                     html += `<span class="cursor"></span>`;
                 }
-
                 sentenceDisplay.innerHTML = html;
                 applyStyles();
+                updateWordTarget();
             }
 
             function applyStyles() {
                 const input = userInput.value;
                 const chars = currentSentence.split('');
                 const spans = sentenceDisplay.querySelectorAll('span[data-idx]');
-
-                spans.forEach(span => {
-                    span.classList.remove('correct', 'wrong');
-                });
-
+                spans.forEach(span => span.classList.remove('correct', 'wrong'));
                 for (let i = 0; i < input.length && i < chars.length; i++) {
                     const span = sentenceDisplay.querySelector(`span[data-idx="${i}"]`);
                     if (!span) continue;
@@ -1106,103 +1200,285 @@
                 }
             }
 
-            function updateStats() {
-                const elapsed = startTime ? (Date.now() - startTime) / 1000 : 0;
-                timerDisplay.textContent = Math.floor(elapsed);
+            function renderGlasses() {
+                glassTarget.innerHTML = '';
+                const total = Math.min(totalGlasses, 30);
+                for (let i = 0; i < total; i++) {
+                    const glass = document.createElement('div');
+                    glass.className = 'glass';
+                    if (i < glassesBroken) {
+                        glass.classList.add('broken');
+                        if (i < glassesBroken - 2) {
+                            glass.classList.add('shattered');
+                        }
+                    }
+                    glass.dataset.index = i;
+                    const num = document.createElement('span');
+                    num.className = 'glass-num';
+                    num.textContent = i + 1;
+                    glass.appendChild(num);
+                    glassTarget.appendChild(glass);
+                }
+                glassDisplay.textContent = glassesBroken;
+                glassCountBig.textContent = glassesBroken;
+            }
 
+            function updateDisplay() {
+                const elapsed = startTime ? (Date.now() - startTime) / 1000 : 0;
                 if (elapsed > 0 && correctCharsTyped > 0) {
                     const minutes = elapsed / 60;
                     const wpm = Math.round((correctCharsTyped / 5) / minutes);
-                    speedDisplay.textContent = wpm;
-
-                    const level = getLevelFromWPM(wpm, 0);
-                    levelBadge.textContent = `⚡ ئاست: ${level.label}`;
-                    levelBadge.className = `badge-level ${level.cls}`;
+                    wpmDisplay.textContent = wpm;
                 } else {
-                    speedDisplay.textContent = '0';
+                    wpmDisplay.textContent = '0';
                 }
 
-                if (totalCharsTyped > 0) {
-                    const acc = Math.round((correctCharsTyped / totalCharsTyped) * 100);
-                    accuracyDisplay.textContent = acc;
+                scoreDisplay.textContent = score;
+                levelDisplay.textContent = level;
+                comboDisplay.textContent = combo;
+
+                // Update character
+                charBigEmoji.textContent = getCharacterEmoji();
+                charNameBig.textContent = `🥷 ${getCharacterName()}`;
+                charLevelBig.textContent = level;
+
+                // Update combo on character
+                if (combo > 0) {
+                    comboOnChar.textContent = `🔥 x${combo}`;
+                    comboOnChar.classList.add('active');
                 } else {
-                    accuracyDisplay.textContent = '100';
+                    comboOnChar.textContent = '🔥 x0';
+                    comboOnChar.classList.remove('active');
                 }
 
                 const total = activeList.length;
-                const current = Math.min(sentenceIndex + 1, total);
-                progressDisplay.textContent = `${current}/${total}`;
-                correctDisplay.textContent = correctCharsTyped;
-            }
+                const progress = total > 0 ? (sentencesCompleted / total) * 100 : 0;
+                progressFill.style.width = Math.min(progress, 100) + '%';
 
-            function updateStatus() {
                 const label = getModeLabel();
-                const emoji = getModeEmoji();
                 const count = activeList.length;
-                let extra = '';
-                if (currentMode === 'tapoo') {
-                    extra = ` (${getSubModeLabel()})`;
-                }
-                statusText.innerHTML = `${emoji} مۆدی ${label}${extra} — <strong>${count}</strong>`;
+                let extra = currentMode === 'tapoo' ? ` (${currentSubMode === 'short' ? 'کورت' : currentSubMode === 'long' ? 'درێژ' : 'تێکەڵ'})` : '';
+                statusText.innerHTML = `${currentMode === 'proverb' ? '📖' : currentMode === 'story' ? '📚' : '📜'} مۆدی ${label}${extra} — <strong>${count}</strong>`;
+
+                renderGlasses();
             }
 
             // ================================================================
-            //  KEYBOARD HIGHLIGHT
+            //  SWORD & CHARACTER ANIMATIONS
             // ================================================================
 
-            function highlightKey(char) {
-                const allKeys = keyboardEl.querySelectorAll('.key');
-                allKeys.forEach(k => {
-                    k.classList.remove('active-key', 'hit-correct', 'hit-wrong');
-                });
+            function ninjaAttackMotion() {
+                ninjaBig.classList.remove('attack');
+                void ninjaBig.offsetWidth;
+                ninjaBig.classList.add('attack');
+                setTimeout(() => ninjaBig.classList.remove('attack'), 220);
+            }
 
-                if (!char) return;
+            function swingSword() {
+                swordBig.classList.remove('swing', 'slash');
+                ninjaBig.classList.remove('ninja-hit');
+                void swordBig.offsetWidth;
+                swordBig.classList.add('swing');
+                ninjaAttackMotion();
+                targetDummy.classList.remove('hit');
+                void targetDummy.offsetWidth;
+                targetDummy.classList.add('hit');
+                setTimeout(() => {
+                    swordBig.classList.remove('swing');
+                    targetDummy.classList.remove('hit');
+                }, 180);
+                spawnSlashLine();
+            }
 
-                let found = null;
-                allKeys.forEach(k => {
-                    const keyText = k.dataset.key;
-                    if (keyText && keyText.toLowerCase() === char.toLowerCase()) {
-                        found = k;
-                    }
-                    if (char === ' ' && k.dataset.key === 'Space') {
-                        found = k;
-                    }
-                    if (keyText === char) {
-                        found = k;
-                    }
-                });
+            function slashSword() {
+                swordBig.classList.remove('swing', 'slash');
+                void swordBig.offsetWidth;
+                swordBig.classList.add('slash');
+                ninjaAttackMotion();
+                targetDummy.classList.remove('hit');
+                void targetDummy.offsetWidth;
+                targetDummy.classList.add('hit');
+                setTimeout(() => {
+                    swordBig.classList.remove('slash');
+                    targetDummy.classList.remove('hit');
+                }, 300);
+                spawnSlashLine();
+            }
 
-                if (found) {
-                    found.classList.add('active-key');
+            function spawnSlashLine() {
+                const rect = targetDummy.getBoundingClientRect();
+                const el = document.createElement('div');
+                el.className = 'slash-line';
+                el.style.left = (rect.left - 55) + 'px';
+                el.style.top = (rect.top + rect.height / 2) + 'px';
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 260);
+            }
+
+            function dashChar() {
+                characterBig.classList.remove('dash-char', 'hit-char', 'jump-char');
+                void characterBig.offsetWidth;
+                characterBig.classList.add('dash-char');
+                setTimeout(() => characterBig.classList.remove('dash-char'), 350);
+            }
+
+            function hitChar() {
+                characterBig.classList.remove('dash-char', 'hit-char', 'jump-char');
+                void characterBig.offsetWidth;
+                characterBig.classList.add('hit-char');
+                setTimeout(() => characterBig.classList.remove('hit-char'), 450);
+            }
+
+            function jumpChar() {
+                characterBig.classList.remove('dash-char', 'hit-char', 'jump-char');
+                void characterBig.offsetWidth;
+                characterBig.classList.add('jump-char');
+                setTimeout(() => characterBig.classList.remove('jump-char'), 600);
+            }
+
+            function showDamageOnChar(dmg) {
+                damageOnChar.textContent = `💥 +${dmg}`;
+                damageOnChar.classList.remove('active');
+                void damageOnChar.offsetWidth;
+                damageOnChar.classList.add('active');
+                setTimeout(() => damageOnChar.classList.remove('active'), 800);
+            }
+
+            function spawnParticles(x, y, count = 12) {
+                const emojis = ['⚔️', '🗡️', '✨', '⚡', '💥', '🔥', '⭐', '🌟'];
+                for (let i = 0; i < count; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'particle';
+                    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    el.style.left = (x || window.innerWidth / 2) + 'px';
+                    el.style.top = (y || window.innerHeight / 2) + 'px';
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = 50 + Math.random() * 200;
+                    el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                    el.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+                    el.style.fontSize = (1 + Math.random() * 2) + 'rem';
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 900);
                 }
             }
 
-            function markHit(char, isCorrect) {
-                const allKeys = keyboardEl.querySelectorAll('.key');
-                let found = null;
-                allKeys.forEach(k => {
-                    const keyText = k.dataset.key;
-                    if (keyText && keyText.toLowerCase() === char.toLowerCase()) {
-                        found = k;
-                    }
-                    if (char === ' ' && k.dataset.key === 'Space') {
-                        found = k;
-                    }
-                    if (keyText === char) {
-                        found = k;
-                    }
-                });
-
-                if (found) {
-                    found.classList.remove('active-key');
-                    if (isCorrect) {
-                        found.classList.add('hit-correct');
-                        setTimeout(() => found.classList.remove('hit-correct'), 300);
-                    } else {
-                        found.classList.add('hit-wrong');
-                        setTimeout(() => found.classList.remove('hit-wrong'), 400);
-                    }
+            function spawnGlassFragments(x, y, count = 15) {
+                for (let i = 0; i < count; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'glass-fragment';
+                    el.style.left = (x || window.innerWidth / 2) + 'px';
+                    el.style.top = (y || window.innerHeight / 2) + 'px';
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = 40 + Math.random() * 200;
+                    el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                    el.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+                    el.style.background = `rgba(${100 + Math.random()*155}, ${200 + Math.random()*55}, 255, ${0.08 + Math.random()*0.15})`;
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 800);
                 }
+            }
+
+            function showLevelUp() {
+                const el = document.createElement('div');
+                el.className = 'level-up';
+                el.textContent = `🥷 ئاست ${level} 🗡️`;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 1600);
+                spawnParticles(window.innerWidth / 2, window.innerHeight / 2, 30);
+                jumpChar();
+            }
+
+            function breakWord() {
+                animateWordBreak();
+                slashSword();
+                jumpChar();
+
+                const dmg = 8 + (combo * 2);
+                showDamageOnChar(dmg);
+                score += dmg;
+                combo++;
+                if (combo > maxCombo) maxCombo = combo;
+                updateDisplay();
+
+                wordTarget.classList.remove('word-done');
+                void wordTarget.offsetWidth;
+                wordTarget.classList.add('word-done');
+                setTimeout(() => wordTarget.classList.remove('word-done'), 260);
+            }
+
+            function breakGlass() {
+                if (glassesBroken >= totalGlasses) return;
+                glassesBroken++;
+                renderGlasses();
+
+                slashSword();
+                jumpChar();
+
+                const glasses = glassTarget.querySelectorAll('.glass');
+                if (glasses.length > glassesBroken - 1) {
+                    const glassEl = glasses[glassesBroken - 1];
+                    const rect = glassEl.getBoundingClientRect();
+                    spawnGlassFragments(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
+                }
+
+                const dmg = 10 + (combo * 2);
+                showDamageOnChar(dmg);
+                score += dmg;
+
+                combo++;
+                if (combo > maxCombo) maxCombo = combo;
+
+                updateDisplay();
+
+                if (glassesBroken >= totalGlasses) {
+                    level++;
+                    totalGlasses = Math.min(totalGlasses + 5, 30);
+                    glassesBroken = 0;
+                    showLevelUp();
+                    renderGlasses();
+                    updateDisplay();
+                }
+            }
+
+            function getWordBoundaries(text) {
+                const words = [];
+                const re = /\S+/gu;
+                let m;
+                while ((m = re.exec(text)) !== null) {
+                    words.push({ start: m.index, end: m.index + m[0].length, text: m[0] });
+                }
+                return words;
+            }
+
+            function getCurrentWord() {
+                const words = getWordBoundaries(currentSentence);
+                return words.find(w => charIndex < w.end) || words[words.length - 1] || null;
+            }
+
+            function updateWordTarget() {
+                const word = getCurrentWord();
+                if (!word) {
+                    wordTarget.textContent = '🏆 تەواو';
+                    return;
+                }
+                const typed = Math.max(0, Math.min(charIndex - word.start, word.text.length));
+                const remaining = word.text.slice(typed);
+                wordTarget.textContent = remaining ? `🎯 ${remaining}` : '⚡ ئامادەی وشەی داهاتوو';
+            }
+
+            function animateWordBreak() {
+                targetDummy.classList.remove('word-break');
+                void targetDummy.offsetWidth;
+                targetDummy.classList.add('word-break');
+                spawnGlassFragments(
+                    targetDummy.getBoundingClientRect().left + targetDummy.offsetWidth / 2,
+                    targetDummy.getBoundingClientRect().top + targetDummy.offsetHeight / 2,
+                    22
+                );
+                setTimeout(() => {
+                    targetDummy.classList.remove('word-break');
+                    targetDummy.style.opacity = '1';
+                }, 520);
             }
 
             // ================================================================
@@ -1214,7 +1490,6 @@
                     finishGame();
                     return;
                 }
-
                 sentenceIndex = index;
                 currentSentence = activeList[index];
                 charIndex = 0;
@@ -1224,59 +1499,39 @@
                 userInput.value = '';
                 userInput.disabled = false;
                 renderSentence();
-                updateStats();
-                updateStatus();
-                highlightKey('');
-                levelMessage.classList.remove('show');
+                updateDisplay();
             }
 
             function finishGame() {
                 stopTimer();
                 isActive = false;
                 userInput.disabled = true;
-
-                const wpm = parseInt(speedDisplay.textContent) || 0;
-                const accuracy = parseInt(accuracyDisplay.textContent) || 0;
-                const level = getLevelFromWPM(wpm, accuracy);
-
-                const modeEmoji = getModeEmoji();
-                const modeLabel = getModeLabel();
-
                 sentenceDisplay.innerHTML = `
-                    <span style="color: #fbbf24; font-weight: 600; font-size: 1.6rem;">
-                        🎉 تەواو! ${activeList.length} ${modeLabel} تەواو بوون!
+                    <span style="color: #ffd700; font-weight: 700; font-size: 1.6rem;">
+                        🏆 تەواو! خاڵ: ${score} | ئاست: ${level} | شوشە: ${glassesBroken}
                     </span>
                     <span class="cursor"></span>
                 `;
-
-                levelMessage.classList.add('show');
-                levelMessageText.innerHTML = `
-                    <span class="msg-${level.cls}">
-                        🏆 ئاستەکەت: ${level.msg} 
-                        (WPM: ${wpm} | دروستی: ${accuracy}%)
-                    </span>
-                `;
-
                 statusText.innerHTML = '🏁 تەواو! دووبارە دەستپێبکە';
-                levelBadge.textContent = `⚡ ئاست: ${level.label}`;
-                levelBadge.className = `badge-level ${level.cls}`;
-                updateStats();
-                highlightKey('');
+                charBigEmoji.textContent = '🏆';
+                spawnParticles(window.innerWidth / 2, window.innerHeight / 2, 35);
+                updateDisplay();
             }
 
             function startGame() {
                 if (isActive) return;
-
                 buildActiveList();
                 if (activeList.length === 0) return;
+                if (sentenceIndex >= activeList.length) sentenceIndex = 0;
+                if (!currentSentence || sentenceIndex >= activeList.length) loadSentence(0);
 
-                if (sentenceIndex >= activeList.length) {
-                    sentenceIndex = 0;
-                }
-
-                if (!currentSentence || sentenceIndex >= activeList.length) {
-                    loadSentence(0);
-                }
+                score = 0;
+                level = 1;
+                combo = 0;
+                maxCombo = 0;
+                sentencesCompleted = 0;
+                glassesBroken = 0;
+                totalGlasses = Math.min(activeList.length, 30);
 
                 isActive = true;
                 userInput.disabled = false;
@@ -1290,13 +1545,8 @@
                 currentSentence = activeList[sentenceIndex];
                 renderSentence();
                 startTimer();
-                updateStats();
-                updateStatus();
-                highlightKey('');
-                levelMessage.classList.remove('show');
-
-                levelBadge.textContent = '⚡ ئاست: —';
-                levelBadge.className = 'badge-level beginner';
+                updateDisplay();
+                renderGlasses();
             }
 
             function resetGame() {
@@ -1304,25 +1554,39 @@
                 isActive = false;
                 startTime = null;
 
+                score = 0;
+                level = 1;
+                combo = 0;
+                maxCombo = 0;
+                sentencesCompleted = 0;
+                glassesBroken = 0;
+                totalGlasses = 10;
+
                 buildActiveList();
                 if (activeList.length === 0) activeList = ['هیچ بەڵگەیەک نیە'];
-
                 sentenceIndex = 0;
                 loadSentence(0);
 
                 userInput.disabled = false;
                 userInput.value = '';
-                timerDisplay.textContent = '0';
-                speedDisplay.textContent = '0';
-                accuracyDisplay.textContent = '100';
-                progressDisplay.textContent = `1/${activeList.length}`;
-                correctDisplay.textContent = '0';
-                levelBadge.textContent = '⚡ ئاست: —';
-                levelBadge.className = 'badge-level beginner';
-                levelMessage.classList.remove('show');
-                updateStatus();
-                highlightKey('');
+                updateDisplay();
+                comboOnChar.classList.remove('active');
                 userInput.focus();
+                renderGlasses();
+            }
+
+            function completeSentence() {
+                sentencesCompleted++;
+                updateDisplay();
+
+                if (sentenceIndex + 1 < activeList.length) {
+                    setTimeout(() => {
+                        loadSentence(sentenceIndex + 1);
+                        if (isActive) userInput.focus();
+                    }, 350);
+                } else {
+                    setTimeout(finishGame, 500);
+                }
             }
 
             // ================================================================
@@ -1333,7 +1597,7 @@
                 if (timerInterval) stopTimer();
                 startTime = Date.now();
                 timerInterval = setInterval(() => {
-                    if (startTime) updateStats();
+                    if (startTime) updateDisplay();
                 }, 200);
             }
 
@@ -1364,38 +1628,53 @@
                     const idx = input.length - 1;
                     if (idx < chars.length) {
                         const isCorrect = lastChar === chars[idx];
-                        markHit(lastChar, isCorrect);
+
+                        if (isCorrect) {
+                            // هەر پیتێکی ڕاست = شمشێر دەجوڵێت + کارەکتەر باز دەدات
+                            swingSword();
+                            dashChar();
+                        } else {
+                            combo = 0;
+                            comboOnChar.textContent = '💔 شکا!';
+                            comboOnChar.classList.add('active');
+                            setTimeout(() => {
+                                comboOnChar.classList.remove('active');
+                                comboOnChar.textContent = '🔥 x0';
+                            }, 600);
+                            hitChar();
+                        }
                     }
                 }
 
                 totalCharsTyped = typedLen;
-
                 let correctCount = 0;
                 for (let i = 0; i < typedLen; i++) {
                     if (input[i] === chars[i]) correctCount++;
                 }
                 correctCharsTyped = correctCount;
-
+                const previousCharIndex = charIndex;
+                ninjaAttackMotion();
                 charIndex = Math.min(input.length, chars.length);
 
-                renderSentence();
-                updateStats();
-
-                if (charIndex < chars.length) {
-                    highlightKey(chars[charIndex]);
-                } else {
-                    highlightKey('');
+                // Every completed word triggers a ninja finishing slash.
+                const words = getWordBoundaries(currentSentence);
+                for (const word of words) {
+                    if (previousCharIndex < word.end && charIndex >= word.end) {
+                        breakWord();
+                    }
                 }
 
+                renderSentence();
+                updateDisplay();
+
                 if (input.length >= chars.length && correctCount === chars.length) {
+                    // Final glass smash: finishing the whole sentence.
+                    breakGlass();
                     setTimeout(() => {
-                        if (sentenceIndex + 1 < activeList.length) {
-                            loadSentence(sentenceIndex + 1);
-                            if (isActive) userInput.focus();
-                        } else {
-                            finishGame();
+                        if (isActive) {
+                            completeSentence();
                         }
-                    }, 400);
+                    }, 250);
                 }
             }
 
@@ -1406,40 +1685,22 @@
             function setMode(mode) {
                 if (mode === currentMode) return;
                 currentMode = mode;
-
-                modeBtns.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.mode === mode);
-                });
-
-                // Show/hide sub-mode buttons for Tapoo
-                if (mode === 'tapoo') {
-                    subModeContainer.style.display = 'flex';
-                } else {
-                    subModeContainer.style.display = 'none';
-                }
-
+                modeBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+                subModeContainer.style.display = mode === 'tapoo' ? 'flex' : 'none';
                 resetGame();
             }
 
             function setSubMode(submode) {
                 if (submode === currentSubMode) return;
                 currentSubMode = submode;
-
-                subModeBtns.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.submode === submode);
-                });
-
+                subModeBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.submode === submode));
                 resetGame();
             }
 
             function setCount(count) {
                 if (count === maxCount) return;
                 maxCount = count;
-
-                countBtns.forEach(btn => {
-                    btn.classList.toggle('active', parseInt(btn.dataset.count) === count);
-                });
-
+                countBtns.forEach(btn => btn.classList.toggle('active', parseInt(btn.dataset.count) === count));
                 resetGame();
             }
 
@@ -1452,35 +1713,21 @@
             resetBtn.addEventListener('click', resetGame);
 
             modeBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    setMode(this.dataset.mode);
-                });
+                btn.addEventListener('click', function() { setMode(this.dataset.mode); });
             });
 
             subModeBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    setSubMode(this.dataset.submode);
-                });
+                btn.addEventListener('click', function() { setSubMode(this.dataset.submode); });
             });
 
             countBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    setCount(parseInt(this.dataset.count));
-                });
-            });
-
-            keyboardEl.addEventListener('click', function() {
-                userInput.focus();
+                btn.addEventListener('click', function() { setCount(parseInt(this.dataset.count)); });
             });
 
             document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && e.key === 'Enter') {
-                    e.preventDefault();
-                    startGame();
-                }
-                if (e.key === 'Escape') {
-                    resetGame();
-                }
+                if (e.ctrlKey && e.key === 'Enter') { e.preventDefault();
+                    startGame(); }
+                if (e.key === 'Escape') { resetGame(); }
             });
 
             // ================================================================
@@ -1488,27 +1735,17 @@
             // ================================================================
 
             function init() {
-                buildKeyboard();
-                
-                // Hide sub-mode initially
                 subModeContainer.style.display = 'none';
-                
                 buildActiveList();
                 if (activeList.length === 0) activeList = ['بەخێربێیت!'];
                 loadSentence(0);
-                updateStatus();
-                levelBadge.textContent = '⚡ ئاست: —';
-                levelBadge.className = 'badge-level beginner';
+                updateDisplay();
+                renderGlasses();
                 userInput.focus();
-
-                if (currentSentence && currentSentence.length > 0) {
-                    setTimeout(() => highlightKey(currentSentence[0]), 300);
-                }
-
-                console.log('⌨️ تایپ خێرا - وتە · چیرۆک · تاپۆ');
-                console.log(`📚 ${activeList.length} بەڵگە ئامادەیە`);
+                console.log('🥷 شمشێر تایپ - نینجای تایپ!');
+                console.log('🗡️ هەر پیتێکی ڕاست = شمشێر دەجوڵێت | هەر وشەیەک = برینی کۆتایی');
+                console.log('💎 هەر وشەیەک = ئامانج دەشکێت | کۆتایی ڕستە = فینیشەر');
                 console.log('💡 Ctrl+Enter = دەستپێکردن | Esc = دووبارە');
-                console.log('📜 تاپۆ: کورت (تەنها ناو و ژمارە) | درێژ (بەڵگەی تەواو) | تێکەڵ');
             }
 
             init();
