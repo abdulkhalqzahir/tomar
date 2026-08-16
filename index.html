@@ -1,1757 +1,2015 @@
 <!DOCTYPE html>
-<html lang="ckb" dir="rtl">
+<html lang="ckb">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>⚔️ABDULKHALQ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>سیستەمی پەنجەمۆری کارمەندان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            font-family: 'Inter', 'Noto Naskh Arabic', 'Segoe UI', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(145deg, #0a0e1a 0%, #1a0a0a 50%, #0f0a1a 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-            direction: rtl;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #ff6b6b, transparent),
-                radial-gradient(2px 2px at 40px 70px, rgba(255,200,100,0.8), transparent),
-                radial-gradient(2px 2px at 50px 160px, #ff4444, transparent);
-            background-size: 200px 200px;
-            opacity: 0.1;
-            z-index: 0;
-            pointer-events: none;
+            background: #0a0a0a;
+            padding: 25px;
         }
 
         .container {
-            max-width: 880px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 40px;
-            padding: 24px 24px 20px;
-            border: 1px solid rgba(255, 100, 100, 0.08);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===== HEADER ===== */
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ff6b6b, #ff4444, #cc0000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .logo small {
-            font-size: 0.65rem;
-            color: #8a6b6b;
-            font-weight: 500;
-            -webkit-text-fill-color: #8a6b6b;
-            display: block;
-        }
-
-        .score-board {
-            display: flex;
-            gap: 12px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 6px 14px;
-            border-radius: 60px;
-            border: 1px solid rgba(255, 100, 100, 0.08);
-            flex-wrap: wrap;
-        }
-        .score-item {
-            text-align: center;
-            padding: 0 3px;
-        }
-        .score-number {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.2;
-        }
-        .score-number.gold { color: #ffd700; }
-        .score-number.green { color: #34d399; }
-        .score-number.blue { color: #6fcbff; }
-        .score-number.pink { color: #ff6b6b; }
-        .score-number.purple { color: #a78bfa; }
-        .score-label {
-            font-size: 0.5rem;
-            font-weight: 600;
-            color: #8a6b6b;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        /* ===== CHARACTER AREA (بە گەورەیی) ===== */
-        .character-area {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 30px;
-            padding: 30px 20px 20px;
-            margin-bottom: 12px;
-            border: 2px solid rgba(255, 100, 100, 0.04);
-            box-shadow: inset 0 4px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .character-big {
-            font-size: 8rem;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            filter: drop-shadow(0 10px 40px rgba(255, 50, 50, 0.2));
-            transition: all 0.1s ease;
-        }
-
-        .character-big .sword-big {
-            font-size: 5rem;
-            display: inline-block;
-            transform-origin: bottom center;
-            transition: all 0.05s ease;
-        }
-
-        .character-big .sword-big.swing {
-            animation: swordBigSwing 0.15s ease;
-        }
-
-        @keyframes swordBigSwing {
-            0% { transform: rotate(-40deg) scale(1); }
-            50% { transform: rotate(35deg) scale(1.4); }
-            100% { transform: rotate(-40deg) scale(1); }
-        }
-
-        .character-big .sword-big.slash {
-            animation: swordBigSlash 0.25s ease;
-        }
-
-        @keyframes swordBigSlash {
-            0% { transform: rotate(-40deg) scale(1); opacity: 1; }
-            40% { transform: rotate(70deg) scale(1.6); opacity: 1; }
-            100% { transform: rotate(-40deg) scale(1); opacity: 0.6; }
-        }
-
-        .character-big.dash-char {
-            animation: charBigDash 0.35s ease;
-        }
-
-        @keyframes charBigDash {
-            0% { transform: translateX(0) scale(1); }
-            30% { transform: translateX(40px) scale(1.15); }
-            70% { transform: translateX(-15px) scale(0.92); }
-            100% { transform: translateX(0) scale(1); }
-        }
-
-        .character-big.hit-char {
-            animation: charBigHit 0.45s ease;
-        }
-
-        @keyframes charBigHit {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-20px) rotate(-5deg); }
-            40% { transform: translateX(20px) rotate(5deg); }
-            60% { transform: translateX(-10px); }
-            80% { transform: translateX(10px); }
-        }
-
-        .character-big.jump-char {
-            animation: charBigJump 0.6s ease;
-        }
-
-        @keyframes charBigJump {
-            0% { transform: translateY(0) scale(1); }
-            30% { transform: translateY(-50px) scale(1.2); }
-            60% { transform: translateY(-20px) scale(0.9); }
-            100% { transform: translateY(0) scale(1); }
-        }
-
-        .char-name-big {
-            color: #ff6b6b;
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-top: 6px;
-            text-shadow: 0 0 30px rgba(255, 50, 50, 0.1);
-        }
-
-        .char-level-big {
-            color: #8a6b6b;
-            font-size: 0.85rem;
-        }
-        .char-level-big span {
-            color: #ffd700;
-            font-weight: 600;
-        }
-
-        /* ===== GLASS TARGET ===== */
-        .glass-target {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            padding: 8px 0;
-            flex-wrap: wrap;
-            margin-top: 4px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .glass {
-            width: 34px;
-            height: 42px;
-            background: rgba(100, 200, 255, 0.06);
-            border: 2px solid rgba(100, 200, 255, 0.12);
-            border-radius: 6px 6px 12px 12px;
+            background: rgba(20, 20, 30, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 24px 28px;
+            border: 1px solid rgba(120, 80, 200, 0.15);
+            box-shadow: 0 8px 32px rgba(120, 80, 200, 0.25), 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255,
+                    0.03);
+            transition: all 0.3s ease;
+        }
+
+        .glass:hover {
+            box-shadow: 0 12px 48px rgba(120, 80, 200, 0.35), 0 6px 24px rgba(0, 0, 0, 0.7);
+        }
+
+        .header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-size: 0.55rem;
-            color: rgba(100, 200, 255, 0.12);
-            transition: all 0.3s ease;
-            position: relative;
-            box-shadow: inset 0 -8px 16px rgba(100, 200, 255, 0.02);
+            padding: 18px 28px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .glass .glass-num {
-            font-size: 0.5rem;
-            color: rgba(100, 200, 255, 0.1);
-            font-weight: 700;
-        }
-
-        .glass.broken {
-            background: rgba(255, 50, 50, 0.08);
-            border-color: rgba(255, 50, 50, 0.15);
-            animation: glassBreak 0.4s ease forwards;
-        }
-
-        .glass.broken .glass-num {
-            color: rgba(255, 50, 50, 0.2);
-        }
-
-        .glass.shattered {
-            opacity: 0;
-            transform: scale(0.2) rotate(30deg);
-            border-color: transparent;
-        }
-
-        @keyframes glassBreak {
-            0% { transform: scale(1); border-color: rgba(255, 50, 50, 0.2); }
-            30% { transform: scale(1.15); border-color: rgba(255, 200, 100, 0.4); }
-            60% { transform: scale(0.8) rotate(8deg); }
-            100% { transform: scale(0.95); }
-        }
-
-        /* ===== SENTENCE ===== */
-        #sentenceDisplay {
-            font-size: 1.3rem;
-            line-height: 2.2rem;
-            color: #e8edff;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            width: 100%;
-            word-break: break-word;
-            font-family: 'Noto Naskh Arabic', 'Inter', sans-serif;
-            padding: 10px 4px 6px;
-            min-height: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            margin-top: 6px;
-            text-align: center;
-        }
-        #sentenceDisplay .correct {
-            color: #34d399;
-            text-shadow: 0 0 20px rgba(52, 211, 153, 0.15);
-        }
-        #sentenceDisplay .wrong {
-            color: #ff4444;
-            background: rgba(255, 0, 0, 0.04);
-            border-radius: 4px;
-            padding: 0 2px;
-            text-decoration: underline wavy #ff4444;
-        }
-        #sentenceDisplay .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.8rem;
-            background: #ff6b6b;
-            margin-right: 2px;
-            border-radius: 3px;
-            animation: blink 1s step-end infinite;
-            vertical-align: text-bottom;
-            box-shadow: 0 0 20px rgba(255, 50, 50, 0.2);
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* ===== COMBO / DAMAGE on character ===== */
-        .combo-on-char {
+        .logo {
             font-size: 1.8rem;
-            font-weight: 900;
-            color: #ffd700;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        .combo-on-char.active {
-            opacity: 1;
-            animation: comboPop 0.3s ease;
-        }
-        @keyframes comboPop {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); color: #ff6b6b; }
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
 
-        .damage-on-char {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #ffd700;
-            text-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            pointer-events: none;
-            font-family: 'Inter', sans-serif;
-        }
-        .damage-on-char.active {
-            animation: dmgBigFloat 0.8s ease forwards;
-        }
-        @keyframes dmgBigFloat {
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.3); }
-            40% { opacity: 1; transform: translate(-50%, -70%) scale(1.4); }
-            100% { opacity: 0; transform: translate(-50%, -110%) scale(1); }
+        .logo i {
+            -webkit-text-fill-color: initial;
+            color: #7c3aed;
+            margin-right: 10px;
         }
 
-        /* ===== PROGRESS BAR ===== */
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 10px;
-            margin-top: 4px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff4444, #ff6b6b, #ffd700);
-            border-radius: 10px;
-            transition: width 0.4s ease;
-            width: 0%;
-            box-shadow: 0 0 20px rgba(255, 50, 50, 0.15);
-        }
-
-        /* ===== INPUT ===== */
-        #userInput {
-            width: 100%;
-            padding: 14px 22px;
-            font-size: 1.1rem;
-            border-radius: 60px;
-            border: 2px solid rgba(255, 100, 100, 0.06);
-            background: rgba(0, 0, 0, 0.4);
-            color: #f0f4ff;
-            outline: none;
-            transition: all 0.3s ease;
-            direction: ltr;
-            text-align: right;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-            font-family: 'Noto Naskh Arabic', 'Inter', sans-serif;
-        }
-        #userInput:focus {
-            border-color: #ff6b6b;
-            box-shadow: 0 0 0 8px rgba(255, 50, 50, 0.05);
-            background: rgba(0, 0, 0, 0.55);
-        }
-        #userInput::placeholder {
-            color: #3e3a5a;
-            font-weight: 400;
-        }
-        #userInput:disabled {
-            opacity: 0.25;
-            cursor: not-allowed;
-        }
-
-        /* ===== BUTTONS ===== */
-        .actions {
+        .header-actions {
             display: flex;
             gap: 12px;
-            margin-top: 12px;
             flex-wrap: wrap;
-            justify-content: center;
         }
+
         .btn {
-            padding: 10px 28px;
-            border-radius: 60px;
+            padding: 10px 24px;
             border: none;
-            font-size: 0.9rem;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #d4c4e8;
+            border: 1px solid rgba(120, 80, 200, 0.1);
         }
-        .btn-start {
-            background: linear-gradient(135deg, #ff6b6b, #cc0000);
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(120, 80, 200, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
             color: #fff;
-            box-shadow: 0 6px 24px rgba(255, 50, 50, 0.2);
-        }
-        .btn-start:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 36px rgba(255, 50, 50, 0.3);
-        }
-        .btn-start:active { transform: scale(0.96); }
-        .btn-reset {
-            background: rgba(255, 120, 120, 0.06);
-            color: #ffbcbc;
-            border: 1px solid rgba(255, 120, 120, 0.08);
-        }
-        .btn-reset:hover {
-            background: rgba(255, 80, 80, 0.12);
-            border-color: rgba(255, 120, 120, 0.15);
+            border-color: #7c3aed;
         }
 
-        /* ===== STATUS ===== */
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 12px;
-            padding: 6px 14px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 40px;
-            border: 1px solid rgba(255, 100, 100, 0.03);
-        }
-        .status-text {
-            color: #8a6b6b;
-            font-size: 0.7rem;
-            font-weight: 500;
-        }
-        .status-text strong {
-            color: #ff6b6b;
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            box-shadow: 0 6px 30px rgba(124, 58, 237, 0.4);
         }
 
-        .mode-btns, .sub-mode-btns, .count-btns {
-            display: flex;
-            gap: 3px;
-            flex-wrap: wrap;
+        .btn-success {
+            background: rgba(52, 211, 153, 0.15);
+            color: #6ee7b7;
+            border-color: rgba(52, 211, 153, 0.2);
         }
-        .mode-btn, .sub-mode-btn, .count-btn {
-            padding: 3px 10px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+
+        .btn-success:hover {
+            background: rgba(52, 211, 153, 0.25);
+            border-color: rgba(52, 211, 153, 0.4);
+        }
+
+        .btn-warning {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+        .btn-warning:hover {
+            background: rgba(251, 191, 36, 0.25);
+            border-color: rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.25);
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-outline {
             background: transparent;
-            color: #6a6a8a;
-            font-size: 0.6rem;
-            font-weight: 600;
+            border: 1px solid rgba(120, 80, 200, 0.2);
+            color: #a78bfa;
+        }
+
+        .btn-outline:hover {
+            background: rgba(120, 80, 200, 0.1);
+            border-color: rgba(120, 80, 200, 0.4);
+        }
+
+        .btn-sm {
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            border-radius: 8px;
+        }
+
+        .btn-xs {
+            padding: 3px 10px;
+            font-size: 0.65rem;
+            border-radius: 6px;
+            min-width: 30px;
+            justify-content: center;
+        }
+
+        /* Fingerprint Button */
+        .fingerprint-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid rgba(120, 80, 200, 0.3);
+            background: rgba(120, 80, 200, 0.05);
+            color: #a78bfa;
+            font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        .mode-btn.active, .sub-mode-btn.active, .count-btn.active {
-            background: #ff6b6b;
-            color: #0a0e1a;
-            border-color: #ff6b6b;
-        }
-        .mode-btn:hover:not(.active), .sub-mode-btn:hover:not(.active), .count-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.04);
-            color: #b3b3c7;
-        }
-        .sub-mode-btn.active, .count-btn.active {
-            background: rgba(255, 100, 100, 0.15);
-            color: #ff6b6b;
-            border-color: rgba(255, 100, 100, 0.12);
-        }
-
-        .level-up {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            font-weight: 900;
-            color: #ffd700;
-            text-shadow: 0 0 60px rgba(255, 215, 0, 0.4);
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            animation: levelUpAnim 1.5s ease forwards;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 30px 60px;
-            border-radius: 40px;
-            border: 2px solid rgba(255, 215, 0, 0.15);
-        }
-        @keyframes levelUpAnim {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
-            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
-        }
-
-        .particle {
-            position: fixed;
-            pointer-events: none;
-            font-size: 1.5rem;
-            animation: particleFly 0.9s ease forwards;
-            z-index: 50;
-        }
-        @keyframes particleFly {
-            0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
-            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); }
-        }
-
-        .glass-fragment {
-            position: fixed;
-            pointer-events: none;
-            width: 12px;
-            height: 12px;
-            background: rgba(100, 200, 255, 0.12);
-            border-radius: 2px;
-            animation: glassFragFly 0.7s ease forwards;
-            z-index: 40;
-        }
-        @keyframes glassFragFly {
-            0% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
-            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(720deg); }
-        }
-
-
-        /* ===== NINJA BATTLE UPGRADE ===== */
-        .character-area {
-            min-height: 260px;
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 50% 70%, rgba(255,65,65,.10), transparent 32%),
-                linear-gradient(180deg, rgba(8,10,18,.9), rgba(22,7,10,.65));
-        }
-
-        .ninja-wrap {
-            position: relative;
-            width: min(520px, 92%);
-            height: 145px;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 28px;
-            z-index: 3;
-        }
-
-        .ninja {
             position: relative;
-            width: 105px;
-            height: 125px;
-            filter: drop-shadow(0 15px 22px rgba(0,0,0,.65));
-            transform-origin: 50% 90%;
-            transition: transform .08s ease;
         }
 
-        .ninja-head {
-            position: absolute;
-            top: -6px;
-            left: 7px;
-            font-size: 5.6rem;
-            line-height: 1;
-            z-index: 2;
+        .fingerprint-btn:hover {
+            background: rgba(120, 80, 200, 0.15);
+            border-color: #7c3aed;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(120, 80, 200, 0.2);
         }
 
-        .ninja-body {
-            position: absolute;
-            width: 64px;
-            height: 78px;
-            left: 20px;
-            top: 48px;
-            border-radius: 45% 45% 20% 20%;
-            background: linear-gradient(135deg, #151a27, #05070c 70%);
-            border: 2px solid rgba(255,255,255,.08);
-            box-shadow: inset 0 0 18px rgba(255,60,60,.08);
+        .fingerprint-btn:active {
+            transform: scale(0.95);
         }
 
-        .ninja-body::before,
-        .ninja-body::after {
-            content: "";
-            position: absolute;
-            width: 14px;
-            height: 62px;
-            background: #080b12;
-            border-radius: 20px;
-            top: 35px;
+        .fingerprint-btn.active {
+            border-color: #6ee7b7;
+            color: #6ee7b7;
+            background: rgba(52, 211, 153, 0.1);
+            box-shadow: 0 0 40px rgba(52, 211, 153, 0.2);
         }
-        .ninja-body::before { left: -12px; transform: rotate(28deg); }
-        .ninja-body::after { right: -12px; transform: rotate(-28deg); }
 
-        .ninja-shadow {
+        .fingerprint-btn .badge {
             position: absolute;
-            bottom: 0;
-            width: 150px;
-            height: 20px;
+            top: -4px;
+            right: -4px;
+            width: 16px;
+            height: 16px;
+            background: #6ee7b7;
             border-radius: 50%;
-            background: rgba(0,0,0,.6);
-            filter: blur(7px);
-        }
-
-        .sword-big {
-            position: relative;
-            z-index: 4;
-            font-size: 5rem;
-            display: inline-block;
-            transform-origin: 20% 85%;
-            filter: drop-shadow(0 0 16px rgba(180,220,255,.25));
-        }
-
-        .sword-big.swing {
-            animation: ninjaSlash .13s cubic-bezier(.2,.8,.2,1);
-        }
-        .sword-big.slash {
-            animation: ninjaFinisher .28s cubic-bezier(.15,.8,.2,1);
-        }
-
-        @keyframes ninjaSlash {
-            0% { transform: rotate(-65deg) translateY(5px) scale(.9); }
-            55% { transform: rotate(25deg) translateY(-8px) scale(1.18); }
-            100% { transform: rotate(-35deg) translateY(0) scale(1); }
-        }
-
-        @keyframes ninjaFinisher {
-            0% { transform: rotate(-70deg) translateX(0) scale(.85); }
-            35% { transform: rotate(75deg) translateX(30px) scale(1.55); }
-            55% { transform: rotate(90deg) translateX(48px) scale(1.65); }
-            100% { transform: rotate(-45deg) translateX(0) scale(1); }
-        }
-
-        .ninja-hit {
-            animation: ninjaHit .18s ease;
-        }
-        @keyframes ninjaHit {
-            0% { transform: translateX(0); }
-            30% { transform: translateX(12px) rotate(5deg); }
-            65% { transform: translateX(-9px) rotate(-4deg); }
-            100% { transform: translateX(0); }
-        }
-
-        .target-dummy {
-            position: absolute;
-            right: 9%;
-            bottom: 34px;
-            width: 92px;
-            height: 92px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            font-size: 3.8rem;
-            background: radial-gradient(circle, rgba(255,80,80,.18), rgba(255,80,80,.02) 65%, transparent 70%);
-            border: 2px dashed rgba(255,90,90,.20);
-            transition: transform .16s ease, opacity .16s ease, filter .16s ease;
-            z-index: 2;
-        }
-
-        .target-dummy.hit {
-            animation: targetHit .2s ease;
-            filter: drop-shadow(0 0 24px rgba(255,70,70,.8));
-        }
-
-        @keyframes targetHit {
-            0% { transform: scale(1) rotate(0); }
-            45% { transform: scale(1.35) rotate(8deg); }
-            100% { transform: scale(1) rotate(0); }
-        }
-
-        .target-dummy.word-break {
-            animation: targetBreak .5s ease forwards;
-        }
-
-        @keyframes targetBreak {
-            0% { opacity: 1; transform: scale(1); }
-            35% { opacity: 1; transform: scale(1.35) rotate(-8deg); }
-            100% { opacity: 0; transform: scale(.1) rotate(40deg); }
-        }
-
-        .word-target {
-            margin: 3px auto 4px;
-            width: fit-content;
-            min-width: 150px;
-            padding: 4px 13px;
-            border-radius: 999px;
-            color: #ffb4b4;
-            background: rgba(255,65,65,.06);
-            border: 1px solid rgba(255,100,100,.10);
-            font-size: .72rem;
+            font-size: 0.4rem;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
         }
 
-        .word-done {
-            animation: wordDone .25s ease;
-        }
-        @keyframes wordDone {
-            50% { color: #ffd700; transform: scale(1.08); }
-        }
-
-        .slash-line {
-            position: fixed;
-            width: 170px;
-            height: 5px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, transparent, #fff, #8ed8ff, transparent);
-            box-shadow: 0 0 22px #8ed8ff;
-            pointer-events: none;
-            z-index: 90;
-            animation: slashLine .22s ease forwards;
-            transform: rotate(-18deg);
-        }
-        @keyframes slashLine {
-            0% { opacity: 0; transform: translateX(-50px) rotate(-18deg) scaleX(.2); }
-            35% { opacity: 1; transform: translateX(0) rotate(-18deg) scaleX(1); }
-            100% { opacity: 0; transform: translateX(70px) rotate(-18deg) scaleX(.5); }
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
         }
 
-        @media (max-width: 650px) {
-            .ninja-wrap { gap: 12px; transform: scale(.62); }
-            .target-dummy { right: 3%; font-size: 2.8rem; width: 65px; height: 65px; }
+        .stat-card {
+            padding: 20px 24px;
+            text-align: center;
         }
 
+        .stat-card .stat-icon {
+            font-size: 1.6rem;
+            color: #7c3aed;
+            margin-bottom: 6px;
+            display: block;
+        }
 
-        /* ===== COMPACT FULL-VIEWPORT MODE ===== */
-        html, body {
-            min-height: 100%;
-            overflow-x: hidden;
+        .stat-card h4 {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
         }
-        body {
-            padding: 8px 10px !important;
+
+        .stat-card p {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 4px;
         }
-        .container {
-            max-width: 980px !important;
-            min-height: 0 !important;
-            height: calc(100vh - 16px);
-            margin: 0 auto !important;
+
+        .stat-card .highlight {
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 28px;
+        }
+
+        .table-header {
             display: flex;
-            flex-direction: column;
-            gap: 7px !important;
-        }
-        .header {
-            padding: 7px 14px !important;
-            min-height: 54px;
-        }
-        .header h1 {
-            font-size: 1.25rem !important;
-            margin: 0 !important;
-        }
-        .header p {
-            font-size: .72rem !important;
-            margin: 2px 0 0 !important;
-        }
-        .stats-bar {
-            padding: 5px 8px !important;
-            gap: 5px !important;
-        }
-        .stat {
-            padding: 4px 10px !important;
-            min-width: 82px !important;
-        }
-        .stat-label { font-size: .58rem !important; }
-        .stat-value { font-size: 1rem !important; }
-        .character-area {
-            min-height: 150px !important;
-            height: 150px !important;
-            border-radius: 12px !important;
-        }
-        .ninja-wrap {
-            transform: scale(.72);
-            transform-origin: center bottom;
-            height: 130px;
-        }
-        .target-dummy {
-            right: 10%;
-            bottom: 22px;
-            transform: scale(.72);
-        }
-        .sentence-area {
-            padding: 8px 12px !important;
-        }
-        #sentenceDisplay {
-            min-height: 45px !important;
-            font-size: 1.08rem !important;
-            line-height: 1.55 !important;
-        }
-        .word-target {
-            margin: 0 auto 2px !important;
-            padding: 2px 10px !important;
-            font-size: .62rem !important;
-        }
-        .input-area {
-            padding: 7px 10px !important;
-        }
-        #typingInput {
-            min-height: 42px !important;
-            padding: 8px 12px !important;
-            font-size: 1rem !important;
-        }
-        .controls {
-            padding: 7px 10px !important;
-            gap: 6px !important;
-        }
-        .controls button, button {
-            padding: 7px 13px !important;
-            font-size: .78rem !important;
-        }
-        .progress-section {
-            padding: 5px 10px !important;
-        }
-        .progress-bar { height: 8px !important; }
-        .tips {
-            padding: 5px 10px !important;
-            font-size: .65rem !important;
-        }
-        .footer {
-            padding: 4px !important;
-            font-size: .62rem !important;
-        }
-        .glass-container {
-            min-height: 0 !important;
-        }
-        .glass {
-            transform: scale(.75);
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        /* ===== MOVING NINJA ===== */
-        .ninja-wrap { animation: ninjaIdle 1.1s ease-in-out infinite; }
-        @keyframes ninjaIdle {
-            0%, 100% { transform: translate3d(-5px, 2px, 0) scale(.72) rotate(-1deg); }
-            50% { transform: translate3d(5px, -4px, 0) scale(.72) rotate(1deg); }
+        .table-header h2 {
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 600;
         }
-        .ninja.move-fast {
-            animation: ninjaRun .18s linear infinite;
+
+        .table-header h2 i {
+            color: #7c3aed;
+            margin-right: 10px;
         }
-        @keyframes ninjaRun {
-            0% { transform: translateX(-8px) rotate(-3deg); }
-            50% { transform: translateX(10px) rotate(3deg); }
-            100% { transform: translateX(-8px) rotate(-3deg); }
+
+        .table-header .hint {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2);
         }
-        .ninja.move-attack {
-            animation: ninjaAttack .18s cubic-bezier(.15,.8,.25,1);
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        @keyframes ninjaAttack {
-            0% { transform: translateX(-4px) rotate(-8deg); }
-            30% { transform: translateX(12px) rotate(8deg) scale(1.06); }
-            100% { transform: translateX(0) rotate(0) scale(1); }
+
+        th {
+            text-align: left;
+            padding: 14px 16px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            border-bottom: 1px solid rgba(120, 80, 200, 0.1);
         }
-        .target-dummy {
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.85);
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: rgba(120, 80, 200, 0.04);
+        }
+
+        .employee-name {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .employee-id {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.15);
+            margin-left: 8px;
+        }
+
+        /* Time Control */
+        .time-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .time-control .btn {
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            min-width: 28px;
+            justify-content: center;
+            border-radius: 6px;
+            background: rgba(120, 80, 200, 0.1);
+            border-color: rgba(120, 80, 200, 0.15);
+            color: #a78bfa;
+        }
+
+        .time-control .btn:hover {
+            background: rgba(120, 80, 200, 0.2);
+            transform: scale(1.05);
+        }
+
+        .time-control .btn:active {
+            transform: scale(0.95);
+        }
+
+        .time-control .btn-add {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: rgba(52, 211, 153, 0.2);
+            color: #6ee7b7;
+        }
+
+        .time-control .btn-add:hover {
+            background: rgba(52, 211, 153, 0.25);
+        }
+
+        .time-control .btn-sub {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .time-control .btn-sub:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+
+        .time-display {
+            min-width: 55px;
+            text-align: center;
+            font-weight: 500;
+            color: #fff;
+            font-size: 0.9rem;
+            padding: 4px 0;
+        }
+
+        .time-display.empty {
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: 300;
+        }
+
+        /* Fingerprint Cell */
+        .fingerprint-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fingerprint-cell .fp-status {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .fingerprint-cell .fp-status.registered {
+            color: #6ee7b7;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-present {
+            background: rgba(52, 211, 153, 0.15);
+            color: #6ee7b7;
+            border: 1px solid rgba(52, 211, 153, 0.15);
+        }
+
+        .status-absent {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.15);
+        }
+
+        .status-leave {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.15);
+        }
+
+        /* Action Buttons */
+        .action-btns {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .action-btns .btn {
+            padding: 4px 10px;
+            font-size: 0.65rem;
+            border-radius: 6px;
+        }
+
+        /* Reports */
+        .report-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .report-card {
+            padding: 20px 24px;
+        }
+
+        .report-card h3 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.25);
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .report-card h3 i {
+            color: #7c3aed;
+            margin-right: 8px;
+        }
+
+        .report-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.85rem;
+        }
+
+        .report-item:last-child {
+            border-bottom: none;
+        }
+
+        .report-item .name {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .report-item .details {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.75rem;
+        }
+
+        /* Chart */
+        .chart-container {
+            height: 260px;
+            padding: 20px 24px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #14141e;
+            border-radius: 24px;
+            padding: 35px 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(120, 80, 200, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(120, 80, 200, 0.05);
+        }
+
+        .modal-content h2 {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-content h2 i {
+            color: #7c3aed;
+        }
+
+        .modal-content .form-group {
+            margin-bottom: 18px;
+        }
+
+        .modal-content .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .modal-content .form-group input,
+        .modal-content .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(120, 80, 200, 0.1);
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+        }
+
+        .modal-content .form-group input:focus,
+        .modal-content .form-group textarea:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-content .form-group input::placeholder,
+        .modal-content .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .modal-content .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .modal-content .form-group input:disabled {
+            opacity: 0.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Fingerprint Scan Modal */
+        .fingerprint-scan {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .fingerprint-scan .fp-icon {
+            font-size: 5rem;
+            color: #7c3aed;
+            margin-bottom: 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .fingerprint-scan .fp-icon.waiting {
+            color: #7c3aed;
+            animation: pulseIcon 1.5s ease-in-out infinite;
+        }
+
+        .fingerprint-scan .fp-icon.scanning {
+            animation: scanPulse 0.8s ease-in-out infinite;
+            color: #fbbf24;
+        }
+
+        .fingerprint-scan .fp-icon.success {
+            color: #6ee7b7;
             animation: none;
         }
-        .target-dummy.word-break {
-            animation: targetBreak .32s ease forwards;
-        }
-        @keyframes targetBreak {
-            0% { opacity: 1; transform: translateY(0) scale(.72) rotate(0); }
-            45% { opacity: 1; transform: translateY(-5px) scale(1.05) rotate(12deg); }
-            100% { opacity: 0; transform: translateY(4px) scale(.05) rotate(45deg); }
+
+        .fingerprint-scan .fp-icon.error {
+            color: #f87171;
+            animation: none;
         }
 
-        /* Fast typing = faster ninja */
-
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 650px) {
-            .container { padding: 16px 12px; border-radius: 24px; }
-            .character-big { font-size: 5rem; }
-            .character-big .sword-big { font-size: 3.5rem; }
-            .character-area { padding: 20px 14px; min-height: 150px; }
-            .glass { width: 26px; height: 34px; }
-            .glass .glass-num { font-size: 0.4rem; }
-            #sentenceDisplay { font-size: 1rem; line-height: 1.8rem; }
-            .score-number { font-size: 0.95rem; }
-            .score-board { padding: 4px 10px; gap: 6px; }
-            .btn { padding: 8px 18px; font-size: 0.8rem; }
-            .combo-on-char { font-size: 1.2rem; }
-            .damage-on-char { font-size: 2.5rem; }
-            .char-name-big { font-size: 0.9rem; }
+        .fingerprint-scan .fp-icon.match {
+            color: #6ee7b7;
+            animation: none;
         }
 
-        @media (max-width: 450px) {
-            .character-big { font-size: 3.8rem; }
-            .character-big .sword-big { font-size: 2.5rem; }
-            .character-area { padding: 14px 10px; min-height: 120px; }
-            .glass { width: 20px; height: 28px; }
-            .glass .glass-num { font-size: 0.35rem; }
-            #sentenceDisplay { font-size: 0.85rem; line-height: 1.6rem; }
-            .score-number { font-size: 0.8rem; }
-            .level-up { font-size: 2.5rem; padding: 20px 30px; }
-            .combo-on-char { font-size: 1rem; }
-            .damage-on-char { font-size: 2rem; }
-            .status-bar { flex-direction: column; align-items: stretch; gap: 4px; }
-            .mode-btns, .sub-mode-btns, .count-btns { justify-content: center; }
+        .fingerprint-scan .fp-icon.nomatch {
+            color: #f87171;
+            animation: none;
+        }
+
+        @keyframes pulseIcon {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        @keyframes scanPulse {
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+            25% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+            75% {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        .fingerprint-scan .fp-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fingerprint-scan .fp-text.success {
+            color: #6ee7b7;
+        }
+
+        .fingerprint-scan .fp-text.error {
+            color: #f87171;
+        }
+
+        .fingerprint-scan .fp-text.match {
+            color: #6ee7b7;
+        }
+
+        .fingerprint-scan .fp-text.nomatch {
+            color: #f87171;
+        }
+
+        .fingerprint-scan .fp-touch-area {
+            width: 220px;
+            height: 130px;
+            margin: 10px auto;
+            border: 2px dashed rgba(120, 80, 200, 0.2);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            gap: 5px;
+        }
+
+        .fingerprint-scan .fp-touch-area .finger-icon {
+            font-size: 2.5rem;
+            opacity: 0.5;
+        }
+
+        .fingerprint-scan .fp-touch-area .hold-text {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .fingerprint-scan .fp-touch-area:hover {
+            border-color: rgba(120, 80, 200, 0.4);
+            background: rgba(120, 80, 200, 0.03);
+        }
+
+        .fingerprint-scan .fp-touch-area.active {
+            border-color: #6ee7b7;
+            background: rgba(52, 211, 153, 0.05);
+        }
+
+        .fingerprint-scan .fp-touch-area.error {
+            border-color: #f87171;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .fingerprint-scan .fp-progress {
+            width: 100%;
+            max-width: 280px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            margin: 12px auto 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .fingerprint-scan .fp-progress.active {
+            display: block;
+        }
+
+        .fingerprint-scan .fp-progress .fp-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #7c3aed, #a78bfa);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .fingerprint-scan .fp-progress .fp-progress-bar.success {
+            background: linear-gradient(90deg, #6ee7b7, #34d399);
+        }
+
+        .fingerprint-scan .fp-progress .fp-progress-bar.error {
+            background: linear-gradient(90deg, #f87171, #ef4444);
+        }
+
+        /* Leave List */
+        .leave-list {
+            max-height: 140px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+
+        .leave-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .leave-item .leave-date {
+            color: #a78bfa;
+            font-weight: 500;
+        }
+
+        .leave-item .leave-delete {
+            color: #f87171;
+            cursor: pointer;
+        }
+
+        .leave-item .leave-delete:hover {
+            color: #ef4444;
+        }
+
+        /* Notification */
+        .notification-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 24px;
+            border-radius: 14px;
+            z-index: 2000;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            max-width: 400px;
+            animation: slideUp 0.4s ease;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(120, 80, 200, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(120, 80, 200, 0.5);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            color: rgba(120, 80, 200, 0.3);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .report-section {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px 20px;
+            }
+            .header-actions {
+                justify-content: center;
+            }
+            .report-section {
+                grid-template-columns: 1fr;
+            }
+            .modal-content {
+                padding: 24px;
+            }
+            th,
+            td {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            .glass {
+                padding: 16px 18px;
+            }
+            .time-control {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .action-btns .btn {
+                padding: 3px 8px;
+                font-size: 0.55rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .fingerprint-cell {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .fingerprint-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .fingerprint-scan .fp-touch-area {
+                width: 100%;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .stat-card p {
+                font-size: 1.6rem;
+            }
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- HEADER -->
-        <div class="game-header">
+        <!-- Header -->
+        <div class="header glass">
             <div class="logo">
-                <h1>⚔️ABADULKHALQ </h1>
-                <small>🥷 KHAWAN</small>
+                <i class="fas fa-fingerprint"></i> پەنجەمۆر
             </div>
-            <div class="score-board">
-                <div class="score-item"><div class="score-number gold" id="scoreDisplay">0</div><div class="score-label">⭐ خاڵ</div></div>
-                <div class="score-item"><div class="score-number blue" id="levelDisplay">١</div><div class="score-label">📈 ئاست</div></div>
-                <div class="score-item"><div class="score-number pink" id="comboDisplay">٠</div><div class="score-label">🔥 کۆمبۆ</div></div>
-                <div class="score-item"><div class="score-number purple" id="wpmDisplay">0</div><div class="score-label">⚡ WPM</div></div>
-                <div class="score-item"><div class="score-number green" id="glassDisplay">0</div><div class="score-label">💎 ئامانج</div></div>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="openAddEmployeeModal()">
+                    <i class="fas fa-plus"></i> زیادکردن
+                </button>
             </div>
         </div>
 
-        <!-- CHARACTER BIG -->
-        <div class="character-area">
-            <div class="combo-on-char" id="comboOnChar">🔥 x0</div>
-            <div class="damage-on-char" id="damageOnChar">💥 +50</div>
-            
-            <div class="character-big" id="characterBig">
-                <div class="ninja-wrap" id="ninjaWrap"><div class="ninja-shadow"></div><div class="ninja" id="ninjaBig"><div class="ninja-head">🥷</div><div class="ninja-body"></div></div><span class="sword-big" id="swordBig">🗡️</span></div><div class="target-dummy" id="targetDummy"><span>🎯</span></div>
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card glass">
+                <span class="stat-icon"><i class="fas fa-user-friends"></i></span>
+                <h4>کۆی کارمەندان</h4>
+                <p id="totalEmployees">0</p>
             </div>
-            <div class="char-name-big" id="charNameBig">🥷 </div>
-            <div class="char-level-big">ئاست <span id="charLevelBig">١</span> | شوشە <span id="glassCountBig">٠</span></div>
-            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="stat-card glass">
+                <span class="stat-icon"><i class="fas fa-check-circle"></i></span>
+                <h4>ئامادەی ئەمڕۆ</h4>
+                <p id="presentToday" class="highlight">0</p>
+            </div>
+            <div class="stat-card glass">
+                <span class="stat-icon"><i class="fas fa-chart-line"></i></span>
+                <h4>ڕێژەی ئامادەبوون</h4>
+                <p id="attendanceRate" class="highlight">0%</p>
+            </div>
+            <div class="stat-card glass">
+                <span class="stat-icon"><i class="fas fa-umbrella-beach"></i></span>
+                <h4>مۆڵەتی ئەمڕۆ</h4>
+                <p id="leaveToday">0</p>
+            </div>
         </div>
 
-        <!-- GLASS TARGET -->
-        <div class="glass-target" id="glassTarget"></div>
-
-        <!-- SENTENCE -->
-        <div class="word-target" id="wordTarget">🎯 وشەی داهاتوو</div>
-        <div id="sentenceDisplay">
-            <span>👆 کلیک لە «دەستپێکردن» بکە</span>
-            <span class="cursor"></span>
+        <!-- Table -->
+        <div class="table-container glass">
+            <div class="table-header">
+                <h2><i class="fas fa-list"></i> لیستی کارمەندان</h2>
+                <span class="hint"><i class="fas fa-fingerprint"></i> کلیک لە پەنجەمۆر بکە، پەنجەت ڕابگرە تا دەناسرێتەوە</span>
+            </div>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:50px;">#</th>
+                            <th>ناو</th>
+                            <th style="width:120px;">پەنجەمۆر</th>
+                            <th style="width:180px;">کاتی هاتن</th>
+                            <th style="width:180px;">کاتی چونەوە</th>
+                            <th style="width:100px;">ڕەوش</th>
+                            <th style="width:180px;">کردار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeTableBody"></tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- INPUT -->
-        <input type="text" id="userInput" placeholder="لێرە بنوسە ..." autocomplete="off" />
-
-        <!-- ACTIONS -->
-        <div class="actions">
-            <button class="btn btn-start" id="startBtn">⚔️ دەستپێکردن</button>
-            <button class="btn btn-reset" id="resetBtn">🔄 دووبارە</button>
+        <!-- Reports -->
+        <div class="report-section">
+            <div class="report-card glass">
+                <h3><i class="fas fa-calendar-week"></i> ڕاپۆرتی هەفتانە</h3>
+                <div id="weeklyReport"></div>
+            </div>
+            <div class="report-card glass">
+                <h3><i class="fas fa-calendar-alt"></i> ڕاپۆرتی مانگانە</h3>
+                <div id="monthlyReport"></div>
+            </div>
+            <div class="report-card glass">
+                <h3><i class="fas fa-umbrella-beach"></i> کۆی مۆڵەتەکان</h3>
+                <div id="leaveSummary"></div>
+            </div>
         </div>
 
-        <!-- STATUS -->
-        <div class="status-bar">
-            <span class="status-text" id="statusText">📖 مۆدی وتە — <strong>١٠</strong></span>
-            <div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">
-                <div class="mode-btns">
-                    <button class="mode-btn active" data-mode="proverb">📖 وتە</button>
-                    <button class="mode-btn" data-mode="story">📚 چیرۆک</button>
-                    <button class="mode-btn" data-mode="tapoo">📜 تاپۆ</button>
+        <!-- Chart -->
+        <div class="chart-container glass">
+            <canvas id="attendanceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Modal: Add Employee -->
+    <div class="modal" id="addEmployeeModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-user-plus"></i> زیادکردنی کارمەند</h2>
+            <div class="form-group">
+                <label>ناوی کارمەند</label>
+                <input type="text" id="newEmployeeName" placeholder="ناوی تەواو بنوسە" />
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="addEmployee()"><i class="fas fa-check"></i> زیادکردن</button>
+                <button class="btn btn-outline" onclick="closeModal('addEmployeeModal')"><i class="fas fa-times"></i> ڕەتکردنەوە</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Fingerprint -->
+    <div class="modal" id="fingerprintModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-fingerprint"></i> <span id="fpModalTitle">پەنجەمۆر</span></h2>
+            <div class="fingerprint-scan">
+                <i class="fas fa-fingerprint fp-icon waiting" id="fpIcon"></i>
+                <div class="fp-text" id="fpText">👆 پەنجەمۆری خۆت دابنێ و ڕایبگرە بۆ چەند چرکەیەک</div>
+                <div class="fp-touch-area" id="fpTouchArea" onclick="simulateFingerprintTouch()">
+                    <span class="finger-icon">👆</span>
+                    <span>پەنجەت دابنێ</span>
+                    <span class="hold-text">(ڕایبگرە بۆ ٢-٣ چرکە)</span>
                 </div>
-                <div class="sub-mode-btns" id="subModeContainer" style="display:none;">
-                    <button class="sub-mode-btn active" data-submode="mixed">تێکەڵ</button>
-                    <button class="sub-mode-btn" data-submode="short">کورت</button>
-                    <button class="sub-mode-btn" data-submode="long">درێژ</button>
+                <div class="fp-progress" id="fpProgress">
+                    <div class="fp-progress-bar" id="fpProgressBar"></div>
                 </div>
-                <div class="count-btns">
-                    <button class="count-btn active" data-count="10">١٠</button>
-                    <button class="count-btn" data-count="25">٢٥</button>
-                    <button class="count-btn" data-count="50">٥٠</button>
+                <p style="font-size:0.7rem;color:rgba(255,255,255,0.12);margin-top:10px;">
+                    کلیک لەسەر بۆکسی سەرەوە بکە یان کلیلی Space فشار بدە و ڕایبگرە
+                </p>
+                <div id="fpResult" style="margin-top:10px;min-height:25px;"></div>
+                <div style="margin-top:15px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                    <button class="btn btn-success" onclick="registerFingerprint()" id="fpRegisterBtn">
+                        <i class="fas fa-save"></i> تۆمارکردن
+                    </button>
+                    <button class="btn btn-danger" onclick="clearFingerprint()">
+                        <i class="fas fa-trash"></i> سڕینەوە
+                    </button>
+                    <button class="btn btn-outline" onclick="closeModal('fingerprintModal')">
+                        <i class="fas fa-times"></i> داخستن
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal: Edit Employee -->
+    <div class="modal" id="editEmployeeModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-edit"></i> دەستکاری کارمەند</h2>
+            <div class="form-group">
+                <label>ناوی کارمەند</label>
+                <input type="text" id="editEmployeeName" />
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="saveEditEmployee()"><i class="fas fa-save"></i> هەڵگرتن</button>
+                <button class="btn btn-outline" onclick="closeModal('editEmployeeModal')"><i class="fas fa-times"></i> ڕەتکردنەوە</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Leave -->
+    <div class="modal" id="leaveModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-umbrella-beach"></i> بەڕێوەبردنی مۆڵەت</h2>
+            <div class="form-group">
+                <label>ناوی کارمەند</label>
+                <input type="text" id="leaveEmployeeName" disabled />
+            </div>
+            <div class="form-group">
+                <label>ڕێکەوتی مۆڵەت</label>
+                <input type="date" id="leaveDate" />
+            </div>
+            <div class="form-group">
+                <label>هۆکاری مۆڵەت</label>
+                <textarea id="leaveReason" placeholder="هۆکاری مۆڵەت بنوسە..."></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="addLeave()" style="width:100%;justify-content:center;margin-bottom:12px;">
+                <i class="fas fa-plus"></i> زیادکردنی مۆڵەت
+            </button>
+            <div class="leave-list" id="leaveList"></div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModal('leaveModal')"><i class="fas fa-times"></i> داخستن</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        (function() {
-            'use strict';
+        // ============================================================
+        // DATA MANAGEMENT
+        // ============================================================
+        const STORAGE_KEY = 'fingerprint_employees_v4';
 
-            // ================================================================
-            //  DATA
-            // ================================================================
+        function getDefaultData() {
+            return {
+                employees: [
+                    { id: 1, name: 'عەلی محەمەد', fingerprint: null },
+                    { id: 2, name: 'سارا کەریم', fingerprint: null },
+                    { id: 3, name: 'ئەحمەد ڕەسوڵ', fingerprint: null },
+                ],
+                attendance: {},
+                leaves: {}
+            };
+        }
 
-            const PROVERBS = [
-                "هەوڵ بدە سەرکەوتن لەگەڵتە، بێ هەوڵ ژیان بەفیڕۆ دەچێت",
-                "زانیاری هێزە، خوێندن ڕووناکییە، بیرکردنەوە پێشکەوتنە",
-                "کات زێڕە، بە باشی بەکاری بهێنە بۆ داهاتوویەکی گەش",
-                "خوێندن ڕووناکییە، ڕووناکی ڕێگا دەدۆزێتەوە بۆ سەرکەوتن",
-                "بە هەوڵی خۆت بگە بە مەبەست، هیچ کەس شوێنی تۆ ناگرێتەوە",
-                "باشی بکە وەک ئاوی زەریا، بەردەوام و بێ تەنگە",
-                "دەست بە کار بکە خودا یارمەتیت دەدات، بەوڵە نەکەوێتە خەمەوە",
-                "ئیمان دارە بە خۆت، چونکە تۆ توانای زۆرت هەیە",
-                "شەرمن نەبە لە فێربوون، هەر کەس لە هەڵەکانی خۆیەوە فێر دەبێت",
-                "هەر ڕۆژێک هەوڵێکی نوێ، پێشکەوتن بچوک دەبێتە گۆڕانکاری گەورە"
-            ];
-
-            const STORIES = [
-                "لە ڕۆژێکی خۆشدا کوڕێکی گەنج بە ناوی زانیار لە گوندێکی شاخاوی ژیان دەکرد. ئەو خەونی ئەوەی دەبینی کە کتێبخانەیەک دروست بکات، باوەڕی وابوو خوێندن ژیان دەگۆڕێت.",
-                "کچێک بە ناوی ژین لە گوندێکی دوورەدەست ژیان دەکرد. هەموو ڕۆژێک ڕێگایەکی درێژی دەبڕی بۆ خوێندن. دوای ساڵانێک بووە مامۆستا.",
-                "دوو برا بە ناوەکانی ڕێبوار و ڕەهەند لە شارێکی گەورەدا ژیان دەکرد. یەکێکیان خوێندن و ئەوی تر بازرگانی. بە هاوکاری کۆمپانیایەکی گەورەیان دامەزراند.",
-                "منداڵێک بە ناوی ئاوات حەزی لە گوێگرتن لە چیرۆکی باپیرەی بوو. بڕیاریدا خۆی چیرۆک بنووسێت. دوای ساڵانێک بووە نووسەرێکی ناسراو.",
-                "خەڵکی گوندێکی شاخاوی بە یەکەوە دەژیان. کاتێک زستانێکی سەخت هات، هەموو گوندەکە کۆبوونەوە و مانەوە."
-            ];
-
-            const TAPOO_SHORT = [
-                "ئەحمەد محەممەد - ٢٢١١٤٣ - شوقە ٤/ب",
-                "خەدیجە عەلی - ٣٤٥٦٧ - خانوو ١١٣/أ",
-                "محەممەد ساڵح - ٥٦٧٨٩ - گەڕەکی شۆرە",
-                "فاتیمە حەسەن - ٧٨٩١٢ - شوقە ١/أ",
-                "عەبدولڕەحمان - ٣٢١٤٥ - تەلەعفەر",
-                "زەینەب عەلی - ٤٣٢١١ - شوقە ٣/ج",
-                "یووسف ئەحمەد - ٥٤٣٢١ - خانوو ٨٥",
-                "ڕەحیم سەلمان - ٦٥٤٣٢ - شەقامی نەورۆز",
-                "نەجمە حەسەن - ٧٦٥٤٣ - شوقە ٥/ب",
-                "محەممەد عەلی - ٨٧٦٥٤ - خانوو ٢٢"
-            ];
-
-            const TAPOO_LONG = [
-                "پشک دراوە بە ئەحمەد محەممەد بە (٢٢١١٤٣) لە شوقە (٤/ب) بە ناوی فەلاح حەسەن لە گەڕەکی شۆرە",
-                "بەڵگەنامەی خانووی ژمارە (١١٣/أ) بە ناوی خەدیجە عەلی بە (٣٤٥٦٧) لە ناوچەی کەرکوک",
-                "تۆماری زەوی بە ناوی محەممەد ساڵح بە (٥٦٧٨٩) لە گەڕەکی شۆرە، خانوو بە (٢/ج)",
-                "پشک دراوە بە فاتیمە حەسەن بە (٧٨٩١٢) لە شوقە (١/أ) بە بەهای (٢٥٠٠٠٠٠٠) دینار",
-                "تاپۆی زەوی بە ناوی عەبدولڕەحمان محەممەد بە (٣٢١٤٥) لە ناحیەی تەلەعفەر",
-                "بەڵگەی مەڵک بە ناوی زەینەب عەلی بە (٤٣٢١١) لە شوقە (٣/ج) بە ڕووبەری (١٢٠) مەتر",
-                "پشک دراوە بە یووسف ئەحمەد بە (٥٤٣٢١) لە خانووی ژمارە (٨٥) لە گەڕەکی بەکر",
-                "تۆماری خانوو بە ناوی ڕەحیم سەلمان بە (٦٥٤٣٢) لە شەقامی نەورۆز، خانوو بە (١٢/أ)",
-                "بەڵگەنامەی زەوی بە ناوی نەجمە حەسەن بە (٧٦٥٤٣) لە شوقە (٥/ب) بە (٣٠٠) مەتر",
-                "پشک دراوە بە محەممەد عەلی بە (٨٧٦٥٤) لە خانووی ژمارە (٢٢) لە گەڕەکی ئازادی"
-            ];
-
-            // ================================================================
-            //  DOM REFS
-            // ================================================================
-
-            const sentenceDisplay = document.getElementById('sentenceDisplay');
-            const userInput = document.getElementById('userInput');
-            const scoreDisplay = document.getElementById('scoreDisplay');
-            const levelDisplay = document.getElementById('levelDisplay');
-            const comboDisplay = document.getElementById('comboDisplay');
-            const wpmDisplay = document.getElementById('wpmDisplay');
-            const glassDisplay = document.getElementById('glassDisplay');
-            const glassCountBig = document.getElementById('glassCountBig');
-            const progressFill = document.getElementById('progressFill');
-            const glassTarget = document.getElementById('glassTarget');
-            const statusText = document.getElementById('statusText');
-            const startBtn = document.getElementById('startBtn');
-            const resetBtn = document.getElementById('resetBtn');
-            const modeBtns = document.querySelectorAll('.mode-btn');
-            const subModeBtns = document.querySelectorAll('.sub-mode-btn');
-            const subModeContainer = document.getElementById('subModeContainer');
-            const countBtns = document.querySelectorAll('.count-btn');
-
-            // Character elements
-            const charBigEmoji = document.getElementById('charBigEmoji');
-            const swordBig = document.getElementById('swordBig');
-            const ninjaBig = document.getElementById('ninjaBig');
-            const targetDummy = document.getElementById('targetDummy');
-            const wordTarget = document.getElementById('wordTarget');
-            const charNameBig = document.getElementById('charNameBig');
-            const charLevelBig = document.getElementById('charLevelBig');
-            const characterBig = document.getElementById('characterBig');
-            const comboOnChar = document.getElementById('comboOnChar');
-            const damageOnChar = document.getElementById('damageOnChar');
-
-            // ================================================================
-            //  STATE
-            // ================================================================
-
-            let currentMode = 'proverb';
-            let currentSubMode = 'mixed';
-            let maxCount = 10;
-
-            let activeList = [];
-            let currentSentence = '';
-            let sentenceIndex = 0;
-            let charIndex = 0;
-
-            let isActive = false;
-            let startTime = null;
-            let timerInterval = null;
-
-            let totalCharsTyped = 0;
-            let correctCharsTyped = 0;
-
-            let score = 0;
-            let level = 1;
-            let combo = 0;
-            let maxCombo = 0;
-            let sentencesCompleted = 0;
-            let glassesBroken = 0;
-            let totalGlasses = 10;
-
-            // ================================================================
-            //  HELPERS
-            // ================================================================
-
-            function getFullList() {
-                if (currentMode === 'proverb') return PROVERBS;
-                if (currentMode === 'story') return STORIES;
-                if (currentSubMode === 'short') return TAPOO_SHORT;
-                if (currentSubMode === 'long') return TAPOO_LONG;
-                const combined = [];
-                const maxLen = Math.max(TAPOO_SHORT.length, TAPOO_LONG.length);
-                for (let i = 0; i < maxLen; i++) {
-                    if (i < TAPOO_SHORT.length) combined.push(TAPOO_SHORT[i]);
-                    if (i < TAPOO_LONG.length) combined.push(TAPOO_LONG[i]);
-                }
-                return combined;
+        function getData() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) {
+                const defaultData = getDefaultData();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData));
+                return defaultData;
             }
-
-            function buildActiveList() {
-                const full = getFullList();
-                activeList = full.slice(0, Math.min(maxCount, full.length));
-                if (activeList.length === 0) activeList = ['هیچ بەڵگەیەک نیە'];
-                totalGlasses = Math.min(activeList.length, 30);
-                return activeList;
+            try {
+                return JSON.parse(raw);
+            } catch {
+                const defaultData = getDefaultData();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData));
+                return defaultData;
             }
+        }
 
-            function getModeLabel() {
-                if (currentMode === 'proverb') return 'وتە';
-                if (currentMode === 'story') return 'چیرۆک';
-                return 'تاپۆ';
+        function saveData(data) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function getToday() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        function generateId() {
+            return Date.now() + Math.floor(Math.random() * 1000);
+        }
+
+        function formatDate(dateStr) {
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('ckb', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function getTimeNow() {
+            return new Date().toLocaleTimeString('ckb', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // ============================================================
+        // ============================================================
+        // FINGERPRINT / BIOMETRIC FUNCTIONS
+        // ============================================================
+        // This version works even when the computer has NO touchscreen or
+        // fingerprint sensor. If WebAuthn/Windows Hello is available it uses
+        // the real platform biometric. Otherwise it falls back to a clearly
+        // marked DEMO fingerprint identity stored separately for each employee.
+        // A normal browser cannot read a real fingerprint from any random
+        // surface; real fingerprint matching requires fingerprint hardware.
+        let fpEmployeeId = null;
+        let fpRegistered = false;
+        let fpScanTimeout = null;
+        let fpMode = 'register';
+        let isScanning = false;
+
+        function randomHex(n=32) {
+            const a = new Uint8Array(n);
+            crypto.getRandomValues(a);
+            return Array.from(a, x => x.toString(16).padStart(2,'0')).join('');
+        }
+
+        function biometricSupported() {
+            return !!(window.PublicKeyCredential && navigator.credentials && window.isSecureContext);
+        }
+
+        async function biometricAvailable() {
+            try {
+                if (!biometricSupported()) return false;
+                return await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+            } catch(e) { return false; }
+        }
+
+        function hasRealBiometric() {
+            return biometricSupported() && window.__realBiometricAvailable === true;
+        }
+
+        async function detectBiometric() {
+            window.__realBiometricAvailable = await biometricAvailable();
+            return window.__realBiometricAvailable;
+        }
+
+        function getFingerprintTemplate(employee) {
+            if (!employee.fingerprint) return null;
+            return employee.fingerprint.template || employee.fingerprint.credentialId || null;
+        }
+
+        async function openFingerprintModal(id, mode='register') {
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (!employee) return;
+
+            fpEmployeeId = id;
+            fpRegistered = !!employee.fingerprint;
+            fpMode = mode;
+            isScanning = false;
+
+            const icon = document.getElementById('fpIcon');
+            const text = document.getElementById('fpText');
+            const touchArea = document.getElementById('fpTouchArea');
+            const result = document.getElementById('fpResult');
+            const progress = document.getElementById('fpProgress');
+            const progressBar = document.getElementById('fpProgressBar');
+
+            result.innerHTML = '';
+            progress.classList.remove('active');
+            progressBar.style.width = '0%';
+            progressBar.className = 'fp-progress-bar';
+            document.getElementById('fpModalTitle').textContent = mode === 'register'
+                ? (fpRegistered ? 'نوێکردنەوەی پەنجەمۆر' : 'تۆماری پەنجەمۆر')
+                : 'پشتڕاستکردنەوەی پەنجەمۆر';
+            document.getElementById('fpRegisterBtn').style.display = mode === 'register' ? 'inline-flex' : 'none';
+            document.getElementById('fpRegisterBtn').textContent = fpRegistered ? 'نوێکردنەوە' : 'تۆمارکردن';
+
+            icon.className = 'fas fa-fingerprint fp-icon waiting';
+            text.className = 'fp-text';
+            text.textContent = '👆 بۆ پەنجەمۆر کلیک بکە یان هەر شوێنێکی بۆکسەکە دابگرە';
+            touchArea.className = 'fp-touch-area';
+            touchArea.innerHTML = '<span class="finger-icon">👆</span><span>پەنجەمۆر بخوێنەوە</span><span class="hold-text">کلیک یان touch ـی بۆکسەکە</span>';
+            document.getElementById('fingerprintModal').dataset.employeeId = id;
+            document.getElementById('fingerprintModal').classList.add('active');
+
+            await detectBiometric();
+            if (hasRealBiometric()) {
+                result.innerHTML = '<span style="color:#6ee7b7;">🔐 biometric ـی ڕاستەقینەی کۆمپیوتەر بەردەستە.</span>';
+            } else {
+                result.innerHTML = '<span style="color:#fbbf24;">🧪 شێوازی تاقیکردنەوە: چونکە sensor نییە، پەنجەمۆر شبیه‌سازی دەکرێت.</span>';
             }
+        }
 
-            function getCharacterEmoji() {
-                const chars = ['🥷', '⚔️', '🗡️', '🔥', '⚡', '🐉', '👺', '🥷'];
-                return chars[(level - 1) % chars.length];
-            }
+        async function simulateFingerprintTouch() {
+            if (isScanning || fpEmployeeId === null) return;
+            isScanning = true;
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === fpEmployeeId);
+            if (!employee) { isScanning=false; return; }
 
-            function getCharacterName() {
-                const names = ['نینجا', 'شینۆبی', 'تایپ مەستەر', 'نینجای خێرا', 'شینۆبی زیرەک', 'قاتڵی وشە', 'سەربازی شەو', 'نینجای بەهێز'];
-                return names[(level - 1) % names.length];
-            }
+            const icon = document.getElementById('fpIcon');
+            const text = document.getElementById('fpText');
+            const touchArea = document.getElementById('fpTouchArea');
+            const result = document.getElementById('fpResult');
+            const progress = document.getElementById('fpProgress');
+            const progressBar = document.getElementById('fpProgressBar');
 
-            // ================================================================
-            //  RENDER FUNCTIONS
-            // ================================================================
+            icon.className = 'fas fa-fingerprint fp-icon scanning';
+            text.className = 'fp-text';
+            text.textContent = hasRealBiometric() ? '🔍 پەنجەمۆری ڕاستەقینە دەخوێنرێتەوە...' : '🧪 پەنجەمۆری تاقیکردنەوە دەخوێنرێتەوە...';
+            touchArea.className = 'fp-touch-area active';
+            touchArea.innerHTML = '<span class="finger-icon">🔍</span><span>دەخوێنرێتەوە...</span><span class="hold-text">تکایە چاوەڕێ بکە</span>';
+            progress.classList.add('active');
+            progressBar.className = 'fp-progress-bar';
+            progressBar.style.width = '0%';
 
-            function renderSentence() {
-                if (!currentSentence) {
-                    sentenceDisplay.innerHTML = `<span>هیچ بەڵگەیەک نیە</span><span class="cursor"></span>`;
-                    return;
-                }
-                const chars = currentSentence.split('');
-                let html = '';
-                for (let i = 0; i < chars.length; i++) {
-                    if (i < charIndex) {
-                        html += `<span data-idx="${i}">${chars[i]}</span>`;
-                    } else if (i === charIndex) {
-                        html += `<span data-idx="${i}">${chars[i]}</span><span class="cursor"></span>`;
-                    } else {
-                        html += `<span data-idx="${i}">${chars[i]}</span>`;
-                    }
-                }
-                if (charIndex >= chars.length) {
-                    html += `<span class="cursor"></span>`;
-                }
-                sentenceDisplay.innerHTML = html;
-                applyStyles();
-                updateWordTarget();
-            }
-
-            function applyStyles() {
-                const input = userInput.value;
-                const chars = currentSentence.split('');
-                const spans = sentenceDisplay.querySelectorAll('span[data-idx]');
-                spans.forEach(span => span.classList.remove('correct', 'wrong'));
-                for (let i = 0; i < input.length && i < chars.length; i++) {
-                    const span = sentenceDisplay.querySelector(`span[data-idx="${i}"]`);
-                    if (!span) continue;
-                    if (input[i] === chars[i]) {
-                        span.classList.add('correct');
-                    } else {
-                        span.classList.add('wrong');
-                    }
-                }
-            }
-
-            function renderGlasses() {
-                glassTarget.innerHTML = '';
-                const total = Math.min(totalGlasses, 30);
-                for (let i = 0; i < total; i++) {
-                    const glass = document.createElement('div');
-                    glass.className = 'glass';
-                    if (i < glassesBroken) {
-                        glass.classList.add('broken');
-                        if (i < glassesBroken - 2) {
-                            glass.classList.add('shattered');
+            try {
+                if (hasRealBiometric()) {
+                    await verifyOrRegisterReal(employee);
+                } else {
+                    // DEMO MODE: no hardware is required. Each employee gets
+                    // a unique stored template, so employees do not share one.
+                    await new Promise(r => setTimeout(r, 900));
+                    if (fpMode === 'register') {
+                        if (!employee.fingerprint || !employee.fingerprint.template) {
+                            employee.fingerprint = {
+                                type: 'demo-fingerprint',
+                                template: randomHex(32),
+                                registeredAt: new Date().toISOString(),
+                                version: 3
+                            };
+                            saveData(data);
                         }
+                        showFingerprintResult(true, '🧪 پەنجەمۆری تایبەتی ' + employee.name + ' تۆمار کرا.');
+                        setTimeout(() => { closeModal('fingerprintModal'); renderAll(); }, 700);
+                    } else {
+                        const template = getFingerprintTemplate(employee);
+                        if (!template) throw new Error('NO_REGISTERED_FINGERPRINT');
+                        showFingerprintResult(true, '🧪 پەنجەمۆر بۆ ' + employee.name + ' پشتڕاست کرایەوە.');
+                        setTimeout(() => { performAttendance(employee.id); closeModal('fingerprintModal'); }, 700);
                     }
-                    glass.dataset.index = i;
-                    const num = document.createElement('span');
-                    num.className = 'glass-num';
-                    num.textContent = i + 1;
-                    glass.appendChild(num);
-                    glassTarget.appendChild(glass);
                 }
-                glassDisplay.textContent = glassesBroken;
-                glassCountBig.textContent = glassesBroken;
+            } catch(err) {
+                console.error(err);
+                showFingerprintResult(false, '❌ پەنجەمۆر پشتڕاست نەکرایەوە.');
+                isScanning = false;
             }
+        }
 
-            function updateDisplay() {
-                const elapsed = startTime ? (Date.now() - startTime) / 1000 : 0;
-                if (elapsed > 0 && correctCharsTyped > 0) {
-                    const minutes = elapsed / 60;
-                    const wpm = Math.round((correctCharsTyped / 5) / minutes);
-                    wpmDisplay.textContent = wpm;
-                } else {
-                    wpmDisplay.textContent = '0';
-                }
+        function showFingerprintResult(ok, message) {
+            const icon = document.getElementById('fpIcon');
+            const text = document.getElementById('fpText');
+            const touchArea = document.getElementById('fpTouchArea');
+            const result = document.getElementById('fpResult');
+            const progressBar = document.getElementById('fpProgressBar');
+            progressBar.style.width = '100%';
+            progressBar.className = 'fp-progress-bar ' + (ok ? 'success' : 'error');
+            icon.className = 'fas fa-fingerprint fp-icon ' + (ok ? 'success' : 'nomatch');
+            text.className = 'fp-text ' + (ok ? 'success' : 'nomatch');
+            text.textContent = message;
+            touchArea.className = 'fp-touch-area ' + (ok ? 'active' : 'error');
+            touchArea.innerHTML = '<span class="finger-icon">' + (ok ? '✅' : '❌') + '</span><span>' + (ok ? 'پشتڕاستکراوە' : 'هەڵە') + '</span>';
+            result.innerHTML = '<span style="color:' + (ok ? '#6ee7b7' : '#f87171') + ';">' + message + '</span>';
+            isScanning = false;
+        }
 
-                scoreDisplay.textContent = score;
-                levelDisplay.textContent = level;
-                comboDisplay.textContent = combo;
-
-                // Update character
-                charBigEmoji.textContent = getCharacterEmoji();
-                charNameBig.textContent = `🥷 ${getCharacterName()}`;
-                charLevelBig.textContent = level;
-
-                // Update combo on character
-                if (combo > 0) {
-                    comboOnChar.textContent = `🔥 x${combo}`;
-                    comboOnChar.classList.add('active');
-                } else {
-                    comboOnChar.textContent = '🔥 x0';
-                    comboOnChar.classList.remove('active');
-                }
-
-                const total = activeList.length;
-                const progress = total > 0 ? (sentencesCompleted / total) * 100 : 0;
-                progressFill.style.width = Math.min(progress, 100) + '%';
-
-                const label = getModeLabel();
-                const count = activeList.length;
-                let extra = currentMode === 'tapoo' ? ` (${currentSubMode === 'short' ? 'کورت' : currentSubMode === 'long' ? 'درێژ' : 'تێکەڵ'})` : '';
-                statusText.innerHTML = `${currentMode === 'proverb' ? '📖' : currentMode === 'story' ? '📚' : '📜'} مۆدی ${label}${extra} — <strong>${count}</strong>`;
-
-                renderGlasses();
+        async function verifyOrRegisterReal(employee) {
+            // Real WebAuthn/Windows Hello mode. The browser/OS performs the
+            // biometric check; the page never receives the fingerprint image.
+            const enc = new TextEncoder();
+            const challenge = crypto.getRandomValues(new Uint8Array(32));
+            if (fpMode === 'register') {
+                const userId = crypto.getRandomValues(new Uint8Array(16));
+                const credential = await navigator.credentials.create({ publicKey: {
+                    challenge, rp:{name:'سیستەمی ئامادەبوونی کارمەندان'},
+                    user:{id:userId,name:'employee-'+employee.id,displayName:employee.name},
+                    pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
+                    authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},
+                    timeout:60000,attestation:'none'
+                }});
+                if (!credential) throw new Error('NO_CREDENTIAL');
+                employee.fingerprint={type:'webauthn',credentialId:b64urlEncode(new Uint8Array(credential.rawId)),registeredAt:new Date().toISOString(),version:3};
+                saveData(getData());
+                showFingerprintResult(true,'✅ پەنجەمۆری ڕاستەقینەی '+employee.name+' تۆمار کرا.');
+                setTimeout(()=>{closeModal('fingerprintModal');renderAll();},700);
+            } else {
+                if (!employee.fingerprint || employee.fingerprint.type!=='webauthn') throw new Error('NO_REGISTERED_FINGERPRINT');
+                const assertion=await navigator.credentials.get({publicKey:{challenge,allowCredentials:[{type:'public-key',id:b64urlDecode(employee.fingerprint.credentialId)}],userVerification:'required',timeout:60000}});
+                if (!assertion) throw new Error('NO_ASSERTION');
+                showFingerprintResult(true,'✅ پەنجەمۆر هی '+employee.name+' ـە.');
+                setTimeout(()=>{performAttendance(employee.id);closeModal('fingerprintModal');},700);
             }
+        }
 
-            // ================================================================
-            //  SWORD & CHARACTER ANIMATIONS
-            // ================================================================
+        function b64urlEncode(bytes) { let s=''; bytes.forEach(b=>s+=String.fromCharCode(b)); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+        function b64urlDecode(str) { str=str.replace(/-/g,'+').replace(/_/g,'/'); while(str.length%4)str+='='; const bin=atob(str); return Uint8Array.from(bin,c=>c.charCodeAt(0)); }
 
-            function ninjaAttackMotion() {
-                ninjaBig.classList.remove('attack');
-                void ninjaBig.offsetWidth;
-                ninjaBig.classList.add('attack');
-                setTimeout(() => ninjaBig.classList.remove('attack'), 220);
-            }
+        async function registerFingerprint() {
+            if (fpEmployeeId === null) return;
+            if (!isScanning) await simulateFingerprintTouch();
+        }
 
-            function swingSword() {
-                swordBig.classList.remove('swing', 'slash');
-                ninjaBig.classList.remove('ninja-hit');
-                void swordBig.offsetWidth;
-                swordBig.classList.add('swing');
-                ninjaAttackMotion();
-                targetDummy.classList.remove('hit');
-                void targetDummy.offsetWidth;
-                targetDummy.classList.add('hit');
-                setTimeout(() => {
-                    swordBig.classList.remove('swing');
-                    targetDummy.classList.remove('hit');
-                }, 180);
-                spawnSlashLine();
-            }
+        function clearFingerprint() {
+            if (fpEmployeeId === null) return;
+            const data=getData(); const employee=data.employees.find(e=>e.id===fpEmployeeId);
+            if(!employee)return;
+            if(!confirm('دڵنیایت لە سڕینەوەی پەنجەمۆری '+employee.name+'؟'))return;
+            employee.fingerprint=null; saveData(data); closeModal('fingerprintModal'); renderAll();
+            showNotification('❌ پەنجەمۆری '+employee.name+' سڕایەوە','error');
+        }
 
-            function slashSword() {
-                swordBig.classList.remove('swing', 'slash');
-                void swordBig.offsetWidth;
-                swordBig.classList.add('slash');
-                ninjaAttackMotion();
-                targetDummy.classList.remove('hit');
-                void targetDummy.offsetWidth;
-                targetDummy.classList.add('hit');
-                setTimeout(() => {
-                    swordBig.classList.remove('slash');
-                    targetDummy.classList.remove('hit');
-                }, 300);
-                spawnSlashLine();
-            }
+        function performAttendance(id) {
+            const data=getData(); const employee=data.employees.find(e=>e.id===id); if(!employee)return;
+            const key=`${id}_${getToday()}`, now=getTimeNow(); if(!data.attendance)data.attendance={};
+            if(!data.attendance[key]) { data.attendance[key]={checkIn:now,checkOut:''}; saveData(data); renderAll(); showNotification('✅ پەنجەمۆر پشتڕاست کرایەوە! کاتی هاتن تۆمار کرا بۆ '+employee.name+': '+now,'success'); }
+            else if(data.attendance[key].checkIn&&!data.attendance[key].checkOut) { data.attendance[key].checkOut=now; saveData(data); renderAll(); showNotification('✅ پەنجەمۆر پشتڕاست کرایەوە! کاتی چونەوە تۆمار کرا بۆ '+employee.name+': '+now,'success'); }
+            else showNotification('⚠️ ئەمڕۆ چەک-ئین و چەک-ئاوت تۆمار کراوە بۆ '+employee.name,'warning');
+        }
 
-            function spawnSlashLine() {
-                const rect = targetDummy.getBoundingClientRect();
-                const el = document.createElement('div');
-                el.className = 'slash-line';
-                el.style.left = (rect.left - 55) + 'px';
-                el.style.top = (rect.top + rect.height / 2) + 'px';
-                document.body.appendChild(el);
-                setTimeout(() => el.remove(), 260);
-            }
+        function fingerprintCheck(id) {
+            const data=getData(); const employee=data.employees.find(e=>e.id===id); if(!employee)return;
+            if(!employee.fingerprint) { if(confirm('⚠️ ئەم کارمەندە پەنجەمۆری نییە! تۆماری بکەیت؟')) openFingerprintModal(id,'register'); return; }
+            openFingerprintModal(id,'verify');
+        }
 
-            function dashChar() {
-                characterBig.classList.remove('dash-char', 'hit-char', 'jump-char');
-                void characterBig.offsetWidth;
-                characterBig.classList.add('dash-char');
-                setTimeout(() => characterBig.classList.remove('dash-char'), 350);
-            }
+        // ============================================================
+        // NOTIFICATION
+        // ============================================================
+        function showNotification(message, type) {
+            const existing = document.querySelector('.notification-toast');
+            if (existing) existing.remove();
 
-            function hitChar() {
-                characterBig.classList.remove('dash-char', 'hit-char', 'jump-char');
-                void characterBig.offsetWidth;
-                characterBig.classList.add('hit-char');
-                setTimeout(() => characterBig.classList.remove('hit-char'), 450);
-            }
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'rgba(52,211,153,0.15)',
+                warning: 'rgba(251,191,36,0.15)',
+                error: 'rgba(239,68,68,0.15)'
+            };
+            const borders = {
+                success: 'rgba(52,211,153,0.3)',
+                warning: 'rgba(251,191,36,0.3)',
+                error: 'rgba(239,68,68,0.3)'
+            };
+            const icons = {
+                success: 'fa-check-circle',
+                warning: 'fa-exclamation-circle',
+                error: 'fa-times-circle'
+            };
+            const iconColors = {
+                success: '#6ee7b7',
+                warning: '#fbbf24',
+                error: '#f87171'
+            };
 
-            function jumpChar() {
-                characterBig.classList.remove('dash-char', 'hit-char', 'jump-char');
-                void characterBig.offsetWidth;
-                characterBig.classList.add('jump-char');
-                setTimeout(() => characterBig.classList.remove('jump-char'), 600);
-            }
-
-            function showDamageOnChar(dmg) {
-                damageOnChar.textContent = `💥 +${dmg}`;
-                damageOnChar.classList.remove('active');
-                void damageOnChar.offsetWidth;
-                damageOnChar.classList.add('active');
-                setTimeout(() => damageOnChar.classList.remove('active'), 800);
-            }
-
-            function spawnParticles(x, y, count = 12) {
-                const emojis = ['⚔️', '🗡️', '✨', '⚡', '💥', '🔥', '⭐', '🌟'];
-                for (let i = 0; i < count; i++) {
-                    const el = document.createElement('div');
-                    el.className = 'particle';
-                    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                    el.style.left = (x || window.innerWidth / 2) + 'px';
-                    el.style.top = (y || window.innerHeight / 2) + 'px';
-                    const angle = Math.random() * Math.PI * 2;
-                    const dist = 50 + Math.random() * 200;
-                    el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-                    el.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
-                    el.style.fontSize = (1 + Math.random() * 2) + 'rem';
-                    document.body.appendChild(el);
-                    setTimeout(() => el.remove(), 900);
-                }
-            }
-
-            function spawnGlassFragments(x, y, count = 15) {
-                for (let i = 0; i < count; i++) {
-                    const el = document.createElement('div');
-                    el.className = 'glass-fragment';
-                    el.style.left = (x || window.innerWidth / 2) + 'px';
-                    el.style.top = (y || window.innerHeight / 2) + 'px';
-                    const angle = Math.random() * Math.PI * 2;
-                    const dist = 40 + Math.random() * 200;
-                    el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-                    el.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
-                    el.style.background = `rgba(${100 + Math.random()*155}, ${200 + Math.random()*55}, 255, ${0.08 + Math.random()*0.15})`;
-                    document.body.appendChild(el);
-                    setTimeout(() => el.remove(), 800);
-                }
-            }
-
-            function showLevelUp() {
-                const el = document.createElement('div');
-                el.className = 'level-up';
-                el.textContent = `🥷 ئاست ${level} 🗡️`;
-                document.body.appendChild(el);
-                setTimeout(() => el.remove(), 1600);
-                spawnParticles(window.innerWidth / 2, window.innerHeight / 2, 30);
-                jumpChar();
-            }
-
-            function breakWord() {
-                animateWordBreak();
-                slashSword();
-                jumpChar();
-
-                const dmg = 8 + (combo * 2);
-                showDamageOnChar(dmg);
-                score += dmg;
-                combo++;
-                if (combo > maxCombo) maxCombo = combo;
-                updateDisplay();
-
-                wordTarget.classList.remove('word-done');
-                void wordTarget.offsetWidth;
-                wordTarget.classList.add('word-done');
-                setTimeout(() => wordTarget.classList.remove('word-done'), 260);
-            }
-
-            function breakGlass() {
-                if (glassesBroken >= totalGlasses) return;
-                glassesBroken++;
-                renderGlasses();
-
-                slashSword();
-                jumpChar();
-
-                const glasses = glassTarget.querySelectorAll('.glass');
-                if (glasses.length > glassesBroken - 1) {
-                    const glassEl = glasses[glassesBroken - 1];
-                    const rect = glassEl.getBoundingClientRect();
-                    spawnGlassFragments(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
-                }
-
-                const dmg = 10 + (combo * 2);
-                showDamageOnChar(dmg);
-                score += dmg;
-
-                combo++;
-                if (combo > maxCombo) maxCombo = combo;
-
-                updateDisplay();
-
-                if (glassesBroken >= totalGlasses) {
-                    level++;
-                    totalGlasses = Math.min(totalGlasses + 5, 30);
-                    glassesBroken = 0;
-                    showLevelUp();
-                    renderGlasses();
-                    updateDisplay();
-                }
-            }
-
-            function getWordBoundaries(text) {
-                const words = [];
-                const re = /\S+/gu;
-                let m;
-                while ((m = re.exec(text)) !== null) {
-                    words.push({ start: m.index, end: m.index + m[0].length, text: m[0] });
-                }
-                return words;
-            }
-
-            function getCurrentWord() {
-                const words = getWordBoundaries(currentSentence);
-                return words.find(w => charIndex < w.end) || words[words.length - 1] || null;
-            }
-
-            function updateWordTarget() {
-                const word = getCurrentWord();
-                if (!word) {
-                    wordTarget.textContent = '🏆 تەواو';
-                    return;
-                }
-                const typed = Math.max(0, Math.min(charIndex - word.start, word.text.length));
-                const remaining = word.text.slice(typed);
-                wordTarget.textContent = remaining ? `🎯 ${remaining}` : '⚡ ئامادەی وشەی داهاتوو';
-            }
-
-            function animateWordBreak() {
-                targetDummy.classList.remove('word-break');
-                void targetDummy.offsetWidth;
-                targetDummy.classList.add('word-break');
-                spawnGlassFragments(
-                    targetDummy.getBoundingClientRect().left + targetDummy.offsetWidth / 2,
-                    targetDummy.getBoundingClientRect().top + targetDummy.offsetHeight / 2,
-                    22
-                );
-                setTimeout(() => {
-                    targetDummy.classList.remove('word-break');
-                    targetDummy.style.opacity = '1';
-                }, 520);
-            }
-
-            // ================================================================
-            //  GAME LOGIC
-            // ================================================================
-
-            function loadSentence(index) {
-                if (index >= activeList.length) {
-                    finishGame();
-                    return;
-                }
-                sentenceIndex = index;
-                currentSentence = activeList[index];
-                charIndex = 0;
-                totalCharsTyped = 0;
-                correctCharsTyped = 0;
-
-                userInput.value = '';
-                userInput.disabled = false;
-                renderSentence();
-                updateDisplay();
-            }
-
-            function finishGame() {
-                stopTimer();
-                isActive = false;
-                userInput.disabled = true;
-                sentenceDisplay.innerHTML = `
-                    <span style="color: #ffd700; font-weight: 700; font-size: 1.6rem;">
-                        🏆 تەواو! خاڵ: ${score} | ئاست: ${level} | شوشە: ${glassesBroken}
-                    </span>
-                    <span class="cursor"></span>
+            toast.className = 'notification-toast';
+            toast.style.cssText = `
+                    background: ${colors[type] || colors.success};
+                    border: 1px solid ${borders[type] || borders.success};
                 `;
-                statusText.innerHTML = '🏁 تەواو! دووبارە دەستپێبکە';
-                charBigEmoji.textContent = '🏆';
-                spawnParticles(window.innerWidth / 2, window.innerHeight / 2, 35);
-                updateDisplay();
+            toast.innerHTML =
+                `<i class="fas ${icons[type] || icons.success}" style="color:${iconColors[type] || iconColors.success};margin-right:10px;"></i> ${message}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3500);
+        }
+
+        // ============================================================
+        // TIME HELPERS
+        // ============================================================
+        function addMinutes(timeStr, minutes) {
+            if (!timeStr) return '';
+            const parts = timeStr.split(':');
+            let hours = parseInt(parts[0]);
+            let mins = parseInt(parts[1]) + minutes;
+            if (mins >= 60) { hours += Math.floor(mins / 60);
+                mins = mins % 60; }
+            if (mins < 0) { hours -= Math.ceil(Math.abs(mins) / 60);
+                mins = ((mins % 60) + 60) % 60; }
+            if (hours < 0) hours = 23;
+            if (hours > 23) hours = 0;
+            return String(hours).padStart(2, '0') + ':' + String(mins).padStart(2, '0');
+        }
+
+        // ============================================================
+        // EMPLOYEE CRUD
+        // ============================================================
+        function addEmployee() {
+            const name = document.getElementById('newEmployeeName').value.trim();
+            if (!name) { alert('تکایە ناوی کارمەند بنوسە!'); return; }
+            const data = getData();
+            data.employees.push({ id: generateId(), name: name, fingerprint: null });
+            saveData(data);
+            closeModal('addEmployeeModal');
+            document.getElementById('newEmployeeName').value = '';
+            renderAll();
+        }
+
+        function deleteEmployee(id) {
+            if (!confirm('دڵنیایت لە سڕینەوەی ئەم کارمەندە؟')) return;
+            const data = getData();
+            data.employees = data.employees.filter(emp => emp.id !== id);
+            Object.keys(data.attendance).forEach(key => {
+                if (key.startsWith(id + '_')) delete data.attendance[key];
+            });
+            delete data.leaves[id];
+            saveData(data);
+            renderAll();
+        }
+
+        function openEditModal(id) {
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (!employee) return;
+            document.getElementById('editEmployeeName').value = employee.name;
+            document.getElementById('editEmployeeModal').dataset.employeeId = id;
+            document.getElementById('editEmployeeModal').classList.add('active');
+        }
+
+        function saveEditEmployee() {
+            const id = parseInt(document.getElementById('editEmployeeModal').dataset.employeeId);
+            const name = document.getElementById('editEmployeeName').value.trim();
+            if (!name) { alert('تکایە ناوی کارمەند بنوسە!'); return; }
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (employee) {
+                employee.name = name;
+                saveData(data);
+                closeModal('editEmployeeModal');
+                renderAll();
+            }
+        }
+
+        // ============================================================
+        // TIME CONTROL
+        // ============================================================
+        function adjustTime(employeeId, type, amount) {
+            const data = getData();
+            const today = getToday();
+            const key = `${employeeId}_${today}`;
+
+            if (!data.attendance) data.attendance = {};
+            if (!data.attendance[key]) {
+                data.attendance[key] = { checkIn: '', checkOut: '' };
             }
 
-            function startGame() {
-                if (isActive) return;
-                buildActiveList();
-                if (activeList.length === 0) return;
-                if (sentenceIndex >= activeList.length) sentenceIndex = 0;
-                if (!currentSentence || sentenceIndex >= activeList.length) loadSentence(0);
+            const current = data.attendance[key][type] || '';
+            const newTime = addMinutes(current, amount);
 
-                score = 0;
-                level = 1;
-                combo = 0;
-                maxCombo = 0;
-                sentencesCompleted = 0;
-                glassesBroken = 0;
-                totalGlasses = Math.min(activeList.length, 30);
+            if (newTime || amount === 0) {
+                data.attendance[key][type] = newTime;
+                saveData(data);
+                renderAll();
+            }
+        }
 
-                isActive = true;
-                userInput.disabled = false;
-                userInput.value = '';
-                userInput.focus();
+        // ============================================================
+        // MANUAL ATTENDANCE (Fallback)
+        // ============================================================
+        function checkIn(id) {
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (!employee) return;
 
-                totalCharsTyped = 0;
-                correctCharsTyped = 0;
-                charIndex = 0;
-
-                currentSentence = activeList[sentenceIndex];
-                renderSentence();
-                startTimer();
-                updateDisplay();
-                renderGlasses();
+            if (!employee.fingerprint) {
+                if (confirm('⚠️ ئەم کارمەندە پەنجەمۆری نییە! ئایا دەتەوێت پەنجەمۆر تۆمار بکەیت؟')) {
+                    openFingerprintModal(id, 'register');
+                }
+                return;
             }
 
-            function resetGame() {
-                stopTimer();
-                isActive = false;
-                startTime = null;
+            const today = getToday();
+            const key = `${id}_${today}`;
+            const now = getTimeNow();
 
-                score = 0;
-                level = 1;
-                combo = 0;
-                maxCombo = 0;
-                sentencesCompleted = 0;
-                glassesBroken = 0;
-                totalGlasses = 10;
+            if (!data.attendance) data.attendance = {};
+            if (!data.attendance[key]) {
+                data.attendance[key] = { checkIn: now, checkOut: '' };
+                saveData(data);
+                renderAll();
+                showNotification('✅ کاتی هاتن تۆمار کرا بۆ ' + employee.name + ': ' + now, 'success');
+            } else if (data.attendance[key].checkIn) {
+                alert('⚠️ ئەمڕۆ چەک-ئین کراوە!');
+            }
+        }
 
-                buildActiveList();
-                if (activeList.length === 0) activeList = ['هیچ بەڵگەیەک نیە'];
-                sentenceIndex = 0;
-                loadSentence(0);
+        function checkOut(id) {
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (!employee) return;
 
-                userInput.disabled = false;
-                userInput.value = '';
-                updateDisplay();
-                comboOnChar.classList.remove('active');
-                userInput.focus();
-                renderGlasses();
+            if (!employee.fingerprint) {
+                if (confirm('⚠️ ئەم کارمەندە پەنجەمۆری نییە! ئایا دەتەوێت پەنجەمۆر تۆمار بکەیت؟')) {
+                    openFingerprintModal(id, 'register');
+                }
+                return;
             }
 
-            function completeSentence() {
-                sentencesCompleted++;
-                updateDisplay();
+            const today = getToday();
+            const key = `${id}_${today}`;
+            const now = getTimeNow();
 
-                if (sentenceIndex + 1 < activeList.length) {
-                    setTimeout(() => {
-                        loadSentence(sentenceIndex + 1);
-                        if (isActive) userInput.focus();
-                    }, 350);
+            if (!data.attendance || !data.attendance[key] || !data.attendance[key].checkIn) {
+                alert('⚠️ پێویستە یەکەم جار چەک-ئین بکەیت!');
+                return;
+            }
+            if (data.attendance[key].checkOut) {
+                alert('⚠️ چەک-ئاوت تۆمار کراوە!');
+                return;
+            }
+            data.attendance[key].checkOut = now;
+            saveData(data);
+            renderAll();
+            showNotification('✅ کاتی چونەوە تۆمار کرا بۆ ' + employee.name + ': ' + now, 'success');
+        }
+
+        // ============================================================
+        // LEAVE FUNCTIONS
+        // ============================================================
+        function openLeaveModal(id) {
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (!employee) return;
+            document.getElementById('leaveEmployeeName').value = employee.name;
+            document.getElementById('leaveModal').dataset.employeeId = id;
+            document.getElementById('leaveDate').value = getToday();
+            document.getElementById('leaveReason').value = '';
+            renderLeaveList(id);
+            document.getElementById('leaveModal').classList.add('active');
+        }
+
+        function renderLeaveList(employeeId) {
+            const data = getData();
+            const list = document.getElementById('leaveList');
+            list.innerHTML = '';
+            if (!data.leaves || !data.leaves[employeeId] || data.leaves[employeeId].length === 0) {
+                list.innerHTML =
+                    '<div style="color:rgba(255,255,255,0.15);text-align:center;padding:12px;font-size:0.8rem;">هیچ مۆڵەتێک تۆمار نەکراوە</div>';
+                return;
+            }
+            data.leaves[employeeId].forEach((leave, index) => {
+                const div = document.createElement('div');
+                div.className = 'leave-item';
+                div.innerHTML = `
+                        <span class="leave-date">${formatDate(leave.date)}</span>
+                        <span>${leave.reason || '-'}</span>
+                        <span class="leave-delete" onclick="deleteLeave(${employeeId}, ${index})"><i class="fas fa-trash"></i></span>
+                    `;
+                list.appendChild(div);
+            });
+        }
+
+        function addLeave() {
+            const id = parseInt(document.getElementById('leaveModal').dataset.employeeId);
+            const date = document.getElementById('leaveDate').value;
+            const reason = document.getElementById('leaveReason').value.trim();
+            if (!date) { alert('تکایە ڕێکەوتی مۆڵەت دیاری بکە!'); return; }
+            const data = getData();
+            if (!data.leaves) data.leaves = {};
+            if (!data.leaves[id]) data.leaves[id] = [];
+            if (data.leaves[id].some(l => l.date === date)) {
+                alert('ئەم ڕێکەوتە پێشتر تۆمار کراوە!');
+                return;
+            }
+            data.leaves[id].push({ date: date, reason: reason || 'بێ هۆکار' });
+            saveData(data);
+            renderLeaveList(id);
+            document.getElementById('leaveDate').value = getToday();
+            document.getElementById('leaveReason').value = '';
+            renderAll();
+        }
+
+        function deleteLeave(employeeId, index) {
+            if (!confirm('دڵنیایت لە سڕینەوەی ئەم مۆڵەتە؟')) return;
+            const data = getData();
+            if (data.leaves && data.leaves[employeeId]) {
+                data.leaves[employeeId].splice(index, 1);
+                if (data.leaves[employeeId].length === 0) delete data.leaves[employeeId];
+                saveData(data);
+                renderLeaveList(employeeId);
+                renderAll();
+            }
+        }
+
+        // ============================================================
+        // GET HELPERS
+        // ============================================================
+        function getAttendanceForToday(employeeId, data) {
+            const today = getToday();
+            const key = `${employeeId}_${today}`;
+            if (data.attendance && data.attendance[key]) {
+                return data.attendance[key];
+            }
+            return null;
+        }
+
+        function isOnLeaveToday(employeeId, data) {
+            const today = getToday();
+            if (data.leaves && data.leaves[employeeId]) {
+                return data.leaves[employeeId].some(l => l.date === today);
+            }
+            return false;
+        }
+
+        function getEmployeeAttendanceHistory(employeeId, data, days = 30) {
+            const history = [];
+            const today = new Date();
+            for (let i = 0; i < days; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const key = `${employeeId}_${dateStr}`;
+                const isLeave = data.leaves && data.leaves[employeeId] &&
+                    data.leaves[employeeId].some(l => l.date === dateStr);
+                if (data.attendance && data.attendance[key]) {
+                    history.push({
+                        date: dateStr,
+                        checkIn: data.attendance[key].checkIn || '-',
+                        checkOut: data.attendance[key].checkOut || '-',
+                        isLeave: isLeave
+                    });
+                } else if (isLeave) {
+                    history.push({ date: dateStr, checkIn: '-', checkOut: '-', isLeave: true });
+                }
+            }
+            return history;
+        }
+
+        // ============================================================
+        // RENDER FUNCTIONS
+        // ============================================================
+        function renderStats(data) {
+            const employees = data.employees;
+            const today = getToday();
+            let present = 0,
+                leaveToday = 0;
+            employees.forEach(emp => {
+                const att = getAttendanceForToday(emp.id, data);
+                if (att && att.checkIn) present++;
+                if (isOnLeaveToday(emp.id, data)) leaveToday++;
+            });
+            document.getElementById('totalEmployees').textContent = employees.length;
+            document.getElementById('presentToday').textContent = present;
+            const rate = employees.length > 0 ? Math.round((present / employees.length) * 100) : 0;
+            document.getElementById('attendanceRate').textContent = rate + '%';
+            document.getElementById('leaveToday').textContent = leaveToday;
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('employeeTableBody');
+            tbody.innerHTML = '';
+            if (data.employees.length === 0) {
+                tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7">
+                                <div class="empty-state">
+                                    <i class="fas fa-users-slash"></i>
+                                    <p>هیچ کارمەندێک نییە</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                return;
+            }
+            data.employees.forEach((emp, index) => {
+                const att = getAttendanceForToday(emp.id, data);
+                const onLeave = isOnLeaveToday(emp.id, data);
+                const isPresent = att && att.checkIn;
+                const checkInTime = att && att.checkIn ? att.checkIn : '';
+                const checkOutTime = att && att.checkOut ? att.checkOut : '';
+                const hasFingerprint = !!emp.fingerprint;
+
+                let statusText, statusClass;
+                if (onLeave) {
+                    statusText = 'مۆڵەت';
+                    statusClass = 'status-leave';
+                } else if (isPresent) {
+                    statusText = 'ئامادە';
+                    statusClass = 'status-present';
                 } else {
-                    setTimeout(finishGame, 500);
-                }
-            }
-
-            // ================================================================
-            //  TIMER
-            // ================================================================
-
-            function startTimer() {
-                if (timerInterval) stopTimer();
-                startTime = Date.now();
-                timerInterval = setInterval(() => {
-                    if (startTime) updateDisplay();
-                }, 200);
-            }
-
-            function stopTimer() {
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                }
-                startTime = null;
-            }
-
-            // ================================================================
-            //  INPUT HANDLER
-            // ================================================================
-
-            function handleInput(e) {
-                if (!isActive) {
-                    startGame();
-                    if (!isActive) return;
+                    statusText = 'غایب';
+                    statusClass = 'status-absent';
                 }
 
-                const input = userInput.value;
-                const chars = currentSentence.split('');
-                const typedLen = Math.min(input.length, chars.length);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                        <td style="color:rgba(255,255,255,0.2);font-weight:500;">${index + 1}</td>
+                        <td>
+                            <span class="employee-name">${emp.name}</span>
+                            <span class="employee-id">#${String(emp.id).slice(-4)}</span>
+                        </td>
+                        <td>
+                            <div class="fingerprint-cell">
+                                <button class="fingerprint-btn ${hasFingerprint ? 'active' : ''}" 
+                                        onclick="fingerprintCheck(${emp.id})" 
+                                        title="${hasFingerprint ? 'پەنجەمۆر تۆمار کراوە - کلیک بکە و پەنجەکە ڕابگرە' : 'پەنجەمۆر تۆمار نەکراوە - کلیک بکە بۆ تۆمارکردن'}">
+                                    <i class="fas fa-fingerprint"></i>
+                                    ${hasFingerprint ? '<span class="badge"><i class="fas fa-check" style="font-size:0.4rem;"></i></span>' : ''}
+                                </button>
+                                <span class="fp-status ${hasFingerprint ? 'registered' : ''}">
+                                    ${hasFingerprint ? '✅ تۆمارکراوە' : '❌ نەکراوە'}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="time-control">
+                                <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkIn', -5)" title="کەمکردن 5 خولەک">−</button>
+                                <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkIn', -1)" title="کەمکردن 1 خولەک">−1</button>
+                                <span class="time-display ${checkInTime ? '' : 'empty'}">${checkInTime || '--:--'}</span>
+                                <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkIn', 1)" title="زیادکردن 1 خولەک">+1</button>
+                                <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkIn', 5)" title="زیادکردن 5 خولەک">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="time-control">
+                                <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkOut', -5)" title="کەمکردن 5 خولەک">−</button>
+                                <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkOut', -1)" title="کەمکردن 1 خولەک">−1</button>
+                                <span class="time-display ${checkOutTime ? '' : 'empty'}">${checkOutTime || '--:--'}</span>
+                                <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkOut', 1)" title="زیادکردن 1 خولەک">+1</button>
+                                <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkOut', 5)" title="زیادکردن 5 خولەک">+</button>
+                            </div>
+                        </td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn btn-success btn-sm" onclick="checkIn(${emp.id})" title="هاتن">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </button>
+                                <button class="btn btn-warning btn-sm" onclick="checkOut(${emp.id})" title="چونەوە">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm" onclick="openFingerprintModal(${emp.id}, 'register')" title="تۆماری پەنجەمۆر">
+                                    <i class="fas fa-fingerprint"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm" onclick="openEditModal(${emp.id})" title="دەستکاری ناو">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-success btn-sm" onclick="openLeaveModal(${emp.id})" title="مۆڵەت">
+                                    <i class="fas fa-umbrella-beach"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteEmployee(${emp.id})" title="سڕینەوە">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                tbody.appendChild(tr);
+            });
+        }
 
-                const lastChar = input.length > 0 ? input[input.length - 1] : '';
-                if (lastChar) {
-                    const idx = input.length - 1;
-                    if (idx < chars.length) {
-                        const isCorrect = lastChar === chars[idx];
+        function renderReports(data) {
+            const weeklyDiv = document.getElementById('weeklyReport');
+            const monthlyDiv = document.getElementById('monthlyReport');
+            const leaveDiv = document.getElementById('leaveSummary');
+            let weeklyHTML = '',
+                monthlyHTML = '',
+                leaveHTML = '';
 
-                        if (isCorrect) {
-                            // هەر پیتێکی ڕاست = شمشێر دەجوڵێت + کارەکتەر باز دەدات
-                            swingSword();
-                            dashChar();
-                        } else {
-                            combo = 0;
-                            comboOnChar.textContent = '💔 شکا!';
-                            comboOnChar.classList.add('active');
-                            setTimeout(() => {
-                                comboOnChar.classList.remove('active');
-                                comboOnChar.textContent = '🔥 x0';
-                            }, 600);
-                            hitChar();
+            data.employees.forEach(emp => {
+                const h7 = getEmployeeAttendanceHistory(emp.id, data, 7);
+                const p7 = h7.filter(h => h.checkIn !== '-').length;
+                const l7 = h7.filter(h => h.isLeave).length;
+                weeklyHTML += `
+                        <div class="report-item">
+                            <span class="name">${emp.name}</span>
+                            <span class="details">${p7}/7 | مۆڵەت: ${l7}</span>
+                        </div>
+                    `;
+                const h30 = getEmployeeAttendanceHistory(emp.id, data, 30);
+                const p30 = h30.filter(h => h.checkIn !== '-').length;
+                const l30 = h30.filter(h => h.isLeave).length;
+                monthlyHTML += `
+                        <div class="report-item">
+                            <span class="name">${emp.name}</span>
+                            <span class="details">${p30}/30 | مۆڵەت: ${l30}</span>
+                        </div>
+                    `;
+                if (data.leaves && data.leaves[emp.id]) {
+                    leaveHTML += `
+                            <div class="report-item">
+                                <span class="name">${emp.name}</span>
+                                <span class="details">${data.leaves[emp.id].length} مۆڵەت</span>
+                            </div>
+                        `;
+                }
+            });
+
+            weeklyDiv.innerHTML = weeklyHTML ||
+                '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ تۆمارێک نییە</div>';
+            monthlyDiv.innerHTML = monthlyHTML ||
+                '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ تۆمارێک نییە</div>';
+            leaveDiv.innerHTML = leaveHTML ||
+                '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ مۆڵەتێک نییە</div>';
+        }
+
+        function renderChart(data) {
+            const ctx = document.getElementById('attendanceChart').getContext('2d');
+            if (window.attendanceChartInstance) window.attendanceChartInstance.destroy();
+            const today = getToday();
+            const labels = data.employees.map(emp => emp.name);
+            const statuses = data.employees.map(emp => {
+                const att = getAttendanceForToday(emp.id, data);
+                const onLeave = isOnLeaveToday(emp.id, data);
+                if (onLeave) return 2;
+                return (att && att.checkIn) ? 1 : 0;
+            });
+            const colors = statuses.map(v => {
+                if (v === 2) return '#fbbf24';
+                return v === 1 ? '#7c3aed' : 'rgba(120,80,200,0.15)';
+            });
+
+            window.attendanceChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'ڕەوشی ئەمڕۆ',
+                        data: statuses,
+                        backgroundColor: colors,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255,255,255,0.3)',
+                                font: { size: 11 },
+                                generateLabels: function() {
+                                    return [
+                                        { text: '✅ ئامادە', fillStyle: '#7c3aed' },
+                                        { text: '❌ غایب', fillStyle: 'rgba(120,80,200,0.15)' },
+                                        { text: '🌴 مۆڵەت', fillStyle: '#fbbf24' }
+                                    ];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 2.5,
+                            ticks: {
+                                stepSize: 1,
+                                color: 'rgba(255,255,255,0.15)',
+                                callback: function(value) {
+                                    if (value === 2) return 'مۆڵەت';
+                                    if (value === 1) return 'ئامادە';
+                                    return 'غایب';
+                                }
+                            },
+                            grid: { color: 'rgba(255,255,255,0.03)' }
+                        },
+                        x: {
+                            ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 10 } },
+                            grid: { display: false }
                         }
                     }
                 }
+            });
+        }
 
-                totalCharsTyped = typedLen;
-                let correctCount = 0;
-                for (let i = 0; i < typedLen; i++) {
-                    if (input[i] === chars[i]) correctCount++;
+        function renderAll() {
+            const data = getData();
+            renderStats(data);
+            renderTable(data);
+            renderReports(data);
+            renderChart(data);
+        }
+
+        // ============================================================
+        // MODAL FUNCTIONS
+        // ============================================================
+        function openAddEmployeeModal() {
+            document.getElementById('addEmployeeModal').classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            if (fpScanTimeout) {
+                clearTimeout(fpScanTimeout);
+                fpScanTimeout = null;
+            }
+            isScanning = false;
+            const progress = document.getElementById('fpProgress');
+            progress.classList.remove('active');
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    if (fpScanTimeout) {
+                        clearTimeout(fpScanTimeout);
+                        fpScanTimeout = null;
+                    }
+                    isScanning = false;
+                    const progress = document.getElementById('fpProgress');
+                    progress.classList.remove('active');
                 }
-                correctCharsTyped = correctCount;
-                const previousCharIndex = charIndex;
-                ninjaAttackMotion();
-                charIndex = Math.min(input.length, chars.length);
+            });
+        });
 
-                // Every completed word triggers a ninja finishing slash.
-                const words = getWordBoundaries(currentSentence);
-                for (const word of words) {
-                    if (previousCharIndex < word.end && charIndex >= word.end) {
-                        breakWord();
+        // ============================================================
+        // KEYBOARD SHORTCUT - Space for fingerprint (hold)
+        // ============================================================
+        let spaceHoldTimeout = null;
+        let spacePressed = false;
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.code === 'Space') {
+                const modal = document.getElementById('fingerprintModal');
+                if (modal.classList.contains('active')) {
+                    e.preventDefault();
+                    if (!spacePressed) {
+                        spacePressed = true;
+                        spaceHoldTimeout = setTimeout(() => {
+                            simulateFingerprintTouch();
+                            spacePressed = false;
+                        }, 500);
                     }
                 }
+            }
+        });
 
-                renderSentence();
-                updateDisplay();
-
-                if (input.length >= chars.length && correctCount === chars.length) {
-                    // Final glass smash: finishing the whole sentence.
-                    breakGlass();
-                    setTimeout(() => {
-                        if (isActive) {
-                            completeSentence();
-                        }
-                    }, 250);
+        document.addEventListener('keyup', function(e) {
+            if (e.key === ' ' || e.code === 'Space') {
+                spacePressed = false;
+                if (spaceHoldTimeout) {
+                    clearTimeout(spaceHoldTimeout);
+                    spaceHoldTimeout = null;
                 }
             }
+        });
 
-            // ================================================================
-            //  MODE / COUNT / SUBMODE CHANGE
-            // ================================================================
-
-            function setMode(mode) {
-                if (mode === currentMode) return;
-                currentMode = mode;
-                modeBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
-                subModeContainer.style.display = mode === 'tapoo' ? 'flex' : 'none';
-                resetGame();
-            }
-
-            function setSubMode(submode) {
-                if (submode === currentSubMode) return;
-                currentSubMode = submode;
-                subModeBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.submode === submode));
-                resetGame();
-            }
-
-            function setCount(count) {
-                if (count === maxCount) return;
-                maxCount = count;
-                countBtns.forEach(btn => btn.classList.toggle('active', parseInt(btn.dataset.count) === count));
-                resetGame();
-            }
-
-            // ================================================================
-            //  EVENT LISTENERS
-            // ================================================================
-
-            userInput.addEventListener('input', handleInput);
-            startBtn.addEventListener('click', startGame);
-            resetBtn.addEventListener('click', resetGame);
-
-            modeBtns.forEach(btn => {
-                btn.addEventListener('click', function() { setMode(this.dataset.mode); });
-            });
-
-            subModeBtns.forEach(btn => {
-                btn.addEventListener('click', function() { setSubMode(this.dataset.submode); });
-            });
-
-            countBtns.forEach(btn => {
-                btn.addEventListener('click', function() { setCount(parseInt(this.dataset.count)); });
-            });
-
-            document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && e.key === 'Enter') { e.preventDefault();
-                    startGame(); }
-                if (e.key === 'Escape') { resetGame(); }
-            });
-
-            // ================================================================
-            //  INIT
-            // ================================================================
-
-            function init() {
-                subModeContainer.style.display = 'none';
-                buildActiveList();
-                if (activeList.length === 0) activeList = ['بەخێربێیت!'];
-                loadSentence(0);
-                updateDisplay();
-                renderGlasses();
-                userInput.focus();
-                console.log('🥷 شمشێر تایپ - نینجای تایپ!');
-                console.log('🗡️ هەر پیتێکی ڕاست = شمشێر دەجوڵێت | هەر وشەیەک = برینی کۆتایی');
-                console.log('💎 هەر وشەیەک = ئامانج دەشکێت | کۆتایی ڕستە = فینیشەر');
-                console.log('💡 Ctrl+Enter = دەستپێکردن | Esc = دووبارە');
-            }
-
-            init();
-
-        })();
+        // ============================================================
+        // INITIALIZE
+        // ============================================================
+        renderAll();
+        setInterval(renderAll, 60000);
     </script>
-
 </body>
 </html>
