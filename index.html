@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ckb">
+<html lang="ckb" dir="rtl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -12,66 +12,61 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-
         body {
             min-height: 100vh;
+            padding: 20px;
+            transition: all 0.4s ease;
             background: #0a0a0a;
-            padding: 15px;
+            color: #ffffff;
         }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-
         .glass {
+            border-radius: 20px;
+            padding: 20px 24px;
+            transition: all 0.3s ease;
             background: rgba(20, 20, 30, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 20px 24px;
             border: 1px solid rgba(120, 80, 200, 0.15);
             box-shadow: 0 8px 32px rgba(120, 80, 200, 0.25);
-            transition: all 0.3s ease;
         }
-
         .glass:hover {
             box-shadow: 0 12px 48px rgba(120, 80, 200, 0.35);
         }
-
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 20px;
-            margin-bottom: 20px;
+            padding: 16px 24px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
             gap: 12px;
         }
-
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             background: linear-gradient(135deg, #a78bfa, #7c3aed);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
         }
-
         .logo i {
             -webkit-text-fill-color: initial;
             color: #7c3aed;
-            margin-right: 8px;
         }
-
         .header-actions {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            align-items: center;
         }
-
         .btn {
             padding: 8px 18px;
             border: none;
@@ -88,73 +83,59 @@
             border: 1px solid rgba(120, 80, 200, 0.1);
             touch-action: manipulation;
         }
-
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(120, 80, 200, 0.25);
         }
-
         .btn:active {
             transform: scale(0.95);
         }
-
         .btn-primary {
             background: linear-gradient(135deg, #7c3aed, #6d28d9);
             color: #fff;
             border-color: #7c3aed;
         }
-
         .btn-primary:hover {
             background: linear-gradient(135deg, #8b5cf6, #7c3aed);
             box-shadow: 0 6px 30px rgba(124, 58, 237, 0.4);
         }
-
         .btn-success {
             background: rgba(52, 211, 153, 0.15);
             color: #6ee7b7;
             border-color: rgba(52, 211, 153, 0.2);
         }
-
         .btn-success:hover {
             background: rgba(52, 211, 153, 0.25);
         }
-
         .btn-warning {
             background: rgba(251, 191, 36, 0.15);
             color: #fbbf24;
             border-color: rgba(251, 191, 36, 0.2);
         }
-
         .btn-warning:hover {
             background: rgba(251, 191, 36, 0.25);
         }
-
         .btn-danger {
             background: rgba(239, 68, 68, 0.15);
             color: #f87171;
             border-color: rgba(239, 68, 68, 0.2);
         }
-
         .btn-danger:hover {
             background: rgba(239, 68, 68, 0.25);
         }
-
         .btn-outline {
             background: transparent;
             border: 1px solid rgba(120, 80, 200, 0.2);
             color: #a78bfa;
         }
-
         .btn-outline:hover {
             background: rgba(120, 80, 200, 0.1);
         }
-
         .btn-sm {
             padding: 4px 10px;
             font-size: 0.65rem;
             border-radius: 6px;
         }
-
         .btn-xs {
             padding: 2px 8px;
             font-size: 0.6rem;
@@ -162,16 +143,239 @@
             min-width: 26px;
             justify-content: center;
         }
-
-        /* Fingerprint Button - بەشێکی گەورە بۆ بەکارهێنانی پەنجە */
+        .theme-toggle-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid rgba(120, 80, 200, 0.25);
+            background: rgba(120, 80, 200, 0.12);
+            color: #a78bfa;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(120, 80, 200, 0.25);
+            transform: scale(1.08) rotate(20deg);
+            border-color: #7c3aed;
+        }
+        .theme-toggle-btn:active {
+            transform: scale(0.92);
+        }
+        .theme-selector {
+            position: relative;
+            display: inline-block;
+            z-index: 9999;
+        }
+        .theme-dropdown {
+            display: none;
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background: rgba(20, 20, 30, 0.98);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 16px;
+            padding: 14px 16px;
+            min-width: 190px;
+            border: 1px solid rgba(120, 80, 200, 0.2);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+            z-index: 99999;
+            transition: all 0.3s ease;
+        }
+        .theme-dropdown.active {
+            display: block;
+            animation: themeSlideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes themeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: right;
+            margin-bottom: 2px;
+        }
+        .theme-option:last-child {
+            margin-bottom: 0;
+        }
+        .theme-option:hover {
+            background: rgba(120, 80, 200, 0.15);
+            transform: translateX(-4px);
+        }
+        .theme-option .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .theme-option:hover .color-dot {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        .theme-option .color-dot.dark {
+            background: #0a0a0a;
+        }
+        .theme-option .color-dot.light {
+            background: #f0f0f5;
+        }
+        .theme-option .color-dot.purple {
+            background: #2a1a3e;
+        }
+        .theme-option .color-dot.blue {
+            background: #1a2a4e;
+        }
+        .theme-option .color-dot.green {
+            background: #1a3a2a;
+        }
+        .theme-option .color-dot.yellow {
+            background: #3a3a1a;
+        }
+        .theme-option .check-mark {
+            margin-right: auto;
+            color: #7c3aed;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .theme-option.active-theme .check-mark {
+            display: block;
+        }
+        .theme-option.active-theme {
+            background: rgba(120, 80, 200, 0.12);
+            border: 1px solid rgba(120, 80, 200, 0.15);
+        }
+        .theme-option .theme-name {
+            flex: 1;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            padding: 18px 20px;
+            text-align: center;
+        }
+        .stat-card .stat-icon {
+            font-size: 1.4rem;
+            color: #7c3aed;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .stat-card h4 {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        .stat-card p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        .stat-card .highlight {
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .table-container {
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .table-header h2 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .table-header h2 i {
+            color: #7c3aed;
+            margin-right: 8px;
+        }
+        .table-header .hint {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+        th {
+            text-align: right;
+            padding: 10px 12px;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(120, 80, 200, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            vertical-align: middle;
+        }
+        tr:hover td {
+            background: rgba(120, 80, 200, 0.04);
+        }
+        .employee-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .employee-id {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.15);
+            margin-right: 6px;
+        }
+        .fingerprint-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
         .fingerprint-btn {
-            width: 55px;
-            height: 55px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             border: 2px solid rgba(120, 80, 200, 0.3);
             background: rgba(120, 80, 200, 0.05);
             color: #a78bfa;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -180,177 +384,49 @@
             position: relative;
             touch-action: manipulation;
         }
-
         .fingerprint-btn:hover {
             background: rgba(120, 80, 200, 0.15);
             border-color: #7c3aed;
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(120, 80, 200, 0.2);
         }
-
         .fingerprint-btn:active {
             transform: scale(0.92);
         }
-
         .fingerprint-btn.active {
             border-color: #6ee7b7;
             color: #6ee7b7;
             background: rgba(52, 211, 153, 0.1);
             box-shadow: 0 0 40px rgba(52, 211, 153, 0.2);
         }
-
         .fingerprint-btn .badge {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 18px;
-            height: 18px;
+            top: -2px;
+            right: -2px;
+            width: 16px;
+            height: 16px;
             background: #6ee7b7;
             border-radius: 50%;
-            font-size: 0.45rem;
+            font-size: 0.4rem;
             color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
         }
-
-        .fingerprint-btn .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(120, 80, 200, 0.3);
-            transform: scale(0);
-            animation: rippleAnim 0.8s ease-out;
-            pointer-events: none;
-        }
-
-        @keyframes rippleAnim {
-            to {
-                transform: scale(2.5);
-                opacity: 0;
-            }
-        }
-
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 14px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            padding: 16px 20px;
-            text-align: center;
-        }
-
-        .stat-card .stat-icon {
-            font-size: 1.3rem;
-            color: #7c3aed;
-            margin-bottom: 4px;
-            display: block;
-        }
-
-        .stat-card h4 {
+        .fingerprint-cell .fp-status {
             font-size: 0.6rem;
-            color: rgba(255, 255, 255, 0.35);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
-        .stat-card p {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #fff;
-            margin-top: 2px;
-        }
-
-        .stat-card .highlight {
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Table */
-        .table-container {
-            overflow-x: auto;
-            margin-bottom: 20px;
-        }
-
-        .table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .table-header h2 {
-            font-size: 0.9rem;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .table-header h2 i {
-            color: #7c3aed;
-            margin-right: 8px;
-        }
-
-        .table-header .hint {
-            font-size: 0.6rem;
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8rem;
-        }
-
-        th {
-            text-align: left;
-            padding: 10px 12px;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             color: rgba(255, 255, 255, 0.3);
-            font-weight: 600;
-            border-bottom: 1px solid rgba(120, 80, 200, 0.1);
         }
-
-        td {
-            padding: 8px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            color: rgba(255, 255, 255, 0.85);
-            vertical-align: middle;
+        .fingerprint-cell .fp-status.registered {
+            color: #6ee7b7;
         }
-
-        tr:hover td {
-            background: rgba(120, 80, 200, 0.04);
-        }
-
-        .employee-name {
-            font-weight: 600;
-            color: #fff;
-            font-size: 0.85rem;
-        }
-
-        .employee-id {
-            font-size: 0.6rem;
-            color: rgba(255, 255, 255, 0.15);
-            margin-left: 6px;
-        }
-
-        /* Time Control */
         .time-control {
             display: flex;
             align-items: center;
             gap: 3px;
             flex-wrap: wrap;
         }
-
         .time-control .btn {
             padding: 2px 6px;
             font-size: 0.6rem;
@@ -361,66 +437,40 @@
             border-color: rgba(120, 80, 200, 0.15);
             color: #a78bfa;
         }
-
         .time-control .btn:hover {
             background: rgba(120, 80, 200, 0.2);
             transform: scale(1.05);
         }
-
         .time-control .btn:active {
             transform: scale(0.95);
         }
-
         .time-control .btn-add {
             background: rgba(52, 211, 153, 0.15);
             border-color: rgba(52, 211, 153, 0.2);
             color: #6ee7b7;
         }
-
         .time-control .btn-add:hover {
             background: rgba(52, 211, 153, 0.25);
         }
-
         .time-control .btn-sub {
             background: rgba(239, 68, 68, 0.15);
             border-color: rgba(239, 68, 68, 0.2);
             color: #f87171;
         }
-
         .time-control .btn-sub:hover {
             background: rgba(239, 68, 68, 0.25);
         }
-
         .time-display {
             min-width: 45px;
             text-align: center;
             font-weight: 500;
-            color: #fff;
             font-size: 0.8rem;
             padding: 2px 0;
         }
-
         .time-display.empty {
             color: rgba(255, 255, 255, 0.15);
             font-weight: 300;
         }
-
-        .fingerprint-cell {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .fingerprint-cell .fp-status {
-            font-size: 0.6rem;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .fingerprint-cell .fp-status.registered {
-            color: #6ee7b7;
-        }
-
         .status-badge {
             display: inline-block;
             padding: 3px 10px;
@@ -430,49 +480,40 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
-
         .status-present {
             background: rgba(52, 211, 153, 0.15);
             color: #6ee7b7;
             border: 1px solid rgba(52, 211, 153, 0.15);
         }
-
         .status-absent {
             background: rgba(239, 68, 68, 0.15);
             color: #f87171;
             border: 1px solid rgba(239, 68, 68, 0.15);
         }
-
         .status-leave {
             background: rgba(251, 191, 36, 0.15);
             color: #fbbf24;
             border: 1px solid rgba(251, 191, 36, 0.15);
         }
-
         .action-btns {
             display: flex;
             gap: 4px;
             flex-wrap: wrap;
         }
-
         .action-btns .btn {
             padding: 3px 8px;
             font-size: 0.55rem;
             border-radius: 5px;
         }
-
-        /* Reports */
         .report-section {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
-
         .report-card {
             padding: 16px 20px;
         }
-
         .report-card h3 {
             font-size: 0.6rem;
             text-transform: uppercase;
@@ -481,12 +522,10 @@
             margin-bottom: 10px;
             font-weight: 600;
         }
-
         .report-card h3 i {
             color: #7c3aed;
-            margin-right: 6px;
+            margin-left: 6px;
         }
-
         .report-item {
             display: flex;
             justify-content: space-between;
@@ -494,27 +533,20 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             font-size: 0.75rem;
         }
-
         .report-item:last-child {
             border-bottom: none;
         }
-
         .report-item .name {
-            color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
         }
-
         .report-item .details {
             color: rgba(255, 255, 255, 0.3);
             font-size: 0.65rem;
         }
-
         .chart-container {
-            height: 200px;
+            height: 220px;
             padding: 16px 20px;
         }
-
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -522,32 +554,28 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(12px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 15px;
         }
-
         .modal.active {
             display: flex;
         }
-
         .modal-content {
-            background: #14141e;
             border-radius: 24px;
             padding: 28px 30px;
             max-width: 480px;
             width: 100%;
+            background: #14141e;
             border: 1px solid rgba(120, 80, 200, 0.1);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             max-height: 95vh;
             overflow-y: auto;
         }
-
         .modal-content h2 {
-            color: #fff;
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 20px;
@@ -555,16 +583,13 @@
             align-items: center;
             gap: 10px;
         }
-
         .modal-content h2 i {
             color: #7c3aed;
         }
-
-        .modal-content .form-group {
+        .form-group {
             margin-bottom: 16px;
         }
-
-        .modal-content .form-group label {
+        .form-group label {
             display: block;
             font-size: 0.6rem;
             color: rgba(255, 255, 255, 0.3);
@@ -573,48 +598,36 @@
             margin-bottom: 4px;
             font-weight: 500;
         }
-
-        .modal-content .form-group input,
-        .modal-content .form-group textarea {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
             padding: 10px 14px;
             border-radius: 10px;
-            border: 1px solid rgba(120, 80, 200, 0.1);
             font-size: 0.9rem;
             outline: none;
             transition: 0.3s;
             background: rgba(255, 255, 255, 0.03);
             color: #fff;
+            border: 1px solid rgba(120, 80, 200, 0.1);
         }
-
-        .modal-content .form-group input:focus,
-        .modal-content .form-group textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             border-color: #7c3aed;
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
         }
-
-        .modal-content .form-group textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
         .modal-actions {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-
         .modal-actions .btn {
             flex: 1;
             justify-content: center;
         }
-
-        /* Fingerprint Scanner - گەورە و ڕوون بۆ هەموو ئامێرێک */
         .fingerprint-scan {
             text-align: center;
             padding: 5px 0;
         }
-
         .fingerprint-scan .fp-icon {
             font-size: 4.5rem;
             color: #7c3aed;
@@ -622,37 +635,26 @@
             display: block;
             transition: all 0.3s ease;
         }
-
         .fingerprint-scan .fp-icon.waiting {
             color: #7c3aed;
             animation: pulseIcon 1.5s ease-in-out infinite;
         }
-
         .fingerprint-scan .fp-icon.scanning {
             animation: scanPulse 0.6s ease-in-out infinite;
             color: #fbbf24;
         }
-
         .fingerprint-scan .fp-icon.success {
             color: #6ee7b7;
             animation: none;
         }
-
         .fingerprint-scan .fp-icon.error {
             color: #f87171;
             animation: none;
         }
-
         .fingerprint-scan .fp-icon.match {
             color: #6ee7b7;
             animation: none;
         }
-
-        .fingerprint-scan .fp-icon.nomatch {
-            color: #f87171;
-            animation: none;
-        }
-
         @keyframes pulseIcon {
             0%,
             100% {
@@ -664,7 +666,6 @@
                 opacity: 1;
             }
         }
-
         @keyframes scanPulse {
             0%,
             100% {
@@ -677,7 +678,6 @@
                 transform: scale(1.15) rotate(3deg);
             }
         }
-
         .fingerprint-scan .fp-text {
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
@@ -688,24 +688,15 @@
             justify-content: center;
             padding: 0 10px;
         }
-
         .fingerprint-scan .fp-text.success {
             color: #6ee7b7;
         }
-
         .fingerprint-scan .fp-text.error {
             color: #f87171;
         }
-
         .fingerprint-scan .fp-text.match {
             color: #6ee7b7;
         }
-
-        .fingerprint-scan .fp-text.nomatch {
-            color: #f87171;
-        }
-
-        /* Touch Area - گەورە بۆ هەستی پەنجە */
         .fingerprint-scan .fp-touch-area {
             width: 100%;
             max-width: 300px;
@@ -726,36 +717,29 @@
             touch-action: manipulation;
             background: rgba(120, 80, 200, 0.02);
         }
-
         .fingerprint-scan .fp-touch-area .finger-icon {
             font-size: 3rem;
             opacity: 0.6;
         }
-
         .fingerprint-scan .fp-touch-area .hold-text {
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.15);
         }
-
         .fingerprint-scan .fp-touch-area:hover {
             border-color: rgba(120, 80, 200, 0.5);
             background: rgba(120, 80, 200, 0.05);
         }
-
         .fingerprint-scan .fp-touch-area:active {
             transform: scale(0.97);
         }
-
         .fingerprint-scan .fp-touch-area.active {
             border-color: #6ee7b7;
             background: rgba(52, 211, 153, 0.05);
         }
-
         .fingerprint-scan .fp-touch-area.error {
             border-color: #f87171;
             background: rgba(239, 68, 68, 0.05);
         }
-
         .fingerprint-scan .fp-touch-area .scan-line {
             width: 80%;
             height: 2px;
@@ -764,11 +748,9 @@
             animation: scanLineAnim 0.8s ease-in-out infinite;
             display: none;
         }
-
         .fingerprint-scan .fp-touch-area.active .scan-line {
             display: block;
         }
-
         @keyframes scanLineAnim {
             0% {
                 transform: translateY(-40px);
@@ -782,7 +764,6 @@
                 opacity: 0;
             }
         }
-
         .fingerprint-scan .fp-progress {
             width: 100%;
             max-width: 280px;
@@ -793,11 +774,9 @@
             overflow: hidden;
             display: none;
         }
-
         .fingerprint-scan .fp-progress.active {
             display: block;
         }
-
         .fingerprint-scan .fp-progress .fp-progress-bar {
             height: 100%;
             width: 0%;
@@ -805,21 +784,17 @@
             border-radius: 4px;
             transition: width 0.2s ease;
         }
-
         .fingerprint-scan .fp-progress .fp-progress-bar.success {
             background: linear-gradient(90deg, #6ee7b7, #34d399);
         }
-
         .fingerprint-scan .fp-progress .fp-progress-bar.error {
             background: linear-gradient(90deg, #f87171, #ef4444);
         }
-
         .fingerprint-scan .fp-result {
             margin-top: 8px;
             min-height: 25px;
             font-size: 0.8rem;
         }
-
         .fingerprint-scan .fp-buttons {
             margin-top: 12px;
             display: flex;
@@ -827,41 +802,33 @@
             justify-content: center;
             flex-wrap: wrap;
         }
-
-        /* Leave List */
         .leave-list {
             max-height: 120px;
             overflow-y: auto;
             margin: 8px 0;
         }
-
         .leave-item {
             display: flex;
             justify-content: space-between;
             padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.03);
             border-radius: 6px;
             margin-bottom: 4px;
             font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
             color: rgba(255, 255, 255, 0.8);
         }
-
         .leave-item .leave-date {
             color: #a78bfa;
             font-weight: 500;
         }
-
         .leave-item .leave-delete {
             color: #f87171;
             cursor: pointer;
             padding: 0 5px;
         }
-
         .leave-item .leave-delete:hover {
             color: #ef4444;
         }
-
-        /* Notification */
         .notification-toast {
             position: fixed;
             bottom: 20px;
@@ -879,7 +846,6 @@
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -890,43 +856,347 @@
                 transform: translateX(-50%) translateY(0);
             }
         }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(120, 80, 200, 0.3);
-            border-radius: 10px;
-        }
-
         .empty-state {
             text-align: center;
             padding: 30px 20px;
             color: rgba(255, 255, 255, 0.15);
         }
-
         .empty-state i {
             font-size: 2rem;
             color: rgba(120, 80, 200, 0.3);
             margin-bottom: 10px;
             display: block;
         }
-
-        /* Responsive */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(120, 80, 200, 0.3);
+            border-radius: 10px;
+        }
+        body.theme-light {
+            background: #f0f0f5;
+            color: #1a1a2e;
+        }
+        body.theme-light .glass {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(120, 80, 200, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        body.theme-light .glass:hover {
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+        }
+        body.theme-light .stat-card p {
+            color: #1a1a2e;
+        }
+        body.theme-light .employee-name {
+            color: #1a1a2e;
+        }
+        body.theme-light td {
+            color: #2d2d44;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        body.theme-light .time-display {
+            color: #1a1a2e;
+        }
+        body.theme-light .modal-content {
+            background: #ffffff;
+            border: 1px solid rgba(120, 80, 200, 0.08);
+        }
+        body.theme-light .modal-content .form-group input,
+        body.theme-light .modal-content .form-group textarea {
+            background: rgba(0, 0, 0, 0.03);
+            color: #1a1a2e;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        body.theme-light .modal-content .form-group input:focus,
+        body.theme-light .modal-content .form-group textarea:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        body.theme-light .leave-item {
+            background: rgba(0, 0, 0, 0.03);
+            color: #2d2d44;
+        }
+        body.theme-light .table-header h2 {
+            color: #1a1a2e;
+        }
+        body.theme-light th {
+            color: rgba(0, 0, 0, 0.3);
+        }
+        body.theme-light .theme-dropdown {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        body.theme-light .theme-option {
+            color: rgba(0, 0, 0, 0.8);
+        }
+        body.theme-light .report-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        body.theme-light .report-item .details {
+            color: rgba(0, 0, 0, 0.3);
+        }
+        body.theme-light .notification-toast {
+            color: #1a1a2e;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        body.theme-light .stat-card h4 {
+            color: rgba(0, 0, 0, 0.35);
+        }
+        body.theme-light .table-header .hint {
+            color: rgba(0, 0, 0, 0.2);
+        }
+        body.theme-light .time-display.empty {
+            color: rgba(0, 0, 0, 0.15);
+        }
+        body.theme-light .employee-id {
+            color: rgba(0, 0, 0, 0.15);
+        }
+        body.theme-light .fingerprint-cell .fp-status {
+            color: rgba(0, 0, 0, 0.3);
+        }
+        body.theme-purple {
+            background: #1a0a2e;
+            color: #e8d5f5;
+        }
+        body.theme-purple .glass {
+            background: rgba(40, 20, 60, 0.85);
+            border: 1px solid rgba(160, 120, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(120, 80, 255, 0.2);
+        }
+        body.theme-purple .glass:hover {
+            box-shadow: 0 12px 48px rgba(120, 80, 255, 0.3);
+        }
+        body.theme-purple .stat-card p {
+            color: #e8d5f5;
+        }
+        body.theme-purple .employee-name {
+            color: #e8d5f5;
+        }
+        body.theme-purple td {
+            color: rgba(232, 213, 245, 0.85);
+        }
+        body.theme-purple .time-display {
+            color: #e8d5f5;
+        }
+        body.theme-purple .modal-content {
+            background: #2a1a3e;
+            border: 1px solid rgba(160, 120, 255, 0.15);
+        }
+        body.theme-purple .modal-content .form-group input,
+        body.theme-purple .modal-content .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8d5f5;
+            border: 1px solid rgba(160, 120, 255, 0.15);
+        }
+        body.theme-purple .modal-content .form-group input:focus,
+        body.theme-purple .modal-content .form-group textarea:focus {
+            border-color: #a078ff;
+            box-shadow: 0 0 0 3px rgba(160, 120, 255, 0.15);
+        }
+        body.theme-purple .leave-item {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(232, 213, 245, 0.8);
+        }
+        body.theme-purple .table-header h2 {
+            color: #e8d5f5;
+        }
+        body.theme-purple th {
+            color: rgba(232, 213, 245, 0.3);
+        }
+        body.theme-purple .logo {
+            background: linear-gradient(135deg, #c4a8ff, #a078ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.theme-purple .stat-card h4 {
+            color: rgba(232, 213, 245, 0.35);
+        }
+        body.theme-blue {
+            background: #0a1628;
+            color: #d5e5f5;
+        }
+        body.theme-blue .glass {
+            background: rgba(20, 40, 70, 0.85);
+            border: 1px solid rgba(80, 160, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(80, 160, 255, 0.2);
+        }
+        body.theme-blue .glass:hover {
+            box-shadow: 0 12px 48px rgba(80, 160, 255, 0.3);
+        }
+        body.theme-blue .stat-card p {
+            color: #d5e5f5;
+        }
+        body.theme-blue .employee-name {
+            color: #d5e5f5;
+        }
+        body.theme-blue td {
+            color: rgba(213, 229, 245, 0.85);
+        }
+        body.theme-blue .time-display {
+            color: #d5e5f5;
+        }
+        body.theme-blue .modal-content {
+            background: #1a2a4e;
+            border: 1px solid rgba(80, 160, 255, 0.15);
+        }
+        body.theme-blue .modal-content .form-group input,
+        body.theme-blue .modal-content .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            color: #d5e5f5;
+            border: 1px solid rgba(80, 160, 255, 0.15);
+        }
+        body.theme-blue .modal-content .form-group input:focus,
+        body.theme-blue .modal-content .form-group textarea:focus {
+            border-color: #50a0ff;
+            box-shadow: 0 0 0 3px rgba(80, 160, 255, 0.15);
+        }
+        body.theme-blue .leave-item {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(213, 229, 245, 0.8);
+        }
+        body.theme-blue .table-header h2 {
+            color: #d5e5f5;
+        }
+        body.theme-blue th {
+            color: rgba(213, 229, 245, 0.3);
+        }
+        body.theme-blue .logo {
+            background: linear-gradient(135deg, #80c8ff, #50a0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.theme-blue .stat-card h4 {
+            color: rgba(213, 229, 245, 0.35);
+        }
+        body.theme-green {
+            background: #0a1a0a;
+            color: #d5f5d5;
+        }
+        body.theme-green .glass {
+            background: rgba(20, 50, 30, 0.85);
+            border: 1px solid rgba(80, 255, 160, 0.2);
+            box-shadow: 0 8px 32px rgba(80, 255, 160, 0.2);
+        }
+        body.theme-green .glass:hover {
+            box-shadow: 0 12px 48px rgba(80, 255, 160, 0.3);
+        }
+        body.theme-green .stat-card p {
+            color: #d5f5d5;
+        }
+        body.theme-green .employee-name {
+            color: #d5f5d5;
+        }
+        body.theme-green td {
+            color: rgba(213, 245, 213, 0.85);
+        }
+        body.theme-green .time-display {
+            color: #d5f5d5;
+        }
+        body.theme-green .modal-content {
+            background: #1a3a2a;
+            border: 1px solid rgba(80, 255, 160, 0.15);
+        }
+        body.theme-green .modal-content .form-group input,
+        body.theme-green .modal-content .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            color: #d5f5d5;
+            border: 1px solid rgba(80, 255, 160, 0.15);
+        }
+        body.theme-green .modal-content .form-group input:focus,
+        body.theme-green .modal-content .form-group textarea:focus {
+            border-color: #50ffa0;
+            box-shadow: 0 0 0 3px rgba(80, 255, 160, 0.15);
+        }
+        body.theme-green .leave-item {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(213, 245, 213, 0.8);
+        }
+        body.theme-green .table-header h2 {
+            color: #d5f5d5;
+        }
+        body.theme-green th {
+            color: rgba(213, 245, 213, 0.3);
+        }
+        body.theme-green .logo {
+            background: linear-gradient(135deg, #80ffb0, #50ffa0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.theme-green .stat-card h4 {
+            color: rgba(213, 245, 213, 0.35);
+        }
+        body.theme-yellow {
+            background: #1a1a0a;
+            color: #f5f5d5;
+        }
+        body.theme-yellow .glass {
+            background: rgba(50, 50, 20, 0.85);
+            border: 1px solid rgba(255, 200, 80, 0.2);
+            box-shadow: 0 8px 32px rgba(255, 200, 80, 0.2);
+        }
+        body.theme-yellow .glass:hover {
+            box-shadow: 0 12px 48px rgba(255, 200, 80, 0.3);
+        }
+        body.theme-yellow .stat-card p {
+            color: #f5f5d5;
+        }
+        body.theme-yellow .employee-name {
+            color: #f5f5d5;
+        }
+        body.theme-yellow td {
+            color: rgba(245, 245, 213, 0.85);
+        }
+        body.theme-yellow .time-display {
+            color: #f5f5d5;
+        }
+        body.theme-yellow .modal-content {
+            background: #3a3a1a;
+            border: 1px solid rgba(255, 200, 80, 0.15);
+        }
+        body.theme-yellow .modal-content .form-group input,
+        body.theme-yellow .modal-content .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            color: #f5f5d5;
+            border: 1px solid rgba(255, 200, 80, 0.15);
+        }
+        body.theme-yellow .modal-content .form-group input:focus,
+        body.theme-yellow .modal-content .form-group textarea:focus {
+            border-color: #ffc850;
+            box-shadow: 0 0 0 3px rgba(255, 200, 80, 0.15);
+        }
+        body.theme-yellow .leave-item {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(245, 245, 213, 0.8);
+        }
+        body.theme-yellow .table-header h2 {
+            color: #f5f5d5;
+        }
+        body.theme-yellow th {
+            color: rgba(245, 245, 213, 0.3);
+        }
+        body.theme-yellow .logo {
+            background: linear-gradient(135deg, #ffd870, #ffc850);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.theme-yellow .stat-card h4 {
+            color: rgba(245, 245, 213, 0.35);
+        }
         @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
             .report-section {
                 grid-template-columns: 1fr 1fr;
             }
         }
-
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -939,6 +1209,9 @@
             .header-actions {
                 justify-content: center;
             }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
             .report-section {
                 grid-template-columns: 1fr;
             }
@@ -948,17 +1221,14 @@
             .glass {
                 padding: 14px 16px;
             }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
             .fingerprint-cell {
                 flex-direction: column;
                 gap: 3px;
             }
             .fingerprint-btn {
-                width: 48px;
-                height: 48px;
-                font-size: 1.3rem;
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
             }
             .fingerprint-scan .fp-touch-area {
                 height: 130px;
@@ -968,14 +1238,17 @@
                 font-size: 0.5rem;
             }
             .time-display {
-                min-width: 35px;
-                font-size: 0.7rem;
+                min-width: 32px;
+                font-size: 0.65rem;
             }
             .table-header .hint {
                 display: none;
             }
+            .theme-dropdown {
+                right: -10px;
+                min-width: 170px;
+            }
         }
-
         @media (max-width: 480px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
@@ -1003,98 +1276,69 @@
         }
     </style>
 </head>
-<body>
+<body class="theme-dark">
     <div class="container">
-        <!-- Header -->
-        <div class="header glass">
-            <div class="logo">
-                <i class="fas fa-fingerprint"></i> پەنجەمۆر
-            </div>
+        <header class="header glass">
+            <div class="logo"><i class="fas fa-fingerprint"></i><span>پەنجەمۆر</span></div>
             <div class="header-actions">
-                <button class="btn btn-primary" onclick="openAddEmployeeModal()">
-                    <i class="fas fa-plus"></i> زیادکردن
-                </button>
+                <button class="btn btn-primary" onclick="openAddEmployeeModal()"><i class="fas fa-plus"></i> زیادکردن</button>
+                <div class="theme-selector">
+                    <button class="theme-toggle-btn" onclick="toggleThemeDropdown()" title="گۆڕینی ڕەنگی شاشە"><i class="fas fa-palette"></i></button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <button class="theme-option" data-theme="dark" onclick="setTheme('dark')"><span class="color-dot dark"></span><span class="theme-name">تاریک</span><span class="check-mark"><i class="fas fa-check"></i></span></button>
+                        <button class="theme-option" data-theme="light" onclick="setTheme('light')"><span class="color-dot light"></span><span class="theme-name">ڕووناک</span><span class="check-mark"><i class="fas fa-check"></i></span></button>
+                        <button class="theme-option" data-theme="purple" onclick="setTheme('purple')"><span class="color-dot purple"></span><span class="theme-name">مۆر</span><span class="check-mark"><i class="fas fa-check"></i></span></button>
+                        <button class="theme-option" data-theme="blue" onclick="setTheme('blue')"><span class="color-dot blue"></span><span class="theme-name">شین</span><span class="check-mark"><i class="fas fa-check"></i></span></button>
+                        <button class="theme-option" data-theme="green" onclick="setTheme('green')"><span class="color-dot green"></span><span class="theme-name">سەوز</span><span class="check-mark"><i class="fas fa-check"></i></span></button>
+                        <button class="theme-option" data-theme="yellow" onclick="setTheme('yellow')"><span class="color-dot yellow"></span><span class="theme-name">زەرد</span><span class="check-mark"><i class="fas fa-check"></i></span></button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </header>
 
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card glass">
-                <span class="stat-icon"><i class="fas fa-user-friends"></i></span>
-                <h4>کۆی کارمەندان</h4>
-                <p id="totalEmployees">0</p>
-            </div>
-            <div class="stat-card glass">
-                <span class="stat-icon"><i class="fas fa-check-circle"></i></span>
-                <h4>ئامادەی ئەمڕۆ</h4>
-                <p id="presentToday" class="highlight">0</p>
-            </div>
-            <div class="stat-card glass">
-                <span class="stat-icon"><i class="fas fa-chart-line"></i></span>
-                <h4>ڕێژەی ئامادەبوون</h4>
-                <p id="attendanceRate" class="highlight">0%</p>
-            </div>
-            <div class="stat-card glass">
-                <span class="stat-icon"><i class="fas fa-umbrella-beach"></i></span>
-                <h4>مۆڵەتی ئەمڕۆ</h4>
-                <p id="leaveToday">0</p>
-            </div>
-        </div>
+        <section class="stats-grid">
+            <div class="stat-card glass"><span class="stat-icon"><i class="fas fa-user-friends"></i></span><h4>کۆی کارمەندان</h4><p id="totalEmployees">0</p></div>
+            <div class="stat-card glass"><span class="stat-icon"><i class="fas fa-check-circle"></i></span><h4>ئامادەی ئەمڕۆ</h4><p id="presentToday" class="highlight">0</p></div>
+            <div class="stat-card glass"><span class="stat-icon"><i class="fas fa-chart-line"></i></span><h4>ڕێژەی ئامادەبوون</h4><p id="attendanceRate" class="highlight">0%</p></div>
+            <div class="stat-card glass"><span class="stat-icon"><i class="fas fa-umbrella-beach"></i></span><h4>مۆڵەتی ئەمڕۆ</h4><p id="leaveToday">0</p></div>
+        </section>
 
-        <!-- Table -->
-        <div class="table-container glass">
-            <div class="table-header">
-                <h2><i class="fas fa-list"></i> لیستی کارمەندان</h2>
-                <span class="hint"><i class="fas fa-fingerprint"></i> کلیک یان تەچ لە پەنجەمۆر بکە</span>
-            </div>
-            <div style="overflow-x:auto;">
+        <section class="table-container glass">
+            <div class="table-header"><h2><i class="fas fa-list"></i> لیستی کارمەندان</h2><span class="hint"><i class="fas fa-fingerprint"></i> کلیک یان تەچ لە پەنجەمۆر بکە</span></div>
+            <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th style="width:35px;">#</th>
+                            <th>#</th>
                             <th>ناو</th>
-                            <th style="width:100px;">پەنجەمۆر</th>
-                            <th style="width:150px;">کاتی هاتن</th>
-                            <th style="width:150px;">کاتی چونەوە</th>
-                            <th style="width:80px;">ڕەوش</th>
-                            <th style="width:160px;">کردار</th>
+                            <th>پەنجەمۆر</th>
+                            <th>کاتی هاتن</th>
+                            <th>چوونەوە بۆ ڕێست</th>
+                            <th>هاتنەوە لە ڕێست</th>
+                            <th>کاتی چونەوە</th>
+                            <th>ڕەوش</th>
+                            <th>کردار</th>
                         </tr>
                     </thead>
                     <tbody id="employeeTableBody"></tbody>
                 </table>
             </div>
-        </div>
+        </section>
 
-        <!-- Reports -->
-        <div class="report-section">
-            <div class="report-card glass">
-                <h3><i class="fas fa-calendar-week"></i> ڕاپۆرتی هەفتانە</h3>
-                <div id="weeklyReport"></div>
-            </div>
-            <div class="report-card glass">
-                <h3><i class="fas fa-calendar-alt"></i> ڕاپۆرتی مانگانە</h3>
-                <div id="monthlyReport"></div>
-            </div>
-            <div class="report-card glass">
-                <h3><i class="fas fa-umbrella-beach"></i> کۆی مۆڵەتەکان</h3>
-                <div id="leaveSummary"></div>
-            </div>
-        </div>
+        <section class="report-section">
+            <div class="report-card glass"><h3><i class="fas fa-calendar-week"></i> ڕاپۆرتی هەفتانە</h3><div id="weeklyReport"></div></div>
+            <div class="report-card glass"><h3><i class="fas fa-calendar-alt"></i> ڕاپۆرتی مانگانە</h3><div id="monthlyReport"></div></div>
+            <div class="report-card glass"><h3><i class="fas fa-umbrella-beach"></i> کۆی مۆڵەتەکان</h3><div id="leaveSummary"></div></div>
+        </section>
 
-        <!-- Chart -->
-        <div class="chart-container glass">
-            <canvas id="attendanceChart"></canvas>
-        </div>
+        <section class="chart-container glass"><canvas id="attendanceChart"></canvas></section>
     </div>
 
-    <!-- Modal: Add Employee -->
+    <!-- Modals -->
     <div class="modal" id="addEmployeeModal">
         <div class="modal-content">
             <h2><i class="fas fa-user-plus"></i> زیادکردنی کارمەند</h2>
-            <div class="form-group">
-                <label>ناوی کارمەند</label>
-                <input type="text" id="newEmployeeName" placeholder="ناوی تەواو بنوسە" />
-            </div>
+            <div class="form-group"><label>ناوی کارمەند</label><input type="text" id="newEmployeeName" placeholder="ناوی تەواو بنوسە" /></div>
             <div class="modal-actions">
                 <button class="btn btn-primary" onclick="addEmployee()"><i class="fas fa-check"></i> زیادکردن</button>
                 <button class="btn btn-outline" onclick="closeModal('addEmployeeModal')"><i class="fas fa-times"></i> ڕەتکردنەوە</button>
@@ -1102,7 +1346,6 @@
         </div>
     </div>
 
-    <!-- Modal: Fingerprint Scanner - گەورە بۆ هەموو ئامێرێک -->
     <div class="modal" id="fingerprintModal">
         <div class="modal-content">
             <h2><i class="fas fa-fingerprint"></i> <span id="fpModalTitle">پەنجەمۆر</span></h2>
@@ -1110,38 +1353,23 @@
                 <i class="fas fa-fingerprint fp-icon waiting" id="fpIcon"></i>
                 <div class="fp-text" id="fpText">👆 پەنجەت دابنێ لەسەر بۆکسی خوارەوە</div>
                 <div class="fp-touch-area" id="fpTouchArea" onclick="startFingerprintScan()">
-                    <span class="finger-icon">🖐️</span>
-                    <span>پەنجەمۆر بخوێنەرەوە</span>
-                    <span class="hold-text">کلیک یان تەچ بکە و ڕایبگرە</span>
-                    <div class="scan-line"></div>
+                    <span class="finger-icon">🖐️</span><span>پەنجەمۆر بخوێنەرەوە</span><span class="hold-text">کلیک یان تەچ بکە و ڕایبگرە</span><div class="scan-line"></div>
                 </div>
-                <div class="fp-progress" id="fpProgress">
-                    <div class="fp-progress-bar" id="fpProgressBar"></div>
-                </div>
+                <div class="fp-progress" id="fpProgress"><div class="fp-progress-bar" id="fpProgressBar"></div></div>
                 <div class="fp-result" id="fpResult"></div>
                 <div class="fp-buttons">
-                    <button class="btn btn-success" onclick="registerFingerprint()" id="fpRegisterBtn">
-                        <i class="fas fa-save"></i> تۆمارکردن
-                    </button>
-                    <button class="btn btn-danger" onclick="clearFingerprint()">
-                        <i class="fas fa-trash"></i> سڕینەوە
-                    </button>
-                    <button class="btn btn-outline" onclick="closeModal('fingerprintModal')">
-                        <i class="fas fa-times"></i> داخستن
-                    </button>
+                    <button class="btn btn-success" onclick="registerFingerprint()" id="fpRegisterBtn"><i class="fas fa-save"></i> تۆمارکردن</button>
+                    <button class="btn btn-danger" onclick="clearFingerprint()"><i class="fas fa-trash"></i> سڕینەوە</button>
+                    <button class="btn btn-outline" onclick="closeModal('fingerprintModal')"><i class="fas fa-times"></i> داخستن</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal: Edit Employee -->
     <div class="modal" id="editEmployeeModal">
         <div class="modal-content">
             <h2><i class="fas fa-edit"></i> دەستکاری کارمەند</h2>
-            <div class="form-group">
-                <label>ناوی کارمەند</label>
-                <input type="text" id="editEmployeeName" />
-            </div>
+            <div class="form-group"><label>ناوی کارمەند</label><input type="text" id="editEmployeeName" /></div>
             <div class="modal-actions">
                 <button class="btn btn-primary" onclick="saveEditEmployee()"><i class="fas fa-save"></i> هەڵگرتن</button>
                 <button class="btn btn-outline" onclick="closeModal('editEmployeeModal')"><i class="fas fa-times"></i> ڕەتکردنەوە</button>
@@ -1149,29 +1377,15 @@
         </div>
     </div>
 
-    <!-- Modal: Leave -->
     <div class="modal" id="leaveModal">
         <div class="modal-content">
             <h2><i class="fas fa-umbrella-beach"></i> بەڕێوەبردنی مۆڵەت</h2>
-            <div class="form-group">
-                <label>ناوی کارمەند</label>
-                <input type="text" id="leaveEmployeeName" disabled />
-            </div>
-            <div class="form-group">
-                <label>ڕێکەوتی مۆڵەت</label>
-                <input type="date" id="leaveDate" />
-            </div>
-            <div class="form-group">
-                <label>هۆکاری مۆڵەت</label>
-                <textarea id="leaveReason" placeholder="هۆکاری مۆڵەت بنوسە..."></textarea>
-            </div>
-            <button class="btn btn-primary" onclick="addLeave()" style="width:100%;justify-content:center;margin-bottom:10px;">
-                <i class="fas fa-plus"></i> زیادکردنی مۆڵەت
-            </button>
+            <div class="form-group"><label>ناوی کارمەند</label><input type="text" id="leaveEmployeeName" disabled /></div>
+            <div class="form-group"><label>ڕێکەوتی مۆڵەت</label><input type="date" id="leaveDate" /></div>
+            <div class="form-group"><label>هۆکاری مۆڵەت</label><textarea id="leaveReason" placeholder="هۆکاری مۆڵەت بنوسە..."></textarea></div>
+            <button class="btn btn-primary" onclick="addLeave()" style="width:100%;justify-content:center;margin-bottom:10px;"><i class="fas fa-plus"></i> زیادکردنی مۆڵەت</button>
             <div class="leave-list" id="leaveList"></div>
-            <div class="modal-actions">
-                <button class="btn btn-outline" onclick="closeModal('leaveModal')"><i class="fas fa-times"></i> داخستن</button>
-            </div>
+            <div class="modal-actions"><button class="btn btn-outline" onclick="closeModal('leaveModal')"><i class="fas fa-times"></i> داخستن</button></div>
         </div>
     </div>
 
@@ -1179,7 +1393,7 @@
         // ============================================================
         // DATA MANAGEMENT
         // ============================================================
-        const STORAGE_KEY = 'fingerprint_employees_v6';
+        const STORAGE_KEY = 'fingerprint_employees_v13';
 
         function getDefaultData() {
             return {
@@ -1189,7 +1403,8 @@
                     { id: 3, name: 'ئەحمەد ڕەسوڵ', fingerprint: null },
                 ],
                 attendance: {},
-                leaves: {}
+                leaves: {},
+                theme: 'dark'
             };
         }
 
@@ -1200,7 +1415,13 @@
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
                 return d;
             }
-            try { return JSON.parse(raw); } catch {
+            try {
+                const parsed = JSON.parse(raw);
+                if (!parsed.theme) parsed.theme = 'dark';
+                if (!parsed.attendance) parsed.attendance = {};
+                if (!parsed.leaves) parsed.leaves = {};
+                return parsed;
+            } catch {
                 const d = getDefaultData();
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
                 return d;
@@ -1229,17 +1450,42 @@
         }
 
         // ============================================================
-        // FINGERPRINT SYSTEM - بەبێ ئامێری تایبەت، تەنها لەسەر بنەمای کلیل
+        // THEME SYSTEM
+        // ============================================================
+        function setTheme(theme) {
+            const validThemes = ['dark', 'light', 'purple', 'blue', 'green', 'yellow'];
+            if (!validThemes.includes(theme)) theme = 'dark';
+            validThemes.forEach(t => document.body.classList.remove('theme-' + t));
+            document.body.classList.add('theme-' + theme);
+            const data = getData();
+            data.theme = theme;
+            saveData(data);
+            document.querySelectorAll('.theme-option').forEach(el => {
+                el.classList.toggle('active-theme', el.dataset.theme === theme);
+            });
+            document.getElementById('themeDropdown').classList.remove('active');
+            showNotification('🎨 ڕەنگی شاشە گۆڕدرا بۆ ' + theme, 'success');
+        }
+
+        function toggleThemeDropdown() {
+            document.getElementById('themeDropdown').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            const selector = document.querySelector('.theme-selector');
+            if (selector && !selector.contains(e.target)) {
+                document.getElementById('themeDropdown').classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // FINGERPRINT SYSTEM
         // ============================================================
         let fpEmployeeId = null;
         let fpMode = 'register';
         let isScanning = false;
-        let fpRegistered = false;
         let scanTimer = null;
-        let holdTimer = null;
-        let isHolding = false;
 
-        // دروستکردنی کۆدی تایبەت بۆ هەر کارمەندێک
         function generateFingerprintCode() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
             let code = '';
@@ -1249,10 +1495,8 @@
             return code;
         }
 
-        // دەستپێکردنی خوێندنەوەی پەنجەمۆر
         function startFingerprintScan() {
             if (isScanning || fpEmployeeId === null) return;
-
             const data = getData();
             const employee = data.employees.find(emp => emp.id === fpEmployeeId);
             if (!employee) return;
@@ -1264,23 +1508,16 @@
             const progress = document.getElementById('fpProgress');
             const progressBar = document.getElementById('fpProgressBar');
 
-            // ڕەوشی سکانی دەستپێبکە
             isScanning = true;
-            isHolding = true;
             icon.className = 'fas fa-fingerprint fp-icon scanning';
             text.textContent = '🔍 پەنجەمۆر دەخوێنرێتەوە... پەنجەت ڕابگرە';
             touchArea.className = 'fp-touch-area active';
-            touchArea.innerHTML = `
-                    <span class="finger-icon">🔍</span>
-                    <span>پەنجەمۆر دەخوێنرێتەوە...</span>
-                    <span class="hold-text">پەنجەت ڕابگرە</span>
-                    <div class="scan-line"></div>
-                `;
+            touchArea.innerHTML =
+                `<span class="finger-icon">🔍</span><span>پەنجەمۆر دەخوێنرێتەوە...</span><span class="hold-text">پەنجەت ڕابگرە</span><div class="scan-line"></div>`;
             progress.classList.add('active');
             progressBar.style.width = '0%';
             progressBar.className = 'fp-progress-bar';
 
-            // خوێندنەوەی پەنجەمۆر لە ماوەی 1-2 چرکەدا
             let progressValue = 0;
             scanTimer = setInterval(() => {
                 progressValue += 5;
@@ -1289,20 +1526,17 @@
                 }
             }, 60);
 
-            // دوای 1.5 چرکە ئەنجامەکە دیاری بکە
             setTimeout(() => {
                 clearInterval(scanTimer);
-
                 const isRegistered = !!employee.fingerprint;
 
                 if (fpMode === 'register') {
-                    // تۆمارکردن - کۆدێکی تایبەت دروست بکە
                     if (!employee.fingerprint) {
                         employee.fingerprint = {
                             type: 'unique-code',
                             code: generateFingerprintCode(),
                             registeredAt: new Date().toISOString(),
-                            version: 6
+                            version: 13
                         };
                         saveData(data);
                     }
@@ -1313,19 +1547,14 @@
                     text.textContent = '✅ پەنجەمۆری ' + employee.name + ' تۆمار کرا!';
                     result.innerHTML = '<span style="color:#6ee7b7;">✅ پەنجەمۆر بە سەرکەوتوویی تۆمار کرا</span>';
                     touchArea.className = 'fp-touch-area active';
-                    touchArea.innerHTML = `
-                            <span class="finger-icon">✅</span>
-                            <span>تۆمار کرا</span>
-                            <span class="hold-text">سەرکەوتوو</span>
-                        `;
+                    touchArea.innerHTML =
+                        `<span class="finger-icon">✅</span><span>تۆمار کرا</span><span class="hold-text">سەرکەوتوو</span>`;
                     setTimeout(() => { closeModal('fingerprintModal');
                         renderAll(); }, 1000);
                     isScanning = false;
-                    isHolding = false;
                     return;
                 }
 
-                // ڕێژەی پشتڕاستکردنەوە
                 if (!isRegistered) {
                     progressBar.className = 'fp-progress-bar error';
                     progressBar.style.width = '100%';
@@ -1334,58 +1563,38 @@
                     text.textContent = '❌ پەنجەمۆر نەناسرایەوە! تکایە یەکەم جار تۆماری بکە.';
                     result.innerHTML = '<span style="color:#f87171;">❌ ئەم کارمەندە پەنجەمۆری تۆمار نەکراوە</span>';
                     touchArea.className = 'fp-touch-area error';
-                    touchArea.innerHTML = `
-                            <span class="finger-icon">❌</span>
-                            <span>نەناسرایەوە</span>
-                            <span class="hold-text">پەنجەمۆر تۆمار نەکراوە</span>
-                        `;
+                    touchArea.innerHTML =
+                        `<span class="finger-icon">❌</span><span>نەناسرایەوە</span><span class="hold-text">پەنجەمۆر تۆمار نەکراوە</span>`;
                     isScanning = false;
-                    isHolding = false;
                     return;
                 }
 
-                // پشتڕاستکردنەوەی سەرکەوتوو
                 progressBar.className = 'fp-progress-bar success';
                 progressBar.style.width = '100%';
                 icon.className = 'fas fa-fingerprint fp-icon match';
                 text.className = 'fp-text match';
                 text.textContent = '✅ پەنجەمۆری ' + employee.name + ' ناسرایەوە!';
-                result.innerHTML = '<span style="color:#6ee7b7;">✅ پەنجەمۆر پشتڕاست کرایەوە! کاتی هاتن/چونەوە تۆمار دەکرێت...</span>';
+                result.innerHTML = '<span style="color:#6ee7b7;">✅ پەنجەمۆر پشتڕاست کرایەوە!</span>';
                 touchArea.className = 'fp-touch-area active';
-                touchArea.innerHTML = `
-                        <span class="finger-icon">✅</span>
-                        <span>پشتڕاست کرایەوە</span>
-                        <span class="hold-text">سەرکەوتوو</span>
-                    `;
+                touchArea.innerHTML =
+                    `<span class="finger-icon">✅</span><span>پشتڕاست کرایەوە</span><span class="hold-text">سەرکەوتوو</span>`;
 
                 setTimeout(() => {
-                    performAttendance(employee.id);
                     closeModal('fingerprintModal');
                     isScanning = false;
-                    isHolding = false;
                 }, 800);
-
             }, 1500);
         }
 
-        // ============================================================
-        // FINGERPRINT UI FUNCTIONS
-        // ============================================================
-        async function openFingerprintModal(id, mode = 'register') {
+        function openFingerprintModal(id, mode = 'register') {
             const data = getData();
             const employee = data.employees.find(emp => emp.id === id);
             if (!employee) return;
-
             fpEmployeeId = id;
-            fpRegistered = !!employee.fingerprint;
             fpMode = mode;
             isScanning = false;
-            isHolding = false;
-
             if (scanTimer) { clearInterval(scanTimer);
                 scanTimer = null; }
-            if (holdTimer) { clearTimeout(holdTimer);
-                holdTimer = null; }
 
             document.getElementById('fpIcon').className = 'fas fa-fingerprint fp-icon waiting';
             document.getElementById('fpText').textContent = '👆 پەنجەت دابنێ لەسەر بۆکسی خوارەوە';
@@ -1395,42 +1604,18 @@
 
             const touchArea = document.getElementById('fpTouchArea');
             touchArea.className = 'fp-touch-area';
-            touchArea.innerHTML = `
-                    <span class="finger-icon">🖐️</span>
-                    <span>پەنجەمۆر بخوێنەرەوە</span>
-                    <span class="hold-text">کلیک یان تەچ بکە و ڕایبگرە</span>
-                    <div class="scan-line"></div>
-                `;
+            touchArea.innerHTML =
+                `<span class="finger-icon">🖐️</span><span>پەنجەمۆر بخوێنەرەوە</span><span class="hold-text">کلیک یان تەچ بکە و ڕایبگرە</span><div class="scan-line"></div>`;
 
             document.getElementById('fpModalTitle').textContent = mode === 'register' ?
-                (fpRegistered ? 'نوێکردنەوەی پەنجەمۆر' : 'تۆماری پەنجەمۆر') :
+                (employee.fingerprint ? 'نوێکردنەوەی پەنجەمۆر' : 'تۆماری پەنجەمۆر') :
                 'پشتڕاستکردنەوەی پەنجەمۆر';
 
             const registerBtn = document.getElementById('fpRegisterBtn');
             registerBtn.style.display = mode === 'register' ? 'inline-flex' : 'none';
-            registerBtn.textContent = fpRegistered ? 'نوێکردنەوە' : 'تۆمارکردن';
-
-            const result = document.getElementById('fpResult');
-            result.innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:0.7rem;">💡 هیچ ئامێرێکی تایبەت پێویست نییە، تەنها پەنجەت دابنێ</span>';
+            registerBtn.textContent = employee.fingerprint ? 'نوێکردنەوە' : 'تۆمارکردن';
 
             document.getElementById('fingerprintModal').classList.add('active');
-
-            // پشتگیری لە touch و mouse بۆ هەموو ئامێرێک
-            const touchAreaElem = document.getElementById('fpTouchArea');
-
-            // بۆ ئەوەی کاتێک پەنجە ڕادەگیرێت، سکان بەردەوام بێت
-            touchAreaElem.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                if (!isScanning && fpEmployeeId !== null) {
-                    startFingerprintScan();
-                }
-            }, { passive: false });
-
-            touchAreaElem.addEventListener('mousedown', function(e) {
-                if (!isScanning && fpEmployeeId !== null) {
-                    startFingerprintScan();
-                }
-            });
         }
 
         function registerFingerprint() {
@@ -1451,35 +1636,10 @@
             showNotification('❌ پەنجەمۆری ' + employee.name + ' سڕایەوە', 'error');
         }
 
-        function performAttendance(id) {
-            const data = getData();
-            const employee = data.employees.find(e => e.id === id);
-            if (!employee) return;
-
-            const key = `${id}_${getToday()}`;
-            const now = getTimeNow();
-            if (!data.attendance) data.attendance = {};
-
-            if (!data.attendance[key]) {
-                data.attendance[key] = { checkIn: now, checkOut: '' };
-                saveData(data);
-                renderAll();
-                showNotification('✅ کاتی هاتن تۆمار کرا بۆ ' + employee.name + ': ' + now + ' (پەنجەمۆر)', 'success');
-            } else if (data.attendance[key].checkIn && !data.attendance[key].checkOut) {
-                data.attendance[key].checkOut = now;
-                saveData(data);
-                renderAll();
-                showNotification('✅ کاتی چونەوە تۆمار کرا بۆ ' + employee.name + ': ' + now + ' (پەنجەمۆر)', 'success');
-            } else {
-                showNotification('⚠️ ئەمڕۆ هاتن و چونەوە تۆمار کراوە بۆ ' + employee.name, 'warning');
-            }
-        }
-
         function fingerprintCheck(id) {
             const data = getData();
             const employee = data.employees.find(e => e.id === id);
             if (!employee) return;
-
             if (!employee.fingerprint) {
                 if (confirm('⚠️ ئەم کارمەندە پەنجەمۆری نییە! تۆماری بکەیت؟')) {
                     openFingerprintModal(id, 'register');
@@ -1497,32 +1657,16 @@
             if (existing) existing.remove();
 
             const toast = document.createElement('div');
-            const colors = {
-                success: 'rgba(52,211,153,0.2)',
-                warning: 'rgba(251,191,36,0.2)',
-                error: 'rgba(239,68,68,0.2)'
-            };
-            const borders = {
-                success: 'rgba(52,211,153,0.3)',
-                warning: 'rgba(251,191,36,0.3)',
-                error: 'rgba(239,68,68,0.3)'
-            };
-            const icons = {
-                success: 'fa-check-circle',
-                warning: 'fa-exclamation-circle',
-                error: 'fa-times-circle'
-            };
-            const iconColors = {
-                success: '#6ee7b7',
-                warning: '#fbbf24',
-                error: '#f87171'
-            };
+            const colors = { success: 'rgba(52,211,153,0.2)', warning: 'rgba(251,191,36,0.2)', error: 'rgba(239,68,68,0.2)' };
+            const borders = { success: 'rgba(52,211,153,0.3)', warning: 'rgba(251,191,36,0.3)', error: 'rgba(239,68,68,0.3)' };
+            const icons = { success: 'fa-check-circle', warning: 'fa-exclamation-circle', error: 'fa-times-circle' };
+            const iconColors = { success: '#6ee7b7', warning: '#fbbf24', error: '#f87171' };
 
             toast.className = 'notification-toast';
             toast.style.cssText = 'background:' + (colors[type] || colors.success) + ';border:1px solid ' + (borders[
                 type] || borders.success) + ';';
             toast.innerHTML = '<i class="fas ' + (icons[type] || icons.success) + '" style="color:' + (iconColors[
-                    type] || iconColors.success) + ';margin-right:8px;"></i> ' + message;
+                type] || iconColors.success) + ';margin-left:8px;"></i> ' + message;
             document.body.appendChild(toast);
 
             setTimeout(() => {
@@ -1536,17 +1680,25 @@
         // TIME HELPERS
         // ============================================================
         function addMinutes(timeStr, minutes) {
-            if (!timeStr) return '';
+            if (!timeStr || timeStr === '--:--') {
+                const now = new Date();
+                const h = String(now.getHours()).padStart(2, '0');
+                const m = String(now.getMinutes()).padStart(2, '0');
+                timeStr = h + ':' + m;
+            }
             const parts = timeStr.split(':');
             let hours = parseInt(parts[0]);
-            let mins = parseInt(parts[1]) + minutes;
-            if (mins >= 60) { hours += Math.floor(mins / 60);
-                mins = mins % 60; }
-            if (mins < 0) { hours -= Math.ceil(Math.abs(mins) / 60);
-                mins = ((mins % 60) + 60) % 60; }
-            if (hours < 0) hours = 23;
-            if (hours > 23) hours = 0;
-            return String(hours).padStart(2, '0') + ':' + String(mins).padStart(2, '0');
+            let mins = parseInt(parts[1]);
+            if (isNaN(hours)) hours = 0;
+            if (isNaN(mins)) mins = 0;
+
+            let totalMinutes = hours * 60 + mins + minutes;
+            if (totalMinutes < 0) totalMinutes = 0;
+            if (totalMinutes > 1439) totalMinutes = 1439;
+
+            const newHours = Math.floor(totalMinutes / 60);
+            const newMins = totalMinutes % 60;
+            return String(newHours).padStart(2, '0') + ':' + String(newMins).padStart(2, '0');
         }
 
         // ============================================================
@@ -1561,11 +1713,14 @@
             closeModal('addEmployeeModal');
             document.getElementById('newEmployeeName').value = '';
             renderAll();
+            showNotification('✅ کارمەندی ' + name + ' زیاد کرا', 'success');
         }
 
         function deleteEmployee(id) {
             if (!confirm('دڵنیایت لە سڕینەوەی ئەم کارمەندە؟')) return;
             const data = getData();
+            const employee = data.employees.find(e => e.id === id);
+            const name = employee ? employee.name : '';
             data.employees = data.employees.filter(emp => emp.id !== id);
             Object.keys(data.attendance).forEach(key => {
                 if (key.startsWith(id + '_')) delete data.attendance[key];
@@ -1573,6 +1728,7 @@
             delete data.leaves[id];
             saveData(data);
             renderAll();
+            showNotification('❌ کارمەندی ' + name + ' سڕایەوە', 'error');
         }
 
         function openEditModal(id) {
@@ -1595,24 +1751,35 @@
                 saveData(data);
                 closeModal('editEmployeeModal');
                 renderAll();
+                showNotification('✅ ناوی کارمەند گۆڕدرا', 'success');
             }
         }
 
+        // ============================================================
+        // TIME ADJUST - 4 کات: هاتن، چوون بۆ ڕێست، هاتنەوە لە ڕێست، چونەوە
+        // ============================================================
         function adjustTime(employeeId, type, amount) {
             const data = getData();
             const today = getToday();
             const key = `${employeeId}_${today}`;
             if (!data.attendance) data.attendance = {};
-            if (!data.attendance[key]) data.attendance[key] = { checkIn: '', checkOut: '' };
+            if (!data.attendance[key]) {
+                data.attendance[key] = { checkIn: '', breakStart: '', breakEnd: '', checkOut: '' };
+            }
+
             const current = data.attendance[key][type] || '';
             const newTime = addMinutes(current, amount);
-            if (newTime || amount === 0) {
+
+            if (newTime) {
                 data.attendance[key][type] = newTime;
                 saveData(data);
                 renderAll();
             }
         }
 
+        // ============================================================
+        // CHECK IN / BREAK START / BREAK END / CHECK OUT
+        // ============================================================
         function checkIn(id) {
             const data = getData();
             const employee = data.employees.find(emp => emp.id === id);
@@ -1628,13 +1795,74 @@
             const now = getTimeNow();
             if (!data.attendance) data.attendance = {};
             if (!data.attendance[key]) {
-                data.attendance[key] = { checkIn: now, checkOut: '' };
+                data.attendance[key] = { checkIn: now, breakStart: '', breakEnd: '', checkOut: '' };
                 saveData(data);
                 renderAll();
                 showNotification('✅ کاتی هاتن تۆمار کرا بۆ ' + employee.name + ': ' + now, 'success');
-            } else if (data.attendance[key].checkIn) {
+            } else if (!data.attendance[key].checkIn) {
+                data.attendance[key].checkIn = now;
+                saveData(data);
+                renderAll();
+                showNotification('✅ کاتی هاتن تۆمار کرا بۆ ' + employee.name + ': ' + now, 'success');
+            } else {
                 alert('⚠️ ئەمڕۆ چەک-ئین کراوە!');
             }
+        }
+
+        function breakStart(id) {
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (!employee) return;
+            if (!employee.fingerprint) {
+                if (confirm('⚠️ ئەم کارمەندە پەنجەمۆری نییە! ئایا دەتەوێت پەنجەمۆر تۆمار بکەیت؟')) {
+                    openFingerprintModal(id, 'register');
+                }
+                return;
+            }
+            const today = getToday();
+            const key = `${id}_${today}`;
+            const now = getTimeNow();
+            if (!data.attendance) data.attendance = {};
+            if (!data.attendance[key]) {
+                data.attendance[key] = { checkIn: '', breakStart: now, breakEnd: '', checkOut: '' };
+                saveData(data);
+                renderAll();
+                showNotification('✅ چوونەوە بۆ ڕێست: ' + employee.name + ': ' + now, 'success');
+            } else if (!data.attendance[key].breakStart) {
+                data.attendance[key].breakStart = now;
+                saveData(data);
+                renderAll();
+                showNotification('✅ چوونەوە بۆ ڕێست: ' + employee.name + ': ' + now, 'success');
+            } else {
+                alert('⚠️ ئەمڕۆ چوونەوە بۆ ڕێست تۆمار کراوە!');
+            }
+        }
+
+        function breakEnd(id) {
+            const data = getData();
+            const employee = data.employees.find(emp => emp.id === id);
+            if (!employee) return;
+            if (!employee.fingerprint) {
+                if (confirm('⚠️ ئەم کارمەندە پەنجەمۆری نییە! ئایا دەتەوێت پەنجەمۆر تۆمار بکەیت؟')) {
+                    openFingerprintModal(id, 'register');
+                }
+                return;
+            }
+            const today = getToday();
+            const key = `${id}_${today}`;
+            const now = getTimeNow();
+            if (!data.attendance || !data.attendance[key] || !data.attendance[key].breakStart) {
+                alert('⚠️ پێویستە یەکەم جار چوونەوە بۆ ڕێست تۆمار بکەیت!');
+                return;
+            }
+            if (data.attendance[key].breakEnd) {
+                alert('⚠️ هاتنەوە لە ڕێست تۆمار کراوە!');
+                return;
+            }
+            data.attendance[key].breakEnd = now;
+            saveData(data);
+            renderAll();
+            showNotification('✅ هاتنەوە لە ڕێست: ' + employee.name + ': ' + now, 'success');
         }
 
         function checkOut(id) {
@@ -1715,6 +1943,7 @@
             document.getElementById('leaveDate').value = getToday();
             document.getElementById('leaveReason').value = '';
             renderAll();
+            showNotification('✅ مۆڵەت زیاد کرا', 'success');
         }
 
         function deleteLeave(employeeId, index) {
@@ -1747,7 +1976,7 @@
             return false;
         }
 
-        function getEmployeeAttendanceHistory(employeeId, data, days = 30) {
+        function getEmployeeAttendanceHistory(employeeId, data, days) {
             const history = [];
             const today = new Date();
             for (let i = 0; i < days; i++) {
@@ -1761,11 +1990,14 @@
                     history.push({
                         date: dateStr,
                         checkIn: data.attendance[key].checkIn || '-',
+                        breakStart: data.attendance[key].breakStart || '-',
+                        breakEnd: data.attendance[key].breakEnd || '-',
                         checkOut: data.attendance[key].checkOut || '-',
                         isLeave: isLeave
                     });
                 } else if (isLeave) {
-                    history.push({ date: dateStr, checkIn: '-', checkOut: '-', isLeave: true });
+                    history.push({ date: dateStr, checkIn: '-', breakStart: '-', breakEnd: '-', checkOut: '-',
+                        isLeave: true });
                 }
             }
             return history;
@@ -1793,7 +2025,7 @@
             tbody.innerHTML = '';
             if (data.employees.length === 0) {
                 tbody.innerHTML =
-                    `<tr><td colspan="7"><div class="empty-state"><i class="fas fa-users-slash"></i><p>هیچ کارمەندێک نییە</p></div></td></tr>`;
+                    `<tr><td colspan="9"><div class="empty-state"><i class="fas fa-users-slash"></i><p>هیچ کارمەندێک نییە</p></div></td></tr>`;
                 return;
             }
             data.employees.forEach((emp, index) => {
@@ -1801,6 +2033,8 @@
                 const onLeave = isOnLeaveToday(emp.id, data);
                 const isPresent = att && att.checkIn;
                 const checkInTime = att && att.checkIn ? att.checkIn : '';
+                const breakStartTime = att && att.breakStart ? att.breakStart : '';
+                const breakEndTime = att && att.breakEnd ? att.breakEnd : '';
                 const checkOutTime = att && att.checkOut ? att.checkOut : '';
                 const hasFingerprint = !!emp.fingerprint;
 
@@ -1817,15 +2051,69 @@
                 }
 
                 const tr = document.createElement('tr');
-                tr.innerHTML = `
-                        <td style="color:rgba(255,255,255,0.2);font-weight:500;">${index + 1}</td>
-                        <td><span class="employee-name">${emp.name}</span><span class="employee-id">#${String(emp.id).slice(-4)}</span></td>
-                        <td><div class="fingerprint-cell"><button class="fingerprint-btn ${hasFingerprint ? 'active' : ''}" onclick="fingerprintCheck(${emp.id})" title="${hasFingerprint ? 'پەنجەمۆر تۆمار کراوە - کلیک بکە' : 'پەنجەمۆر تۆمار نەکراوە - کلیک بکە بۆ تۆمارکردن'}"><i class="fas fa-fingerprint"></i>${hasFingerprint ? '<span class="badge"><i class="fas fa-check" style="font-size:0.4rem;"></i></span>' : ''}</button><span class="fp-status ${hasFingerprint ? 'registered' : ''}">${hasFingerprint ? '✅ تۆمارکراوە' : '❌ نەکراوە'}</span></div></td>
-                        <td><div class="time-control"><button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkIn', -5)">−</button><button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkIn', -1)">−1</button><span class="time-display ${checkInTime ? '' : 'empty'}">${checkInTime || '--:--'}</span><button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkIn', 1)">+1</button><button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkIn', 5)">+</button></div></td>
-                        <td><div class="time-control"><button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkOut', -5)">−</button><button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkOut', -1)">−1</button><span class="time-display ${checkOutTime ? '' : 'empty'}">${checkOutTime || '--:--'}</span><button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkOut', 1)">+1</button><button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkOut', 5)">+</button></div></td>
-                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                        <td><div class="action-btns"><button class="btn btn-success btn-sm" onclick="checkIn(${emp.id})" title="هاتن"><i class="fas fa-sign-in-alt"></i></button><button class="btn btn-warning btn-sm" onclick="checkOut(${emp.id})" title="چونەوە"><i class="fas fa-sign-out-alt"></i></button><button class="btn btn-primary btn-sm" onclick="openFingerprintModal(${emp.id}, 'register')" title="تۆماری پەنجەمۆر"><i class="fas fa-fingerprint"></i></button><button class="btn btn-primary btn-sm" onclick="openEditModal(${emp.id})" title="دەستکاری ناو"><i class="fas fa-edit"></i></button><button class="btn btn-success btn-sm" onclick="openLeaveModal(${emp.id})" title="مۆڵەت"><i class="fas fa-umbrella-beach"></i></button><button class="btn btn-danger btn-sm" onclick="deleteEmployee(${emp.id})" title="سڕینەوە"><i class="fas fa-trash"></i></button></div></td>
-                    `;
+                tr.innerHTML =
+                    `
+                    <td>${index + 1}</td>
+                    <td><span class="employee-name">${emp.name}</span><span class="employee-id">#${String(emp.id).slice(-4)}</span></td>
+                    <td>
+                        <div class="fingerprint-cell">
+                            <button class="fingerprint-btn ${hasFingerprint ? 'active' : ''}" onclick="fingerprintCheck(${emp.id})" title="${hasFingerprint ? 'پەنجەمۆر تۆمار کراوە - کلیک بکە' : 'پەنجەمۆر تۆمار نەکراوە - کلیک بکە بۆ تۆمارکردن'}">
+                                <i class="fas fa-fingerprint"></i>
+                                ${hasFingerprint ? '<span class="badge"><i class="fas fa-check" style="font-size:0.4rem;"></i></span>' : ''}
+                            </button>
+                            <span class="fp-status ${hasFingerprint ? 'registered' : ''}">${hasFingerprint ? '✅ تۆمارکراوە' : '❌ نەکراوە'}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="time-control">
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkIn', -5)">−</button>
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkIn', -1)">−1</button>
+                            <span class="time-display ${checkInTime ? '' : 'empty'}">${checkInTime || '--:--'}</span>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkIn', 1)">+1</button>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkIn', 5)">+</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="time-control">
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'breakStart', -5)">−</button>
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'breakStart', -1)">−1</button>
+                            <span class="time-display ${breakStartTime ? '' : 'empty'}">${breakStartTime || '--:--'}</span>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'breakStart', 1)">+1</button>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'breakStart', 5)">+</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="time-control">
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'breakEnd', -5)">−</button>
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'breakEnd', -1)">−1</button>
+                            <span class="time-display ${breakEndTime ? '' : 'empty'}">${breakEndTime || '--:--'}</span>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'breakEnd', 1)">+1</button>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'breakEnd', 5)">+</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="time-control">
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkOut', -5)">−</button>
+                            <button class="btn btn-xs btn-sub" onclick="adjustTime(${emp.id}, 'checkOut', -1)">−1</button>
+                            <span class="time-display ${checkOutTime ? '' : 'empty'}">${checkOutTime || '--:--'}</span>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkOut', 1)">+1</button>
+                            <button class="btn btn-xs btn-add" onclick="adjustTime(${emp.id}, 'checkOut', 5)">+</button>
+                        </div>
+                    </td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn btn-success btn-sm" onclick="checkIn(${emp.id})" title="هاتن"><i class="fas fa-sign-in-alt"></i></button>
+                            <button class="btn btn-warning btn-sm" onclick="breakStart(${emp.id})" title="چوونەوە بۆ ڕێست"><i class="fas fa-coffee"></i></button>
+                            <button class="btn btn-info btn-sm" onclick="breakEnd(${emp.id})" title="هاتنەوە لە ڕێست"><i class="fas fa-undo-alt"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="checkOut(${emp.id})" title="چونەوە"><i class="fas fa-sign-out-alt"></i></button>
+                            <button class="btn btn-primary btn-sm" onclick="openFingerprintModal(${emp.id}, 'register')" title="تۆماری پەنجەمۆر"><i class="fas fa-fingerprint"></i></button>
+                            <button class="btn btn-primary btn-sm" onclick="openEditModal(${emp.id})" title="دەستکاری ناو"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-success btn-sm" onclick="openLeaveModal(${emp.id})" title="مۆڵەت"><i class="fas fa-umbrella-beach"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteEmployee(${emp.id})" title="سڕینەوە"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
                 tbody.appendChild(tr);
             });
         }
@@ -1861,7 +2149,28 @@
         function renderChart(data) {
             const ctx = document.getElementById('attendanceChart').getContext('2d');
             if (window.attendanceChartInstance) window.attendanceChartInstance.destroy();
-            const today = getToday();
+
+            if (data.employees.length === 0) {
+                window.attendanceChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['هیچ کارمەندێک نییە'],
+                        datasets: [{ label: 'ڕەوشی ئەمڕۆ', data: [0], backgroundColor: ['rgba(120,80,200,0.15)'],
+                            borderRadius: 4 }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: 'rgba(255,255,255,0.3)' } } },
+                        scales: {
+                            y: { beginAtZero: true, max: 2.5, ticks: { color: 'rgba(255,255,255,0.3)' } },
+                            x: { ticks: { color: 'rgba(255,255,255,0.3)' } }
+                        }
+                    }
+                });
+                return;
+            }
+
             const labels = data.employees.map(emp => emp.name);
             const statuses = data.employees.map(emp => {
                 const att = getAttendanceForToday(emp.id, data);
@@ -1870,6 +2179,11 @@
                 return (att && att.checkIn) ? 1 : 0;
             });
             const colors = statuses.map(v => v === 2 ? '#fbbf24' : v === 1 ? '#7c3aed' : 'rgba(120,80,200,0.15)');
+
+            const isLight = document.body.classList.contains('theme-light');
+            const textColor = isLight ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)';
+            const gridColor = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.03)';
+
             window.attendanceChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -1888,7 +2202,7 @@
                     plugins: {
                         legend: {
                             labels: {
-                                color: 'rgba(255,255,255,0.3)',
+                                color: textColor,
                                 font: { size: 10 },
                                 generateLabels: function() {
                                     return [
@@ -1906,7 +2220,7 @@
                             max: 2.5,
                             ticks: {
                                 stepSize: 1,
-                                color: 'rgba(255,255,255,0.15)',
+                                color: textColor,
                                 font: { size: 9 },
                                 callback: function(value) {
                                     if (value === 2) return 'مۆڵەت';
@@ -1914,10 +2228,10 @@
                                     return 'غایب';
                                 }
                             },
-                            grid: { color: 'rgba(255,255,255,0.03)' }
+                            grid: { color: gridColor }
                         },
                         x: {
-                            ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 9 } },
+                            ticks: { color: textColor, font: { size: 9 } },
                             grid: { display: false }
                         }
                     }
@@ -1931,6 +2245,17 @@
             renderTable(data);
             renderReports(data);
             renderChart(data);
+
+            if (data.theme) {
+                const validThemes = ['dark', 'light', 'purple', 'blue', 'green', 'yellow'];
+                if (validThemes.includes(data.theme)) {
+                    validThemes.forEach(t => document.body.classList.remove('theme-' + t));
+                    document.body.classList.add('theme-' + data.theme);
+                    document.querySelectorAll('.theme-option').forEach(el => {
+                        el.classList.toggle('active-theme', el.dataset.theme === data.theme);
+                    });
+                }
+            }
         }
 
         // ============================================================
@@ -1943,11 +2268,8 @@
         function closeModal(id) {
             document.getElementById(id).classList.remove('active');
             isScanning = false;
-            isHolding = false;
             if (scanTimer) { clearInterval(scanTimer);
                 scanTimer = null; }
-            if (holdTimer) { clearTimeout(holdTimer);
-                holdTimer = null; }
             document.getElementById('fpProgress').classList.remove('active');
         }
 
@@ -1956,18 +2278,15 @@
                 if (e.target === this) {
                     this.classList.remove('active');
                     isScanning = false;
-                    isHolding = false;
                     if (scanTimer) { clearInterval(scanTimer);
                         scanTimer = null; }
-                    if (holdTimer) { clearTimeout(holdTimer);
-                        holdTimer = null; }
                     document.getElementById('fpProgress').classList.remove('active');
                 }
             });
         });
 
         // ============================================================
-        // KEYBOARD SHORTCUT - Space for fingerprint
+        // KEYBOARD SHORTCUT
         // ============================================================
         document.addEventListener('keydown', function(e) {
             if ((e.key === ' ' || e.code === 'Space') && document.getElementById('fingerprintModal').classList.contains(
@@ -1984,10 +2303,10 @@
         setInterval(renderAll, 60000);
 
         console.log('🖐️ سیستەمی پەنجەمۆری کارمەندان ئامادەیە!');
-        console.log('📌 کلیک یان تەچ لەسەر پەنجەمۆری هەر کارمەندێک بکە بۆ خوێندنەوە.');
-        console.log('📱 لەسەر مۆبایل و لەپتۆپ بە یەک شێوە کاردەکات.');
-        console.log('💡 هیچ ئامێرێکی تایبەت پێویست نییە!');
-        console.log('🔐 هەر کارمەندێک کۆدی تایبەتی خۆی هەیە.');
+        console.log('⏰ کاتی هاتن | چوونەوە بۆ ڕێست | هاتنەوە لە ڕێست | کاتی چونەوە');
+        console.log('🎨 کلیک لەسەر ئایکۆنی پالتە بکە بۆ گۆڕینی ڕەنگی شاشە');
+        console.log('✏️ دەتوانیت کاتەکان بە دوگمەکانی + و - دەستکاری بکەیت');
+        console.log('💾 هەموو داتاکان لە localStorage خەزن دەبن');
     </script>
 </body>
 </html>
