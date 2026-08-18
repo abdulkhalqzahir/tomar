@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>سیستەمی پەنجەمۆری کارمەندان</title>
+    <title>سیستەمی پەنجەمۆری کارمەندان - Xawan</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -38,6 +39,108 @@
         .glass:hover {
             box-shadow: 0 12px 48px rgba(120, 80, 200, 0.35);
         }
+
+        /* ============================================== */
+        /* NEW SECTION: OFFICE REPORT HEADER (XAWAN STYLE)*/
+        /* ============================================== */
+        .xawan-report-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 30px;
+            margin-bottom: 25px;
+            background: linear-gradient(145deg, rgba(10, 20, 40, 0.9), rgba(0, 10, 30, 0.95));
+            border: 1px solid rgba(0, 100, 255, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 15px 50px rgba(0, 50, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+            flex-wrap: wrap;
+        }
+        /* Neon Blue Glow effect */
+        .xawan-report-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 100, 255, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+        .xawan-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 2;
+        }
+        /* گونجاندنی لۆگۆکە لەگەڵ دیزاینەکە */
+        .xawan-logo-img {
+            height: 55px;
+            width: auto;
+            filter: drop-shadow(0 0 15px rgba(0, 150, 255, 0.4));
+            transition: transform 0.3s ease;
+        }
+        .xawan-logo-img:hover {
+            transform: scale(1.05);
+        }
+        .xawan-text-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #80b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(0, 100, 255, 0.2);
+        }
+        .xawan-title {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            z-index: 2;
+            gap: 4px;
+        }
+        .xawan-title h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+        }
+        .xawan-title span {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .xawan-title span i {
+            color: #3b82f6;
+        }
+        .xawan-auto-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2;
+        }
+        .xawan-status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #6ee7b7;
+            box-shadow: 0 0 10px rgba(110, 231, 183, 0.6);
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .xawan-status-text {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* ============================================== */
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -142,6 +245,53 @@
             border-radius: 5px;
             min-width: 26px;
             justify-content: center;
+        }
+        .btn-pdf {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        .btn-pdf:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+        .btn-report {
+            background: rgba(52, 211, 153, 0.15);
+            color: #6ee7b7;
+            border-color: rgba(52, 211, 153, 0.2);
+        }
+        .btn-report:hover {
+            background: rgba(52, 211, 153, 0.25);
+        }
+        .btn-finish {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+            border-color: #f59e0b;
+            font-weight: 600;
+            padding: 10px 24px;
+        }
+        .btn-finish:hover {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.4);
+        }
+        .btn-refresh-day {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            border-color: #3b82f6;
+            font-weight: 600;
+            padding: 10px 20px;
+        }
+        .btn-refresh-day:hover {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
+        }
+        .btn-save-daily {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: #fff;
+            border-color: #8b5cf6;
+        }
+        .btn-save-daily:hover {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.4);
         }
         .theme-toggle-btn {
             width: 38px;
@@ -324,11 +474,20 @@
         }
         .table-header h2 i {
             color: #7c3aed;
-            margin-right: 8px;
+            margin-left: 8px;
         }
         .table-header .hint {
             font-size: 0.6rem;
             color: rgba(255, 255, 255, 0.2);
+        }
+        .auto-save-badge {
+            display: inline-block;
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            background: rgba(52, 211, 153, 0.08);
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 8px;
         }
         table {
             width: 100%;
@@ -507,7 +666,7 @@
         }
         .report-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 16px;
             margin-bottom: 24px;
         }
@@ -543,6 +702,44 @@
             color: rgba(255, 255, 255, 0.3);
             font-size: 0.65rem;
         }
+        .report-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .report-actions .btn {
+            flex: 1;
+            justify-content: center;
+            min-width: 80px;
+        }
+        .report-pdf-content {
+            padding: 10px 0;
+        }
+        .report-pdf-content .report-item {
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .daily-save-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.75rem;
+            align-items: center;
+        }
+        .daily-save-item .date {
+            color: #a78bfa;
+            font-weight: 500;
+        }
+        .daily-save-item .time {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.65rem;
+        }
+        .daily-save-item .btn {
+            padding: 2px 10px;
+            font-size: 0.55rem;
+        }
         .chart-container {
             height: 220px;
             padding: 16px 20px;
@@ -567,7 +764,7 @@
         .modal-content {
             border-radius: 24px;
             padding: 28px 30px;
-            max-width: 480px;
+            max-width: 500px;
             width: 100%;
             background: #14141e;
             border: 1px solid rgba(120, 80, 200, 0.1);
@@ -586,6 +783,38 @@
         .modal-content h2 i {
             color: #7c3aed;
         }
+        .modal-content .finish-message {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.2rem;
+        }
+        .modal-content .finish-message .big-icon {
+            font-size: 3rem;
+            color: #fbbf24;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .modal-content .finish-message .sub-text {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.3);
+            margin-top: 5px;
+        }
+        .modal-content .warning-message {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1rem;
+        }
+        .modal-content .warning-message .big-icon {
+            font-size: 3rem;
+            color: #f87171;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .modal-content .warning-message .sub-text {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.3);
+            margin-top: 5px;
+        }
         .form-group {
             margin-bottom: 16px;
         }
@@ -599,7 +828,8 @@
             font-weight: 500;
         }
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 10px 14px;
             border-radius: 10px;
@@ -611,9 +841,14 @@
             border: 1px solid rgba(120, 80, 200, 0.1);
         }
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             border-color: #7c3aed;
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        .form-group select option {
+            background: #14141e;
+            color: #fff;
         }
         .modal-actions {
             display: flex;
@@ -879,6 +1114,7 @@
             background: rgba(120, 80, 200, 0.3);
             border-radius: 10px;
         }
+
         body.theme-light {
             background: #f0f0f5;
             color: #1a1a2e;
@@ -909,15 +1145,27 @@
             border: 1px solid rgba(120, 80, 200, 0.08);
         }
         body.theme-light .modal-content .form-group input,
-        body.theme-light .modal-content .form-group textarea {
+        body.theme-light .modal-content .form-group textarea,
+        body.theme-light .modal-content .form-group select {
             background: rgba(0, 0, 0, 0.03);
             color: #1a1a2e;
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
         body.theme-light .modal-content .form-group input:focus,
-        body.theme-light .modal-content .form-group textarea:focus {
+        body.theme-light .modal-content .form-group textarea:focus,
+        body.theme-light .modal-content .form-group select:focus {
             border-color: #7c3aed;
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        body.theme-light .modal-content .form-group select option {
+            background: #fff;
+            color: #1a1a2e;
+        }
+        body.theme-light .modal-content .finish-message .sub-text {
+            color: rgba(0, 0, 0, 0.3);
+        }
+        body.theme-light .modal-content .warning-message .sub-text {
+            color: rgba(0, 0, 0, 0.3);
         }
         body.theme-light .leave-item {
             background: rgba(0, 0, 0, 0.03);
@@ -942,6 +1190,15 @@
         body.theme-light .report-item .details {
             color: rgba(0, 0, 0, 0.3);
         }
+        body.theme-light .report-pdf-content .report-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        body.theme-light .daily-save-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        body.theme-light .daily-save-item .time {
+            color: rgba(0, 0, 0, 0.3);
+        }
         body.theme-light .notification-toast {
             color: #1a1a2e;
             border: 1px solid rgba(0, 0, 0, 0.05);
@@ -961,6 +1218,10 @@
         body.theme-light .fingerprint-cell .fp-status {
             color: rgba(0, 0, 0, 0.3);
         }
+        body.theme-light .auto-save-badge {
+            color: rgba(0, 0, 0, 0.2);
+        }
+
         body.theme-purple {
             background: #1a0a2e;
             color: #e8d5f5;
@@ -990,15 +1251,21 @@
             border: 1px solid rgba(160, 120, 255, 0.15);
         }
         body.theme-purple .modal-content .form-group input,
-        body.theme-purple .modal-content .form-group textarea {
+        body.theme-purple .modal-content .form-group textarea,
+        body.theme-purple .modal-content .form-group select {
             background: rgba(255, 255, 255, 0.05);
             color: #e8d5f5;
             border: 1px solid rgba(160, 120, 255, 0.15);
         }
         body.theme-purple .modal-content .form-group input:focus,
-        body.theme-purple .modal-content .form-group textarea:focus {
+        body.theme-purple .modal-content .form-group textarea:focus,
+        body.theme-purple .modal-content .form-group select:focus {
             border-color: #a078ff;
             box-shadow: 0 0 0 3px rgba(160, 120, 255, 0.15);
+        }
+        body.theme-purple .modal-content .form-group select option {
+            background: #2a1a3e;
+            color: #e8d5f5;
         }
         body.theme-purple .leave-item {
             background: rgba(255, 255, 255, 0.05);
@@ -1018,6 +1285,7 @@
         body.theme-purple .stat-card h4 {
             color: rgba(232, 213, 245, 0.35);
         }
+
         body.theme-blue {
             background: #0a1628;
             color: #d5e5f5;
@@ -1047,15 +1315,21 @@
             border: 1px solid rgba(80, 160, 255, 0.15);
         }
         body.theme-blue .modal-content .form-group input,
-        body.theme-blue .modal-content .form-group textarea {
+        body.theme-blue .modal-content .form-group textarea,
+        body.theme-blue .modal-content .form-group select {
             background: rgba(255, 255, 255, 0.05);
             color: #d5e5f5;
             border: 1px solid rgba(80, 160, 255, 0.15);
         }
         body.theme-blue .modal-content .form-group input:focus,
-        body.theme-blue .modal-content .form-group textarea:focus {
+        body.theme-blue .modal-content .form-group textarea:focus,
+        body.theme-blue .modal-content .form-group select:focus {
             border-color: #50a0ff;
             box-shadow: 0 0 0 3px rgba(80, 160, 255, 0.15);
+        }
+        body.theme-blue .modal-content .form-group select option {
+            background: #1a2a4e;
+            color: #d5e5f5;
         }
         body.theme-blue .leave-item {
             background: rgba(255, 255, 255, 0.05);
@@ -1075,6 +1349,7 @@
         body.theme-blue .stat-card h4 {
             color: rgba(213, 229, 245, 0.35);
         }
+
         body.theme-green {
             background: #0a1a0a;
             color: #d5f5d5;
@@ -1104,15 +1379,21 @@
             border: 1px solid rgba(80, 255, 160, 0.15);
         }
         body.theme-green .modal-content .form-group input,
-        body.theme-green .modal-content .form-group textarea {
+        body.theme-green .modal-content .form-group textarea,
+        body.theme-green .modal-content .form-group select {
             background: rgba(255, 255, 255, 0.05);
             color: #d5f5d5;
             border: 1px solid rgba(80, 255, 160, 0.15);
         }
         body.theme-green .modal-content .form-group input:focus,
-        body.theme-green .modal-content .form-group textarea:focus {
+        body.theme-green .modal-content .form-group textarea:focus,
+        body.theme-green .modal-content .form-group select:focus {
             border-color: #50ffa0;
             box-shadow: 0 0 0 3px rgba(80, 255, 160, 0.15);
+        }
+        body.theme-green .modal-content .form-group select option {
+            background: #1a3a2a;
+            color: #d5f5d5;
         }
         body.theme-green .leave-item {
             background: rgba(255, 255, 255, 0.05);
@@ -1132,6 +1413,7 @@
         body.theme-green .stat-card h4 {
             color: rgba(213, 245, 213, 0.35);
         }
+
         body.theme-yellow {
             background: #1a1a0a;
             color: #f5f5d5;
@@ -1161,15 +1443,21 @@
             border: 1px solid rgba(255, 200, 80, 0.15);
         }
         body.theme-yellow .modal-content .form-group input,
-        body.theme-yellow .modal-content .form-group textarea {
+        body.theme-yellow .modal-content .form-group textarea,
+        body.theme-yellow .modal-content .form-group select {
             background: rgba(255, 255, 255, 0.05);
             color: #f5f5d5;
             border: 1px solid rgba(255, 200, 80, 0.15);
         }
         body.theme-yellow .modal-content .form-group input:focus,
-        body.theme-yellow .modal-content .form-group textarea:focus {
+        body.theme-yellow .modal-content .form-group textarea:focus,
+        body.theme-yellow .modal-content .form-group select:focus {
             border-color: #ffc850;
             box-shadow: 0 0 0 3px rgba(255, 200, 80, 0.15);
+        }
+        body.theme-yellow .modal-content .form-group select option {
+            background: #3a3a1a;
+            color: #f5f5d5;
         }
         body.theme-yellow .leave-item {
             background: rgba(255, 255, 255, 0.05);
@@ -1189,6 +1477,7 @@
         body.theme-yellow .stat-card h4 {
             color: rgba(245, 245, 213, 0.35);
         }
+
         @media (max-width: 992px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
@@ -1213,7 +1502,7 @@
                 grid-template-columns: 1fr 1fr;
             }
             .report-section {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
             .modal-content {
                 padding: 20px;
@@ -1248,6 +1537,23 @@
                 right: -10px;
                 min-width: 170px;
             }
+            .xawan-report-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 20px;
+            }
+            .xawan-title {
+                align-items: flex-start;
+                width: 100%;
+            }
+            .xawan-auto-status {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .xawan-logo-img {
+                height: 40px;
+            }
         }
         @media (max-width: 480px) {
             .stats-grid {
@@ -1273,15 +1579,42 @@
                 font-size: 0.8rem;
                 min-height: 40px;
             }
+            .report-section {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body class="theme-dark">
     <div class="container">
+        
+        <!-- =========================================== -->
+        <!-- NEW SECTION: XAWAN OFFICE REPORT HEADER      -->
+        <!-- =========================================== -->
+        <div class="xawan-report-header">
+            <div class="xawan-logo-area">
+                <img src="https://i.imgur.com/your-xawan-logo-placeholder.png" alt="Xawan Logo" class="xawan-logo-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100\' height=\'100\' rx=\'20\' fill=\'%230a1628\'/><path d=\'M20 50 L40 30 L60 70 L80 50\' stroke=\'%233b82f6\' stroke-width=\'8\' fill=\'none\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>'">
+                <span class="xawan-text-brand">xawan</span>
+            </div>
+            <div class="xawan-title">
+                <h2><i class="fas fa-chart-pie" style="margin-left:8px;color:#3b82f6;"></i> بەڕێوبەر خوناڤ لەزگین </h2>
+                <span><i class="fas fa-sync-alt fa-spin"></i> نوێکردنەوەی ئۆتۆماتیکی ڕۆژانە <span id="xawanLiveTime" style="color:#3b82f6;font-weight:600;">-</span></span>
+            </div>
+            <div class="xawan-auto-status">
+                <span class="xawan-status-dot"></span>
+                <span class="xawan-status-text">سیستم چالاکە &amp; ئامادەیە</span>
+            </div>
+        </div>
+        <!-- =========================================== -->
+
+        <!-- HEADER -->
         <header class="header glass">
             <div class="logo"><i class="fas fa-fingerprint"></i><span>پەنجەمۆر</span></div>
             <div class="header-actions">
                 <button class="btn btn-primary" onclick="openAddEmployeeModal()"><i class="fas fa-plus"></i> زیادکردن</button>
+                <button class="btn btn-refresh-day" onclick="openRefreshDayModal()"><i class="fas fa-sync-alt"></i> نوێکردنەوەی ڕۆژانە</button>
+                <button class="btn btn-finish" onclick="finishDay()"><i class="fas fa-check-circle"></i> کۆتایی و پاشەکەوتکردن</button>
+                <span class="auto-save-badge"><i class="fas fa-save"></i> خەزنی ئۆتۆماتیکی</span>
                 <div class="theme-selector">
                     <button class="theme-toggle-btn" onclick="toggleThemeDropdown()" title="گۆڕینی ڕەنگی شاشە"><i class="fas fa-palette"></i></button>
                     <div class="theme-dropdown" id="themeDropdown">
@@ -1296,6 +1629,7 @@
             </div>
         </header>
 
+        <!-- STATS -->
         <section class="stats-grid">
             <div class="stat-card glass"><span class="stat-icon"><i class="fas fa-user-friends"></i></span><h4>کۆی کارمەندان</h4><p id="totalEmployees">0</p></div>
             <div class="stat-card glass"><span class="stat-icon"><i class="fas fa-check-circle"></i></span><h4>ئامادەی ئەمڕۆ</h4><p id="presentToday" class="highlight">0</p></div>
@@ -1303,8 +1637,12 @@
             <div class="stat-card glass"><span class="stat-icon"><i class="fas fa-umbrella-beach"></i></span><h4>مۆڵەتی ئەمڕۆ</h4><p id="leaveToday">0</p></div>
         </section>
 
+        <!-- TABLE -->
         <section class="table-container glass">
-            <div class="table-header"><h2><i class="fas fa-list"></i> لیستی کارمەندان</h2><span class="hint"><i class="fas fa-fingerprint"></i> کلیک یان تەچ لە پەنجەمۆر بکە</span></div>
+            <div class="table-header">
+                <h2><i class="fas fa-list"></i> لیستی کارمەندان</h2>
+                <span class="hint"><i class="fas fa-fingerprint"></i> کلیک یان تەچ لە پەنجەمۆر بکە</span>
+            </div>
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -1325,16 +1663,47 @@
             </div>
         </section>
 
+        <!-- REPORTS & DAILY SAVES -->
         <section class="report-section">
-            <div class="report-card glass"><h3><i class="fas fa-calendar-week"></i> ڕاپۆرتی هەفتانە</h3><div id="weeklyReport"></div></div>
-            <div class="report-card glass"><h3><i class="fas fa-calendar-alt"></i> ڕاپۆرتی مانگانە</h3><div id="monthlyReport"></div></div>
-            <div class="report-card glass"><h3><i class="fas fa-umbrella-beach"></i> کۆی مۆڵەتەکان</h3><div id="leaveSummary"></div></div>
+            <div class="report-card glass">
+                <h3><i class="fas fa-calendar-week"></i> ڕاپۆرتی هەفتانە</h3>
+                <div id="weeklyReport"></div>
+                <div class="report-actions">
+                    <button class="btn btn-report btn-sm" onclick="openReportModal('weekly')"><i class="fas fa-eye"></i> بینین</button>
+                    <button class="btn btn-pdf btn-sm" onclick="exportReportPDF('weekly')"><i class="fas fa-file-pdf"></i> PDF</button>
+                </div>
+            </div>
+            <div class="report-card glass">
+                <h3><i class="fas fa-calendar-alt"></i> ڕاپۆرتی مانگانە</h3>
+                <div id="monthlyReport"></div>
+                <div class="report-actions">
+                    <button class="btn btn-report btn-sm" onclick="openReportModal('monthly')"><i class="fas fa-eye"></i> بینین</button>
+                    <button class="btn btn-pdf btn-sm" onclick="exportReportPDF('monthly')"><i class="fas fa-file-pdf"></i> PDF</button>
+                </div>
+            </div>
+            <div class="report-card glass">
+                <h3><i class="fas fa-umbrella-beach"></i> کۆی مۆڵەتەکان</h3>
+                <div id="leaveSummary"></div>
+                <div class="report-actions">
+                    <button class="btn btn-report btn-sm" onclick="openReportModal('leaves')"><i class="fas fa-eye"></i> بینین</button>
+                    <button class="btn btn-pdf btn-sm" onclick="exportReportPDF('leaves')"><i class="fas fa-file-pdf"></i> PDF</button>
+                </div>
+            </div>
+            <div class="report-card glass">
+                <h3><i class="fas fa-history"></i> ناردنەکانی رۆژانە</h3>
+                <div id="dailySavesList"></div>
+                <div class="report-actions">
+                    <button class="btn btn-save-daily btn-sm" onclick="openDailySaveModal()"><i class="fas fa-plus"></i> ناردنی نوێ</button>
+                    <button class="btn btn-pdf btn-sm" onclick="exportAllDailySavesPDF()"><i class="fas fa-file-pdf"></i> هەموو PDF</button>
+                </div>
+            </div>
         </section>
 
+        <!-- CHART -->
         <section class="chart-container glass"><canvas id="attendanceChart"></canvas></section>
     </div>
 
-    <!-- Modals -->
+    <!-- ADD EMPLOYEE MODAL -->
     <div class="modal" id="addEmployeeModal">
         <div class="modal-content">
             <h2><i class="fas fa-user-plus"></i> زیادکردنی کارمەند</h2>
@@ -1346,6 +1715,7 @@
         </div>
     </div>
 
+    <!-- FINGERPRINT MODAL -->
     <div class="modal" id="fingerprintModal">
         <div class="modal-content">
             <h2><i class="fas fa-fingerprint"></i> <span id="fpModalTitle">پەنجەمۆر</span></h2>
@@ -1366,6 +1736,7 @@
         </div>
     </div>
 
+    <!-- EDIT EMPLOYEE MODAL -->
     <div class="modal" id="editEmployeeModal">
         <div class="modal-content">
             <h2><i class="fas fa-edit"></i> دەستکاری کارمەند</h2>
@@ -1377,6 +1748,7 @@
         </div>
     </div>
 
+    <!-- LEAVE MODAL -->
     <div class="modal" id="leaveModal">
         <div class="modal-content">
             <h2><i class="fas fa-umbrella-beach"></i> بەڕێوەبردنی مۆڵەت</h2>
@@ -1389,11 +1761,89 @@
         </div>
     </div>
 
+    <!-- REPORT MODAL -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content" style="max-width:700px;">
+            <h2><i class="fas fa-file-alt"></i> <span id="reportModalTitle">ڕاپۆرت</span></h2>
+            <div id="reportModalContent" class="report-pdf-content"></div>
+            <div class="modal-actions">
+                <button class="btn btn-pdf" onclick="exportReportPDFFromModal()"><i class="fas fa-file-pdf"></i> داگرتنی PDF</button>
+                <button class="btn btn-outline" onclick="closeModal('reportModal')"><i class="fas fa-times"></i> داخستن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINISH DAY MODAL -->
+    <div class="modal" id="finishModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-check-circle" style="color:#fbbf24;"></i> کۆتایی ڕۆژ</h2>
+            <div class="finish-message">
+                <span class="big-icon">✅</span>
+                <div>ئەمرۆ تەواو بوو</div>
+                <div style="font-size:1.5rem;font-weight:700;color:#fbbf24;">دەست خۆش</div>
+                <div class="sub-text">ڕێکەوت: <span id="finishDate"></span></div>
+                <div class="sub-text" style="margin-top:8px;">هەموو داتاکان پاشەکەوت کران و ڕاپۆرتەکان نوێ کرانەوە</div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="closeModal('finishModal')"><i class="fas fa-check"></i> باشە</button>
+                <button class="btn btn-success" onclick="exportFullReportPDF()"><i class="fas fa-file-pdf"></i> داگرتنی هەموو ڕاپۆرتەکان</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REFRESH DAY MODAL -->
+    <div class="modal" id="refreshDayModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-sync-alt" style="color:#3b82f6;"></i> نوێکردنەوەی ڕۆژانە</h2>
+            <div class="warning-message">
+                <span class="big-icon">⚠️</span>
+                <div style="font-size:1.1rem;font-weight:600;color:#fbbf24;">دڵنیایت لە نوێکردنەوەی ڕۆژانە؟</div>
+                <div class="sub-text" style="margin-top:8px;">ئەم کردارە هەموو کاتەکانی ئەمڕۆ سفر دەکاتەوە</div>
+                <div class="sub-text" style="color:#f87171;">کارمەندان، پەنجەمۆرەکان و مۆڵەتەکان هەر وەک خۆیان دەمێننەوە</div>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+                <label>ڕێکەوتی نوێکردنەوە</label>
+                <input type="date" id="refreshDate" />
+            </div>
+            <div class="form-group">
+                <label>تێبینی (ئاراستەکەر)</label>
+                <textarea id="refreshNote" placeholder="تێبینیەکەت بنوسە... (بۆ نموونە: دەستپێکردنی ڕۆژی نوێ)"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-refresh-day" onclick="confirmRefreshDay()"><i class="fas fa-check"></i> بەڵێ، نوێی بکەرەوە</button>
+                <button class="btn btn-outline" onclick="closeModal('refreshDayModal')"><i class="fas fa-times"></i> نەخێر، ڕەتکردنەوە</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAILY SAVE MODAL -->
+    <div class="modal" id="dailySaveModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-save" style="color:#8b5cf6;"></i> ناردنی رۆژانە</h2>
+            <div class="form-group">
+                <label>ڕێکەوت</label>
+                <input type="date" id="dailySaveDate" />
+            </div>
+            <div class="form-group">
+                <label>تێبینی (ئاراستەکەر)</label>
+                <textarea id="dailySaveNote" placeholder="تێبینیەکەت بنوسە... (ئاراستەکەر)"></textarea>
+            </div>
+            <div class="form-group">
+                <label>داتاکانی ئەمڕۆ</label>
+                <div style="background:rgba(255,255,255,0.03);padding:10px;border-radius:10px;font-size:0.8rem;max-height:150px;overflow-y:auto;" id="dailySaveDataPreview"></div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-save-daily" onclick="saveDailyData()"><i class="fas fa-check"></i> ناردن</button>
+                <button class="btn btn-outline" onclick="closeModal('dailySaveModal')"><i class="fas fa-times"></i> ڕەتکردنەوە</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ============================================================
         // DATA MANAGEMENT
         // ============================================================
-        const STORAGE_KEY = 'fingerprint_employees_v13';
+        const STORAGE_KEY = 'fingerprint_employees_v17';
 
         function getDefaultData() {
             return {
@@ -1404,7 +1854,14 @@
                 ],
                 attendance: {},
                 leaves: {},
-                theme: 'dark'
+                theme: 'dark',
+                defaultTimes: {
+                    breakStart: '12:00',
+                    checkOut: '17:00'
+                },
+                reportHistory: {},
+                dailySaves: [],
+                refreshHistory: []
             };
         }
 
@@ -1420,6 +1877,10 @@
                 if (!parsed.theme) parsed.theme = 'dark';
                 if (!parsed.attendance) parsed.attendance = {};
                 if (!parsed.leaves) parsed.leaves = {};
+                if (!parsed.defaultTimes) parsed.defaultTimes = { breakStart: '12:00', checkOut: '17:00' };
+                if (!parsed.reportHistory) parsed.reportHistory = {};
+                if (!parsed.dailySaves) parsed.dailySaves = [];
+                if (!parsed.refreshHistory) parsed.refreshHistory = [];
                 return parsed;
             } catch {
                 const d = getDefaultData();
@@ -1443,6 +1904,11 @@
         function formatDate(dateStr) {
             const d = new Date(dateStr + 'T00:00:00');
             return d.toLocaleDateString('ckb', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function formatDateFull(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('ckb', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         }
 
         function getTimeNow() {
@@ -1477,6 +1943,54 @@
                 document.getElementById('themeDropdown').classList.remove('active');
             }
         });
+
+        // ============================================================
+        // AUTO-UPDATE LIVE TIME FOR XAWAN HEADER
+        // ============================================================
+        function updateXawanLiveTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ckb', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('xawanLiveTime').textContent = timeString;
+        }
+        setInterval(updateXawanLiveTime, 1000);
+        updateXawanLiveTime();
+
+        // ============================================================
+        // REFRESH DAY
+        // ============================================================
+        function openRefreshDayModal() {
+            document.getElementById('refreshDate').value = getToday();
+            document.getElementById('refreshNote').value = '';
+            document.getElementById('refreshDayModal').classList.add('active');
+        }
+
+        function confirmRefreshDay() {
+            const data = getData();
+            const today = getToday();
+            const note = document.getElementById('refreshNote').value.trim() || 'نوێکردنەوەی ڕۆژانە';
+
+            let refreshedCount = 0;
+            data.employees.forEach(emp => {
+                const key = `${emp.id}_${today}`;
+                if (data.attendance && data.attendance[key]) {
+                    data.attendance[key] = { checkIn: '', breakStart: '', breakEnd: '', checkOut: '' };
+                    refreshedCount++;
+                }
+            });
+
+            if (!data.refreshHistory) data.refreshHistory = [];
+            data.refreshHistory.push({
+                date: today,
+                note: note,
+                refreshedAt: new Date().toISOString(),
+                count: refreshedCount
+            });
+
+            saveData(data);
+            closeModal('refreshDayModal');
+            renderAll();
+            showNotification('✅ ڕۆژ نوێ کرایەوە! ' + refreshedCount + ' کارمەند سفر کران', 'success');
+        }
 
         // ============================================================
         // FINGERPRINT SYSTEM
@@ -1536,7 +2050,7 @@
                             type: 'unique-code',
                             code: generateFingerprintCode(),
                             registeredAt: new Date().toISOString(),
-                            version: 13
+                            version: 17
                         };
                         saveData(data);
                     }
@@ -1701,6 +2215,322 @@
             return String(newHours).padStart(2, '0') + ':' + String(newMins).padStart(2, '0');
         }
 
+        function applyDefaultTimes(employeeId) {
+            const data = getData();
+            const today = getToday();
+            const key = `${employeeId}_${today}`;
+            if (!data.attendance) data.attendance = {};
+            if (!data.attendance[key]) {
+                data.attendance[key] = { checkIn: '', breakStart: '', breakEnd: '', checkOut: '' };
+            }
+            if (!data.attendance[key].breakStart || data.attendance[key].breakStart === '') {
+                data.attendance[key].breakStart = '12:00';
+            }
+            if (!data.attendance[key].checkOut || data.attendance[key].checkOut === '') {
+                data.attendance[key].checkOut = '17:00';
+            }
+            saveData(data);
+        }
+
+        // ============================================================
+        // FINISH DAY FUNCTION
+        // ============================================================
+        function finishDay() {
+            const data = getData();
+            const today = getToday();
+            
+            let allComplete = true;
+            let incompleteEmployees = [];
+            
+            data.employees.forEach(emp => {
+                const key = `${emp.id}_${today}`;
+                const att = data.attendance[key];
+                if (!att || !att.checkIn || !att.breakStart || !att.breakEnd || !att.checkOut) {
+                    allComplete = false;
+                    incompleteEmployees.push(emp.name);
+                }
+            });
+            
+            if (!allComplete) {
+                if (!confirm(`⚠️ هەندێک کارمەند کاتەکانیان تەواو نەکردووە:\n${incompleteEmployees.join('، ')}\n\nئایا دەتەوێت بەردەوام بیت؟`)) {
+                    return;
+                }
+            }
+            
+            if (!data.reportHistory) data.reportHistory = {};
+            data.reportHistory[today] = {
+                date: today,
+                savedAt: new Date().toISOString(),
+                attendance: JSON.parse(JSON.stringify(data.attendance)),
+                leaves: JSON.parse(JSON.stringify(data.leaves))
+            };
+            saveData(data);
+            
+            document.getElementById('finishDate').textContent = formatDateFull(new Date());
+            document.getElementById('finishModal').classList.add('active');
+            
+            renderAll();
+            
+            showNotification('✅ ئەمرۆ تەواو بوو! هەموو داتاکان پاشەکەوت کران', 'success');
+        }
+
+        // ============================================================
+        // DAILY SAVE FUNCTIONS
+        // ============================================================
+        function openDailySaveModal() {
+            const data = getData();
+            const today = getToday();
+            
+            document.getElementById('dailySaveDate').value = today;
+            document.getElementById('dailySaveNote').value = '';
+            
+            let preview = '';
+            data.employees.forEach(emp => {
+                const key = `${emp.id}_${today}`;
+                const att = data.attendance[key];
+                if (att && att.checkIn) {
+                    preview += `<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.03);">`;
+                    preview += `<span>${emp.name}</span>`;
+                    preview += `<span style="color:#6ee7b7;">${att.checkIn} | ${att.breakStart} | ${att.breakEnd} | ${att.checkOut}</span>`;
+                    preview += `</div>`;
+                }
+            });
+            if (!preview) {
+                preview = '<div style="color:rgba(255,255,255,0.15);text-align:center;padding:10px;">هیچ داتایەک بۆ ئەمڕۆ تۆمار نەکراوە</div>';
+            }
+            document.getElementById('dailySaveDataPreview').innerHTML = preview;
+            
+            document.getElementById('dailySaveModal').classList.add('active');
+        }
+
+        function saveDailyData() {
+            const data = getData();
+            const date = document.getElementById('dailySaveDate').value;
+            const note = document.getElementById('dailySaveNote').value.trim();
+            
+            if (!date) {
+                alert('تکایە ڕێکەوت دیاری بکە!');
+                return;
+            }
+            
+            if (!data.dailySaves) data.dailySaves = [];
+            
+            const todayData = {};
+            data.employees.forEach(emp => {
+                const key = `${emp.id}_${date}`;
+                if (data.attendance && data.attendance[key]) {
+                    todayData[emp.name] = {
+                        checkIn: data.attendance[key].checkIn || '',
+                        breakStart: data.attendance[key].breakStart || '',
+                        breakEnd: data.attendance[key].breakEnd || '',
+                        checkOut: data.attendance[key].checkOut || ''
+                    };
+                }
+            });
+            
+            const dailySave = {
+                id: generateId(),
+                date: date,
+                note: note || 'ناردنی رۆژانە',
+                savedAt: new Date().toISOString(),
+                data: todayData,
+                employees: data.employees.map(emp => ({ id: emp.id, name: emp.name }))
+            };
+            
+            data.dailySaves.push(dailySave);
+            saveData(data);
+            
+            closeModal('dailySaveModal');
+            renderAll();
+            showNotification('✅ ناردنی رۆژانە بۆ ' + formatDate(date) + ' پاشەکەوت کرا', 'success');
+        }
+
+        function renderDailySaves(data) {
+            const container = document.getElementById('dailySavesList');
+            container.innerHTML = '';
+            
+            if (!data.dailySaves || data.dailySaves.length === 0) {
+                container.innerHTML = '<div style="color:rgba(255,255,255,0.15);text-align:center;padding:10px;font-size:0.8rem;">هیچ ناردنێک تۆمار نەکراوە</div>';
+                return;
+            }
+            
+            const sorted = [...data.dailySaves].reverse().slice(0, 5);
+            sorted.forEach(save => {
+                const div = document.createElement('div');
+                div.className = 'daily-save-item';
+                const empCount = Object.keys(save.data).length;
+                div.innerHTML = `
+                    <div>
+                        <span class="date">${formatDate(save.date)}</span>
+                        <span style="font-size:0.6rem;color:rgba(255,255,255,0.2);margin-right:8px;">${save.note}</span>
+                    </div>
+                    <div>
+                        <span class="time">${empCount} کارمەند</span>
+                        <button class="btn btn-xs btn-pdf" onclick="exportDailySavePDF('${save.id}')" title="داگرتنی PDF"><i class="fas fa-file-pdf"></i></button>
+                        <button class="btn btn-xs btn-danger" onclick="deleteDailySave('${save.id}')" title="سڕینەوە"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            
+            if (data.dailySaves.length > 5) {
+                const more = document.createElement('div');
+                more.className = 'daily-save-item';
+                more.style.justifyContent = 'center';
+                more.style.color = 'rgba(255,255,255,0.2)';
+                more.style.fontSize = '0.7rem';
+                more.textContent = `+ ${data.dailySaves.length - 5} ناردنی تر`;
+                container.appendChild(more);
+            }
+        }
+
+        function deleteDailySave(id) {
+            if (!confirm('دڵنیایت لە سڕینەوەی ئەم ناردنە؟')) return;
+            const data = getData();
+            data.dailySaves = data.dailySaves.filter(s => s.id !== id);
+            saveData(data);
+            renderAll();
+            showNotification('❌ ناردنەکە سڕایەوە', 'error');
+        }
+
+        function exportDailySavePDF(id) {
+            const data = getData();
+            const save = data.dailySaves.find(s => s.id === id);
+            if (!save) {
+                showNotification('❌ ناردنەکە نەدۆزرایەوە', 'error');
+                return;
+            }
+            
+            let html = `
+                <h1 style="color:#7c3aed;font-size:1.5rem;margin-bottom:5px;">📋 ناردنی رۆژانە</h1>
+                <div style="font-size:0.8rem;color:#666;margin-bottom:5px;">ڕێکەوت: ${formatDate(save.date)}</div>
+                <div style="font-size:0.8rem;color:#666;margin-bottom:15px;">تێبینی: ${save.note}</div>
+                <hr style="border:1px solid #7c3aed;margin-bottom:15px;">
+            `;
+            
+            const entries = Object.entries(save.data);
+            if (entries.length === 0) {
+                html += '<div style="color:#999;">هیچ داتایەک تۆمار نەکراوە</div>';
+            } else {
+                html += `<table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+                    <tr style="border-bottom:2px solid #7c3aed;">
+                        <th style="text-align:right;padding:8px;">ناو</th>
+                        <th style="text-align:center;padding:8px;">هاتن</th>
+                        <th style="text-align:center;padding:8px;">چوون بۆ ڕێست</th>
+                        <th style="text-align:center;padding:8px;">هاتنەوە لە ڕێست</th>
+                        <th style="text-align:center;padding:8px;">چونەوە</th>
+                    </tr>`;
+                entries.forEach(([name, times]) => {
+                    html += `<tr style="border-bottom:1px solid #eee;">
+                        <td style="padding:6px;font-weight:500;">${name}</td>
+                        <td style="text-align:center;padding:6px;color:#6ee7b7;">${times.checkIn || '--:--'}</td>
+                        <td style="text-align:center;padding:6px;color:#fbbf24;">${times.breakStart || '--:--'}</td>
+                        <td style="text-align:center;padding:6px;color:#fbbf24;">${times.breakEnd || '--:--'}</td>
+                        <td style="text-align:center;padding:6px;color:#f87171;">${times.checkOut || '--:--'}</td>
+                    </tr>`;
+                });
+                html += '</table>';
+            }
+            
+            html += `
+                <div style="margin-top:20px;border-top:1px solid #eee;padding-top:10px;font-size:0.7rem;color:#888;text-align:center;">
+                    ناردنی رۆژانە - ${formatDateFull(new Date(save.savedAt))}
+                </div>
+            `;
+            
+            const element = document.createElement('div');
+            element.style.cssText = `padding:20px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;`;
+            element.innerHTML = html;
+            
+            document.body.appendChild(element);
+            
+            html2pdf().set({
+                margin: [10, 10, 10, 10],
+                filename: `ناردنی_رۆژانە_${save.date}.pdf`,
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).from(element).save().then(() => {
+                element.remove();
+                showNotification('✅ PDF بە سەرکەوتوویی داگیرا', 'success');
+            }).catch(() => {
+                element.remove();
+                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
+            });
+        }
+
+        function exportAllDailySavesPDF() {
+            const data = getData();
+            if (!data.dailySaves || data.dailySaves.length === 0) {
+                showNotification('❌ هیچ ناردنێک تۆمار نەکراوە', 'error');
+                return;
+            }
+            
+            let html = `
+                <h1 style="color:#7c3aed;font-size:1.8rem;margin-bottom:5px;">📋 هەموو ناردنەکانی رۆژانە</h1>
+                <div style="font-size:0.8rem;color:#666;margin-bottom:15px;">کۆی گشتی: ${data.dailySaves.length} ناردن</div>
+                <hr style="border:1px solid #7c3aed;margin-bottom:20px;">
+            `;
+            
+            const sorted = [...data.dailySaves].reverse();
+            sorted.forEach((save, idx) => {
+                html += `<div style="margin-bottom:20px;border:1px solid #e0e0e0;border-radius:10px;padding:15px;">`;
+                html += `<div style="display:flex;justify-content:space-between;margin-bottom:8px;">`;
+                html += `<span style="font-weight:600;color:#7c3aed;">${idx + 1}. ${formatDate(save.date)}</span>`;
+                html += `<span style="color:#666;font-size:0.7rem;">${save.note}</span>`;
+                html += `</div>`;
+                
+                const entries = Object.entries(save.data);
+                if (entries.length > 0) {
+                    html += `<table style="width:100%;border-collapse:collapse;font-size:0.7rem;">
+                        <tr style="border-bottom:1px solid #ddd;">
+                            <th style="text-align:right;padding:4px;">ناو</th>
+                            <th style="text-align:center;padding:4px;">هاتن</th>
+                            <th style="text-align:center;padding:4px;">چوون بۆ ڕێست</th>
+                            <th style="text-align:center;padding:4px;">هاتنەوە لە ڕێست</th>
+                            <th style="text-align:center;padding:4px;">چونەوە</th>
+                        </tr>`;
+                    entries.forEach(([name, times]) => {
+                        html += `<tr style="border-bottom:1px solid #f0f0f0;">
+                            <td style="padding:3px;">${name}</td>
+                            <td style="text-align:center;padding:3px;color:#6ee7b7;">${times.checkIn || '--:--'}</td>
+                            <td style="text-align:center;padding:3px;color:#fbbf24;">${times.breakStart || '--:--'}</td>
+                            <td style="text-align:center;padding:3px;color:#fbbf24;">${times.breakEnd || '--:--'}</td>
+                            <td style="text-align:center;padding:3px;color:#f87171;">${times.checkOut || '--:--'}</td>
+                        </tr>`;
+                    });
+                    html += '</table>';
+                } else {
+                    html += '<div style="color:#999;font-size:0.7rem;">هیچ داتایەک تۆمار نەکراوە</div>';
+                }
+                html += `</div>`;
+            });
+            
+            html += `
+                <div style="margin-top:20px;border-top:1px solid #eee;padding-top:10px;font-size:0.7rem;color:#888;text-align:center;">
+                    هەموو ناردنەکانی رۆژانە - ${formatDateFull(new Date())}
+                </div>
+            `;
+            
+            const element = document.createElement('div');
+            element.style.cssText = `padding:20px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;`;
+            element.innerHTML = html;
+            
+            document.body.appendChild(element);
+            
+            html2pdf().set({
+                margin: [10, 10, 10, 10],
+                filename: `هەموو_ناردنەکانی_رۆژانە.pdf`,
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).from(element).save().then(() => {
+                element.remove();
+                showNotification('✅ هەموو ناردنەکان وەک PDF داگیران', 'success');
+            }).catch(() => {
+                element.remove();
+                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
+            });
+        }
+
         // ============================================================
         // EMPLOYEE CRUD
         // ============================================================
@@ -1756,7 +2586,7 @@
         }
 
         // ============================================================
-        // TIME ADJUST - 4 کات: هاتن، چوون بۆ ڕێست، هاتنەوە لە ڕێست، چونەوە
+        // TIME ADJUST
         // ============================================================
         function adjustTime(employeeId, type, amount) {
             const data = getData();
@@ -1767,6 +2597,13 @@
                 data.attendance[key] = { checkIn: '', breakStart: '', breakEnd: '', checkOut: '' };
             }
 
+            if (type === 'breakStart' && !data.attendance[key].breakStart) {
+                data.attendance[key].breakStart = '12:00';
+            }
+            if (type === 'checkOut' && !data.attendance[key].checkOut) {
+                data.attendance[key].checkOut = '17:00';
+            }
+
             const current = data.attendance[key][type] || '';
             const newTime = addMinutes(current, amount);
 
@@ -1774,6 +2611,33 @@
                 data.attendance[key][type] = newTime;
                 saveData(data);
                 renderAll();
+                autoSaveForReports(employeeId);
+            }
+        }
+
+        // ============================================================
+        // AUTO SAVE
+        // ============================================================
+        function autoSaveForReports(employeeId) {
+            const data = getData();
+            const today = getToday();
+            const key = `${employeeId}_${today}`;
+            const att = data.attendance[key];
+            
+            if (att && att.checkIn && att.breakStart && att.breakEnd && att.checkOut) {
+                if (!data.reportHistory) data.reportHistory = {};
+                if (!data.reportHistory[today]) {
+                    data.reportHistory[today] = {
+                        date: today,
+                        savedAt: new Date().toISOString(),
+                        attendance: {},
+                        leaves: {}
+                    };
+                }
+                data.reportHistory[today].attendance = JSON.parse(JSON.stringify(data.attendance));
+                data.reportHistory[today].leaves = JSON.parse(JSON.stringify(data.leaves));
+                saveData(data);
+                showNotification('✅ هەموو کاتەکان تەواو بوون! داتاکە بۆ ڕاپۆرتەکان خەزن کرا.', 'success');
             }
         }
 
@@ -1795,12 +2659,14 @@
             const now = getTimeNow();
             if (!data.attendance) data.attendance = {};
             if (!data.attendance[key]) {
-                data.attendance[key] = { checkIn: now, breakStart: '', breakEnd: '', checkOut: '' };
+                data.attendance[key] = { checkIn: now, breakStart: '12:00', breakEnd: '', checkOut: '17:00' };
                 saveData(data);
                 renderAll();
                 showNotification('✅ کاتی هاتن تۆمار کرا بۆ ' + employee.name + ': ' + now, 'success');
             } else if (!data.attendance[key].checkIn) {
                 data.attendance[key].checkIn = now;
+                if (!data.attendance[key].breakStart) data.attendance[key].breakStart = '12:00';
+                if (!data.attendance[key].checkOut) data.attendance[key].checkOut = '17:00';
                 saveData(data);
                 renderAll();
                 showNotification('✅ کاتی هاتن تۆمار کرا بۆ ' + employee.name + ': ' + now, 'success');
@@ -1821,18 +2687,18 @@
             }
             const today = getToday();
             const key = `${id}_${today}`;
-            const now = getTimeNow();
             if (!data.attendance) data.attendance = {};
             if (!data.attendance[key]) {
-                data.attendance[key] = { checkIn: '', breakStart: now, breakEnd: '', checkOut: '' };
+                data.attendance[key] = { checkIn: '', breakStart: '12:00', breakEnd: '', checkOut: '17:00' };
                 saveData(data);
                 renderAll();
-                showNotification('✅ چوونەوە بۆ ڕێست: ' + employee.name + ': ' + now, 'success');
+                showNotification('✅ چوونەوە بۆ ڕێست (جێگیر کراوە 12:00): ' + employee.name, 'success');
             } else if (!data.attendance[key].breakStart) {
-                data.attendance[key].breakStart = now;
+                data.attendance[key].breakStart = '12:00';
+                if (!data.attendance[key].checkOut) data.attendance[key].checkOut = '17:00';
                 saveData(data);
                 renderAll();
-                showNotification('✅ چوونەوە بۆ ڕێست: ' + employee.name + ': ' + now, 'success');
+                showNotification('✅ چوونەوە بۆ ڕێست (جێگیر کراوە 12:00): ' + employee.name, 'success');
             } else {
                 alert('⚠️ ئەمڕۆ چوونەوە بۆ ڕێست تۆمار کراوە!');
             }
@@ -1863,6 +2729,7 @@
             saveData(data);
             renderAll();
             showNotification('✅ هاتنەوە لە ڕێست: ' + employee.name + ': ' + now, 'success');
+            autoSaveForReports(id);
         }
 
         function checkOut(id) {
@@ -1877,7 +2744,6 @@
             }
             const today = getToday();
             const key = `${id}_${today}`;
-            const now = getTimeNow();
             if (!data.attendance || !data.attendance[key] || !data.attendance[key].checkIn) {
                 alert('⚠️ پێویستە یەکەم جار چەک-ئین بکەیت!');
                 return;
@@ -1886,10 +2752,11 @@
                 alert('⚠️ چەک-ئاوت تۆمار کراوە!');
                 return;
             }
-            data.attendance[key].checkOut = now;
+            data.attendance[key].checkOut = '17:00';
             saveData(data);
             renderAll();
-            showNotification('✅ کاتی چونەوە تۆمار کرا بۆ ' + employee.name + ': ' + now, 'success');
+            showNotification('✅ کاتی چونەوە (جێگیر کراوە 17:00) بۆ ' + employee.name, 'success');
+            autoSaveForReports(id);
         }
 
         // ============================================================
@@ -1956,6 +2823,176 @@
                 renderLeaveList(employeeId);
                 renderAll();
             }
+        }
+
+        // ============================================================
+        // REPORT FUNCTIONS
+        // ============================================================
+        let currentReportType = 'weekly';
+        let currentReportHTML = '';
+
+        function getReportData(type) {
+            const data = getData();
+            let html = '';
+            
+            if (type === 'weekly') {
+                html = '<div style="margin-bottom:10px;"><strong>ڕاپۆرتی هەفتانە</strong> (7 ڕۆژی پێشوو)</div>';
+                data.employees.forEach(emp => {
+                    const h = getEmployeeAttendanceHistory(emp.id, data, 7);
+                    const p = h.filter(h => h.checkIn !== '-').length;
+                    const l = h.filter(h => h.isLeave).length;
+                    html += `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p}/7 ئامادە | ${l} مۆڵەت</span></div>`;
+                });
+            } else if (type === 'monthly') {
+                html = '<div style="margin-bottom:10px;"><strong>ڕاپۆرتی مانگانە</strong> (30 ڕۆژی پێشوو)</div>';
+                data.employees.forEach(emp => {
+                    const h = getEmployeeAttendanceHistory(emp.id, data, 30);
+                    const p = h.filter(h => h.checkIn !== '-').length;
+                    const l = h.filter(h => h.isLeave).length;
+                    html += `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p}/30 ئامادە | ${l} مۆڵەت</span></div>`;
+                });
+            } else if (type === 'leaves') {
+                html = '<div style="margin-bottom:10px;"><strong>کۆی مۆڵەتەکان</strong></div>';
+                let hasLeaves = false;
+                data.employees.forEach(emp => {
+                    if (data.leaves && data.leaves[emp.id] && data.leaves[emp.id].length > 0) {
+                        hasLeaves = true;
+                        html += `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${data.leaves[emp.id].length} مۆڵەت</span></div>`;
+                    }
+                });
+                if (!hasLeaves) {
+                    html += '<div style="color:rgba(255,255,255,0.15);padding:10px;">هیچ مۆڵەتێک تۆمار نەکراوە</div>';
+                }
+            }
+            
+            return html;
+        }
+
+        function openReportModal(type) {
+            currentReportType = type;
+            const titles = {
+                weekly: 'ڕاپۆرتی هەفتانە',
+                monthly: 'ڕاپۆرتی مانگانە',
+                leaves: 'کۆی مۆڵەتەکان'
+            };
+            document.getElementById('reportModalTitle').textContent = titles[type] || 'ڕاپۆرت';
+            currentReportHTML = getReportData(type);
+            document.getElementById('reportModalContent').innerHTML = currentReportHTML;
+            document.getElementById('reportModal').classList.add('active');
+        }
+
+        function exportReportPDFFromModal() {
+            exportReportPDF(currentReportType);
+        }
+
+        function exportReportPDF(type) {
+            const titles = {
+                weekly: 'ڕاپۆرتی هەفتانە',
+                monthly: 'ڕاپۆرتی مانگانە',
+                leaves: 'کۆی مۆڵەتەکان'
+            };
+            
+            const content = getReportData(type);
+            const title = titles[type] || 'ڕاپۆرت';
+            
+            const element = document.createElement('div');
+            element.style.cssText = `padding:20px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;`;
+            element.innerHTML = `
+                <h1 style="color:#7c3aed;font-size:1.5rem;margin-bottom:10px;">${title}</h1>
+                <div style="border-bottom:2px solid #7c3aed;margin-bottom:15px;"></div>
+                <div style="font-size:0.9rem;">${content}</div>
+                <div style="margin-top:20px;border-top:1px solid #eee;padding-top:10px;font-size:0.7rem;color:#888;">
+                    ڕێکەوت: ${new Date().toLocaleDateString('ckb', { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' })}
+                </div>
+            `;
+            
+            document.body.appendChild(element);
+            
+            html2pdf().set({
+                margin: [10, 10, 10, 10],
+                filename: `${title}_${new Date().toISOString().split('T')[0]}.pdf`,
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).from(element).save().then(() => {
+                element.remove();
+                showNotification('✅ PDF بە سەرکەوتوویی داگیرا', 'success');
+            }).catch(() => {
+                element.remove();
+                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
+            });
+        }
+
+        function exportFullReportPDF() {
+            const data = getData();
+            const today = getToday();
+            
+            let allReports = `
+                <h1 style="color:#7c3aed;font-size:1.8rem;margin-bottom:5px;">📊 ڕاپۆرتی گشتی</h1>
+                <div style="font-size:0.8rem;color:#666;margin-bottom:15px;">ڕێکەوت: ${formatDateFull(new Date())}</div>
+                <hr style="border:1px solid #7c3aed;margin-bottom:20px;">
+            `;
+            
+            allReports += `<h2 style="color:#7c3aed;font-size:1.2rem;margin-top:15px;">📅 ڕاپۆرتی هەفتانە (7 ڕۆژی پێشوو)</h2>`;
+            data.employees.forEach(emp => {
+                const h = getEmployeeAttendanceHistory(emp.id, data, 7);
+                const p = h.filter(h => h.checkIn !== '-').length;
+                const l = h.filter(h => h.isLeave).length;
+                allReports += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;">`;
+                allReports += `<span style="font-weight:500;">${emp.name}</span>`;
+                allReports += `<span style="color:#666;">${p}/7 ئامادە | ${l} مۆڵەت</span>`;
+                allReports += `</div>`;
+            });
+            
+            allReports += `<h2 style="color:#7c3aed;font-size:1.2rem;margin-top:20px;">📆 ڕاپۆرتی مانگانە (30 ڕۆژی پێشوو)</h2>`;
+            data.employees.forEach(emp => {
+                const h = getEmployeeAttendanceHistory(emp.id, data, 30);
+                const p = h.filter(h => h.checkIn !== '-').length;
+                const l = h.filter(h => h.isLeave).length;
+                allReports += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;">`;
+                allReports += `<span style="font-weight:500;">${emp.name}</span>`;
+                allReports += `<span style="color:#666;">${p}/30 ئامادە | ${l} مۆڵەت</span>`;
+                allReports += `</div>`;
+            });
+            
+            allReports += `<h2 style="color:#7c3aed;font-size:1.2rem;margin-top:20px;">🏖️ کۆی مۆڵەتەکان</h2>`;
+            let hasLeaves = false;
+            data.employees.forEach(emp => {
+                if (data.leaves && data.leaves[emp.id] && data.leaves[emp.id].length > 0) {
+                    hasLeaves = true;
+                    allReports += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;">`;
+                    allReports += `<span style="font-weight:500;">${emp.name}</span>`;
+                    allReports += `<span style="color:#666;">${data.leaves[emp.id].length} مۆڵەت</span>`;
+                    allReports += `</div>`;
+                }
+            });
+            if (!hasLeaves) {
+                allReports += `<div style="color:#999;padding:8px 0;">هیچ مۆڵەتێک تۆمار نەکراوە</div>`;
+            }
+            
+            allReports += `
+                <div style="margin-top:25px;border-top:2px solid #7c3aed;padding-top:12px;font-size:0.7rem;color:#888;text-align:center;">
+                    ڕاپۆرتی گشتی - ${formatDateFull(new Date())}
+                </div>
+            `;
+            
+            const element = document.createElement('div');
+            element.style.cssText = `padding:30px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;max-width:800px;margin:auto;`;
+            element.innerHTML = allReports;
+            
+            document.body.appendChild(element);
+            
+            html2pdf().set({
+                margin: [10, 10, 10, 10],
+                filename: `ڕاپۆرتی_گشتی_${today}.pdf`,
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).from(element).save().then(() => {
+                element.remove();
+                showNotification('✅ هەموو ڕاپۆرتەکان وەک PDF داگیران', 'success');
+            }).catch(() => {
+                element.remove();
+                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
+            });
         }
 
         // ============================================================
@@ -2029,6 +3066,8 @@
                 return;
             }
             data.employees.forEach((emp, index) => {
+                applyDefaultTimes(emp.id);
+                
                 const att = getAttendanceForToday(emp.id, data);
                 const onLeave = isOnLeaveToday(emp.id, data);
                 const isPresent = att && att.checkIn;
@@ -2144,6 +3183,8 @@
                 '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ تۆمارێک نییە</div>';
             document.getElementById('leaveSummary').innerHTML = leaveHTML ||
                 '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ مۆڵەتێک نییە</div>';
+            
+            renderDailySaves(data);
         }
 
         function renderChart(data) {
@@ -2241,6 +3282,11 @@
 
         function renderAll() {
             const data = getData();
+            
+            data.employees.forEach(emp => {
+                applyDefaultTimes(emp.id);
+            });
+            
             renderStats(data);
             renderTable(data);
             renderReports(data);
@@ -2303,10 +3349,7 @@
         setInterval(renderAll, 60000);
 
         console.log('🖐️ سیستەمی پەنجەمۆری کارمەندان ئامادەیە!');
-        console.log('⏰ کاتی هاتن | چوونەوە بۆ ڕێست | هاتنەوە لە ڕێست | کاتی چونەوە');
-        console.log('🎨 کلیک لەسەر ئایکۆنی پالتە بکە بۆ گۆڕینی ڕەنگی شاشە');
-        console.log('✏️ دەتوانیت کاتەکان بە دوگمەکانی + و - دەستکاری بکەیت');
-        console.log('💾 هەموو داتاکان لە localStorage خەزن دەبن');
+        console.log('📊 بەشی بینی راپۆرتی کارمەندانی ئۆفیس زیاد کرا!');
     </script>
 </body>
 </html>
