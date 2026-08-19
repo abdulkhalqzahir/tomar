@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- پەڕگەی SheetJS بۆ کارکردن لەگەڵ Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
+        /* ... هەموو ستایلەکان وەک پێشتر ... */
         * {
             margin: 0;
             padding: 0;
@@ -40,9 +43,6 @@
             box-shadow: 0 12px 48px rgba(120, 80, 200, 0.35);
         }
 
-        /* ============================================== */
-        /* NEW SECTION: OFFICE REPORT HEADER (XAWAN STYLE)*/
-        /* ============================================== */
         .xawan-report-header {
             display: flex;
             align-items: center;
@@ -57,7 +57,6 @@
             overflow: hidden;
             flex-wrap: wrap;
         }
-        /* Neon Blue Glow effect */
         .xawan-report-header::before {
             content: '';
             position: absolute;
@@ -74,7 +73,6 @@
             gap: 15px;
             z-index: 2;
         }
-        /* گونجاندنی لۆگۆکە لەگەڵ دیزاینەکە */
         .xawan-logo-img {
             height: 55px;
             width: auto;
@@ -138,8 +136,6 @@
             font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.7);
         }
-        
-        /* ============================================== */
 
         .header {
             display: flex;
@@ -262,6 +258,14 @@
         .btn-report:hover {
             background: rgba(52, 211, 153, 0.25);
         }
+        .btn-excel {
+            background: rgba(52, 211, 153, 0.15);
+            color: #6ee7b7;
+            border-color: rgba(52, 211, 153, 0.2);
+        }
+        .btn-excel:hover {
+            background: rgba(52, 211, 153, 0.25);
+        }
         .btn-finish {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #fff;
@@ -283,6 +287,17 @@
         .btn-refresh-day:hover {
             background: linear-gradient(135deg, #60a5fa, #3b82f6);
             box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
+        }
+        .btn-import-excel {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border-color: #10b981;
+            font-weight: 600;
+            padding: 10px 20px;
+        }
+        .btn-import-excel:hover {
+            background: linear-gradient(135deg, #34d399, #10b981);
+            box-shadow: 0 6px 30px rgba(16, 185, 129, 0.4);
         }
         .btn-save-daily {
             background: linear-gradient(135deg, #8b5cf6, #7c3aed);
@@ -1589,7 +1604,7 @@
     <div class="container">
         
         <!-- =========================================== -->
-        <!-- NEW SECTION: XAWAN OFFICE REPORT HEADER      -->
+        <!-- XAWAN OFFICE REPORT HEADER                   -->
         <!-- =========================================== -->
         <div class="xawan-report-header">
             <div class="xawan-logo-area">
@@ -1605,13 +1620,14 @@
                 <span class="xawan-status-text">سیستم چالاکە &amp; ئامادەیە</span>
             </div>
         </div>
-        <!-- =========================================== -->
 
         <!-- HEADER -->
         <header class="header glass">
             <div class="logo"><i class="fas fa-fingerprint"></i><span>پەنجەمۆر</span></div>
             <div class="header-actions">
                 <button class="btn btn-primary" onclick="openAddEmployeeModal()"><i class="fas fa-plus"></i> زیادکردن</button>
+                <button class="btn btn-import-excel" onclick="document.getElementById('excelFileInput').click()"><i class="fas fa-file-excel"></i> داخڵکردنی Excel</button>
+                <input type="file" id="excelFileInput" accept=".xlsx,.xls" style="display:none;" onchange="importEmployeesFromExcel(event)" />
                 <button class="btn btn-refresh-day" onclick="openRefreshDayModal()"><i class="fas fa-sync-alt"></i> نوێکردنەوەی ڕۆژانە</button>
                 <button class="btn btn-finish" onclick="finishDay()"><i class="fas fa-check-circle"></i> کۆتایی و پاشەکەوتکردن</button>
                 <span class="auto-save-badge"><i class="fas fa-save"></i> خەزنی ئۆتۆماتیکی</span>
@@ -1841,7 +1857,7 @@
 
     <script>
         // ============================================================
-        // DATA MANAGEMENT
+        // DATA MANAGEMENT - Local Storage
         // ============================================================
         const STORAGE_KEY = 'fingerprint_employees_v17';
 
@@ -1954,6 +1970,65 @@
         }
         setInterval(updateXawanLiveTime, 1000);
         updateXawanLiveTime();
+
+        // ============================================================
+        // EXCEL IMPORT - دانانی فایلی Excel و داخڵکردنی هەموو ناوەکان بە جارێک
+        // ============================================================
+        function importEmployeesFromExcel(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+
+                    const names = [];
+                    jsonData.forEach(row => {
+                        if (row.length > 0 && row[0]) {
+                            const name = String(row[0]).trim();
+                            if (name && name.length > 0) {
+                                names.push(name);
+                            }
+                        }
+                    });
+
+                    if (names.length === 0) {
+                        showNotification('❌ هیچ ناوێک لە فایلی Excel نەدۆزرایەوە', 'error');
+                        return;
+                    }
+
+                    const appData = getData();
+                    let addedCount = 0;
+                    let duplicateCount = 0;
+
+                    names.forEach(name => {
+                        const existing = appData.employees.find(emp => emp.name === name);
+                        if (!existing) {
+                            appData.employees.push({
+                                id: generateId(),
+                                name: name,
+                                fingerprint: null
+                            });
+                            addedCount++;
+                        } else {
+                            duplicateCount++;
+                        }
+                    });
+
+                    saveData(appData);
+                    renderAll();
+                    showNotification(`✅ ${addedCount} کارمەند زیاد کران | ${duplicateCount} ناوی تکراری پەرێزران`, 'success');
+                } catch (error) {
+                    showNotification('❌ هەڵە لە خوێندنەوەی فایلی Excel: ' + error.message, 'error');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+            event.target.value = '';
+        }
 
         // ============================================================
         // REFRESH DAY
@@ -3350,6 +3425,7 @@
 
         console.log('🖐️ سیستەمی پەنجەمۆری کارمەندان ئامادەیە!');
         console.log('📊 بەشی بینی راپۆرتی کارمەندانی ئۆفیس زیاد کرا!');
+        console.log('📁 بەشی داخڵکردنی فایلی Excel زیاد کرا!');
     </script>
 </body>
 </html>
