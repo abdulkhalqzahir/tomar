@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>سیستەمی پەنجەمۆری کارمەندان - Xawan</title>
+    <title>عبدالخالق زاهیر - Xawan</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- پەڕگەی SheetJS بۆ کارکردن لەگەڵ Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        /* ... هەموو ستایلەکان وەک پێشتر ... */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
         }
         body {
             min-height: 100vh;
@@ -36,13 +33,12 @@
             background: rgba(20, 20, 30, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(120, 80, 200, 0.15);
-            box-shadow: 0 8px 32px rgba(120, 80, 200, 0.25);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
         }
         .glass:hover {
-            box-shadow: 0 12px 48px rgba(120, 80, 200, 0.35);
+            box-shadow: 0 12px 48px rgba(59, 130, 246, 0.3);
         }
-
         .xawan-report-header {
             display: flex;
             align-items: center;
@@ -50,9 +46,9 @@
             padding: 20px 30px;
             margin-bottom: 25px;
             background: linear-gradient(145deg, rgba(10, 20, 40, 0.9), rgba(0, 10, 30, 0.95));
-            border: 1px solid rgba(0, 100, 255, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 24px;
-            box-shadow: 0 15px 50px rgba(0, 50, 255, 0.15);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
             position: relative;
             overflow: hidden;
             flex-wrap: wrap;
@@ -64,7 +60,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 30% 50%, rgba(0, 100, 255, 0.1), transparent 70%);
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1), transparent 70%);
             pointer-events: none;
         }
         .xawan-logo-area {
@@ -76,7 +72,7 @@
         .xawan-logo-img {
             height: 55px;
             width: auto;
-            filter: drop-shadow(0 0 15px rgba(0, 150, 255, 0.4));
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
             transition: transform 0.3s ease;
         }
         .xawan-logo-img:hover {
@@ -89,7 +85,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
-            text-shadow: 0 0 20px rgba(0, 100, 255, 0.2);
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
         }
         .xawan-title {
             display: flex;
@@ -102,7 +98,7 @@
             font-size: 1.2rem;
             font-weight: 600;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
         }
         .xawan-title span {
             font-size: 0.7rem;
@@ -129,14 +125,20 @@
             animation: pulse-dot 2s infinite;
         }
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
         }
         .xawan-status-text {
             font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.7);
         }
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -152,13 +154,13 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .logo i {
             -webkit-text-fill-color: initial;
-            color: #7c3aed;
+            color: #3b82f6;
         }
         .header-actions {
             display: flex;
@@ -179,24 +181,25 @@
             gap: 6px;
             background: rgba(255, 255, 255, 0.05);
             color: #d4c4e8;
-            border: 1px solid rgba(120, 80, 200, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
             touch-action: manipulation;
+            text-decoration: none;
         }
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(120, 80, 200, 0.25);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.25);
         }
         .btn:active {
             transform: scale(0.95);
         }
         .btn-primary {
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #fff;
-            border-color: #7c3aed;
+            border-color: #3b82f6;
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            box-shadow: 0 6px 30px rgba(124, 58, 237, 0.4);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
         }
         .btn-success {
             background: rgba(52, 211, 153, 0.15);
@@ -224,11 +227,20 @@
         }
         .btn-outline {
             background: transparent;
-            border: 1px solid rgba(120, 80, 200, 0.2);
-            color: #a78bfa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
         }
         .btn-outline:hover {
-            background: rgba(120, 80, 200, 0.1);
+            background: rgba(59, 130, 246, 0.1);
+        }
+        .btn-whatsapp {
+            background: rgba(37, 211, 102, 0.2);
+            color: #25d366;
+            border-color: rgba(37, 211, 102, 0.3);
+        }
+        .btn-whatsapp:hover {
+            background: rgba(37, 211, 102, 0.3);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.3);
         }
         .btn-sm {
             padding: 4px 10px;
@@ -242,14 +254,6 @@
             min-width: 26px;
             justify-content: center;
         }
-        .btn-pdf {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-            border-color: rgba(239, 68, 68, 0.2);
-        }
-        .btn-pdf:hover {
-            background: rgba(239, 68, 68, 0.25);
-        }
         .btn-report {
             background: rgba(52, 211, 153, 0.15);
             color: #6ee7b7;
@@ -257,36 +261,6 @@
         }
         .btn-report:hover {
             background: rgba(52, 211, 153, 0.25);
-        }
-        .btn-excel {
-            background: rgba(52, 211, 153, 0.15);
-            color: #6ee7b7;
-            border-color: rgba(52, 211, 153, 0.2);
-        }
-        .btn-excel:hover {
-            background: rgba(52, 211, 153, 0.25);
-        }
-        .btn-finish {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #fff;
-            border-color: #f59e0b;
-            font-weight: 600;
-            padding: 10px 24px;
-        }
-        .btn-finish:hover {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.4);
-        }
-        .btn-refresh-day {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: #fff;
-            border-color: #3b82f6;
-            font-weight: 600;
-            padding: 10px 20px;
-        }
-        .btn-refresh-day:hover {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
         }
         .btn-import-excel {
             background: linear-gradient(135deg, #10b981, #059669);
@@ -299,22 +273,44 @@
             background: linear-gradient(135deg, #34d399, #10b981);
             box-shadow: 0 6px 30px rgba(16, 185, 129, 0.4);
         }
-        .btn-save-daily {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        .btn-refresh-day {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #fff;
-            border-color: #8b5cf6;
+            border-color: #3b82f6;
+            font-weight: 600;
+            padding: 10px 20px;
         }
-        .btn-save-daily:hover {
-            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
-            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.4);
+        .btn-refresh-day:hover {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
+        }
+        .btn-finish {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+            border-color: #f59e0b;
+            font-weight: 600;
+            padding: 10px 24px;
+        }
+        .btn-finish:hover {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.4);
+        }
+        .auto-save-badge {
+            display: inline-block;
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            background: rgba(52, 211, 153, 0.08);
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 8px;
         }
         .theme-toggle-btn {
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            border: 2px solid rgba(120, 80, 200, 0.25);
-            background: rgba(120, 80, 200, 0.12);
-            color: #a78bfa;
+            border: 2px solid rgba(59, 130, 246, 0.25);
+            background: rgba(59, 130, 246, 0.12);
+            color: #60a5fa;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -324,9 +320,9 @@
             touch-action: manipulation;
         }
         .theme-toggle-btn:hover {
-            background: rgba(120, 80, 200, 0.25);
+            background: rgba(59, 130, 246, 0.25);
             transform: scale(1.08) rotate(20deg);
-            border-color: #7c3aed;
+            border-color: #3b82f6;
         }
         .theme-toggle-btn:active {
             transform: scale(0.92);
@@ -347,7 +343,7 @@
             border-radius: 16px;
             padding: 14px 16px;
             min-width: 190px;
-            border: 1px solid rgba(120, 80, 200, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
             z-index: 99999;
             transition: all 0.3s ease;
@@ -386,7 +382,7 @@
             margin-bottom: 0;
         }
         .theme-option:hover {
-            background: rgba(120, 80, 200, 0.15);
+            background: rgba(59, 130, 246, 0.15);
             transform: translateX(-4px);
         }
         .theme-option .color-dot {
@@ -421,7 +417,7 @@
         }
         .theme-option .check-mark {
             margin-right: auto;
-            color: #7c3aed;
+            color: #3b82f6;
             font-size: 0.9rem;
             display: none;
         }
@@ -429,8 +425,8 @@
             display: block;
         }
         .theme-option.active-theme {
-            background: rgba(120, 80, 200, 0.12);
-            border: 1px solid rgba(120, 80, 200, 0.15);
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.15);
         }
         .theme-option .theme-name {
             flex: 1;
@@ -447,7 +443,7 @@
         }
         .stat-card .stat-icon {
             font-size: 1.4rem;
-            color: #7c3aed;
+            color: #3b82f6;
             margin-bottom: 4px;
             display: block;
         }
@@ -464,7 +460,7 @@
             margin-top: 2px;
         }
         .stat-card .highlight {
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -488,48 +484,40 @@
             font-weight: 600;
         }
         .table-header h2 i {
-            color: #7c3aed;
+            color: #3b82f6;
             margin-left: 8px;
         }
         .table-header .hint {
             font-size: 0.6rem;
             color: rgba(255, 255, 255, 0.2);
         }
-        .auto-save-badge {
-            display: inline-block;
-            font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.2);
-            background: rgba(52, 211, 153, 0.08);
-            padding: 2px 10px;
-            border-radius: 20px;
-            margin-left: 8px;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
         th {
             text-align: right;
-            padding: 10px 12px;
-            font-size: 0.6rem;
+            padding: 16px 18px;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(120, 80, 200, 0.1);
-            color: rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.25);
+            color: rgba(59, 130, 246, 0.8);
+            background: rgba(59, 130, 246, 0.06);
         }
         td {
-            padding: 8px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             vertical-align: middle;
         }
         tr:hover td {
-            background: rgba(120, 80, 200, 0.04);
+            background: rgba(59, 130, 246, 0.06);
         }
         .employee-name {
-            font-weight: 600;
-            font-size: 0.85rem;
+            font-weight: 700;
+            font-size: 0.95rem;
         }
         .employee-id {
             font-size: 0.6rem;
@@ -539,17 +527,17 @@
         .fingerprint-cell {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .fingerprint-btn {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            border: 2px solid rgba(120, 80, 200, 0.3);
-            background: rgba(120, 80, 200, 0.05);
-            color: #a78bfa;
-            font-size: 1.2rem;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.05);
+            color: #60a5fa;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -559,10 +547,10 @@
             touch-action: manipulation;
         }
         .fingerprint-btn:hover {
-            background: rgba(120, 80, 200, 0.15);
-            border-color: #7c3aed;
+            background: rgba(59, 130, 246, 0.15);
+            border-color: #3b82f6;
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(120, 80, 200, 0.2);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
         }
         .fingerprint-btn:active {
             transform: scale(0.92);
@@ -589,7 +577,7 @@
             font-weight: 700;
         }
         .fingerprint-cell .fp-status {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.3);
         }
         .fingerprint-cell .fp-status.registered {
@@ -598,21 +586,21 @@
         .time-control {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             flex-wrap: wrap;
         }
         .time-control .btn {
-            padding: 2px 6px;
+            padding: 3px 8px;
             font-size: 0.6rem;
-            min-width: 24px;
+            min-width: 28px;
             justify-content: center;
             border-radius: 5px;
-            background: rgba(120, 80, 200, 0.1);
-            border-color: rgba(120, 80, 200, 0.15);
-            color: #a78bfa;
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
         }
         .time-control .btn:hover {
-            background: rgba(120, 80, 200, 0.2);
+            background: rgba(59, 130, 246, 0.2);
             transform: scale(1.05);
         }
         .time-control .btn:active {
@@ -635,11 +623,11 @@
             background: rgba(239, 68, 68, 0.25);
         }
         .time-display {
-            min-width: 45px;
+            min-width: 50px;
             text-align: center;
-            font-weight: 500;
-            font-size: 0.8rem;
-            padding: 2px 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 4px 2px;
         }
         .time-display.empty {
             color: rgba(255, 255, 255, 0.15);
@@ -647,10 +635,10 @@
         }
         .status-badge {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 4px 14px;
             border-radius: 50px;
-            font-size: 0.55rem;
-            font-weight: 500;
+            font-size: 0.6rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
@@ -671,17 +659,17 @@
         }
         .action-btns {
             display: flex;
-            gap: 4px;
+            gap: 5px;
             flex-wrap: wrap;
         }
         .action-btns .btn {
-            padding: 3px 8px;
-            font-size: 0.55rem;
-            border-radius: 5px;
+            padding: 4px 10px;
+            font-size: 0.6rem;
+            border-radius: 6px;
         }
         .report-section {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 16px;
             margin-bottom: 24px;
         }
@@ -697,7 +685,7 @@
             font-weight: 600;
         }
         .report-card h3 i {
-            color: #7c3aed;
+            color: #3b82f6;
             margin-left: 6px;
         }
         .report-item {
@@ -711,7 +699,7 @@
             border-bottom: none;
         }
         .report-item .name {
-            font-weight: 500;
+            font-weight: 600;
         }
         .report-item .details {
             color: rgba(255, 255, 255, 0.3);
@@ -732,28 +720,9 @@
             padding: 10px 0;
         }
         .report-pdf-content .report-item {
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .daily-save-item {
-            display: flex;
-            justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.75rem;
-            align-items: center;
-        }
-        .daily-save-item .date {
-            color: #a78bfa;
-            font-weight: 500;
-        }
-        .daily-save-item .time {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.65rem;
-        }
-        .daily-save-item .btn {
-            padding: 2px 10px;
-            font-size: 0.55rem;
+            font-size: 0.85rem;
         }
         .chart-container {
             height: 220px;
@@ -782,7 +751,7 @@
             max-width: 500px;
             width: 100%;
             background: #14141e;
-            border: 1px solid rgba(120, 80, 200, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             max-height: 95vh;
             overflow-y: auto;
@@ -796,7 +765,7 @@
             gap: 10px;
         }
         .modal-content h2 i {
-            color: #7c3aed;
+            color: #3b82f6;
         }
         .modal-content .finish-message {
             text-align: center;
@@ -811,7 +780,7 @@
         }
         .modal-content .finish-message .sub-text {
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             margin-top: 5px;
         }
         .modal-content .warning-message {
@@ -827,7 +796,7 @@
         }
         .modal-content .warning-message .sub-text {
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             margin-top: 5px;
         }
         .form-group {
@@ -853,13 +822,13 @@
             transition: 0.3s;
             background: rgba(255, 255, 255, 0.03);
             color: #fff;
-            border: 1px solid rgba(120, 80, 200, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
         .form-group select option {
             background: #14141e;
@@ -880,13 +849,13 @@
         }
         .fingerprint-scan .fp-icon {
             font-size: 4.5rem;
-            color: #7c3aed;
+            color: #3b82f6;
             margin-bottom: 12px;
             display: block;
             transition: all 0.3s ease;
         }
         .fingerprint-scan .fp-icon.waiting {
-            color: #7c3aed;
+            color: #3b82f6;
             animation: pulseIcon 1.5s ease-in-out infinite;
         }
         .fingerprint-scan .fp-icon.scanning {
@@ -952,7 +921,7 @@
             max-width: 300px;
             height: 160px;
             margin: 8px auto;
-            border: 3px dashed rgba(120, 80, 200, 0.25);
+            border: 3px dashed rgba(59, 130, 246, 0.25);
             border-radius: 20px;
             display: flex;
             flex-direction: column;
@@ -965,7 +934,7 @@
             user-select: none;
             gap: 8px;
             touch-action: manipulation;
-            background: rgba(120, 80, 200, 0.02);
+            background: rgba(59, 130, 246, 0.02);
         }
         .fingerprint-scan .fp-touch-area .finger-icon {
             font-size: 3rem;
@@ -976,8 +945,8 @@
             color: rgba(255, 255, 255, 0.15);
         }
         .fingerprint-scan .fp-touch-area:hover {
-            border-color: rgba(120, 80, 200, 0.5);
-            background: rgba(120, 80, 200, 0.05);
+            border-color: rgba(59, 130, 246, 0.5);
+            background: rgba(59, 130, 246, 0.05);
         }
         .fingerprint-scan .fp-touch-area:active {
             transform: scale(0.97);
@@ -993,7 +962,7 @@
         .fingerprint-scan .fp-touch-area .scan-line {
             width: 80%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #7c3aed, transparent);
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
             border-radius: 2px;
             animation: scanLineAnim 0.8s ease-in-out infinite;
             display: none;
@@ -1030,7 +999,7 @@
         .fingerprint-scan .fp-progress .fp-progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #7c3aed, #a78bfa);
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
             border-radius: 4px;
             transition: width 0.2s ease;
         }
@@ -1068,8 +1037,8 @@
             color: rgba(255, 255, 255, 0.8);
         }
         .leave-item .leave-date {
-            color: #a78bfa;
-            font-weight: 500;
+            color: #60a5fa;
+            font-weight: 600;
         }
         .leave-item .leave-delete {
             color: #f87171;
@@ -1113,7 +1082,7 @@
         }
         .empty-state i {
             font-size: 2rem;
-            color: rgba(120, 80, 200, 0.3);
+            color: rgba(59, 130, 246, 0.3);
             margin-bottom: 10px;
             display: block;
         }
@@ -1126,17 +1095,16 @@
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(120, 80, 200, 0.3);
+            background: rgba(59, 130, 246, 0.3);
             border-radius: 10px;
         }
-
         body.theme-light {
             background: #f0f0f5;
             color: #1a1a2e;
         }
         body.theme-light .glass {
             background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(120, 80, 200, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         }
         body.theme-light .glass:hover {
@@ -1157,7 +1125,7 @@
         }
         body.theme-light .modal-content {
             background: #ffffff;
-            border: 1px solid rgba(120, 80, 200, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.08);
         }
         body.theme-light .modal-content .form-group input,
         body.theme-light .modal-content .form-group textarea,
@@ -1169,8 +1137,8 @@
         body.theme-light .modal-content .form-group input:focus,
         body.theme-light .modal-content .form-group textarea:focus,
         body.theme-light .modal-content .form-group select:focus {
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         body.theme-light .modal-content .form-group select option {
             background: #fff;
@@ -1191,6 +1159,7 @@
         }
         body.theme-light th {
             color: rgba(0, 0, 0, 0.3);
+            background: rgba(59, 130, 246, 0.05);
         }
         body.theme-light .theme-dropdown {
             background: rgba(255, 255, 255, 0.95);
@@ -1207,12 +1176,6 @@
         }
         body.theme-light .report-pdf-content .report-item {
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        body.theme-light .daily-save-item {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        body.theme-light .daily-save-item .time {
-            color: rgba(0, 0, 0, 0.3);
         }
         body.theme-light .notification-toast {
             color: #1a1a2e;
@@ -1236,7 +1199,6 @@
         body.theme-light .auto-save-badge {
             color: rgba(0, 0, 0, 0.2);
         }
-
         body.theme-purple {
             background: #1a0a2e;
             color: #e8d5f5;
@@ -1291,6 +1253,7 @@
         }
         body.theme-purple th {
             color: rgba(232, 213, 245, 0.3);
+            background: rgba(160, 120, 255, 0.05);
         }
         body.theme-purple .logo {
             background: linear-gradient(135deg, #c4a8ff, #a078ff);
@@ -1300,7 +1263,6 @@
         body.theme-purple .stat-card h4 {
             color: rgba(232, 213, 245, 0.35);
         }
-
         body.theme-blue {
             background: #0a1628;
             color: #d5e5f5;
@@ -1355,6 +1317,7 @@
         }
         body.theme-blue th {
             color: rgba(213, 229, 245, 0.3);
+            background: rgba(80, 160, 255, 0.05);
         }
         body.theme-blue .logo {
             background: linear-gradient(135deg, #80c8ff, #50a0ff);
@@ -1364,7 +1327,6 @@
         body.theme-blue .stat-card h4 {
             color: rgba(213, 229, 245, 0.35);
         }
-
         body.theme-green {
             background: #0a1a0a;
             color: #d5f5d5;
@@ -1419,6 +1381,7 @@
         }
         body.theme-green th {
             color: rgba(213, 245, 213, 0.3);
+            background: rgba(80, 255, 160, 0.05);
         }
         body.theme-green .logo {
             background: linear-gradient(135deg, #80ffb0, #50ffa0);
@@ -1428,7 +1391,6 @@
         body.theme-green .stat-card h4 {
             color: rgba(213, 245, 213, 0.35);
         }
-
         body.theme-yellow {
             background: #1a1a0a;
             color: #f5f5d5;
@@ -1483,6 +1445,7 @@
         }
         body.theme-yellow th {
             color: rgba(245, 245, 213, 0.3);
+            background: rgba(255, 200, 80, 0.05);
         }
         body.theme-yellow .logo {
             background: linear-gradient(135deg, #ffd870, #ffc850);
@@ -1492,7 +1455,6 @@
         body.theme-yellow .stat-card h4 {
             color: rgba(245, 245, 213, 0.35);
         }
-
         @media (max-width: 992px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
@@ -1543,7 +1505,7 @@
             }
             .time-display {
                 min-width: 32px;
-                font-size: 0.65rem;
+                font-size: 0.7rem;
             }
             .table-header .hint {
                 display: none;
@@ -1568,6 +1530,10 @@
             }
             .xawan-logo-img {
                 height: 40px;
+            }
+            th,
+            td {
+                padding: 12px 14px;
             }
         }
         @media (max-width: 480px) {
@@ -1597,22 +1563,35 @@
             .report-section {
                 grid-template-columns: 1fr;
             }
+            th,
+            td {
+                padding: 10px 8px;
+                font-size: 0.7rem;
+            }
+            .employee-name {
+                font-size: 0.8rem;
+            }
+            .time-display {
+                min-width: 28px;
+                font-size: 0.65rem;
+            }
+            .action-btns .btn {
+                padding: 2px 4px;
+                font-size: 0.45rem;
+            }
         }
     </style>
 </head>
 <body class="theme-dark">
     <div class="container">
-        
-        <!-- =========================================== -->
-        <!-- XAWAN OFFICE REPORT HEADER                   -->
-        <!-- =========================================== -->
+        <!-- XAWAN HEADER -->
         <div class="xawan-report-header">
             <div class="xawan-logo-area">
                 <img src="https://i.imgur.com/your-xawan-logo-placeholder.png" alt="Xawan Logo" class="xawan-logo-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100\' height=\'100\' rx=\'20\' fill=\'%230a1628\'/><path d=\'M20 50 L40 30 L60 70 L80 50\' stroke=\'%233b82f6\' stroke-width=\'8\' fill=\'none\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>'">
                 <span class="xawan-text-brand">xawan</span>
             </div>
             <div class="xawan-title">
-                <h2><i class="fas fa-chart-pie" style="margin-left:8px;color:#3b82f6;"></i> بەڕێوبەر خوناڤ لەزگین </h2>
+                <h2><i class="fas fa-chart-pie" style="margin-left:8px;color:#3b82f6;"></i> بەڕێوبەر:  خوناڤ  لەزگین</h2>
                 <span><i class="fas fa-sync-alt fa-spin"></i> نوێکردنەوەی ئۆتۆماتیکی ڕۆژانە <span id="xawanLiveTime" style="color:#3b82f6;font-weight:600;">-</span></span>
             </div>
             <div class="xawan-auto-status">
@@ -1679,14 +1658,14 @@
             </div>
         </section>
 
-        <!-- REPORTS & DAILY SAVES -->
+        <!-- REPORTS -->
         <section class="report-section">
             <div class="report-card glass">
                 <h3><i class="fas fa-calendar-week"></i> ڕاپۆرتی هەفتانە</h3>
                 <div id="weeklyReport"></div>
                 <div class="report-actions">
                     <button class="btn btn-report btn-sm" onclick="openReportModal('weekly')"><i class="fas fa-eye"></i> بینین</button>
-                    <button class="btn btn-pdf btn-sm" onclick="exportReportPDF('weekly')"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <button class="btn btn-whatsapp btn-sm" onclick="sendReportWhatsApp('weekly')"><i class="fab fa-whatsapp"></i> واتسئەپ</button>
                 </div>
             </div>
             <div class="report-card glass">
@@ -1694,7 +1673,7 @@
                 <div id="monthlyReport"></div>
                 <div class="report-actions">
                     <button class="btn btn-report btn-sm" onclick="openReportModal('monthly')"><i class="fas fa-eye"></i> بینین</button>
-                    <button class="btn btn-pdf btn-sm" onclick="exportReportPDF('monthly')"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <button class="btn btn-whatsapp btn-sm" onclick="sendReportWhatsApp('monthly')"><i class="fab fa-whatsapp"></i> واتسئەپ</button>
                 </div>
             </div>
             <div class="report-card glass">
@@ -1702,15 +1681,7 @@
                 <div id="leaveSummary"></div>
                 <div class="report-actions">
                     <button class="btn btn-report btn-sm" onclick="openReportModal('leaves')"><i class="fas fa-eye"></i> بینین</button>
-                    <button class="btn btn-pdf btn-sm" onclick="exportReportPDF('leaves')"><i class="fas fa-file-pdf"></i> PDF</button>
-                </div>
-            </div>
-            <div class="report-card glass">
-                <h3><i class="fas fa-history"></i> ناردنەکانی رۆژانە</h3>
-                <div id="dailySavesList"></div>
-                <div class="report-actions">
-                    <button class="btn btn-save-daily btn-sm" onclick="openDailySaveModal()"><i class="fas fa-plus"></i> ناردنی نوێ</button>
-                    <button class="btn btn-pdf btn-sm" onclick="exportAllDailySavesPDF()"><i class="fas fa-file-pdf"></i> هەموو PDF</button>
+                    <button class="btn btn-whatsapp btn-sm" onclick="sendReportWhatsApp('leaves')"><i class="fab fa-whatsapp"></i> واتسئەپ</button>
                 </div>
             </div>
         </section>
@@ -1719,7 +1690,7 @@
         <section class="chart-container glass"><canvas id="attendanceChart"></canvas></section>
     </div>
 
-    <!-- ADD EMPLOYEE MODAL -->
+    <!-- MODALS -->
     <div class="modal" id="addEmployeeModal">
         <div class="modal-content">
             <h2><i class="fas fa-user-plus"></i> زیادکردنی کارمەند</h2>
@@ -1731,7 +1702,6 @@
         </div>
     </div>
 
-    <!-- FINGERPRINT MODAL -->
     <div class="modal" id="fingerprintModal">
         <div class="modal-content">
             <h2><i class="fas fa-fingerprint"></i> <span id="fpModalTitle">پەنجەمۆر</span></h2>
@@ -1752,7 +1722,6 @@
         </div>
     </div>
 
-    <!-- EDIT EMPLOYEE MODAL -->
     <div class="modal" id="editEmployeeModal">
         <div class="modal-content">
             <h2><i class="fas fa-edit"></i> دەستکاری کارمەند</h2>
@@ -1764,7 +1733,6 @@
         </div>
     </div>
 
-    <!-- LEAVE MODAL -->
     <div class="modal" id="leaveModal">
         <div class="modal-content">
             <h2><i class="fas fa-umbrella-beach"></i> بەڕێوەبردنی مۆڵەت</h2>
@@ -1777,19 +1745,18 @@
         </div>
     </div>
 
-    <!-- REPORT MODAL -->
     <div class="modal" id="reportModal">
         <div class="modal-content" style="max-width:700px;">
             <h2><i class="fas fa-file-alt"></i> <span id="reportModalTitle">ڕاپۆرت</span></h2>
             <div id="reportModalContent" class="report-pdf-content"></div>
             <div class="modal-actions">
-                <button class="btn btn-pdf" onclick="exportReportPDFFromModal()"><i class="fas fa-file-pdf"></i> داگرتنی PDF</button>
+                <button class="btn btn-whatsapp" onclick="sendReportWhatsAppFromModal()"><i class="fab fa-whatsapp"></i> ناردن بۆ واتسئەپ</button>
                 <button class="btn btn-outline" onclick="closeModal('reportModal')"><i class="fas fa-times"></i> داخستن</button>
             </div>
         </div>
     </div>
 
-    <!-- FINISH DAY MODAL -->
+    <!-- Finish Modal (تەنها دوگمەی "باشە" ماوەتەوە) -->
     <div class="modal" id="finishModal">
         <div class="modal-content">
             <h2><i class="fas fa-check-circle" style="color:#fbbf24;"></i> کۆتایی ڕۆژ</h2>
@@ -1802,12 +1769,10 @@
             </div>
             <div class="modal-actions">
                 <button class="btn btn-primary" onclick="closeModal('finishModal')"><i class="fas fa-check"></i> باشە</button>
-                <button class="btn btn-success" onclick="exportFullReportPDF()"><i class="fas fa-file-pdf"></i> داگرتنی هەموو ڕاپۆرتەکان</button>
             </div>
         </div>
     </div>
 
-    <!-- REFRESH DAY MODAL -->
     <div class="modal" id="refreshDayModal">
         <div class="modal-content">
             <h2><i class="fas fa-sync-alt" style="color:#3b82f6;"></i> نوێکردنەوەی ڕۆژانە</h2>
@@ -1832,33 +1797,7 @@
         </div>
     </div>
 
-    <!-- DAILY SAVE MODAL -->
-    <div class="modal" id="dailySaveModal">
-        <div class="modal-content">
-            <h2><i class="fas fa-save" style="color:#8b5cf6;"></i> ناردنی رۆژانە</h2>
-            <div class="form-group">
-                <label>ڕێکەوت</label>
-                <input type="date" id="dailySaveDate" />
-            </div>
-            <div class="form-group">
-                <label>تێبینی (ئاراستەکەر)</label>
-                <textarea id="dailySaveNote" placeholder="تێبینیەکەت بنوسە... (ئاراستەکەر)"></textarea>
-            </div>
-            <div class="form-group">
-                <label>داتاکانی ئەمڕۆ</label>
-                <div style="background:rgba(255,255,255,0.03);padding:10px;border-radius:10px;font-size:0.8rem;max-height:150px;overflow-y:auto;" id="dailySaveDataPreview"></div>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-save-daily" onclick="saveDailyData()"><i class="fas fa-check"></i> ناردن</button>
-                <button class="btn btn-outline" onclick="closeModal('dailySaveModal')"><i class="fas fa-times"></i> ڕەتکردنەوە</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // ============================================================
-        // DATA MANAGEMENT - Local Storage
-        // ============================================================
         const STORAGE_KEY = 'fingerprint_employees_v17';
 
         function getDefaultData() {
@@ -1871,13 +1810,8 @@
                 attendance: {},
                 leaves: {},
                 theme: 'dark',
-                defaultTimes: {
-                    breakStart: '12:00',
-                    checkOut: '17:00'
-                },
-                reportHistory: {},
-                dailySaves: [],
-                refreshHistory: []
+                defaultTimes: { breakStart: '12:00', checkOut: '17:00' },
+                reportHistory: {}
             };
         }
 
@@ -1895,8 +1829,6 @@
                 if (!parsed.leaves) parsed.leaves = {};
                 if (!parsed.defaultTimes) parsed.defaultTimes = { breakStart: '12:00', checkOut: '17:00' };
                 if (!parsed.reportHistory) parsed.reportHistory = {};
-                if (!parsed.dailySaves) parsed.dailySaves = [];
-                if (!parsed.refreshHistory) parsed.refreshHistory = [];
                 return parsed;
             } catch {
                 const d = getDefaultData();
@@ -1924,7 +1856,8 @@
 
         function formatDateFull(dateStr) {
             const d = new Date(dateStr);
-            return d.toLocaleDateString('ckb', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            return d.toLocaleDateString('ckb', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit',
+                minute: '2-digit' });
         }
 
         function getTimeNow() {
@@ -1932,7 +1865,7 @@
         }
 
         // ============================================================
-        // THEME SYSTEM
+        // THEME
         // ============================================================
         function setTheme(theme) {
             const validThemes = ['dark', 'light', 'purple', 'blue', 'green', 'yellow'];
@@ -1961,18 +1894,131 @@
         });
 
         // ============================================================
-        // AUTO-UPDATE LIVE TIME FOR XAWAN HEADER
+        // NOTIFICATION
         // ============================================================
-        function updateXawanLiveTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ckb', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('xawanLiveTime').textContent = timeString;
+        function showNotification(message, type) {
+            const existing = document.querySelector('.notification-toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            const colors = { success: 'rgba(52,211,153,0.2)', warning: 'rgba(251,191,36,0.2)',
+            error: 'rgba(239,68,68,0.2)' };
+            const borders = { success: 'rgba(52,211,153,0.3)', warning: 'rgba(251,191,36,0.3)',
+            error: 'rgba(239,68,68,0.3)' };
+            const icons = { success: 'fa-check-circle', warning: 'fa-exclamation-circle', error: 'fa-times-circle' };
+            const iconColors = { success: '#6ee7b7', warning: '#fbbf24', error: '#f87171' };
+
+            toast.className = 'notification-toast';
+            toast.style.cssText = 'background:' + (colors[type] || colors.success) + ';border:1px solid ' + (borders[
+                type] || borders.success) + ';';
+            toast.innerHTML = '<i class="fas ' + (icons[type] || icons.success) + '" style="color:' + (iconColors[
+                type] || iconColors.success) + ';margin-left:8px;"></i> ' + message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3500);
         }
-        setInterval(updateXawanLiveTime, 1000);
-        updateXawanLiveTime();
 
         // ============================================================
-        // EXCEL IMPORT - دانانی فایلی Excel و داخڵکردنی هەموو ناوەکان بە جارێک
+        // WHATSAPP SEND
+        // ============================================================
+        function generateReportText(type) {
+            const data = getData();
+            const today = getToday();
+            let text = '';
+
+            const titles = {
+                weekly: '📊 ڕاپۆرتی هەفتانە',
+                monthly: '📊 ڕاپۆرتی مانگانە',
+                leaves: '🏖️ کۆی مۆڵەتەکان',
+                full: '📊 ڕاپۆرتی گشتی'
+            };
+
+            text += `*${titles[type] || 'ڕاپۆرت'}*\n`;
+            text += `📅 ڕێکەوت: ${formatDateFull(new Date())}\n`;
+            text += `━━━━━━━━━━━━━━━━━━\n`;
+
+            if (type === 'full') {
+                // Full report
+                text += `\n*📅 ڕاپۆرتی هەفتانە (7 ڕۆژی پێشوو)*\n`;
+                data.employees.forEach(emp => {
+                    const h = getEmployeeAttendanceHistory(emp.id, data, 7);
+                    const p = h.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                    const l = h.filter(h => h.isLeave).length;
+                    text += `• ${emp.name}: ${p}/7 ئامادە | ${l} مۆڵەت\n`;
+                });
+
+                text += `\n*📆 ڕاپۆرتی مانگانە (30 ڕۆژی پێشوو)*\n`;
+                data.employees.forEach(emp => {
+                    const h = getEmployeeAttendanceHistory(emp.id, data, 30);
+                    const p = h.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                    const l = h.filter(h => h.isLeave).length;
+                    text += `• ${emp.name}: ${p}/30 ئامادە | ${l} مۆڵەت\n`;
+                });
+
+                text += `\n*🏖️ کۆی مۆڵەتەکان*\n`;
+                let hasLeaves = false;
+                data.employees.forEach(emp => {
+                    if (data.leaves && data.leaves[emp.id] && data.leaves[emp.id].length > 0) {
+                        hasLeaves = true;
+                        const dates = data.leaves[emp.id].map(l => formatDate(l.date)).join('، ');
+                        text += `• ${emp.name}: ${data.leaves[emp.id].length} مۆڵەت (${dates})\n`;
+                    }
+                });
+                if (!hasLeaves) text += 'هیچ مۆڵەتێک تۆمار نەکراوە\n';
+
+            } else if (type === 'weekly') {
+                data.employees.forEach(emp => {
+                    const h = getEmployeeAttendanceHistory(emp.id, data, 7);
+                    const p = h.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                    const l = h.filter(h => h.isLeave).length;
+                    text += `• ${emp.name}: ${p}/7 ئامادە | ${l} مۆڵەت\n`;
+                });
+
+            } else if (type === 'monthly') {
+                data.employees.forEach(emp => {
+                    const h = getEmployeeAttendanceHistory(emp.id, data, 30);
+                    const p = h.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                    const l = h.filter(h => h.isLeave).length;
+                    text += `• ${emp.name}: ${p}/30 ئامادە | ${l} مۆڵەت\n`;
+                });
+
+            } else if (type === 'leaves') {
+                let hasLeaves = false;
+                data.employees.forEach(emp => {
+                    if (data.leaves && data.leaves[emp.id] && data.leaves[emp.id].length > 0) {
+                        hasLeaves = true;
+                        const dates = data.leaves[emp.id].map(l => formatDate(l.date)).join('، ');
+                        text += `• ${emp.name}: ${data.leaves[emp.id].length} مۆڵەت (${dates})\n`;
+                    }
+                });
+                if (!hasLeaves) text += 'هیچ مۆڵەتێک تۆمار نەکراوە\n';
+            }
+
+            text += `━━━━━━━━━━━━━━━━━━\n`;
+            text += `🕐 ${new Date().toLocaleString('ckb')}\n`;
+            text += `📱 سیستمەکە لەلایەن Xawan`;
+
+            return text;
+        }
+
+        function sendReportWhatsApp(type) {
+            const text = generateReportText(type);
+            const encoded = encodeURIComponent(text);
+            const url = `https://wa.me/?text=${encoded}`;
+            window.open(url, '_blank');
+            showNotification('✅ ڕاپۆرت نێردرا بۆ واتسئەپ', 'success');
+        }
+
+        function sendReportWhatsAppFromModal() {
+            sendReportWhatsApp(currentReportType);
+        }
+
+        // ============================================================
+        // EXCEL IMPORT
         // ============================================================
         function importEmployeesFromExcel(event) {
             const file = event.target.files[0];
@@ -2021,7 +2067,8 @@
 
                     saveData(appData);
                     renderAll();
-                    showNotification(`✅ ${addedCount} کارمەند زیاد کران | ${duplicateCount} ناوی تکراری پەرێزران`, 'success');
+                    showNotification(`✅ ${addedCount} کارمەند زیاد کران | ${duplicateCount} ناوی تکراری پەرێزران`,
+                        'success');
                 } catch (error) {
                     showNotification('❌ هەڵە لە خوێندنەوەی فایلی Excel: ' + error.message, 'error');
                 }
@@ -2051,14 +2098,6 @@
                     data.attendance[key] = { checkIn: '', breakStart: '', breakEnd: '', checkOut: '' };
                     refreshedCount++;
                 }
-            });
-
-            if (!data.refreshHistory) data.refreshHistory = [];
-            data.refreshHistory.push({
-                date: today,
-                note: note,
-                refreshedAt: new Date().toISOString(),
-                count: refreshedCount
             });
 
             saveData(data);
@@ -2108,71 +2147,91 @@
             progressBar.className = 'fp-progress-bar';
 
             let progressValue = 0;
+            let scanDuration = 2000;
+            let startTime = Date.now();
+
             scanTimer = setInterval(() => {
-                progressValue += 5;
-                if (progressValue <= 100) {
-                    progressBar.style.width = progressValue + '%';
-                }
-            }, 60);
+                const elapsed = Date.now() - startTime;
+                progressValue = Math.min((elapsed / scanDuration) * 100, 100);
+                progressBar.style.width = progressValue + '%';
+                if (progressValue >= 100) {
+                    clearInterval(scanTimer);
+                    scanTimer = null;
+                    const isRegistered = !!employee.fingerprint;
 
-            setTimeout(() => {
-                clearInterval(scanTimer);
-                const isRegistered = !!employee.fingerprint;
-
-                if (fpMode === 'register') {
-                    if (!employee.fingerprint) {
-                        employee.fingerprint = {
-                            type: 'unique-code',
-                            code: generateFingerprintCode(),
-                            registeredAt: new Date().toISOString(),
-                            version: 17
-                        };
-                        saveData(data);
+                    if (fpMode === 'register') {
+                        if (!employee.fingerprint) {
+                            employee.fingerprint = {
+                                type: 'unique-code',
+                                code: generateFingerprintCode(),
+                                registeredAt: new Date().toISOString(),
+                                version: 17
+                            };
+                            saveData(data);
+                        }
+                        progressBar.className = 'fp-progress-bar success';
+                        progressBar.style.width = '100%';
+                        icon.className = 'fas fa-fingerprint fp-icon success';
+                        text.className = 'fp-text success';
+                        text.textContent = '✅ پەنجەمۆری ' + employee.name + ' تۆمار کرا!';
+                        result.innerHTML = '<span style="color:#6ee7b7;">✅ پەنجەمۆر بە سەرکەوتوویی تۆمار کرا</span>';
+                        touchArea.className = 'fp-touch-area active';
+                        touchArea.innerHTML =
+                            `<span class="finger-icon">✅</span><span>تۆمار کرا</span><span class="hold-text">سەرکەوتوو</span>`;
+                        setTimeout(() => { closeModal('fingerprintModal');
+                            renderAll(); }, 1000);
+                        isScanning = false;
+                        return;
                     }
+
+                    if (!isRegistered) {
+                        progressBar.className = 'fp-progress-bar error';
+                        progressBar.style.width = '100%';
+                        icon.className = 'fas fa-fingerprint fp-icon error';
+                        text.className = 'fp-text error';
+                        text.textContent = '❌ پەنجەمۆر نەناسرایەوە! تکایە یەکەم جار تۆماری بکە.';
+                        result.innerHTML = '<span style="color:#f87171;">❌ ئەم کارمەندە پەنجەمۆری تۆمار نەکراوە</span>';
+                        touchArea.className = 'fp-touch-area error';
+                        touchArea.innerHTML =
+                            `<span class="finger-icon">❌</span><span>نەناسرایەوە</span><span class="hold-text">پەنجەمۆر تۆمار نەکراوە</span>`;
+                        isScanning = false;
+                        return;
+                    }
+
+                    // Successfully verified - set check-in time automatically
+                    const today = getToday();
+                    const key = `${fpEmployeeId}_${today}`;
+                    if (!data.attendance) data.attendance = {};
+                    if (!data.attendance[key]) {
+                        data.attendance[key] = { checkIn: getTimeNow(), breakStart: '12:00', breakEnd: '',
+                        checkOut: '17:00' };
+                    } else if (!data.attendance[key].checkIn) {
+                        data.attendance[key].checkIn = getTimeNow();
+                    }
+                    // If check-in already exists, update it with current time
+                    data.attendance[key].checkIn = getTimeNow();
+                    saveData(data);
+
                     progressBar.className = 'fp-progress-bar success';
                     progressBar.style.width = '100%';
-                    icon.className = 'fas fa-fingerprint fp-icon success';
-                    text.className = 'fp-text success';
-                    text.textContent = '✅ پەنجەمۆری ' + employee.name + ' تۆمار کرا!';
-                    result.innerHTML = '<span style="color:#6ee7b7;">✅ پەنجەمۆر بە سەرکەوتوویی تۆمار کرا</span>';
+                    icon.className = 'fas fa-fingerprint fp-icon match';
+                    text.className = 'fp-text match';
+                    text.textContent = '✅ پەنجەمۆری ' + employee.name +
+                    ' ناسرایەوە! کاتی هاتن تۆمار کرا: ' + getTimeNow();
+                    result.innerHTML = '<span style="color:#6ee7b7;">✅ پەنجەمۆر پشتڕاست کرایەوە و کاتی هاتن تۆمار کرا!</span>';
                     touchArea.className = 'fp-touch-area active';
                     touchArea.innerHTML =
-                        `<span class="finger-icon">✅</span><span>تۆمار کرا</span><span class="hold-text">سەرکەوتوو</span>`;
-                    setTimeout(() => { closeModal('fingerprintModal');
-                        renderAll(); }, 1000);
-                    isScanning = false;
-                    return;
+                        `<span class="finger-icon">✅</span><span>پشتڕاست کرایەوە</span><span class="hold-text">کاتی هاتن: ${getTimeNow()}</span>`;
+
+                    setTimeout(() => {
+                        closeModal('fingerprintModal');
+                        renderAll();
+                        isScanning = false;
+                        showNotification('✅ کاتی هاتن بۆ ' + employee.name + ' تۆمار کرا: ' + getTimeNow(),
+                        'success');
+                    }, 1000);
                 }
-
-                if (!isRegistered) {
-                    progressBar.className = 'fp-progress-bar error';
-                    progressBar.style.width = '100%';
-                    icon.className = 'fas fa-fingerprint fp-icon error';
-                    text.className = 'fp-text error';
-                    text.textContent = '❌ پەنجەمۆر نەناسرایەوە! تکایە یەکەم جار تۆماری بکە.';
-                    result.innerHTML = '<span style="color:#f87171;">❌ ئەم کارمەندە پەنجەمۆری تۆمار نەکراوە</span>';
-                    touchArea.className = 'fp-touch-area error';
-                    touchArea.innerHTML =
-                        `<span class="finger-icon">❌</span><span>نەناسرایەوە</span><span class="hold-text">پەنجەمۆر تۆمار نەکراوە</span>`;
-                    isScanning = false;
-                    return;
-                }
-
-                progressBar.className = 'fp-progress-bar success';
-                progressBar.style.width = '100%';
-                icon.className = 'fas fa-fingerprint fp-icon match';
-                text.className = 'fp-text match';
-                text.textContent = '✅ پەنجەمۆری ' + employee.name + ' ناسرایەوە!';
-                result.innerHTML = '<span style="color:#6ee7b7;">✅ پەنجەمۆر پشتڕاست کرایەوە!</span>';
-                touchArea.className = 'fp-touch-area active';
-                touchArea.innerHTML =
-                    `<span class="finger-icon">✅</span><span>پشتڕاست کرایەوە</span><span class="hold-text">سەرکەوتوو</span>`;
-
-                setTimeout(() => {
-                    closeModal('fingerprintModal');
-                    isScanning = false;
-                }, 800);
-            }, 1500);
+            }, 50);
         }
 
         function openFingerprintModal(id, mode = 'register') {
@@ -2239,33 +2298,6 @@
         }
 
         // ============================================================
-        // NOTIFICATION
-        // ============================================================
-        function showNotification(message, type) {
-            const existing = document.querySelector('.notification-toast');
-            if (existing) existing.remove();
-
-            const toast = document.createElement('div');
-            const colors = { success: 'rgba(52,211,153,0.2)', warning: 'rgba(251,191,36,0.2)', error: 'rgba(239,68,68,0.2)' };
-            const borders = { success: 'rgba(52,211,153,0.3)', warning: 'rgba(251,191,36,0.3)', error: 'rgba(239,68,68,0.3)' };
-            const icons = { success: 'fa-check-circle', warning: 'fa-exclamation-circle', error: 'fa-times-circle' };
-            const iconColors = { success: '#6ee7b7', warning: '#fbbf24', error: '#f87171' };
-
-            toast.className = 'notification-toast';
-            toast.style.cssText = 'background:' + (colors[type] || colors.success) + ';border:1px solid ' + (borders[
-                type] || borders.success) + ';';
-            toast.innerHTML = '<i class="fas ' + (icons[type] || icons.success) + '" style="color:' + (iconColors[
-                type] || iconColors.success) + ';margin-left:8px;"></i> ' + message;
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.5s ease';
-                setTimeout(() => toast.remove(), 500);
-            }, 3500);
-        }
-
-        // ============================================================
         // TIME HELPERS
         // ============================================================
         function addMinutes(timeStr, minutes) {
@@ -2308,15 +2340,15 @@
         }
 
         // ============================================================
-        // FINISH DAY FUNCTION
+        // FINISH DAY
         // ============================================================
         function finishDay() {
             const data = getData();
             const today = getToday();
-            
+
             let allComplete = true;
             let incompleteEmployees = [];
-            
+
             data.employees.forEach(emp => {
                 const key = `${emp.id}_${today}`;
                 const att = data.attendance[key];
@@ -2325,13 +2357,13 @@
                     incompleteEmployees.push(emp.name);
                 }
             });
-            
+
             if (!allComplete) {
-                if (!confirm(`⚠️ هەندێک کارمەند کاتەکانیان تەواو نەکردووە:\n${incompleteEmployees.join('، ')}\n\nئایا دەتەوێت بەردەوام بیت؟`)) {
+                if (!confirm(`⚠️ هەندێک کارمەند کاتەکانیان تەواو نەکردووە:\n${incompleteEmployees.join('، ')}\n\nئایا دەتەوێت بەردەوام بیت?`)) {
                     return;
                 }
             }
-            
+
             if (!data.reportHistory) data.reportHistory = {};
             data.reportHistory[today] = {
                 date: today,
@@ -2340,270 +2372,12 @@
                 leaves: JSON.parse(JSON.stringify(data.leaves))
             };
             saveData(data);
-            
+
             document.getElementById('finishDate').textContent = formatDateFull(new Date());
             document.getElementById('finishModal').classList.add('active');
-            
+
             renderAll();
-            
             showNotification('✅ ئەمرۆ تەواو بوو! هەموو داتاکان پاشەکەوت کران', 'success');
-        }
-
-        // ============================================================
-        // DAILY SAVE FUNCTIONS
-        // ============================================================
-        function openDailySaveModal() {
-            const data = getData();
-            const today = getToday();
-            
-            document.getElementById('dailySaveDate').value = today;
-            document.getElementById('dailySaveNote').value = '';
-            
-            let preview = '';
-            data.employees.forEach(emp => {
-                const key = `${emp.id}_${today}`;
-                const att = data.attendance[key];
-                if (att && att.checkIn) {
-                    preview += `<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.03);">`;
-                    preview += `<span>${emp.name}</span>`;
-                    preview += `<span style="color:#6ee7b7;">${att.checkIn} | ${att.breakStart} | ${att.breakEnd} | ${att.checkOut}</span>`;
-                    preview += `</div>`;
-                }
-            });
-            if (!preview) {
-                preview = '<div style="color:rgba(255,255,255,0.15);text-align:center;padding:10px;">هیچ داتایەک بۆ ئەمڕۆ تۆمار نەکراوە</div>';
-            }
-            document.getElementById('dailySaveDataPreview').innerHTML = preview;
-            
-            document.getElementById('dailySaveModal').classList.add('active');
-        }
-
-        function saveDailyData() {
-            const data = getData();
-            const date = document.getElementById('dailySaveDate').value;
-            const note = document.getElementById('dailySaveNote').value.trim();
-            
-            if (!date) {
-                alert('تکایە ڕێکەوت دیاری بکە!');
-                return;
-            }
-            
-            if (!data.dailySaves) data.dailySaves = [];
-            
-            const todayData = {};
-            data.employees.forEach(emp => {
-                const key = `${emp.id}_${date}`;
-                if (data.attendance && data.attendance[key]) {
-                    todayData[emp.name] = {
-                        checkIn: data.attendance[key].checkIn || '',
-                        breakStart: data.attendance[key].breakStart || '',
-                        breakEnd: data.attendance[key].breakEnd || '',
-                        checkOut: data.attendance[key].checkOut || ''
-                    };
-                }
-            });
-            
-            const dailySave = {
-                id: generateId(),
-                date: date,
-                note: note || 'ناردنی رۆژانە',
-                savedAt: new Date().toISOString(),
-                data: todayData,
-                employees: data.employees.map(emp => ({ id: emp.id, name: emp.name }))
-            };
-            
-            data.dailySaves.push(dailySave);
-            saveData(data);
-            
-            closeModal('dailySaveModal');
-            renderAll();
-            showNotification('✅ ناردنی رۆژانە بۆ ' + formatDate(date) + ' پاشەکەوت کرا', 'success');
-        }
-
-        function renderDailySaves(data) {
-            const container = document.getElementById('dailySavesList');
-            container.innerHTML = '';
-            
-            if (!data.dailySaves || data.dailySaves.length === 0) {
-                container.innerHTML = '<div style="color:rgba(255,255,255,0.15);text-align:center;padding:10px;font-size:0.8rem;">هیچ ناردنێک تۆمار نەکراوە</div>';
-                return;
-            }
-            
-            const sorted = [...data.dailySaves].reverse().slice(0, 5);
-            sorted.forEach(save => {
-                const div = document.createElement('div');
-                div.className = 'daily-save-item';
-                const empCount = Object.keys(save.data).length;
-                div.innerHTML = `
-                    <div>
-                        <span class="date">${formatDate(save.date)}</span>
-                        <span style="font-size:0.6rem;color:rgba(255,255,255,0.2);margin-right:8px;">${save.note}</span>
-                    </div>
-                    <div>
-                        <span class="time">${empCount} کارمەند</span>
-                        <button class="btn btn-xs btn-pdf" onclick="exportDailySavePDF('${save.id}')" title="داگرتنی PDF"><i class="fas fa-file-pdf"></i></button>
-                        <button class="btn btn-xs btn-danger" onclick="deleteDailySave('${save.id}')" title="سڕینەوە"><i class="fas fa-trash"></i></button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-            
-            if (data.dailySaves.length > 5) {
-                const more = document.createElement('div');
-                more.className = 'daily-save-item';
-                more.style.justifyContent = 'center';
-                more.style.color = 'rgba(255,255,255,0.2)';
-                more.style.fontSize = '0.7rem';
-                more.textContent = `+ ${data.dailySaves.length - 5} ناردنی تر`;
-                container.appendChild(more);
-            }
-        }
-
-        function deleteDailySave(id) {
-            if (!confirm('دڵنیایت لە سڕینەوەی ئەم ناردنە؟')) return;
-            const data = getData();
-            data.dailySaves = data.dailySaves.filter(s => s.id !== id);
-            saveData(data);
-            renderAll();
-            showNotification('❌ ناردنەکە سڕایەوە', 'error');
-        }
-
-        function exportDailySavePDF(id) {
-            const data = getData();
-            const save = data.dailySaves.find(s => s.id === id);
-            if (!save) {
-                showNotification('❌ ناردنەکە نەدۆزرایەوە', 'error');
-                return;
-            }
-            
-            let html = `
-                <h1 style="color:#7c3aed;font-size:1.5rem;margin-bottom:5px;">📋 ناردنی رۆژانە</h1>
-                <div style="font-size:0.8rem;color:#666;margin-bottom:5px;">ڕێکەوت: ${formatDate(save.date)}</div>
-                <div style="font-size:0.8rem;color:#666;margin-bottom:15px;">تێبینی: ${save.note}</div>
-                <hr style="border:1px solid #7c3aed;margin-bottom:15px;">
-            `;
-            
-            const entries = Object.entries(save.data);
-            if (entries.length === 0) {
-                html += '<div style="color:#999;">هیچ داتایەک تۆمار نەکراوە</div>';
-            } else {
-                html += `<table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
-                    <tr style="border-bottom:2px solid #7c3aed;">
-                        <th style="text-align:right;padding:8px;">ناو</th>
-                        <th style="text-align:center;padding:8px;">هاتن</th>
-                        <th style="text-align:center;padding:8px;">چوون بۆ ڕێست</th>
-                        <th style="text-align:center;padding:8px;">هاتنەوە لە ڕێست</th>
-                        <th style="text-align:center;padding:8px;">چونەوە</th>
-                    </tr>`;
-                entries.forEach(([name, times]) => {
-                    html += `<tr style="border-bottom:1px solid #eee;">
-                        <td style="padding:6px;font-weight:500;">${name}</td>
-                        <td style="text-align:center;padding:6px;color:#6ee7b7;">${times.checkIn || '--:--'}</td>
-                        <td style="text-align:center;padding:6px;color:#fbbf24;">${times.breakStart || '--:--'}</td>
-                        <td style="text-align:center;padding:6px;color:#fbbf24;">${times.breakEnd || '--:--'}</td>
-                        <td style="text-align:center;padding:6px;color:#f87171;">${times.checkOut || '--:--'}</td>
-                    </tr>`;
-                });
-                html += '</table>';
-            }
-            
-            html += `
-                <div style="margin-top:20px;border-top:1px solid #eee;padding-top:10px;font-size:0.7rem;color:#888;text-align:center;">
-                    ناردنی رۆژانە - ${formatDateFull(new Date(save.savedAt))}
-                </div>
-            `;
-            
-            const element = document.createElement('div');
-            element.style.cssText = `padding:20px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;`;
-            element.innerHTML = html;
-            
-            document.body.appendChild(element);
-            
-            html2pdf().set({
-                margin: [10, 10, 10, 10],
-                filename: `ناردنی_رۆژانە_${save.date}.pdf`,
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(element).save().then(() => {
-                element.remove();
-                showNotification('✅ PDF بە سەرکەوتوویی داگیرا', 'success');
-            }).catch(() => {
-                element.remove();
-                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
-            });
-        }
-
-        function exportAllDailySavesPDF() {
-            const data = getData();
-            if (!data.dailySaves || data.dailySaves.length === 0) {
-                showNotification('❌ هیچ ناردنێک تۆمار نەکراوە', 'error');
-                return;
-            }
-            
-            let html = `
-                <h1 style="color:#7c3aed;font-size:1.8rem;margin-bottom:5px;">📋 هەموو ناردنەکانی رۆژانە</h1>
-                <div style="font-size:0.8rem;color:#666;margin-bottom:15px;">کۆی گشتی: ${data.dailySaves.length} ناردن</div>
-                <hr style="border:1px solid #7c3aed;margin-bottom:20px;">
-            `;
-            
-            const sorted = [...data.dailySaves].reverse();
-            sorted.forEach((save, idx) => {
-                html += `<div style="margin-bottom:20px;border:1px solid #e0e0e0;border-radius:10px;padding:15px;">`;
-                html += `<div style="display:flex;justify-content:space-between;margin-bottom:8px;">`;
-                html += `<span style="font-weight:600;color:#7c3aed;">${idx + 1}. ${formatDate(save.date)}</span>`;
-                html += `<span style="color:#666;font-size:0.7rem;">${save.note}</span>`;
-                html += `</div>`;
-                
-                const entries = Object.entries(save.data);
-                if (entries.length > 0) {
-                    html += `<table style="width:100%;border-collapse:collapse;font-size:0.7rem;">
-                        <tr style="border-bottom:1px solid #ddd;">
-                            <th style="text-align:right;padding:4px;">ناو</th>
-                            <th style="text-align:center;padding:4px;">هاتن</th>
-                            <th style="text-align:center;padding:4px;">چوون بۆ ڕێست</th>
-                            <th style="text-align:center;padding:4px;">هاتنەوە لە ڕێست</th>
-                            <th style="text-align:center;padding:4px;">چونەوە</th>
-                        </tr>`;
-                    entries.forEach(([name, times]) => {
-                        html += `<tr style="border-bottom:1px solid #f0f0f0;">
-                            <td style="padding:3px;">${name}</td>
-                            <td style="text-align:center;padding:3px;color:#6ee7b7;">${times.checkIn || '--:--'}</td>
-                            <td style="text-align:center;padding:3px;color:#fbbf24;">${times.breakStart || '--:--'}</td>
-                            <td style="text-align:center;padding:3px;color:#fbbf24;">${times.breakEnd || '--:--'}</td>
-                            <td style="text-align:center;padding:3px;color:#f87171;">${times.checkOut || '--:--'}</td>
-                        </tr>`;
-                    });
-                    html += '</table>';
-                } else {
-                    html += '<div style="color:#999;font-size:0.7rem;">هیچ داتایەک تۆمار نەکراوە</div>';
-                }
-                html += `</div>`;
-            });
-            
-            html += `
-                <div style="margin-top:20px;border-top:1px solid #eee;padding-top:10px;font-size:0.7rem;color:#888;text-align:center;">
-                    هەموو ناردنەکانی رۆژانە - ${formatDateFull(new Date())}
-                </div>
-            `;
-            
-            const element = document.createElement('div');
-            element.style.cssText = `padding:20px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;`;
-            element.innerHTML = html;
-            
-            document.body.appendChild(element);
-            
-            html2pdf().set({
-                margin: [10, 10, 10, 10],
-                filename: `هەموو_ناردنەکانی_رۆژانە.pdf`,
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(element).save().then(() => {
-                element.remove();
-                showNotification('✅ هەموو ناردنەکان وەک PDF داگیران', 'success');
-            }).catch(() => {
-                element.remove();
-                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
-            });
         }
 
         // ============================================================
@@ -2698,7 +2472,7 @@
             const today = getToday();
             const key = `${employeeId}_${today}`;
             const att = data.attendance[key];
-            
+
             if (att && att.checkIn && att.breakStart && att.breakEnd && att.checkOut) {
                 if (!data.reportHistory) data.reportHistory = {};
                 if (!data.reportHistory[today]) {
@@ -2909,37 +2683,49 @@
         function getReportData(type) {
             const data = getData();
             let html = '';
-            
+
             if (type === 'weekly') {
-                html = '<div style="margin-bottom:10px;"><strong>ڕاپۆرتی هەفتانە</strong> (7 ڕۆژی پێشوو)</div>';
-                data.employees.forEach(emp => {
-                    const h = getEmployeeAttendanceHistory(emp.id, data, 7);
-                    const p = h.filter(h => h.checkIn !== '-').length;
-                    const l = h.filter(h => h.isLeave).length;
-                    html += `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p}/7 ئامادە | ${l} مۆڵەت</span></div>`;
-                });
+                html = '<div style="margin-bottom:10px;"><strong style="color:#3b82f6;font-size:1rem;">📅 ڕاپۆرتی هەفتانە</strong> (7 ڕۆژی پێشوو)</div>';
+                if (data.employees.length === 0) {
+                    html += '<div style="color:rgba(255,255,255,0.15);padding:10px;">هیچ کارمەندێک نییە</div>';
+                } else {
+                    data.employees.forEach(emp => {
+                        const h = getEmployeeAttendanceHistory(emp.id, data, 7);
+                        const p = h.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                        const l = h.filter(h => h.isLeave).length;
+                        html +=
+                            `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p}/7 ئامادە | ${l} مۆڵەت</span></div>`;
+                    });
+                }
             } else if (type === 'monthly') {
-                html = '<div style="margin-bottom:10px;"><strong>ڕاپۆرتی مانگانە</strong> (30 ڕۆژی پێشوو)</div>';
-                data.employees.forEach(emp => {
-                    const h = getEmployeeAttendanceHistory(emp.id, data, 30);
-                    const p = h.filter(h => h.checkIn !== '-').length;
-                    const l = h.filter(h => h.isLeave).length;
-                    html += `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p}/30 ئامادە | ${l} مۆڵەت</span></div>`;
-                });
+                html = '<div style="margin-bottom:10px;"><strong style="color:#3b82f6;font-size:1rem;">📆 ڕاپۆرتی مانگانە</strong> (30 ڕۆژی پێشوو)</div>';
+                if (data.employees.length === 0) {
+                    html += '<div style="color:rgba(255,255,255,0.15);padding:10px;">هیچ کارمەندێک نییە</div>';
+                } else {
+                    data.employees.forEach(emp => {
+                        const h = getEmployeeAttendanceHistory(emp.id, data, 30);
+                        const p = h.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                        const l = h.filter(h => h.isLeave).length;
+                        html +=
+                            `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p}/30 ئامادە | ${l} مۆڵەت</span></div>`;
+                    });
+                }
             } else if (type === 'leaves') {
-                html = '<div style="margin-bottom:10px;"><strong>کۆی مۆڵەتەکان</strong></div>';
+                html = '<div style="margin-bottom:10px;"><strong style="color:#3b82f6;font-size:1rem;">🏖️ کۆی مۆڵەتەکان</strong></div>';
                 let hasLeaves = false;
                 data.employees.forEach(emp => {
                     if (data.leaves && data.leaves[emp.id] && data.leaves[emp.id].length > 0) {
                         hasLeaves = true;
-                        html += `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${data.leaves[emp.id].length} مۆڵەت</span></div>`;
+                        const leaveDates = data.leaves[emp.id].map(l => formatDate(l.date)).join('، ');
+                        html +=
+                            `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${data.leaves[emp.id].length} مۆڵەت (${leaveDates})</span></div>`;
                     }
                 });
                 if (!hasLeaves) {
                     html += '<div style="color:rgba(255,255,255,0.15);padding:10px;">هیچ مۆڵەتێک تۆمار نەکراوە</div>';
                 }
             }
-            
+
             return html;
         }
 
@@ -2954,120 +2740,6 @@
             currentReportHTML = getReportData(type);
             document.getElementById('reportModalContent').innerHTML = currentReportHTML;
             document.getElementById('reportModal').classList.add('active');
-        }
-
-        function exportReportPDFFromModal() {
-            exportReportPDF(currentReportType);
-        }
-
-        function exportReportPDF(type) {
-            const titles = {
-                weekly: 'ڕاپۆرتی هەفتانە',
-                monthly: 'ڕاپۆرتی مانگانە',
-                leaves: 'کۆی مۆڵەتەکان'
-            };
-            
-            const content = getReportData(type);
-            const title = titles[type] || 'ڕاپۆرت';
-            
-            const element = document.createElement('div');
-            element.style.cssText = `padding:20px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;`;
-            element.innerHTML = `
-                <h1 style="color:#7c3aed;font-size:1.5rem;margin-bottom:10px;">${title}</h1>
-                <div style="border-bottom:2px solid #7c3aed;margin-bottom:15px;"></div>
-                <div style="font-size:0.9rem;">${content}</div>
-                <div style="margin-top:20px;border-top:1px solid #eee;padding-top:10px;font-size:0.7rem;color:#888;">
-                    ڕێکەوت: ${new Date().toLocaleDateString('ckb', { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' })}
-                </div>
-            `;
-            
-            document.body.appendChild(element);
-            
-            html2pdf().set({
-                margin: [10, 10, 10, 10],
-                filename: `${title}_${new Date().toISOString().split('T')[0]}.pdf`,
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(element).save().then(() => {
-                element.remove();
-                showNotification('✅ PDF بە سەرکەوتوویی داگیرا', 'success');
-            }).catch(() => {
-                element.remove();
-                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
-            });
-        }
-
-        function exportFullReportPDF() {
-            const data = getData();
-            const today = getToday();
-            
-            let allReports = `
-                <h1 style="color:#7c3aed;font-size:1.8rem;margin-bottom:5px;">📊 ڕاپۆرتی گشتی</h1>
-                <div style="font-size:0.8rem;color:#666;margin-bottom:15px;">ڕێکەوت: ${formatDateFull(new Date())}</div>
-                <hr style="border:1px solid #7c3aed;margin-bottom:20px;">
-            `;
-            
-            allReports += `<h2 style="color:#7c3aed;font-size:1.2rem;margin-top:15px;">📅 ڕاپۆرتی هەفتانە (7 ڕۆژی پێشوو)</h2>`;
-            data.employees.forEach(emp => {
-                const h = getEmployeeAttendanceHistory(emp.id, data, 7);
-                const p = h.filter(h => h.checkIn !== '-').length;
-                const l = h.filter(h => h.isLeave).length;
-                allReports += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;">`;
-                allReports += `<span style="font-weight:500;">${emp.name}</span>`;
-                allReports += `<span style="color:#666;">${p}/7 ئامادە | ${l} مۆڵەت</span>`;
-                allReports += `</div>`;
-            });
-            
-            allReports += `<h2 style="color:#7c3aed;font-size:1.2rem;margin-top:20px;">📆 ڕاپۆرتی مانگانە (30 ڕۆژی پێشوو)</h2>`;
-            data.employees.forEach(emp => {
-                const h = getEmployeeAttendanceHistory(emp.id, data, 30);
-                const p = h.filter(h => h.checkIn !== '-').length;
-                const l = h.filter(h => h.isLeave).length;
-                allReports += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;">`;
-                allReports += `<span style="font-weight:500;">${emp.name}</span>`;
-                allReports += `<span style="color:#666;">${p}/30 ئامادە | ${l} مۆڵەت</span>`;
-                allReports += `</div>`;
-            });
-            
-            allReports += `<h2 style="color:#7c3aed;font-size:1.2rem;margin-top:20px;">🏖️ کۆی مۆڵەتەکان</h2>`;
-            let hasLeaves = false;
-            data.employees.forEach(emp => {
-                if (data.leaves && data.leaves[emp.id] && data.leaves[emp.id].length > 0) {
-                    hasLeaves = true;
-                    allReports += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;">`;
-                    allReports += `<span style="font-weight:500;">${emp.name}</span>`;
-                    allReports += `<span style="color:#666;">${data.leaves[emp.id].length} مۆڵەت</span>`;
-                    allReports += `</div>`;
-                }
-            });
-            if (!hasLeaves) {
-                allReports += `<div style="color:#999;padding:8px 0;">هیچ مۆڵەتێک تۆمار نەکراوە</div>`;
-            }
-            
-            allReports += `
-                <div style="margin-top:25px;border-top:2px solid #7c3aed;padding-top:12px;font-size:0.7rem;color:#888;text-align:center;">
-                    ڕاپۆرتی گشتی - ${formatDateFull(new Date())}
-                </div>
-            `;
-            
-            const element = document.createElement('div');
-            element.style.cssText = `padding:30px;font-family:Inter,sans-serif;background:#fff;color:#1a1a2e;direction:rtl;max-width:800px;margin:auto;`;
-            element.innerHTML = allReports;
-            
-            document.body.appendChild(element);
-            
-            html2pdf().set({
-                margin: [10, 10, 10, 10],
-                filename: `ڕاپۆرتی_گشتی_${today}.pdf`,
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(element).save().then(() => {
-                element.remove();
-                showNotification('✅ هەموو ڕاپۆرتەکان وەک PDF داگیران', 'success');
-            }).catch(() => {
-                element.remove();
-                showNotification('❌ هەڵە لە دروستکردنی PDF', 'error');
-            });
         }
 
         // ============================================================
@@ -3142,7 +2814,7 @@
             }
             data.employees.forEach((emp, index) => {
                 applyDefaultTimes(emp.id);
-                
+
                 const att = getAttendanceForToday(emp.id, data);
                 const onLeave = isOnLeaveToday(emp.id, data);
                 const isPresent = att && att.checkIn;
@@ -3165,8 +2837,7 @@
                 }
 
                 const tr = document.createElement('tr');
-                tr.innerHTML =
-                    `
+                tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td><span class="employee-name">${emp.name}</span><span class="employee-id">#${String(emp.id).slice(-4)}</span></td>
                     <td>
@@ -3236,30 +2907,38 @@
             let weeklyHTML = '',
                 monthlyHTML = '',
                 leaveHTML = '';
-            data.employees.forEach(emp => {
-                const h7 = getEmployeeAttendanceHistory(emp.id, data, 7);
-                const p7 = h7.filter(h => h.checkIn !== '-').length;
-                const l7 = h7.filter(h => h.isLeave).length;
-                weeklyHTML +=
-                    `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p7}/7 | مۆڵەت: ${l7}</span></div>`;
-                const h30 = getEmployeeAttendanceHistory(emp.id, data, 30);
-                const p30 = h30.filter(h => h.checkIn !== '-').length;
-                const l30 = h30.filter(h => h.isLeave).length;
-                monthlyHTML +=
-                    `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p30}/30 | مۆڵەت: ${l30}</span></div>`;
-                if (data.leaves && data.leaves[emp.id]) {
-                    leaveHTML +=
-                        `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${data.leaves[emp.id].length} مۆڵەت</span></div>`;
-                }
-            });
+
+            if (data.employees.length === 0) {
+                weeklyHTML = '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ کارمەندێک نییە</div>';
+                monthlyHTML = '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ کارمەندێک نییە</div>';
+                leaveHTML = '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ مۆڵەتێک نییە</div>';
+            } else {
+                data.employees.forEach(emp => {
+                    const h7 = getEmployeeAttendanceHistory(emp.id, data, 7);
+                    const p7 = h7.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                    const l7 = h7.filter(h => h.isLeave).length;
+                    weeklyHTML +=
+                        `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p7}/7 | مۆڵەت: ${l7}</span></div>`;
+
+                    const h30 = getEmployeeAttendanceHistory(emp.id, data, 30);
+                    const p30 = h30.filter(h => h.checkIn !== '-' && h.checkIn !== '').length;
+                    const l30 = h30.filter(h => h.isLeave).length;
+                    monthlyHTML +=
+                        `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${p30}/30 | مۆڵەت: ${l30}</span></div>`;
+
+                    if (data.leaves && data.leaves[emp.id] && data.leaves[emp.id].length > 0) {
+                        leaveHTML +=
+                            `<div class="report-item"><span class="name">${emp.name}</span><span class="details">${data.leaves[emp.id].length} مۆڵەت</span></div>`;
+                    }
+                });
+            }
+
             document.getElementById('weeklyReport').innerHTML = weeklyHTML ||
                 '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ تۆمارێک نییە</div>';
             document.getElementById('monthlyReport').innerHTML = monthlyHTML ||
                 '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ تۆمارێک نییە</div>';
             document.getElementById('leaveSummary').innerHTML = leaveHTML ||
                 '<div class="report-item" style="color:rgba(255,255,255,0.15);">هیچ مۆڵەتێک نییە</div>';
-            
-            renderDailySaves(data);
         }
 
         function renderChart(data) {
@@ -3271,7 +2950,7 @@
                     type: 'bar',
                     data: {
                         labels: ['هیچ کارمەندێک نییە'],
-                        datasets: [{ label: 'ڕەوشی ئەمڕۆ', data: [0], backgroundColor: ['rgba(120,80,200,0.15)'],
+                        datasets: [{ label: 'ڕەوشی ئەمڕۆ', data: [0], backgroundColor: ['rgba(59,130,246,0.15)'],
                             borderRadius: 4 }]
                     },
                     options: {
@@ -3294,7 +2973,7 @@
                 if (onLeave) return 2;
                 return (att && att.checkIn) ? 1 : 0;
             });
-            const colors = statuses.map(v => v === 2 ? '#fbbf24' : v === 1 ? '#7c3aed' : 'rgba(120,80,200,0.15)');
+            const colors = statuses.map(v => v === 2 ? '#fbbf24' : v === 1 ? '#3b82f6' : 'rgba(59,130,246,0.15)');
 
             const isLight = document.body.classList.contains('theme-light');
             const textColor = isLight ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)';
@@ -3322,8 +3001,8 @@
                                 font: { size: 10 },
                                 generateLabels: function() {
                                     return [
-                                        { text: '✅ ئامادە', fillStyle: '#7c3aed' },
-                                        { text: '❌ غایب', fillStyle: 'rgba(120,80,200,0.15)' },
+                                        { text: '✅ ئامادە', fillStyle: '#3b82f6' },
+                                        { text: '❌ غایب', fillStyle: 'rgba(59,130,246,0.15)' },
                                         { text: '🌴 مۆڵەت', fillStyle: '#fbbf24' }
                                     ];
                                 }
@@ -3357,11 +3036,11 @@
 
         function renderAll() {
             const data = getData();
-            
+
             data.employees.forEach(emp => {
                 applyDefaultTimes(emp.id);
             });
-            
+
             renderStats(data);
             renderTable(data);
             renderReports(data);
@@ -3410,22 +3089,29 @@
         // KEYBOARD SHORTCUT
         // ============================================================
         document.addEventListener('keydown', function(e) {
-            if ((e.key === ' ' || e.code === 'Space') && document.getElementById('fingerprintModal').classList.contains(
-                    'active')) {
+            if ((e.key === ' ' || e.code === 'Space') && document.getElementById('fingerprintModal').classList
+                .contains('active')) {
                 e.preventDefault();
                 if (!isScanning) startFingerprintScan();
             }
         });
 
         // ============================================================
+        // AUTO UPDATE LIVE TIME
+        // ============================================================
+        function updateXawanLiveTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ckb', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('xawanLiveTime').textContent = timeString;
+        }
+        setInterval(updateXawanLiveTime, 1000);
+        updateXawanLiveTime();
+
+        // ============================================================
         // INITIALIZE
         // ============================================================
         renderAll();
         setInterval(renderAll, 60000);
-
-        console.log('🖐️ سیستەمی پەنجەمۆری کارمەندان ئامادەیە!');
-        console.log('📊 بەشی بینی راپۆرتی کارمەندانی ئۆفیس زیاد کرا!');
-        console.log('📁 بەشی داخڵکردنی فایلی Excel زیاد کرا!');
     </script>
 </body>
 </html>
