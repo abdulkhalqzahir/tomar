@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سیستەمی ژمێریاری و دارایی | چوونەژوورەوە</title>
+  <title>ABDULKHALQ | چوونەژوورەوە</title>
   <style>
     /* Reset & Base */
     *, *::before, *::after {
@@ -14,23 +14,25 @@
     }
 
     :root {
-      --bg-dark: #07111a;
-      --bg-card: rgba(13, 27, 42, 0.78);
-      --primary: #10b981;
-      --primary-hover: #059669;
-      --primary-light: #34d399;
-      --accent-gold: #f59e0b;
-      --accent-cyan: #06b6d4;
-      --border-color: rgba(52, 211, 153, 0.22);
-      --border-focus: rgba(52, 211, 153, 0.65);
+      /* Theme: Deep Obsidian Black, Royal Purple & Neon Crimson Red */
+      --bg-dark: #06050b;
+      --bg-card: rgba(14, 11, 22, 0.82);
+      --primary: #9333ea;
+      --primary-hover: #a855f7;
+      --primary-light: #c084fc;
+      --accent-red: #f43f5e;
+      --accent-red-hover: #e11d48;
+      --accent-rose: #fb7185;
+      --border-color: rgba(168, 85, 247, 0.32);
+      --border-focus: #c084fc;
       --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
       --error-color: #f43f5e;
-      --error-bg: rgba(244, 63, 94, 0.12);
-      --shadow-ambient: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 45px rgba(16, 185, 129, 0.15);
-      --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.35);
-      --input-bg: rgba(8, 18, 28, 0.7);
+      --error-bg: rgba(244, 63, 94, 0.16);
+      --shadow-ambient: 0 25px 65px -15px rgba(0, 0, 0, 0.95), 0 0 35px rgba(147, 51, 234, 0.28), 0 0 25px rgba(244, 63, 94, 0.22);
+      --shadow-glow: 0 0 28px rgba(168, 85, 247, 0.45);
+      --input-bg: rgba(10, 8, 16, 0.85);
     }
 
     body {
@@ -40,9 +42,9 @@
       justify-content: center;
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 60%);
+        radial-gradient(circle at 18% 20%, rgba(147, 51, 234, 0.26) 0%, transparent 45%),
+        radial-gradient(circle at 82% 80%, rgba(244, 63, 94, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(126, 34, 206, 0.08) 0%, transparent 60%);
       overflow-x: hidden;
       position: relative;
       padding: 20px;
@@ -52,54 +54,54 @@
     .bg-grid {
       position: fixed;
       inset: 0;
-      background-size: 40px 40px;
+      background-size: 38px 38px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Floating Financial Ambient Elements */
+    /* Floating Red & Purple Ambient Glowing Elements */
     .floating-shape {
       position: absolute;
       border-radius: 50%;
-      filter: blur(60px);
+      filter: blur(65px);
       z-index: 1;
-      opacity: 0.6;
+      opacity: 0.65;
       animation: floatSlow 14s infinite ease-in-out alternate;
     }
 
     .shape-1 {
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.35), transparent 70%);
-      top: -80px;
-      right: -60px;
-      animation-duration: 16s;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(147, 51, 234, 0.45), transparent 70%);
+      top: -90px;
+      right: -70px;
+      animation-duration: 15s;
     }
 
     .shape-2 {
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.28), transparent 70%);
-      bottom: -60px;
-      left: -50px;
-      animation-duration: 18s;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(244, 63, 94, 0.38), transparent 70%);
+      bottom: -70px;
+      left: -60px;
+      animation-duration: 17s;
       animation-delay: -5s;
     }
 
     .shape-3 {
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.2), transparent 70%);
-      top: 60%;
-      right: 15%;
-      animation-duration: 22s;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(217, 70, 239, 0.28), transparent 70%);
+      top: 55%;
+      right: 12%;
+      animation-duration: 20s;
       animation-delay: -9s;
     }
 
-    /* Floating Accounting Icons */
+    /* Floating Accounting & Dynamic Symbols */
     .floating-finance-icons {
       position: fixed;
       inset: 0;
@@ -110,31 +112,31 @@
 
     .f-icon {
       position: absolute;
-      color: rgba(52, 211, 153, 0.16);
+      color: rgba(192, 132, 252, 0.18);
       font-size: 26px;
       user-select: none;
       animation: driftIcon 20s infinite linear;
     }
 
-    .f-icon.i1 { top: 12%; left: 10%; animation-duration: 26s; font-size: 30px; }
-    .f-icon.i2 { top: 75%; left: 8%; animation-duration: 22s; animation-delay: -4s; font-size: 24px; color: rgba(245, 158, 11, 0.15); }
-    .f-icon.i3 { top: 20%; right: 12%; animation-duration: 28s; animation-delay: -8s; font-size: 32px; }
-    .f-icon.i4 { top: 70%; right: 10%; animation-duration: 24s; animation-delay: -12s; font-size: 28px; color: rgba(6, 182, 212, 0.18); }
-    .f-icon.i5 { top: 45%; left: 3%; animation-duration: 30s; animation-delay: -16s; font-size: 22px; }
+    .f-icon.i1 { top: 12%; left: 10%; animation-duration: 26s; font-size: 32px; color: rgba(244, 63, 94, 0.2); }
+    .f-icon.i2 { top: 75%; left: 8%; animation-duration: 22s; animation-delay: -4s; font-size: 26px; color: rgba(168, 85, 247, 0.22); }
+    .f-icon.i3 { top: 20%; right: 12%; animation-duration: 28s; animation-delay: -8s; font-size: 34px; color: rgba(251, 113, 133, 0.22); }
+    .f-icon.i4 { top: 70%; right: 10%; animation-duration: 24s; animation-delay: -12s; font-size: 28px; color: rgba(192, 132, 252, 0.22); }
+    .f-icon.i5 { top: 45%; left: 3%; animation-duration: 30s; animation-delay: -16s; font-size: 24px; color: rgba(244, 63, 94, 0.18); }
 
     @keyframes floatSlow {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, 40px) scale(1.08); }
-      100% { transform: translate(-20px, -30px) scale(0.95); }
+      50% { transform: translate(35px, 45px) scale(1.1); }
+      100% { transform: translate(-25px, -35px) scale(0.95); }
     }
 
     @keyframes driftIcon {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
-      50% { transform: translateY(-30px) rotate(15deg); opacity: 0.45; }
-      100% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.25; }
+      50% { transform: translateY(-35px) rotate(18deg); opacity: 0.55; }
+      100% { transform: translateY(0) rotate(0deg); opacity: 0.25; }
     }
 
-    /* Main Container */
+    /* Main Container with Smooth Perspective */
     .login-wrapper {
       position: relative;
       z-index: 10;
@@ -143,29 +145,31 @@
       perspective: 1000px;
     }
 
-    /* Glassmorphic Accounting Card */
+    /* Glassmorphic Obsidian Card with Purple & Red Glow */
     .login-card {
       background: var(--bg-card);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      border: 1.5px solid var(--border-color);
+      border-radius: 26px;
       padding: 42px 36px;
       box-shadow: var(--shadow-ambient);
       position: relative;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.2s cubic-bezier(0.2, 0, 0.38, 0.9), box-shadow 0.3s ease;
+      will-change: transform;
     }
 
+    /* Scanner Beam in Purple & Red */
     .login-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: -100%;
       width: 200%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary-light), var(--accent-gold), transparent);
-      animation: scanline 6s linear infinite;
+      height: 2.5px;
+      background: linear-gradient(90deg, transparent, var(--primary-light), var(--accent-red), var(--accent-rose), transparent);
+      animation: scanline 5s linear infinite;
     }
 
     @keyframes scanline {
@@ -176,12 +180,12 @@
     /* Card Header */
     .card-header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
     .brand-icon-wrapper {
-      width: 76px;
-      height: 76px;
+      width: 78px;
+      height: 78px;
       margin: 0 auto 16px;
       position: relative;
       display: flex;
@@ -192,17 +196,17 @@
     .brand-icon-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.15));
-      border: 1px solid rgba(52, 211, 153, 0.4);
-      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.35), rgba(244, 63, 94, 0.28));
+      border: 1.5px solid rgba(192, 132, 252, 0.5);
+      border-radius: 22px;
       transform: rotate(45deg);
-      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.5), 0 0 20px rgba(244, 63, 94, 0.35);
       animation: pulseGlow 4s ease-in-out infinite alternate;
     }
 
     @keyframes pulseGlow {
-      0% { transform: rotate(45deg) scale(1); box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.35); }
-      100% { transform: rotate(45deg) scale(1.06); box-shadow: 0 12px 30px rgba(16, 185, 129, 0.55); }
+      0% { transform: rotate(45deg) scale(1); box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.5), 0 0 20px rgba(244, 63, 94, 0.35); }
+      100% { transform: rotate(45deg) scale(1.08); box-shadow: 0 14px 35px rgba(147, 51, 234, 0.7), 0 0 30px rgba(244, 63, 94, 0.55); }
     }
 
     .brand-icon-svg {
@@ -210,16 +214,16 @@
       z-index: 2;
       width: 40px;
       height: 40px;
-      color: #34d399;
-      filter: drop-shadow(0 2px 6px rgba(16, 185, 129, 0.6));
+      color: #c084fc;
+      filter: drop-shadow(0 2px 8px rgba(244, 63, 94, 0.6));
     }
 
     .card-title {
-      font-size: 23px;
-      font-weight: 700;
+      font-size: 28px;
+      font-weight: 800;
       color: var(--text-main);
       margin-bottom: 6px;
-      letter-spacing: -0.3px;
+      letter-spacing: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -227,9 +231,10 @@
     }
 
     .title-gradient {
-      background: linear-gradient(135deg, #f8fafc 30%, #34d399 100%);
+      background: linear-gradient(135deg, #ffffff 15%, #c084fc 50%, #f43f5e 95%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 10px rgba(168, 85, 247, 0.4));
     }
 
     .card-subtitle {
@@ -241,29 +246,29 @@
     .accounting-tag {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      margin-top: 8px;
-      padding: 4px 12px;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 4px 14px;
       border-radius: 20px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(52, 211, 153, 0.25);
+      background: rgba(147, 51, 234, 0.16);
+      border: 1px solid rgba(244, 63, 94, 0.35);
       font-size: 12px;
-      color: #34d399;
+      color: #f472b6;
       font-weight: 600;
     }
 
     .tag-dot {
       width: 6px;
       height: 6px;
-      background-color: #34d399;
+      background-color: #f43f5e;
       border-radius: 50%;
-      box-shadow: 0 0 8px #34d399;
-      animation: blink 2s infinite ease-in-out;
+      box-shadow: 0 0 10px #f43f5e;
+      animation: blink 1.8s infinite ease-in-out;
     }
 
     @keyframes blink {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.4; transform: scale(0.8); }
     }
 
     /* Form Fields */
@@ -278,14 +283,14 @@
       gap: 6px;
       font-size: 13.5px;
       font-weight: 600;
-      color: #cbd5e1;
+      color: #e4e4e7;
       margin-bottom: 8px;
     }
 
     .field-label svg {
       width: 16px;
       height: 16px;
-      color: #34d399;
+      color: #c084fc;
     }
 
     .input-box {
@@ -298,14 +303,14 @@
       width: 100%;
       height: 52px;
       background: var(--input-bg);
-      border: 1.5px solid rgba(52, 211, 153, 0.2);
+      border: 1.5px solid rgba(168, 85, 247, 0.3);
       border-radius: 14px;
       padding: 0 16px 0 46px;
       color: var(--text-main);
       font-size: 15px;
       outline: none;
       transition: all 0.3s ease;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
     }
 
     .input-field::placeholder {
@@ -314,12 +319,12 @@
     }
 
     .input-field:focus {
-      border-color: var(--primary-light);
-      background: rgba(12, 26, 40, 0.95);
+      border-color: #c084fc;
+      background: rgba(18, 14, 28, 0.95);
       box-shadow: 
-        0 0 0 3px rgba(16, 185, 129, 0.22),
-        0 8px 24px -4px rgba(0, 0, 0, 0.5),
-        inset 0 1px 2px rgba(255, 255, 255, 0.05);
+        0 0 0 3px rgba(147, 51, 234, 0.3),
+        0 8px 24px -4px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(244, 63, 94, 0.25);
       transform: translateY(-1px);
     }
 
@@ -335,7 +340,7 @@
     }
 
     .input-field:focus ~ .input-icon {
-      color: #34d399;
+      color: #c084fc;
     }
 
     /* Password Toggle Button */
@@ -357,7 +362,7 @@
     }
 
     .toggle-password:hover {
-      color: var(--primary-light);
+      color: #c084fc;
       transform: scale(1.1);
     }
 
@@ -367,7 +372,7 @@
       align-items: center;
       gap: 10px;
       background: var(--error-bg);
-      border: 1px solid rgba(244, 63, 94, 0.35);
+      border: 1px solid rgba(244, 63, 94, 0.45);
       color: #fda4af;
       padding: 12px 14px;
       border-radius: 12px;
@@ -396,7 +401,7 @@
     .shake {
       animation: shakeForm 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
       border-color: var(--error-color) !important;
-      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.25), 0 0 25px rgba(244, 63, 94, 0.2) !important;
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.35), 0 0 30px rgba(244, 63, 94, 0.4) !important;
     }
 
     @keyframes shakeForm {
@@ -406,12 +411,12 @@
       40%, 60% { transform: translate3d(6px, 0, 0); }
     }
 
-    /* Submit Button with Luxurious Gradient and Hover Glow */
+    /* Submit Button with Purple to Red Gradient */
     .btn-login {
       position: relative;
       width: 100%;
       height: 52px;
-      background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 40%, #e11d48 85%, #be123c 100%);
       color: #ffffff;
       border: none;
       border-radius: 14px;
@@ -422,7 +427,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 10px 25px -4px rgba(16, 185, 129, 0.45), 0 0 15px rgba(16, 185, 129, 0.25);
+      box-shadow: 0 10px 25px -4px rgba(124, 58, 237, 0.55), 0 0 20px rgba(244, 63, 94, 0.4);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
       margin-top: 10px;
@@ -435,14 +440,14 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       transition: 0.5s;
     }
 
     .btn-login:hover {
-      background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+      background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 40%, #f43f5e 85%, #e11d48 100%);
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px -4px rgba(16, 185, 129, 0.65), 0 0 25px rgba(52, 211, 153, 0.35);
+      box-shadow: 0 14px 32px -4px rgba(139, 92, 246, 0.7), 0 0 30px rgba(244, 63, 94, 0.55);
     }
 
     .btn-login:hover::after {
@@ -451,7 +456,7 @@
 
     .btn-login:active {
       transform: translateY(1px) scale(0.99);
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.45);
     }
 
     .btn-icon {
@@ -477,52 +482,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Credentials Info Box / Quick Fill Badge */
-    .demo-credentials-box {
-      margin-top: 26px;
-      padding: 14px 16px;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px dashed rgba(52, 211, 153, 0.25);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .cred-text {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .cred-highlight {
-      color: #34d399;
-      font-weight: 700;
-      direction: ltr;
-      display: inline-block;
-    }
-
-    .btn-autofill {
-      background: rgba(52, 211, 153, 0.15);
-      border: 1px solid rgba(52, 211, 153, 0.35);
-      color: #34d399;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 11.5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s;
-      white-space: nowrap;
-    }
-
-    .btn-autofill:hover {
-      background: rgba(52, 211, 153, 0.25);
-      border-color: #34d399;
-      transform: scale(1.03);
-    }
-
-    /* Success / Accounting Dashboard Preview Screen */
+    /* Success / Redirecting Screen */
     .success-view {
       display: none;
       text-align: center;
@@ -538,19 +498,19 @@
       width: 76px;
       height: 76px;
       margin: 0 auto 18px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.05));
-      border: 2px solid #34d399;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.35), rgba(244, 63, 94, 0.2));
+      border: 2px solid #c084fc;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 30px rgba(16, 185, 129, 0.45);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.55), 0 0 15px rgba(244, 63, 94, 0.4);
       animation: pulseSuccess 2s infinite ease-in-out;
     }
 
     @keyframes pulseSuccess {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(16, 185, 129, 0.45); }
-      50% { transform: scale(1.06); box-shadow: 0 0 40px rgba(16, 185, 129, 0.65); }
+      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(168, 85, 247, 0.55); }
+      50% { transform: scale(1.06); box-shadow: 0 0 45px rgba(244, 63, 94, 0.7); }
     }
 
     .success-title {
@@ -562,100 +522,9 @@
 
     .success-subtitle {
       font-size: 14px;
-      color: #34d399;
+      color: #c084fc;
       margin-bottom: 24px;
       font-weight: 600;
-    }
-
-    /* Mini Accounting Summary Cards */
-    .dashboard-preview {
-      background: rgba(9, 20, 31, 0.85);
-      border: 1px solid rgba(52, 211, 153, 0.2);
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 22px;
-      text-align: right;
-    }
-
-    .preview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 12px;
-      margin-bottom: 14px;
-    }
-
-    .preview-header span {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .status-pill {
-      font-size: 11px;
-      padding: 3px 8px;
-      background: rgba(16, 185, 129, 0.2);
-      border: 1px solid rgba(52, 211, 153, 0.4);
-      color: #34d399;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    .kpi-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .kpi-card {
-      background: rgba(15, 28, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 12px;
-    }
-
-    .kpi-title {
-      font-size: 11.5px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .kpi-value {
-      font-size: 16px;
-      font-weight: 700;
-      color: #f8fafc;
-    }
-
-    .kpi-value.green {
-      color: #34d399;
-    }
-
-    .kpi-value.gold {
-      color: #fbbf24;
-    }
-
-    .btn-logout {
-      width: 100%;
-      height: 46px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #cbd5e1;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-logout:hover {
-      background: rgba(244, 63, 94, 0.15);
-      border-color: rgba(244, 63, 94, 0.4);
-      color: #fda4af;
     }
 
     /* Footer text */
@@ -707,12 +576,12 @@
             </svg>
           </div>
           <h1 class="card-title">
-            <span class="title-gradient">سیستەمی ژمێریاری</span>
+            <span class="title-gradient">ABDULKHALQ</span>
           </h1>
-          <p class="card-subtitle">بەخێربێیت، تکایە بچۆ ژوورەوە بۆ ژمێرە و دارایی</p>
+          <p class="card-subtitle">بەخێربێیت، تکایە زانیارییەکان بنووسە بۆ چوونەژوورەوە</p>
           <div class="accounting-tag">
             <span class="tag-dot"></span>
-            <span>بڕوانامەی ئەمنی دارایی چالاکە</span>
+            <span>سیستەمی دارایی و ژمێریاری</span>
           </div>
         </div>
 
@@ -787,7 +656,7 @@
 
           <!-- Submit Button -->
           <button type="submit" class="btn-login" id="submitBtn">
-            <span id="btnText">چوونەژوورەوە بۆ ژمێریاری</span>
+            <span id="btnText">چوونەژوورەوە</span>
             <div class="spinner" id="btnSpinner"></div>
             <svg class="btn-icon" id="btnIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <!-- RTL Left Arrow pointing into system -->
@@ -802,14 +671,14 @@
       <!-- Success / Redirecting Screen -->
       <div id="successView" class="success-view">
         <div class="success-badge">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
         </div>
         <h2 class="success-title">چوونەژوورەوە سەرکەوتوو بوو!</h2>
         <p class="success-subtitle" id="redirectMsg">دەچێتە سەر پەڕەی مەبەست...</p>
         <div style="margin-top: 20px; display: flex; justify-content: center;">
-          <div class="spinner" style="display: block; width: 28px; height: 28px; border-width: 3px; border-top-color: #34d399;"></div>
+          <div class="spinner" style="display: block; width: 28px; height: 28px; border-width: 3px; border-top-color: #c084fc;"></div>
         </div>
       </div>
 
@@ -942,22 +811,22 @@
       return false;
     }
 
-    // Mouse 3D Subtle Tilt Effect
+    // Interactive Smooth 3D Card Movement
     document.addEventListener('mousemove', (e) => {
       const card = document.getElementById('loginCard');
       if (!card) return;
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      const rotateX = -(y / rect.height) * 8;
-      const rotateY = (x / rect.width) * 8;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+      const rotateX = -(y / rect.height) * 11;
+      const rotateY = (x / rect.width) * 11;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
     });
 
     document.addEventListener('mouseleave', () => {
       const card = document.getElementById('loginCard');
       if (card) {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
       }
     });
   </script>
